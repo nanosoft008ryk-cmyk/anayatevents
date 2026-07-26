@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { site, stats } from "@/content/site";
 import { photo } from "@/content/images";
-import { serviceFamilies } from "@/content/services";
+import { serviceFamilies, services } from "@/content/services";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
 import { pageMeta, jsonLd, breadcrumbSchema, type Crumb } from "@/lib/seo";
@@ -121,14 +121,18 @@ function AboutPage() {
             </h2>
             <ul className="mt-8 divide-y divide-border border-y border-border">
               {serviceFamilies.map((family) => (
-                <li key={family.name} className="py-5">
-                  <p className="font-display text-xl font-light text-ivory">{family.name}</p>
+                <li key={family} className="py-5">
+                  <p className="font-display text-xl font-light text-ivory">{family}</p>
                   <p className="mt-1.5 font-sans text-sm leading-relaxed font-light text-muted-foreground">
-                    {family.services.map((s) => s.name).join(" · ")}
+                    {services
+                      .filter((s) => s.family === family)
+                      .map((s) => s.name)
+                      .join(" · ")}
                   </p>
                 </li>
               ))}
             </ul>
+
             <Link
               to="/about/process"
               className="mt-8 inline-block border border-gold px-8 py-4 font-sans text-[11px] tracking-[0.24em] uppercase text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
