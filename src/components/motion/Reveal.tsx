@@ -61,27 +61,33 @@ export function Reveal({
     return () => io.disconnect();
   }, [once]);
 
+  // The clip/transform lives on an INNER element. Observing a self-clipped node
+  // makes its intersection rect empty, so the observer would never fire.
+  const Inner = (Tag === "span" ? "span" : "div") as ElementType;
+
   return (
-    <Tag
-      ref={ref as never}
-      className={cn(
-        "will-change-[transform,opacity,clip-path]",
-        shown
-          ? "translate-y-0 opacity-100 blur-0 [clip-path:inset(0_0_0_0)]"
-          : variantClass[variant],
-        className,
-      )}
-      style={{
-        transitionProperty: "transform, opacity, clip-path, filter",
-        transitionDuration: `${duration}ms`,
-        transitionTimingFunction: "var(--ease-lux)",
-        transitionDelay: `${delay}ms`,
-      }}
-    >
-      {children}
+    <Tag ref={ref as never} className={className}>
+      <Inner
+        className={cn(
+          "will-change-[transform,opacity,clip-path]",
+          Tag === "span" ? "inline-block" : "block h-full",
+          shown
+            ? "translate-y-0 opacity-100 blur-0 [clip-path:inset(0_0_0_0)]"
+            : variantClass[variant],
+        )}
+        style={{
+          transitionProperty: "transform, opacity, clip-path, filter",
+          transitionDuration: `${duration}ms`,
+          transitionTimingFunction: "var(--ease-lux)",
+          transitionDelay: `${delay}ms`,
+        }}
+      >
+        {children}
+      </Inner>
     </Tag>
   );
 }
+
 
 /** Splits a line into words and staggers them in — used for oversized headlines. */
 export function RevealWords({
