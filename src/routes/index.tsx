@@ -1,16 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { site, consultationSteps, stats } from "@/content/site";
-import { photo } from "@/content/images";
+import { photo, photosByIds } from "@/content/images";
 import { services } from "@/content/services";
 import { locations } from "@/content/locations";
 import { portfolioCategories } from "@/content/portfolio";
 import { testimonials } from "@/content/testimonials";
 import { articlesByDate } from "@/content/journal";
 import { CtaBand } from "@/components/CtaBand";
+import { CinematicBackdrop } from "@/components/CinematicBackdrop";
+import { Plate } from "@/components/Plate";
+import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
 
 const HERO = "ae-22";
+const HERO_FRAMES = ["ae-22", "ae-13", "ae-16", "ae-26"];
 const HOME_PHOTOS = ["ae-13", "ae-14", "ae-10", "ae-16", "ae-26", "ae-03"];
 
 export const Route = createFileRoute("/")({
@@ -39,291 +44,412 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const hero = photo(HERO);
-  const gallery = HOME_PHOTOS.map(photo);
+  const frames = photosByIds(HERO_FRAMES);
+  const gallery = photosByIds(HOME_PHOTOS);
   const featured = services.slice(0, 6);
   const journal = articlesByDate.slice(0, 3);
 
   return (
-    <main className="bg-background">
-      {/* Hero */}
-      <section className="relative min-h-[100svh] w-full overflow-hidden">
-        <img
-          src={hero.url}
-          alt={hero.alt}
-          fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0" style={{ background: "var(--gradient-veil)" }} />
-        <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-6 pt-36 pb-20 md:px-10 md:pb-28">
-          <p className="font-sans text-[11px] tracking-[0.4em] uppercase text-gold">
-            Lahore · Since {site.founded}
-          </p>
-          <h1 className="mt-8 max-w-5xl font-display text-[3.2rem] leading-[0.98] font-light text-ivory md:text-[6rem]">
-            An evening built
-            <span className="block italic text-gold-light">before you arrive at it.</span>
+    <main className="overflow-x-clip bg-background">
+      {/* ── I. Overture ─────────────────────────────────────────────── */}
+      <section className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden">
+        <CinematicBackdrop frames={frames} />
+
+        <div className="relative mx-auto w-full max-w-[92rem] px-6 pt-40 pb-24 md:px-12 lg:pb-32">
+          <Reveal variant="fade" duration={1400}>
+            <p className="font-sans text-[10px] tracking-[0.5em] uppercase text-gold">
+              Lahore · Since {site.founded}
+            </p>
+          </Reveal>
+
+          <h1 className="mt-10 max-w-[16ch] font-display text-[3.4rem] leading-[0.92] font-light text-ivory sm:text-[5rem] lg:text-[7.5rem]">
+            <RevealWords text="An evening built" delay={120} />
+            <span className="mt-2 block italic text-gold-light">
+              <RevealWords text="before you arrive at it." delay={420} step={60} />
+            </span>
           </h1>
-          <p className="mt-8 max-w-xl font-sans text-[15px] leading-[1.9] font-light text-muted-foreground md:text-base">
-            {site.description}
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link
-              to="/contact"
-              className="border border-gold bg-gold px-8 py-4 font-sans text-[11px] tracking-[0.24em] uppercase text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              Begin an enquiry
-            </Link>
-            <Link
-              to="/portfolio"
-              className="border border-border-strong px-8 py-4 font-sans text-[11px] tracking-[0.24em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
-            >
-              View the work
-            </Link>
+
+          <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+            <Reveal delay={700} className="max-w-xl">
+              <div className="hairline mb-8 max-w-[7rem]" />
+              <p className="font-sans text-[15px] leading-[2] font-light text-foreground/80">
+                {site.description}
+              </p>
+            </Reveal>
+            <Reveal delay={860} className="flex flex-wrap items-center gap-4">
+              <LuxLink to="/contact" tone="foil">
+                Begin an enquiry
+              </LuxLink>
+              <LuxLink to="/portfolio" tone="ghost">
+                View the work
+              </LuxLink>
+            </Reveal>
           </div>
+        </div>
+
+        <div className="pointer-events-none absolute right-8 bottom-10 hidden items-center gap-4 lg:flex">
+          <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-muted-foreground">
+            Scroll
+          </span>
+          <span className="h-16 w-px overflow-hidden bg-border-strong">
+            <span className="block h-6 w-px animate-[drift_2.6s_ease-in-out_infinite_alternate] bg-gold" />
+          </span>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="border-y border-border">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-border md:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label} className="bg-background px-6 py-10 md:px-10 md:py-14">
-              <p className="font-display text-4xl font-light text-gold md:text-5xl">{s.value}</p>
-              <p className="mt-3 font-sans text-[11px] tracking-[0.24em] uppercase text-ivory">
+      {/* ── II. The count — type as architecture, no boxes ──────────── */}
+      <section className="chapter light-left relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
+        <div className="grid gap-x-16 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 110} className="relative">
+              <p className="font-display text-[4.5rem] leading-[0.8] font-light text-foil lg:text-[5.5rem]">
+                {s.value}
+              </p>
+              <p className="mt-6 font-sans text-[10px] tracking-[0.34em] uppercase text-ivory">
                 {s.label}
               </p>
-              <p className="mt-1.5 font-sans text-xs font-light text-muted-foreground">{s.sub}</p>
-            </div>
+              <p className="mt-2 max-w-[22ch] font-sans text-[13px] leading-relaxed font-light text-muted-foreground">
+                {s.sub}
+              </p>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Manifesto */}
-      <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 lg:py-36">
-        <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
-          <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">The house</p>
-          <div>
-            <h2 className="font-display text-4xl leading-[1.08] font-light text-ivory md:text-[3.4rem]">
-              We do not sell decor. We take responsibility for an evening.
+      {/* ── III. Manifesto — overlapping plate, asymmetric ──────────── */}
+      <section className="chapter relative overflow-hidden py-16 lg:py-28">
+        <div className="mx-auto grid max-w-[92rem] items-center gap-y-16 px-6 md:px-12 lg:grid-cols-12 lg:gap-x-0">
+          <Reveal variant="mask" className="lg:col-span-6 lg:col-start-1 lg:-mr-24">
+            <Plate image={photo("ae-05")} ratio="4/5" speed={1.1} fade="both" />
+          </Reveal>
+
+          <Reveal
+            delay={200}
+            className="relative z-10 lg:col-span-6 lg:col-start-6 lg:pl-16 xl:pl-24"
+          >
+            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">The house</p>
+            <h2 className="mt-8 font-display text-[2.5rem] leading-[1.04] font-light text-ivory lg:text-[3.6rem]">
+              We do not sell decor.
+              <span className="block italic text-gold-light">
+                We take responsibility for an evening.
+              </span>
             </h2>
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              <p className="font-sans text-[15px] leading-[1.9] font-light text-muted-foreground">
-                Design, fabrication, florals, lighting and the kitchen all sit inside one house.
-                Nothing is subcontracted to a stranger and then hoped for. The person who reads your
-                first message stands at your gate on the night.
-              </p>
-              <p className="font-sans text-[15px] leading-[1.9] font-light text-muted-foreground">
-                That is the whole difference. It is why a family of four hundred can sit down within
-                minutes of each other, and why the marigold is still fresh at one in the morning.
-              </p>
-            </div>
-          </div>
+            <p className="mt-10 max-w-lg font-sans text-[15px] leading-[2] font-light text-muted-foreground">
+              Design, fabrication, florals, lighting and the kitchen all sit inside one house.
+              Nothing is subcontracted to a stranger and then hoped for. The person who reads your
+              first message stands at your gate on the night.
+            </p>
+            <p className="mt-6 max-w-lg font-sans text-[15px] leading-[2] font-light text-muted-foreground">
+              That is the whole difference. It is why a family of four hundred can sit down within
+              minutes of each other, and why the marigold is still fresh at one in the morning.
+            </p>
+            <LuxTextLink to="/about" className="mt-10">
+              Our story
+            </LuxTextLink>
+          </Reveal>
         </div>
+
+        <Reveal
+          variant="fade"
+          duration={1600}
+          className="pointer-events-none absolute -bottom-6 left-0 hidden w-full overflow-hidden lg:block"
+        >
+          <p className="ghost-word px-12 text-[9rem] whitespace-nowrap xl:text-[12rem]">
+            You Think. We Do.
+          </p>
+        </Reveal>
       </section>
 
-      {/* Services */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-28">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
-                What we do
-              </p>
-              <h2 className="mt-6 font-display text-4xl font-light text-ivory md:text-5xl">
-                Seventeen disciplines, one crew.
-              </h2>
-            </div>
-            <Link
-              to="/services"
-              className="font-sans text-[11px] tracking-[0.24em] uppercase text-gold hover:text-gold-light"
-            >
-              All services →
-            </Link>
-          </div>
+      {/* ── IV. Disciplines — staggered editorial index, no card grid ── */}
+      <section className="chapter light-right relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.3fr]">
+          <Reveal className="lg:sticky lg:top-32 lg:self-start">
+            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">What we do</p>
+            <h2 className="mt-8 font-display text-[2.6rem] leading-[1.02] font-light text-ivory lg:text-[4rem]">
+              Seventeen disciplines,
+              <span className="block italic text-gold-light">one crew.</span>
+            </h2>
+            <LuxTextLink to="/services" className="mt-10">
+              All services
+            </LuxTextLink>
+          </Reveal>
 
-          <div className="mt-14 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((s) => (
-              <Link
-                key={s.slug}
-                to="/services/$slug"
-                params={{ slug: s.slug }}
-                className="group bg-background p-8 transition-colors hover:bg-surface/40 md:p-10"
-              >
-                <p className="font-sans text-[10px] tracking-[0.28em] uppercase text-gold-deep">
-                  {s.family}
-                </p>
-                <h3 className="mt-5 font-display text-2xl font-light text-ivory transition-colors group-hover:text-gold md:text-3xl">
-                  {s.name}
-                </h3>
-                <p className="mt-4 font-sans text-sm leading-[1.85] font-light text-muted-foreground">
-                  {s.lede}
-                </p>
-              </Link>
+          <ol className="lg:pt-6">
+            {featured.map((s, i) => (
+              <Reveal key={s.slug} delay={i * 60}>
+                <li className="group/row relative">
+                  <Link
+                    to="/services/$slug"
+                    params={{ slug: s.slug }}
+                    className="relative grid grid-cols-[auto_1fr] items-baseline gap-x-8 py-9 lg:gap-x-14"
+                    style={{ marginLeft: `${(i % 3) * 1.75}rem` }}
+                  >
+                    <span className="font-sans text-[10px] tracking-[0.3em] text-gold-deep">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block font-display text-[1.9rem] leading-tight font-light text-ivory transition-[color,transform] duration-[900ms] [transition-timing-function:var(--ease-lux)] group-hover/row:translate-x-2 group-hover/row:text-gold lg:text-[2.6rem]">
+                        {s.name}
+                      </span>
+                      <span className="mt-3 block max-w-xl font-sans text-[14px] leading-[1.95] font-light text-muted-foreground opacity-70 transition-opacity duration-700 group-hover/row:opacity-100">
+                        {s.lede}
+                      </span>
+                    </span>
+                    <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-100 bg-border" />
+                    <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-gold transition-transform duration-[900ms] [transition-timing-function:var(--ease-lux)] group-hover/row:scale-x-100" />
+                  </Link>
+                </li>
+              </Reveal>
             ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ── V. Immersive frame — full bleed, blending both ends ─────── */}
+      <section className="relative">
+        <Plate
+          image={photo("ae-19")}
+          ratio="16/9"
+          speed={1.4}
+          fade="both"
+          className="min-h-[70svh] [&>div]:min-h-[70svh]"
+        />
+        <div className="pointer-events-none absolute inset-0 flex items-center">
+          <div className="mx-auto w-full max-w-[92rem] px-6 md:px-12">
+            <Reveal variant="mask" duration={1400}>
+              <p className="max-w-3xl font-display text-[2rem] leading-[1.25] font-light text-ivory italic drop-shadow-[0_10px_40px_rgba(0,0,0,0.8)] lg:text-[3.2rem]">
+                “Light first. Then flowers. Then the food that people will still
+                talk about in March.”
+              </p>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Editorial gallery — a handful only; the rest lives in the Vault */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-28">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
-                Selected work
-              </p>
-              <h2 className="mt-6 font-display text-4xl font-light text-ivory md:text-5xl">
-                Six rooms from a longer archive.
-              </h2>
-            </div>
-            <Link
-              to="/vault"
-              className="font-sans text-[11px] tracking-[0.24em] uppercase text-gold hover:text-gold-light"
-            >
-              Enter the Vault →
-            </Link>
-          </div>
+      {/* ── VI. Selected work — floating, uneven, magazine framing ──── */}
+      <section className="chapter relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
+        <div className="flex flex-wrap items-end justify-between gap-8">
+          <Reveal>
+            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
+              Selected work
+            </p>
+            <h2 className="mt-8 max-w-[14ch] font-display text-[2.6rem] leading-[1.02] font-light text-ivory lg:text-[4rem]">
+              Six rooms from a longer archive.
+            </h2>
+          </Reveal>
+          <Reveal delay={140}>
+            <LuxTextLink to="/vault">Enter the Vault</LuxTextLink>
+          </Reveal>
+        </div>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {gallery.map((img) => (
-              <figure key={img.id} className="group overflow-hidden">
-                <div className="aspect-[4/5] overflow-hidden border border-border">
-                  <img
-                    src={img.url}
-                    alt={img.alt}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.05]"
-                  />
+        <div className="mt-20 grid gap-x-10 gap-y-16 lg:grid-cols-12">
+          <Reveal variant="mask" className="lg:col-span-5 lg:mt-24">
+            <Plate image={gallery[0]} ratio="3/4" caption speed={0.6} />
+          </Reveal>
+          <Reveal variant="mask" delay={120} className="lg:col-span-7">
+            <Plate image={gallery[1]} ratio="4/3" caption speed={0.35} />
+          </Reveal>
+          <Reveal variant="mask" delay={60} className="lg:col-span-4 lg:col-start-2">
+            <Plate image={gallery[2]} ratio="1/1" caption speed={0.5} />
+          </Reveal>
+          <Reveal variant="mask" delay={140} className="lg:col-span-5 lg:mt-28">
+            <Plate image={gallery[3]} ratio="4/5" caption speed={0.7} />
+          </Reveal>
+          <Reveal variant="mask" delay={100} className="lg:col-span-7">
+            <Plate image={gallery[4]} ratio="16/10" caption speed={0.4} />
+          </Reveal>
+          <Reveal variant="mask" delay={180} className="lg:col-span-4 lg:col-start-8 lg:-mt-40">
+            <Plate image={gallery[5]} ratio="3/4" caption speed={0.8} />
+          </Reveal>
+        </div>
+
+        <Reveal className="mt-24 flex flex-wrap gap-x-10 gap-y-5">
+          {portfolioCategories.map((c) => (
+            <Link
+              key={c.slug}
+              to="/portfolio/$slug"
+              params={{ slug: c.slug }}
+              className="group/cat relative font-display text-2xl font-light text-muted-foreground transition-colors duration-500 hover:text-gold lg:text-3xl"
+            >
+              {c.name}
+              <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform duration-[800ms] [transition-timing-function:var(--ease-lux)] group-hover/cat:origin-left group-hover/cat:scale-x-100" />
+            </Link>
+          ))}
+        </Reveal>
+      </section>
+
+      {/* ── VII. Process — horizontal timeline over a dark plate ────── */}
+      <section className="relative isolate overflow-hidden py-28 lg:py-40">
+        <div className="absolute inset-0 -z-10">
+          <img
+            src={photo("ae-08").url}
+            alt=""
+            loading="lazy"
+            className="h-full w-full object-cover opacity-[0.22] drift-slow"
+          />
+          <div className="absolute inset-0 veil" />
+          <div className="absolute inset-0 vignette" />
+        </div>
+
+        <div className="mx-auto max-w-[92rem] px-6 md:px-12">
+          <Reveal>
+            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
+              The process
+            </p>
+            <h2 className="mt-8 max-w-[18ch] font-display text-[2.4rem] leading-[1.04] font-light text-ivory lg:text-[3.6rem]">
+              Five unhurried movements, from first message to last guest.
+            </h2>
+          </Reveal>
+
+          <div className="mt-20 grid gap-y-14 md:grid-cols-3 md:gap-x-12 lg:grid-cols-5">
+            {consultationSteps.map((s, i) => (
+              <Reveal key={s.step} delay={i * 110} className="group/step relative">
+                <div className="mb-6 flex items-center gap-4">
+                  <span className="font-display text-[2.6rem] leading-none font-light text-gold-deep transition-colors duration-700 group-hover/step:text-gold">
+                    {s.step}
+                  </span>
+                  <span className="hairline flex-1 opacity-60" />
                 </div>
-                <figcaption className="mt-3 font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
-                  {img.caption}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-
-          <div className="mt-14 flex flex-wrap gap-3">
-            {portfolioCategories.map((c) => (
-              <Link
-                key={c.slug}
-                to="/portfolio/$slug"
-                params={{ slug: c.slug }}
-                className="border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.2em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
-              >
-                {c.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="border-t border-border bg-surface/30">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-28">
-          <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">The process</p>
-          <div className="mt-14 grid gap-12 md:grid-cols-3 lg:grid-cols-5">
-            {consultationSteps.map((s) => (
-              <div key={s.step}>
-                <span className="font-display text-3xl font-light text-gold-deep">{s.step}</span>
-                <h3 className="mt-4 font-display text-xl font-light text-ivory">{s.title}</h3>
-                <p className="mt-3 font-sans text-[13px] leading-[1.85] font-light text-muted-foreground">
+                <h3 className="font-display text-xl font-light text-ivory">{s.title}</h3>
+                <p className="mt-4 font-sans text-[13px] leading-[1.95] font-light text-muted-foreground">
                   {s.body}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-28">
-          <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
+      {/* ── VIII. Voices — oversized pull quotes, no card walls ─────── */}
+      <section className="chapter light-left relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
+        <Reveal>
+          <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
             {site.rating.value} from {site.rating.count} Google reviews
           </p>
-          <div className="mt-14 grid gap-px border border-border bg-border md:grid-cols-3">
-            {testimonials.slice(0, 3).map((t) => (
-              <figure key={t.id} className="bg-background p-8 md:p-10">
-                <blockquote className="font-display text-xl leading-snug font-light italic text-ivory">
-                  “{t.quote}”
-                </blockquote>
-                <figcaption className="mt-6 font-sans text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
-                  {t.name} · {t.event} · {t.area}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-          <Link
-            to="/reviews"
-            className="mt-10 inline-block font-sans text-[11px] tracking-[0.24em] uppercase text-gold hover:text-gold-light"
-          >
-            Read all reviews →
-          </Link>
+        </Reveal>
+
+        <div className="mt-16 space-y-20 lg:space-y-28">
+          {testimonials.slice(0, 3).map((t, i) => (
+            <Reveal
+              key={t.id}
+              delay={60}
+              className={
+                i === 1
+                  ? "lg:ml-auto lg:max-w-3xl lg:text-right"
+                  : i === 2
+                    ? "lg:mx-auto lg:max-w-2xl"
+                    : "lg:max-w-3xl"
+              }
+            >
+              <blockquote className="font-display text-[1.7rem] leading-[1.3] font-light text-ivory italic lg:text-[2.6rem]">
+                “{t.quote}”
+              </blockquote>
+              <p className="mt-7 font-sans text-[10px] tracking-[0.32em] uppercase text-gold-deep">
+                {t.name} · {t.event} · {t.area}
+              </p>
+            </Reveal>
+          ))}
         </div>
+
+        <Reveal className="mt-20">
+          <LuxTextLink to="/reviews">Read all reviews</LuxTextLink>
+        </Reveal>
       </section>
 
-      {/* Areas */}
-      <section className="border-t border-border bg-surface/30">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-24">
-          <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
-            Where we work
-          </p>
-          <h2 className="mt-6 max-w-3xl font-display text-4xl font-light text-ivory md:text-5xl">
-            Every postcode in Lahore, produced by the same team.
-          </h2>
-          <ul className="mt-10 flex flex-wrap gap-3">
-            {locations.map((l) => (
-              <li key={l.slug}>
+      {/* ── IX. Territory — split screen ────────────────────────────── */}
+      <section className="relative grid items-stretch lg:grid-cols-[1fr_1fr]">
+        <div className="relative order-2 min-h-[50svh] lg:order-1">
+          <Plate
+            image={photo("ae-24")}
+            ratio="3/4"
+            speed={0.9}
+            fade="sides"
+            className="h-full [&>div]:h-full"
+          />
+        </div>
+        <div className="order-1 flex items-center px-6 py-24 md:px-12 lg:order-2 lg:py-40 lg:pr-[max(3rem,calc((100vw-92rem)/2+3rem))]">
+          <div>
+            <Reveal>
+              <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
+                Where we work
+              </p>
+              <h2 className="mt-8 max-w-[16ch] font-display text-[2.4rem] leading-[1.04] font-light text-ivory lg:text-[3.4rem]">
+                Every postcode in Lahore, produced by the same team.
+              </h2>
+            </Reveal>
+            <Reveal delay={140} className="mt-12 flex flex-wrap gap-x-8 gap-y-4">
+              {locations.map((l) => (
                 <Link
+                  key={l.slug}
                   to="/areas/$slug"
                   params={{ slug: l.slug }}
-                  className="inline-flex border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.2em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+                  className="group/area relative font-sans text-[11px] tracking-[0.26em] uppercase text-muted-foreground transition-colors duration-500 hover:text-gold"
                 >
                   {l.shortName}
+                  <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform duration-700 group-hover/area:origin-left group-hover/area:scale-x-100" />
                 </Link>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </Reveal>
+            <Reveal delay={220} className="mt-14">
+              <LuxLink to="/areas" tone="ghost">
+                All service areas
+              </LuxLink>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* Journal */}
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-28">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
-                The journal
-              </p>
-              <h2 className="mt-6 font-display text-4xl font-light text-ivory md:text-5xl">
-                Written by the people who build it.
-              </h2>
-            </div>
-            <Link
-              to="/journal"
-              className="font-sans text-[11px] tracking-[0.24em] uppercase text-gold hover:text-gold-light"
-            >
-              All writing →
-            </Link>
-          </div>
-          <div className="mt-14 grid gap-px border border-border bg-border md:grid-cols-3">
-            {journal.map((a) => (
-              <Link
-                key={a.slug}
-                to="/journal/$slug"
-                params={{ slug: a.slug }}
-                className="group bg-background p-8 md:p-10"
-              >
-                <p className="font-sans text-[10px] tracking-[0.28em] uppercase text-gold-deep">
-                  {a.category} · {a.readingTime}
+      {/* ── X. Journal — one lead story, two whispers ───────────────── */}
+      <section className="chapter relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
+        <div className="flex flex-wrap items-end justify-between gap-8">
+          <Reveal>
+            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
+              The journal
+            </p>
+            <h2 className="mt-8 font-display text-[2.6rem] leading-[1.02] font-light text-ivory lg:text-[4rem]">
+              Written by the people
+              <span className="block italic text-gold-light">who build it.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={120}>
+            <LuxTextLink to="/journal">All writing</LuxTextLink>
+          </Reveal>
+        </div>
+
+        <div className="mt-20 grid gap-x-16 gap-y-14 lg:grid-cols-[1.35fr_1fr]">
+          {journal[0] && (
+            <Reveal variant="mask">
+              <Link to="/journal/$slug" params={{ slug: journal[0].slug }} className="group/lead block">
+                <Plate image={photo("ae-11")} ratio="16/10" />
+                <p className="mt-8 font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
+                  {journal[0].category} · {journal[0].readingTime}
                 </p>
-                <h3 className="mt-5 font-display text-2xl leading-snug font-light text-ivory transition-colors group-hover:text-gold">
-                  {a.title}
+                <h3 className="mt-5 max-w-2xl font-display text-[2rem] leading-[1.12] font-light text-ivory transition-colors duration-700 group-hover/lead:text-gold lg:text-[2.6rem]">
+                  {journal[0].title}
                 </h3>
-                <p className="mt-4 font-sans text-sm leading-[1.85] font-light text-muted-foreground">
-                  {a.excerpt}
+                <p className="mt-5 max-w-xl font-sans text-[14px] leading-[1.95] font-light text-muted-foreground">
+                  {journal[0].excerpt}
                 </p>
               </Link>
+            </Reveal>
+          )}
+
+          <div className="flex flex-col justify-center gap-14 lg:pt-10">
+            {journal.slice(1).map((a, i) => (
+              <Reveal key={a.slug} delay={i * 120}>
+                <Link to="/journal/$slug" params={{ slug: a.slug }} className="group/story block">
+                  <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
+                    {a.category} · {a.readingTime}
+                  </p>
+                  <h3 className="mt-4 font-display text-[1.6rem] leading-tight font-light text-ivory transition-[color,transform] duration-700 group-hover/story:translate-x-1.5 group-hover/story:text-gold lg:text-[2rem]">
+                    {a.title}
+                  </h3>
+                  <p className="mt-4 font-sans text-[13px] leading-[1.95] font-light text-muted-foreground">
+                    {a.excerpt}
+                  </p>
+                  <span className="mt-6 block h-px w-full origin-left scale-x-100 bg-border transition-colors duration-700 group-hover/story:bg-gold" />
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
