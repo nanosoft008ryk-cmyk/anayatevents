@@ -158,11 +158,11 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-20">
-          <AreaMap />
-        </div>
-      </section>
+      <AreaMap
+        areaName="Lahore"
+        travelNote="The studio sits in Green Acres Housing Society, minutes from Bedian Road and within easy reach of DHA, Bahria Town and the Ring Road."
+      />
+
     </main>
   );
 }
