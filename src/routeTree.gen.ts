@@ -9,12 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VaultRouteImport } from './routes/vault'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as PortfolioIndexRouteImport } from './routes/portfolio.index'
 import { Route as AreasIndexRouteImport } from './routes/areas.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
 import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
 
+const VaultRoute = VaultRouteImport.update({
+  id: '/vault',
+  path: '/vault',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -23,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
   id: '/services/',
   path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
+  id: '/portfolio/',
+  path: '/portfolio/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AreasIndexRoute = AreasIndexRouteImport.update({
@@ -35,6 +48,11 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortfolioSlugRoute = PortfolioSlugRouteImport.update({
+  id: '/portfolio/$slug',
+  path: '/portfolio/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AreasSlugRoute = AreasSlugRouteImport.update({
   id: '/areas/$slug',
   path: '/areas/$slug',
@@ -43,50 +61,88 @@ const AreasSlugRoute = AreasSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/vault': typeof VaultRoute
   '/areas/$slug': typeof AreasSlugRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/areas/': typeof AreasIndexRoute
+  '/portfolio/': typeof PortfolioIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/vault': typeof VaultRoute
   '/areas/$slug': typeof AreasSlugRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/areas': typeof AreasIndexRoute
+  '/portfolio': typeof PortfolioIndexRoute
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/vault': typeof VaultRoute
   '/areas/$slug': typeof AreasSlugRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/areas/': typeof AreasIndexRoute
+  '/portfolio/': typeof PortfolioIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/areas/$slug' | '/services/$slug' | '/areas/' | '/services/'
+  fullPaths:
+    | '/'
+    | '/vault'
+    | '/areas/$slug'
+    | '/portfolio/$slug'
+    | '/services/$slug'
+    | '/areas/'
+    | '/portfolio/'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/areas/$slug' | '/services/$slug' | '/areas' | '/services'
+  to:
+    | '/'
+    | '/vault'
+    | '/areas/$slug'
+    | '/portfolio/$slug'
+    | '/services/$slug'
+    | '/areas'
+    | '/portfolio'
+    | '/services'
   id:
     | '__root__'
     | '/'
+    | '/vault'
     | '/areas/$slug'
+    | '/portfolio/$slug'
     | '/services/$slug'
     | '/areas/'
+    | '/portfolio/'
     | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  VaultRoute: typeof VaultRoute
   AreasSlugRoute: typeof AreasSlugRoute
+  PortfolioSlugRoute: typeof PortfolioSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   AreasIndexRoute: typeof AreasIndexRoute
+  PortfolioIndexRoute: typeof PortfolioIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vault': {
+      id: '/vault'
+      path: '/vault'
+      fullPath: '/vault'
+      preLoaderRoute: typeof VaultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -99,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services/'
       preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio/': {
+      id: '/portfolio/'
+      path: '/portfolio'
+      fullPath: '/portfolio/'
+      preLoaderRoute: typeof PortfolioIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/areas/': {
@@ -115,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portfolio/$slug': {
+      id: '/portfolio/$slug'
+      path: '/portfolio/$slug'
+      fullPath: '/portfolio/$slug'
+      preLoaderRoute: typeof PortfolioSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/areas/$slug': {
       id: '/areas/$slug'
       path: '/areas/$slug'
@@ -127,9 +197,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  VaultRoute: VaultRoute,
   AreasSlugRoute: AreasSlugRoute,
+  PortfolioSlugRoute: PortfolioSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   AreasIndexRoute: AreasIndexRoute,
+  PortfolioIndexRoute: PortfolioIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
