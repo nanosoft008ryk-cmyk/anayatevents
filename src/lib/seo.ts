@@ -341,7 +341,9 @@ export function reviewCollectionSchema(
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "@id": `${path}#reviews`,
+    "@id": abs(`${path}#reviews`),
+    numberOfItems: reviews.length,
+
     itemListElement: reviews.map((r, i) => ({
       "@type": "ListItem",
       position: i + 1,
