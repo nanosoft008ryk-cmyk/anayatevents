@@ -13,9 +13,13 @@ import { Route as VaultRouteImport } from './routes/vault'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as PortfolioIndexRouteImport } from './routes/portfolio.index'
+import { Route as JournalIndexRouteImport } from './routes/journal.index'
+import { Route as FaqIndexRouteImport } from './routes/faq.index'
 import { Route as AreasIndexRouteImport } from './routes/areas.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
+import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
+import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
 
 const VaultRoute = VaultRouteImport.update({
@@ -38,6 +42,16 @@ const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
   path: '/portfolio/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JournalIndexRoute = JournalIndexRouteImport.update({
+  id: '/journal/',
+  path: '/journal/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqIndexRoute = FaqIndexRouteImport.update({
+  id: '/faq/',
+  path: '/faq/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AreasIndexRoute = AreasIndexRouteImport.update({
   id: '/areas/',
   path: '/areas/',
@@ -53,6 +67,16 @@ const PortfolioSlugRoute = PortfolioSlugRouteImport.update({
   path: '/portfolio/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JournalSlugRoute = JournalSlugRouteImport.update({
+  id: '/journal/$slug',
+  path: '/journal/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqSlugRoute = FaqSlugRouteImport.update({
+  id: '/faq/$slug',
+  path: '/faq/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AreasSlugRoute = AreasSlugRouteImport.update({
   id: '/areas/$slug',
   path: '/areas/$slug',
@@ -63,9 +87,13 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/vault': typeof VaultRoute
   '/areas/$slug': typeof AreasSlugRoute
+  '/faq/$slug': typeof FaqSlugRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/areas/': typeof AreasIndexRoute
+  '/faq/': typeof FaqIndexRoute
+  '/journal/': typeof JournalIndexRoute
   '/portfolio/': typeof PortfolioIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
@@ -73,9 +101,13 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/vault': typeof VaultRoute
   '/areas/$slug': typeof AreasSlugRoute
+  '/faq/$slug': typeof FaqSlugRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/areas': typeof AreasIndexRoute
+  '/faq': typeof FaqIndexRoute
+  '/journal': typeof JournalIndexRoute
   '/portfolio': typeof PortfolioIndexRoute
   '/services': typeof ServicesIndexRoute
 }
@@ -84,9 +116,13 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/vault': typeof VaultRoute
   '/areas/$slug': typeof AreasSlugRoute
+  '/faq/$slug': typeof FaqSlugRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/areas/': typeof AreasIndexRoute
+  '/faq/': typeof FaqIndexRoute
+  '/journal/': typeof JournalIndexRoute
   '/portfolio/': typeof PortfolioIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
@@ -96,9 +132,13 @@ export interface FileRouteTypes {
     | '/'
     | '/vault'
     | '/areas/$slug'
+    | '/faq/$slug'
+    | '/journal/$slug'
     | '/portfolio/$slug'
     | '/services/$slug'
     | '/areas/'
+    | '/faq/'
+    | '/journal/'
     | '/portfolio/'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
@@ -106,9 +146,13 @@ export interface FileRouteTypes {
     | '/'
     | '/vault'
     | '/areas/$slug'
+    | '/faq/$slug'
+    | '/journal/$slug'
     | '/portfolio/$slug'
     | '/services/$slug'
     | '/areas'
+    | '/faq'
+    | '/journal'
     | '/portfolio'
     | '/services'
   id:
@@ -116,9 +160,13 @@ export interface FileRouteTypes {
     | '/'
     | '/vault'
     | '/areas/$slug'
+    | '/faq/$slug'
+    | '/journal/$slug'
     | '/portfolio/$slug'
     | '/services/$slug'
     | '/areas/'
+    | '/faq/'
+    | '/journal/'
     | '/portfolio/'
     | '/services/'
   fileRoutesById: FileRoutesById
@@ -127,9 +175,13 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   VaultRoute: typeof VaultRoute
   AreasSlugRoute: typeof AreasSlugRoute
+  FaqSlugRoute: typeof FaqSlugRoute
+  JournalSlugRoute: typeof JournalSlugRoute
   PortfolioSlugRoute: typeof PortfolioSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   AreasIndexRoute: typeof AreasIndexRoute
+  FaqIndexRoute: typeof FaqIndexRoute
+  JournalIndexRoute: typeof JournalIndexRoute
   PortfolioIndexRoute: typeof PortfolioIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
@@ -164,6 +216,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journal/': {
+      id: '/journal/'
+      path: '/journal'
+      fullPath: '/journal/'
+      preLoaderRoute: typeof JournalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq/': {
+      id: '/faq/'
+      path: '/faq'
+      fullPath: '/faq/'
+      preLoaderRoute: typeof FaqIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/areas/': {
       id: '/areas/'
       path: '/areas'
@@ -185,6 +251,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journal/$slug': {
+      id: '/journal/$slug'
+      path: '/journal/$slug'
+      fullPath: '/journal/$slug'
+      preLoaderRoute: typeof JournalSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq/$slug': {
+      id: '/faq/$slug'
+      path: '/faq/$slug'
+      fullPath: '/faq/$slug'
+      preLoaderRoute: typeof FaqSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/areas/$slug': {
       id: '/areas/$slug'
       path: '/areas/$slug'
@@ -199,9 +279,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   VaultRoute: VaultRoute,
   AreasSlugRoute: AreasSlugRoute,
+  FaqSlugRoute: FaqSlugRoute,
+  JournalSlugRoute: JournalSlugRoute,
   PortfolioSlugRoute: PortfolioSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   AreasIndexRoute: AreasIndexRoute,
+  FaqIndexRoute: FaqIndexRoute,
+  JournalIndexRoute: JournalIndexRoute,
   PortfolioIndexRoute: PortfolioIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
