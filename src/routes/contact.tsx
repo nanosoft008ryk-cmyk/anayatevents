@@ -4,7 +4,7 @@ import { site, consultationSteps } from "@/content/site";
 import { photo } from "@/content/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AreaMap } from "@/components/AreaMap";
-import { pageMeta, jsonLd, breadcrumbSchema, type Crumb } from "@/lib/seo";
+import { pageMeta, jsonLd, breadcrumbSchema, abs, type Crumb } from "@/lib/seo";
 
 const PATH = "/contact";
 
