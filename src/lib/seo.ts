@@ -64,6 +64,20 @@ export function jsonLd(data: unknown) {
 
 /* ------------------------------- Schema.org ------------------------------ */
 
+/**
+ * Validator note: Google's Rich Results Test resolves relative URLs against the
+ * page it is testing, so relative values are valid — but ONLY once the site has
+ * a real host. Until a domain is attached, BASE_URL stays empty and every URL
+ * we emit is root-relative. Set BASE_URL to "https://yourdomain.com" (no
+ * trailing slash) at launch and every schema URL becomes absolute at once.
+ */
+export const BASE_URL = "";
+
+export function abs(path: string): string {
+  if (/^https?:\/\//.test(path)) return path;
+  return `${BASE_URL}${path}`;
+}
+
 const postalAddress = {
   "@type": "PostalAddress",
   streetAddress: site.address.street,
@@ -73,33 +87,73 @@ const postalAddress = {
   addressCountry: site.address.country,
 };
 
+const openingHoursSpecification = [
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "14:00",
+    closes: "22:00",
+  },
+];
+
 /** Sitewide entity. Emitted once, from __root.tsx only. */
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "/#business",
+    "@id": abs("/#business"),
     name: site.legalName,
     alternateName: site.name,
     slogan: site.tagline,
     description: site.description,
+    // Google flags LocalBusiness without image/logo/geo as missing recommended
+    // fields, so all three are always present.
+    image: abs(logo),
+    logo: abs(logo),
     address: postalAddress,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: site.geo.lat,
+      longitude: site.geo.lng,
+    },
+    hasMap: site.mapsUrl,
     telephone: site.phoneE164,
-    url: "/",
+    url: abs("/"),
     sameAs: [site.instagram, site.mapsUrl],
-    openingHours: site.hoursSchema,
+    openingHoursSpecification,
     priceRange: "$$$",
+    currenciesAccepted: "PKR",
+    foundingDate: site.founded,
     areaServed: { "@type": "City", name: "Lahore" },
+    knowsLanguage: ["en", "ur"],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: site.rating.value,
       reviewCount: site.rating.count,
       bestRating: "5",
+      worstRating: "1",
     },
   };
 }
 
-export function breadcrumbSchema(trail: { name: string; path: string }[]) {
+export interface Crumb {
+  name: string;
+  path: string;
+}
+
+/**
+ * Built from the exact same Crumb[] the visible <Breadcrumbs> renders, so the
+ * markup and the structured data can never drift apart.
+ */
+export function breadcrumbSchema(trail: Crumb[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -107,10 +161,11 @@ export function breadcrumbSchema(trail: { name: string; path: string }[]) {
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: item.path,
+      item: abs(item.path),
     })),
   };
 }
+
 
 export function serviceSchema(input: {
   name: string;
