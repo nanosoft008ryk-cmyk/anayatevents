@@ -22,8 +22,9 @@ export interface PageMetaInput {
   path: string;
   type?: "website" | "article" | "profile";
   noindex?: boolean;
-  /** Absolute https URL only. Relative CDN paths are ignored on purpose. */
+  /** Relative CDN paths are fine — abs() promotes them to absolute URLs. */
   image?: string;
+
 }
 
 export interface HeadMetaEntry {
