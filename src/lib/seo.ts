@@ -22,8 +22,9 @@ export interface PageMetaInput {
   path: string;
   type?: "website" | "article" | "profile";
   noindex?: boolean;
-  /** Absolute https URL only. Relative CDN paths are ignored on purpose. */
+  /** Relative CDN paths are fine — abs() promotes them to absolute URLs. */
   image?: string;
+
 }
 
 export interface HeadMetaEntry {
@@ -38,6 +39,7 @@ export function pageMeta(input: PageMetaInput): {
   links: { rel: string; href: string }[];
 } {
   const { title, description, path, type = "website", noindex, image } = input;
+  const url = abs(path);
 
   const meta: HeadMetaEntry[] = [
     { title },
@@ -45,19 +47,20 @@ export function pageMeta(input: PageMetaInput): {
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: type },
-    { property: "og:url", content: path },
+    { property: "og:url", content: url },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
   ];
 
-  if (image && image.startsWith("https://")) {
-    meta.push({ property: "og:image", content: image });
-    meta.push({ name: "twitter:image", content: image });
+  if (image) {
+    meta.push({ property: "og:image", content: abs(image) });
+    meta.push({ name: "twitter:image", content: abs(image) });
   }
 
   if (noindex) meta.push({ name: "robots", content: "noindex, nofollow" });
 
-  return { meta, links: [{ rel: "canonical", href: path }] };
+  return { meta, links: [{ rel: "canonical", href: url }] };
+
 }
 
 export function jsonLd(data: unknown) {
@@ -67,13 +70,12 @@ export function jsonLd(data: unknown) {
 /* ------------------------------- Schema.org ------------------------------ */
 
 /**
- * Validator note: Google's Rich Results Test resolves relative URLs against the
- * page it is testing, so relative values are valid — but ONLY once the site has
- * a real host. Until a domain is attached, BASE_URL stays empty and every URL
- * we emit is root-relative. Set BASE_URL to "https://yourdomain.com" (no
- * trailing slash) at launch and every schema URL becomes absolute at once.
+ * Absolute origin for every canonical, og:url and schema URL. This is the
+ * project's stable Lovable host; when a custom domain is attached, change this
+ * one line and every URL on the site follows.
  */
-export const BASE_URL = "";
+export const BASE_URL = "https://project--ca05bc7d-2f89-47fe-983b-5f1b9eeefe7a.lovable.app";
+
 
 export function abs(path: string): string {
   if (/^https?:\/\//.test(path)) return path;

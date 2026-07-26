@@ -9,13 +9,73 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VaultRouteImport } from './routes/vault'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as PortfolioIndexRouteImport } from './routes/portfolio.index'
+import { Route as JournalIndexRouteImport } from './routes/journal.index'
+import { Route as FaqIndexRouteImport } from './routes/faq.index'
 import { Route as AreasIndexRouteImport } from './routes/areas.index'
+import { Route as AboutIndexRouteImport } from './routes/about.index'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
+import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
+import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
+import { Route as AboutProcessRouteImport } from './routes/about.process'
 
+const VaultRoute = VaultRouteImport.update({
+  id: '/vault',
+  path: '/vault',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
+  id: '/portfolio/',
+  path: '/portfolio/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalIndexRoute = JournalIndexRouteImport.update({
+  id: '/journal/',
+  path: '/journal/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqIndexRoute = FaqIndexRouteImport.update({
+  id: '/faq/',
+  path: '/faq/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AreasIndexRoute = AreasIndexRouteImport.update({
@@ -23,49 +83,257 @@ const AreasIndexRoute = AreasIndexRouteImport.update({
   path: '/areas/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutIndexRoute = AboutIndexRouteImport.update({
+  id: '/about/',
+  path: '/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/services/$slug',
+  path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioSlugRoute = PortfolioSlugRouteImport.update({
+  id: '/portfolio/$slug',
+  path: '/portfolio/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalSlugRoute = JournalSlugRouteImport.update({
+  id: '/journal/$slug',
+  path: '/journal/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqSlugRoute = FaqSlugRouteImport.update({
+  id: '/faq/$slug',
+  path: '/faq/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AreasSlugRoute = AreasSlugRouteImport.update({
   id: '/areas/$slug',
   path: '/areas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutProcessRoute = AboutProcessRouteImport.update({
+  id: '/about/process',
+  path: '/about/process',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/reviews': typeof ReviewsRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/vault': typeof VaultRoute
+  '/about/process': typeof AboutProcessRoute
   '/areas/$slug': typeof AreasSlugRoute
+  '/faq/$slug': typeof FaqSlugRoute
+  '/journal/$slug': typeof JournalSlugRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/about/': typeof AboutIndexRoute
   '/areas/': typeof AreasIndexRoute
+  '/faq/': typeof FaqIndexRoute
+  '/journal/': typeof JournalIndexRoute
+  '/portfolio/': typeof PortfolioIndexRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/reviews': typeof ReviewsRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/vault': typeof VaultRoute
+  '/about/process': typeof AboutProcessRoute
   '/areas/$slug': typeof AreasSlugRoute
+  '/faq/$slug': typeof FaqSlugRoute
+  '/journal/$slug': typeof JournalSlugRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/about': typeof AboutIndexRoute
   '/areas': typeof AreasIndexRoute
+  '/faq': typeof FaqIndexRoute
+  '/journal': typeof JournalIndexRoute
+  '/portfolio': typeof PortfolioIndexRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/reviews': typeof ReviewsRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/vault': typeof VaultRoute
+  '/about/process': typeof AboutProcessRoute
   '/areas/$slug': typeof AreasSlugRoute
+  '/faq/$slug': typeof FaqSlugRoute
+  '/journal/$slug': typeof JournalSlugRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/about/': typeof AboutIndexRoute
   '/areas/': typeof AreasIndexRoute
+  '/faq/': typeof FaqIndexRoute
+  '/journal/': typeof JournalIndexRoute
+  '/portfolio/': typeof PortfolioIndexRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/areas/$slug' | '/areas/'
+  fullPaths:
+    | '/'
+    | '/contact'
+    | '/reviews'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/vault'
+    | '/about/process'
+    | '/areas/$slug'
+    | '/faq/$slug'
+    | '/journal/$slug'
+    | '/portfolio/$slug'
+    | '/services/$slug'
+    | '/about/'
+    | '/areas/'
+    | '/faq/'
+    | '/journal/'
+    | '/portfolio/'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/areas/$slug' | '/areas'
-  id: '__root__' | '/' | '/areas/$slug' | '/areas/'
+  to:
+    | '/'
+    | '/contact'
+    | '/reviews'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/vault'
+    | '/about/process'
+    | '/areas/$slug'
+    | '/faq/$slug'
+    | '/journal/$slug'
+    | '/portfolio/$slug'
+    | '/services/$slug'
+    | '/about'
+    | '/areas'
+    | '/faq'
+    | '/journal'
+    | '/portfolio'
+    | '/services'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/reviews'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/vault'
+    | '/about/process'
+    | '/areas/$slug'
+    | '/faq/$slug'
+    | '/journal/$slug'
+    | '/portfolio/$slug'
+    | '/services/$slug'
+    | '/about/'
+    | '/areas/'
+    | '/faq/'
+    | '/journal/'
+    | '/portfolio/'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
+  ReviewsRoute: typeof ReviewsRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  VaultRoute: typeof VaultRoute
+  AboutProcessRoute: typeof AboutProcessRoute
   AreasSlugRoute: typeof AreasSlugRoute
+  FaqSlugRoute: typeof FaqSlugRoute
+  JournalSlugRoute: typeof JournalSlugRoute
+  PortfolioSlugRoute: typeof PortfolioSlugRoute
+  ServicesSlugRoute: typeof ServicesSlugRoute
+  AboutIndexRoute: typeof AboutIndexRoute
   AreasIndexRoute: typeof AreasIndexRoute
+  FaqIndexRoute: typeof FaqIndexRoute
+  JournalIndexRoute: typeof JournalIndexRoute
+  PortfolioIndexRoute: typeof PortfolioIndexRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vault': {
+      id: '/vault'
+      path: '/vault'
+      fullPath: '/vault'
+      preLoaderRoute: typeof VaultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio/': {
+      id: '/portfolio/'
+      path: '/portfolio'
+      fullPath: '/portfolio/'
+      preLoaderRoute: typeof PortfolioIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal/': {
+      id: '/journal/'
+      path: '/journal'
+      fullPath: '/journal/'
+      preLoaderRoute: typeof JournalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq/': {
+      id: '/faq/'
+      path: '/faq'
+      fullPath: '/faq/'
+      preLoaderRoute: typeof FaqIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/areas/': {
@@ -75,6 +343,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about/'
+      preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio/$slug': {
+      id: '/portfolio/$slug'
+      path: '/portfolio/$slug'
+      fullPath: '/portfolio/$slug'
+      preLoaderRoute: typeof PortfolioSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal/$slug': {
+      id: '/journal/$slug'
+      path: '/journal/$slug'
+      fullPath: '/journal/$slug'
+      preLoaderRoute: typeof JournalSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq/$slug': {
+      id: '/faq/$slug'
+      path: '/faq/$slug'
+      fullPath: '/faq/$slug'
+      preLoaderRoute: typeof FaqSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/areas/$slug': {
       id: '/areas/$slug'
       path: '/areas/$slug'
@@ -82,13 +385,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/process': {
+      id: '/about/process'
+      path: '/about/process'
+      fullPath: '/about/process'
+      preLoaderRoute: typeof AboutProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
+  ReviewsRoute: ReviewsRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  VaultRoute: VaultRoute,
+  AboutProcessRoute: AboutProcessRoute,
   AreasSlugRoute: AreasSlugRoute,
+  FaqSlugRoute: FaqSlugRoute,
+  JournalSlugRoute: JournalSlugRoute,
+  PortfolioSlugRoute: PortfolioSlugRoute,
+  ServicesSlugRoute: ServicesSlugRoute,
+  AboutIndexRoute: AboutIndexRoute,
   AreasIndexRoute: AreasIndexRoute,
+  FaqIndexRoute: FaqIndexRoute,
+  JournalIndexRoute: JournalIndexRoute,
+  PortfolioIndexRoute: PortfolioIndexRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
