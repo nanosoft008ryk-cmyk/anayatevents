@@ -27,11 +27,12 @@ export const Route = createFileRoute("/contact")({
       jsonLd({
         "@context": "https://schema.org",
         "@type": "ContactPage",
-        "@id": `${PATH}#contactpage`,
+        "@id": abs(`${PATH}#contactpage`),
         name: "Contact Anayat Events & Catering",
-        url: PATH,
-        about: { "@id": "/#business" },
+        url: abs(PATH),
+        about: { "@id": abs("/#business") },
       }),
+
     ],
   }),
   component: ContactPage,
