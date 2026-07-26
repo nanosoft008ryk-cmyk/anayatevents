@@ -100,8 +100,7 @@ function Home() {
             </div>
           </div>
 
-            </div>
-          </div>
+
 
           {/* Floating framed plate */}
           <div className="hidden self-center lg:col-span-4 lg:block">
