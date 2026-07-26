@@ -7,12 +7,13 @@ import { cn } from "@/lib/utils";
  * The house button. No borders-as-boxes: a hairline that draws itself, a foil
  * sweep on hover, a magnetic pull toward the cursor and a travelling arrow.
  */
-export type LuxTone = "foil" | "ghost" | "quiet";
+export type LuxTone = "foil" | "ghost" | "quiet" | "rule";
 
 const toneClass: Record<LuxTone, string> = {
   foil: "text-primary-foreground",
   ghost: "text-ivory",
   quiet: "text-gold",
+  rule: "text-gold",
 };
 
 function useMagnetic(strength = 12) {
@@ -39,6 +40,17 @@ function useMagnetic(strength = 12) {
 }
 
 function Inner({ children, tone, arrow }: { children: ReactNode; tone: LuxTone; arrow: boolean }) {
+  if (tone === "rule") {
+    return (
+      <span className="relative flex items-center gap-4">
+        <span>{children}</span>
+        <span
+          aria-hidden
+          className="h-px w-10 bg-gold transition-[width] duration-[900ms] [transition-timing-function:var(--ease-lux)] group-hover/lux:w-20"
+        />
+      </span>
+    );
+  }
   return (
     <>
       <span
@@ -77,6 +89,7 @@ const ring: Record<LuxTone, string> = {
   ghost:
     "before:absolute before:inset-0 before:-z-10 before:border before:border-border-strong before:transition-colors before:duration-500 hover:before:border-gold hover:text-gold",
   quiet: "hover:text-gold-light",
+  rule: "hover:text-gold-light",
 };
 
 export function LuxLink({
