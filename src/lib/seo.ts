@@ -38,6 +38,7 @@ export function pageMeta(input: PageMetaInput): {
   links: { rel: string; href: string }[];
 } {
   const { title, description, path, type = "website", noindex, image } = input;
+  const url = abs(path);
 
   const meta: HeadMetaEntry[] = [
     { title },
@@ -45,19 +46,20 @@ export function pageMeta(input: PageMetaInput): {
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: type },
-    { property: "og:url", content: path },
+    { property: "og:url", content: url },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
   ];
 
-  if (image && image.startsWith("https://")) {
-    meta.push({ property: "og:image", content: image });
-    meta.push({ name: "twitter:image", content: image });
+  if (image) {
+    meta.push({ property: "og:image", content: abs(image) });
+    meta.push({ name: "twitter:image", content: abs(image) });
   }
 
   if (noindex) meta.push({ name: "robots", content: "noindex, nofollow" });
 
-  return { meta, links: [{ rel: "canonical", href: path }] };
+  return { meta, links: [{ rel: "canonical", href: url }] };
+
 }
 
 export function jsonLd(data: unknown) {
