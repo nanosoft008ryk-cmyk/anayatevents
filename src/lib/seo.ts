@@ -343,7 +343,6 @@ export function reviewCollectionSchema(
     "@type": "ItemList",
     "@id": abs(`${path}#reviews`),
     numberOfItems: reviews.length,
-
     itemListElement: reviews.map((r, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -351,9 +350,22 @@ export function reviewCollectionSchema(
         "@type": "Review",
         reviewBody: r.quote,
         author: { "@type": "Person", name: r.name },
-        itemReviewed: { "@id": "/#business" },
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+        itemReviewed: {
+          "@type": "LocalBusiness",
+          "@id": abs("/#business"),
+          name: site.legalName,
+          image: abs(logo),
+          address: postalAddress,
+          telephone: site.phoneE164,
+        },
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: "5",
+          bestRating: "5",
+          worstRating: "1",
+        },
       },
     })),
+
   };
 }
