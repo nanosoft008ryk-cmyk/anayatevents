@@ -55,21 +55,21 @@ function Home() {
       <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden">
         <CinematicBackdrop frames={frames} />
 
-        <div className="relative mx-auto grid w-full max-w-[92rem] grid-cols-12 items-end gap-x-6 px-6 pt-36 pb-28 md:px-12 lg:pb-24">
-          {/* Vertical eyebrow rail */}
-          <div className="col-span-12 lg:col-span-1">
-            <Reveal variant="fade" duration={1400}>
-              <div className="mb-10 flex items-center gap-4 whitespace-nowrap lg:mb-0 lg:origin-left lg:-rotate-90">
-                <span className="h-px w-8 bg-gold" />
-                <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-gold">
-                  Lahore · Since {site.founded}
-                </p>
-              </div>
-            </Reveal>
-          </div>
+        {/* Vertical eyebrow rail */}
+        <div className="pointer-events-none absolute top-1/2 left-6 hidden -translate-y-1/2 items-center gap-4 lg:flex">
+          <span className="font-sans text-[10px] tracking-[0.4em] uppercase text-gold [writing-mode:vertical-rl] rotate-180">
+            Lahore · Since {site.founded}
+          </span>
+          <span className="h-16 w-px bg-gradient-to-b from-gold to-transparent" />
+        </div>
 
+        <div className="relative mx-auto grid w-full max-w-[92rem] grid-cols-12 items-end gap-x-6 px-6 pt-36 pb-28 md:px-12 lg:pl-24 lg:pb-24">
           {/* Headline column */}
           <div className="col-span-12 flex flex-col lg:col-span-7">
+            <p className="mb-8 flex items-center gap-4 font-sans text-[10px] tracking-[0.4em] uppercase text-gold lg:hidden">
+              <span className="h-px w-8 bg-gold" />
+              Lahore · Since {site.founded}
+            </p>
             <h1 className="font-display text-[3.4rem] leading-[0.9] font-light tracking-tight text-ivory sm:text-[5rem] lg:text-[7.6rem]">
               <RevealWords text="An evening" delay={120} />
               <span className="mt-1 block pl-10 md:pl-24">
@@ -89,7 +89,7 @@ function Home() {
                   {site.description}
                 </p>
               </Reveal>
-              <Reveal delay={900} className="mt-10 flex flex-wrap items-center gap-x-12 gap-y-6">
+              <Reveal delay={900} className="mt-10 flex flex-wrap items-center gap-x-16 gap-y-6">
                 <LuxLink to="/contact" tone="rule" className="px-0 py-0">
                   Begin an enquiry
                 </LuxLink>
@@ -97,6 +97,9 @@ function Home() {
                   View the work
                 </LuxLink>
               </Reveal>
+            </div>
+          </div>
+
             </div>
           </div>
 
