@@ -1,4 +1,6 @@
 import { site } from "@/content/site";
+import { logo } from "@/content/images";
+
 
 /* ---------------------------------------------------------------------------
  * Metadata rules for this project (enforced by the helpers below):
