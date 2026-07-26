@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
-import { locations } from "@/content/locations";
+import { locations, type LocationArea } from "@/content/locations";
 import { photo } from "@/content/images";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -14,7 +14,7 @@ import {
   type Crumb,
 } from "@/lib/seo";
 
-function findArea(slug: string) {
+function findArea(slug: string): LocationArea | undefined {
   return locations.find((l) => l.slug === slug);
 }
 
@@ -68,7 +68,7 @@ export const Route = createFileRoute("/areas/$slug")({
 });
 
 function AreaPage() {
-  const { area } = Route.useLoaderData();
+  const { area } = Route.useLoaderData() as { area: LocationArea };
   const trail = trailFor(area.slug);
   const hero = photo(area.hero);
   const gallery = area.gallery.map(photo);
