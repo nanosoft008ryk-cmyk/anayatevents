@@ -70,13 +70,12 @@ export function jsonLd(data: unknown) {
 /* ------------------------------- Schema.org ------------------------------ */
 
 /**
- * Validator note: Google's Rich Results Test resolves relative URLs against the
- * page it is testing, so relative values are valid — but ONLY once the site has
- * a real host. Until a domain is attached, BASE_URL stays empty and every URL
- * we emit is root-relative. Set BASE_URL to "https://yourdomain.com" (no
- * trailing slash) at launch and every schema URL becomes absolute at once.
+ * Absolute origin for every canonical, og:url and schema URL. This is the
+ * project's stable Lovable host; when a custom domain is attached, change this
+ * one line and every URL on the site follows.
  */
-export const BASE_URL = "";
+export const BASE_URL = "https://project--ca05bc7d-2f89-47fe-983b-5f1b9eeefe7a.lovable.app";
+
 
 export function abs(path: string): string {
   if (/^https?:\/\//.test(path)) return path;
