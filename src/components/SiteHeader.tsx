@@ -3,12 +3,13 @@ import { Link, useRouterState } from "@tanstack/react-router";
 
 import { navigation } from "@/content/navigation";
 import { site } from "@/content/site";
-import { logo } from "@/content/images";
+import { logo, photo } from "@/content/images";
 
 export function SiteHeader() {
   const [open, setOpen] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
@@ -17,50 +18,86 @@ export function SiteHeader() {
   }, [pathname]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 32);
+      setHidden(y > 320 && y > last);
+      last = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = mobile ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobile]);
+
+  const solid = scrolled || !!open || mobile;
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled || open || mobile
-          ? "border-b border-border bg-background/92 backdrop-blur-xl"
-          : "border-b border-transparent"
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,backdrop-filter] duration-[900ms] [transition-timing-function:var(--ease-lux)] ${
+        hidden && !open && !mobile ? "-translate-y-full" : "translate-y-0"
+      } ${solid ? "bg-background/85 backdrop-blur-2xl" : "bg-transparent"}`}
       onMouseLeave={() => setOpen(null)}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
-        <Link to="/" className="flex items-center gap-3" aria-label={`${site.name} — home`}>
-          <img src={logo} alt="" className="h-10 w-10 rounded-full object-cover md:h-11 md:w-11" />
+      <div
+        className={`mx-auto flex max-w-[92rem] items-center justify-between px-6 transition-[padding] duration-700 md:px-12 ${
+          solid ? "py-3.5" : "py-7"
+        }`}
+      >
+        <Link to="/" className="group/logo flex items-center gap-4" aria-label={`${site.name} — home`}>
+          <img
+            src={logo}
+            alt=""
+            className={`rounded-full object-cover transition-all duration-700 [transition-timing-function:var(--ease-lux)] ${
+              solid ? "h-9 w-9" : "h-12 w-12"
+            }`}
+          />
           <span className="hidden flex-col leading-none sm:flex">
-            <span className="font-display text-lg font-light tracking-wide text-ivory">
+            <span className="font-display text-[1.15rem] font-light tracking-[0.04em] text-ivory">
               Anayat Events
             </span>
-            <span className="mt-1 font-sans text-[9px] tracking-[0.34em] uppercase text-gold">
+            <span className="mt-1.5 font-sans text-[8px] tracking-[0.44em] uppercase text-gold">
               {site.tagline}
             </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-10 lg:flex" aria-label="Primary">
           {navigation.map((group) => (
-            <div key={group.label} onMouseEnter={() => setOpen(group.columns ? group.label : null)}>
+            <div
+              key={group.label}
+              className="py-2"
+              onMouseEnter={() => setOpen(group.columns ? group.label : null)}
+            >
               <Link
                 to={group.to}
-                className="font-sans text-[11px] tracking-[0.24em] uppercase text-muted-foreground transition-colors hover:text-gold"
+                className="group/nav relative font-sans text-[10px] tracking-[0.34em] uppercase text-muted-foreground transition-colors duration-500 hover:text-gold"
                 activeProps={{ className: "text-gold" }}
               >
                 {group.label}
+                <span
+                  className={`absolute -bottom-2 left-0 h-px w-full bg-gold transition-transform duration-700 [transition-timing-function:var(--ease-lux)] ${
+                    open === group.label
+                      ? "origin-left scale-x-100"
+                      : "origin-right scale-x-0 group-hover/nav:origin-left group-hover/nav:scale-x-100"
+                  }`}
+                />
               </Link>
             </div>
           ))}
           <Link
             to="/contact"
-            className="border border-gold px-6 py-3 font-sans text-[11px] tracking-[0.24em] uppercase text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
+            className="group/cta relative isolate overflow-hidden px-7 py-3.5 font-sans text-[10px] tracking-[0.34em] uppercase text-gold transition-colors duration-500 hover:text-primary-foreground"
           >
+            <span className="absolute inset-0 -z-10 border border-border-strong transition-colors duration-500 group-hover/cta:border-gold" />
+            <span className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-gold transition-transform duration-[800ms] [transition-timing-function:var(--ease-lux)] group-hover/cta:scale-y-100" />
             Enquire
           </Link>
         </nav>
@@ -70,38 +107,50 @@ export function SiteHeader() {
           onClick={() => setMobile((v) => !v)}
           aria-expanded={mobile}
           aria-label="Toggle menu"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] lg:hidden"
+          className="flex h-11 w-11 flex-col items-center justify-center gap-[6px] lg:hidden"
         >
           <span
-            className={`h-px w-6 bg-ivory transition-transform ${mobile ? "translate-y-[6px] rotate-45" : ""}`}
+            className={`h-px bg-ivory transition-all duration-500 ${mobile ? "w-6 translate-y-[7px] rotate-45" : "w-7"}`}
           />
-          <span className={`h-px w-6 bg-ivory transition-opacity ${mobile ? "opacity-0" : ""}`} />
+          <span className={`h-px w-5 bg-gold transition-opacity duration-300 ${mobile ? "opacity-0" : ""}`} />
           <span
-            className={`h-px w-6 bg-ivory transition-transform ${mobile ? "-translate-y-[6px] -rotate-45" : ""}`}
+            className={`h-px bg-ivory transition-all duration-500 ${mobile ? "w-6 -translate-y-[7px] -rotate-45" : "w-7"}`}
           />
         </button>
       </div>
 
-      {/* Desktop mega panel */}
+      <span
+        className={`mx-auto block h-px max-w-[92rem] origin-left bg-gradient-to-r from-transparent via-border-strong to-transparent transition-transform duration-[900ms] [transition-timing-function:var(--ease-lux)] ${
+          solid ? "scale-x-100" : "scale-x-0"
+        }`}
+      />
+
+      {/* Desktop panel — editorial, with a plate on the right */}
       {open && (
-        <div className="hidden border-t border-border bg-background/97 backdrop-blur-xl lg:block">
-          <div className="mx-auto max-w-7xl px-10 py-12">
-            <div className="grid gap-10 md:grid-cols-4">
+        <div className="hidden bg-background/95 backdrop-blur-2xl lg:block">
+          <div className="mx-auto grid max-w-[92rem] grid-cols-[1.6fr_0.6fr] gap-16 px-12 py-14">
+            <div className="grid gap-12 md:grid-cols-3">
               {navigation
                 .find((g) => g.label === open)
-                ?.columns?.map((col) => (
-                  <div key={col.heading}>
-                    <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
+                ?.columns?.map((col, ci) => (
+                  <div
+                    key={col.heading}
+                    className="animate-[fade-in_0.7s_var(--ease-lux)_both]"
+                    style={{ animationDelay: `${ci * 70}ms` }}
+                  >
+                    <p className="font-sans text-[9px] tracking-[0.38em] uppercase text-gold-deep">
                       {col.heading}
                     </p>
-                    <ul className="mt-5 space-y-3">
+                    <span className="mt-4 block h-px w-full bg-border" />
+                    <ul className="mt-5 space-y-2.5">
                       {col.items.map((item) => (
                         <li key={`${item.to}-${item.label}`}>
                           <Link
                             to={item.to}
                             params={item.params as never}
-                            className="font-display text-lg font-light text-muted-foreground transition-colors hover:text-gold"
+                            className="group/mi inline-flex items-center gap-3 font-display text-[1.15rem] font-light text-muted-foreground transition-colors duration-500 hover:text-gold"
                           >
+                            <span className="h-px w-0 bg-gold transition-all duration-500 group-hover/mi:w-4" />
                             {item.label}
                           </Link>
                         </li>
@@ -110,24 +159,41 @@ export function SiteHeader() {
                   </div>
                 ))}
             </div>
+            <div className="animate-[fade-in_0.9s_var(--ease-lux)_both]">
+              <img
+                src={photo("ae-13").url}
+                alt=""
+                loading="lazy"
+                className="aspect-[3/4] w-full object-cover [mask-image:linear-gradient(to_bottom,black_70%,transparent)]"
+              />
+              <p className="mt-4 font-sans text-[9px] tracking-[0.3em] uppercase text-muted-foreground">
+                {site.tagline}
+              </p>
+            </div>
           </div>
         </div>
       )}
 
-      {/* Mobile drawer */}
+      {/* Mobile — full-height cinematic drawer */}
       {mobile && (
-        <div className="max-h-[80vh] overflow-y-auto border-t border-border bg-background lg:hidden">
-          <div className="px-6 py-8">
-            {navigation.map((group) => (
-              <div key={group.label} className="border-b border-border py-5">
-                <Link
-                  to={group.to}
-                  className="font-display text-2xl font-light text-ivory"
-                >
+        <div className="relative h-[calc(100svh-4.5rem)] overflow-y-auto bg-background lg:hidden">
+          <img
+            src={photo("ae-22").url}
+            alt=""
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.14]"
+          />
+          <div className="relative px-6 pt-6 pb-16">
+            {navigation.map((group, gi) => (
+              <div
+                key={group.label}
+                className="animate-[fade-in_0.6s_var(--ease-lux)_both] border-b border-border py-6"
+                style={{ animationDelay: `${gi * 60}ms` }}
+              >
+                <Link to={group.to} className="font-display text-3xl font-light text-ivory">
                   {group.label}
                 </Link>
                 {group.columns && (
-                  <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2">
+                  <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5">
                     {group.columns
                       .flatMap((c) => c.items)
                       .slice(0, 8)
@@ -146,16 +212,16 @@ export function SiteHeader() {
                 )}
               </div>
             ))}
-            <div className="flex flex-col gap-3 pt-8">
+            <div className="flex flex-col gap-3 pt-10">
               <Link
                 to="/contact"
-                className="border border-gold px-6 py-4 text-center font-sans text-[11px] tracking-[0.24em] uppercase text-gold"
+                className="bg-gold px-6 py-4 text-center font-sans text-[11px] tracking-[0.3em] uppercase text-primary-foreground"
               >
                 Enquire
               </Link>
               <a
                 href={site.phoneHref}
-                className="border border-border-strong px-6 py-4 text-center font-sans text-[11px] tracking-[0.24em] uppercase text-ivory"
+                className="border border-border-strong px-6 py-4 text-center font-sans text-[11px] tracking-[0.3em] uppercase text-ivory"
               >
                 Call {site.phoneDisplay}
               </a>
