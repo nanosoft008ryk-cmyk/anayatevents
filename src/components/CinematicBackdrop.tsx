@@ -66,11 +66,17 @@ export function CinematicBackdrop({
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to right, color-mix(in oklab, var(--background) 92%, transparent) 0%, color-mix(in oklab, var(--background) 62%, transparent) 46%, color-mix(in oklab, var(--background) 24%, transparent) 100%)",
+            "linear-gradient(to right, color-mix(in oklab, var(--background) 82%, transparent) 0%, color-mix(in oklab, var(--background) 42%, transparent) 52%, transparent 100%)",
         }}
       />
-      <div className="absolute inset-0 veil" />
-      <div className="absolute inset-0 vignette" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, var(--background) 0%, color-mix(in oklab, var(--background) 55%, transparent) 32%, transparent 72%)",
+        }}
+      />
+      <div className="absolute inset-0 opacity-70 vignette" />
       <div className="absolute inset-0 grain" />
     </div>
   );
