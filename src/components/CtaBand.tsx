@@ -1,6 +1,7 @@
-import { Link } from "@tanstack/react-router";
-
 import { site } from "@/content/site";
+import { photo } from "@/content/images";
+import { Reveal } from "@/components/motion/Reveal";
+import { LuxLink, LuxAnchor } from "@/components/ui/LuxButton";
 
 export function CtaBand({
   eyebrow = "Begin",
@@ -12,34 +13,54 @@ export function CtaBand({
   body?: string;
 }) {
   return (
-    <section className="border-t border-border bg-surface/30">
-      <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+    <section className="relative isolate overflow-hidden">
+      {/* Plate dissolves into the page above and the footer below — no band edges. */}
+      <div className="absolute inset-0 -z-10">
+        <img
+          src={photo("ae-16").url}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover opacity-30 drift-slow"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 58%, transparent) 45%, var(--background) 100%)",
+          }}
+        />
+        <div className="absolute inset-0 vignette" />
+        <div className="absolute inset-0 grain" />
+      </div>
+
+      <div className="mx-auto max-w-[92rem] px-6 py-32 md:px-12 lg:py-44">
+        <div className="grid gap-14 lg:grid-cols-[1.45fr_1fr] lg:items-end">
           <div>
-            <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">{eyebrow}</p>
-            <h2 className="mt-6 max-w-2xl font-display text-4xl leading-[1.06] font-light text-ivory md:text-5xl">
-              {title}
-            </h2>
-            <p className="mt-6 max-w-xl font-sans text-[15px] leading-[1.85] font-light text-muted-foreground">
-              {body}
-            </p>
+            <Reveal>
+              <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
+                {eyebrow}
+              </p>
+            </Reveal>
+            <Reveal delay={120} variant="mask">
+              <h2 className="mt-8 max-w-[16ch] font-display text-[2.6rem] leading-[1.02] font-light text-ivory lg:text-[4.2rem]">
+                {title}
+              </h2>
+            </Reveal>
+            <Reveal delay={220}>
+              <p className="mt-8 max-w-xl font-sans text-[15px] leading-[2] font-light text-muted-foreground">
+                {body}
+              </p>
+            </Reveal>
           </div>
-          <div className="flex flex-wrap gap-3 lg:justify-end">
-            <Link
-              to="/contact"
-              className="border border-gold bg-gold px-8 py-4 font-sans text-[11px] tracking-[0.24em] uppercase text-primary-foreground transition-opacity hover:opacity-90"
-            >
+
+          <Reveal delay={300} className="flex flex-wrap gap-4 lg:justify-end">
+            <LuxLink to="/contact" tone="foil">
               Start an enquiry
-            </Link>
-            <a
-              href={site.whatsappHref}
-              target="_blank"
-              rel="noreferrer"
-              className="border border-border-strong px-8 py-4 font-sans text-[11px] tracking-[0.24em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
-            >
+            </LuxLink>
+            <LuxAnchor href={site.whatsappHref} tone="ghost">
               WhatsApp
-            </a>
-          </div>
+            </LuxAnchor>
+          </Reveal>
         </div>
       </div>
     </section>

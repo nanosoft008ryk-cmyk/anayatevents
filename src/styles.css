@@ -263,7 +263,92 @@
   opacity: 1;
 }
 
+/* ---------- Cinematic composition helpers ---------- */
+
+@utility chapter {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Warm architectural light bleeding from one corner — no flat slabs. */
+@utility light-left {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto -30%;
+    height: 90%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      60% 60% at 20% 30%,
+      color-mix(in oklab, var(--gold) 9%, transparent) 0%,
+      transparent 70%
+    );
+  }
+}
+
+@utility light-right {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: auto -30% -20% auto;
+    width: 80%;
+    height: 90%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      55% 55% at 75% 60%,
+      color-mix(in oklab, var(--gold) 8%, transparent) 0%,
+      transparent 72%
+    );
+  }
+}
+
+/* Hairline that dissolves at both ends — replaces section borders. */
+@utility hairline {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in oklab, var(--gold) 30%, transparent) 30%,
+    color-mix(in oklab, var(--gold) 30%, transparent) 70%,
+    transparent
+  );
+}
+
+@utility rule-vertical {
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border-strong), transparent);
+}
+
+/* Oversized ghosted word set behind a chapter. */
+@utility ghost-word {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in oklab, var(--gold) 22%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+@utility drift-slow {
+  animation: drift 26s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -22px, 0);
+  }
+}
+
 @keyframes foil-drift {
+
   to {
     background-position: 220% 0;
   }
@@ -307,5 +392,16 @@
   .mask-reveal {
     clip-path: none;
     opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
