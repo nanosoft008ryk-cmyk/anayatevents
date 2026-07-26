@@ -14,7 +14,7 @@ const trail: Crumb[] = [
   { name: "About", path: PATH },
 ];
 
-export const Route = createFileRoute("/about")({
+export const Route = createFileRoute("/about/")({
   head: () => ({
     ...pageMeta({
       title: "About Anayat Events & Catering — Luxury Event House in Lahore",
