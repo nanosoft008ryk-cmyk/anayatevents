@@ -15,12 +15,19 @@ export const site = {
     country: "PK",
     full: "The Palms 7 Farmhouse, Green Acres Housing Society, Lahore 54000, Pakistan",
   },
-  // TODO: replace the placeholders below with the verified business contact details.
-  phoneDisplay: "+92 300 000 0000",
-  phoneHref: "tel:+923000000000",
-  whatsappDisplay: "+92 300 000 0000",
-  whatsappHref: "https://wa.me/923000000000",
-  email: "hello@anayatevents.com",
+  // Contact details taken from the business's own published listings (Instagram
+  // @anayat_events_catering). No email is published, so the site never shows one.
+  contacts: [
+    { name: "Mian Saif", display: "0321 416 9707", tel: "tel:+923214169707", whatsapp: "https://wa.me/923214169707" },
+    { name: "Mian Asif", display: "0321 033 3224", tel: "tel:+923210333224", whatsapp: "https://wa.me/923210333224" },
+  ],
+  phoneDisplay: "0321 416 9707",
+  phoneHref: "tel:+923214169707",
+  phoneE164: "+92 321 4169707",
+  whatsappDisplay: "0321 416 9707",
+  whatsappHref: "https://wa.me/923214169707",
+  instagram: "https://www.instagram.com/anayat_events_catering/",
+
   hours: "Open daily, 2:00 PM – 10:00 PM",
   hoursSchema: ["Mo-Su 14:00-22:00"],
   mapsUrl:
