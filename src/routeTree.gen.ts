@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaultRouteImport } from './routes/vault'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
@@ -29,6 +31,16 @@ import { Route as AboutProcessRouteImport } from './routes/about.process'
 const VaultRoute = VaultRouteImport.update({
   id: '/vault',
   path: '/vault',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReviewsRoute = ReviewsRouteImport.update({
@@ -111,6 +123,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/reviews': typeof ReviewsRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
   '/about/process': typeof AboutProcessRoute
   '/areas/$slug': typeof AreasSlugRoute
@@ -129,6 +143,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/reviews': typeof ReviewsRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
   '/about/process': typeof AboutProcessRoute
   '/areas/$slug': typeof AreasSlugRoute
@@ -148,6 +164,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/reviews': typeof ReviewsRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
   '/about/process': typeof AboutProcessRoute
   '/areas/$slug': typeof AreasSlugRoute
@@ -168,6 +186,8 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/reviews'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/vault'
     | '/about/process'
     | '/areas/$slug'
@@ -186,6 +206,8 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/reviews'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/vault'
     | '/about/process'
     | '/areas/$slug'
@@ -204,6 +226,8 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/reviews'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/vault'
     | '/about/process'
     | '/areas/$slug'
@@ -223,6 +247,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
   ReviewsRoute: typeof ReviewsRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VaultRoute: typeof VaultRoute
   AboutProcessRoute: typeof AboutProcessRoute
   AreasSlugRoute: typeof AreasSlugRoute
@@ -245,6 +271,20 @@ declare module '@tanstack/react-router' {
       path: '/vault'
       fullPath: '/vault'
       preLoaderRoute: typeof VaultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reviews': {
@@ -359,6 +399,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   ReviewsRoute: ReviewsRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   VaultRoute: VaultRoute,
   AboutProcessRoute: AboutProcessRoute,
   AreasSlugRoute: AreasSlugRoute,
