@@ -52,50 +52,80 @@ function Home() {
   return (
     <main className="overflow-x-clip bg-background">
       {/* ── I. Overture ─────────────────────────────────────────────── */}
-      <section className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden">
+      <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden">
         <CinematicBackdrop frames={frames} />
 
-        <div className="relative mx-auto w-full max-w-[92rem] px-6 pt-40 pb-24 md:px-12 lg:pb-32">
-          <Reveal variant="fade" duration={1400}>
-            <p className="font-sans text-[10px] tracking-[0.5em] uppercase text-gold">
-              Lahore · Since {site.founded}
-            </p>
-          </Reveal>
-
-          <h1 className="mt-10 max-w-[16ch] font-display text-[3.4rem] leading-[0.92] font-light text-ivory sm:text-[5rem] lg:text-[7.5rem]">
-            <RevealWords text="An evening built" delay={120} />
-            <span className="mt-2 block italic text-gold-light">
-              <RevealWords text="before you arrive at it." delay={420} step={60} />
-            </span>
-          </h1>
-
-          <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-            <Reveal delay={700} className="max-w-xl">
-              <div className="hairline mb-8 max-w-[7rem]" />
-              <p className="font-sans text-[15px] leading-[2] font-light text-foreground/80">
-                {site.description}
-              </p>
+        <div className="relative mx-auto grid w-full max-w-[92rem] grid-cols-12 items-end gap-x-6 px-6 pt-36 pb-28 md:px-12 lg:pb-24">
+          {/* Vertical eyebrow rail */}
+          <div className="col-span-12 lg:col-span-1">
+            <Reveal variant="fade" duration={1400}>
+              <div className="mb-10 flex items-center gap-4 whitespace-nowrap lg:mb-0 lg:origin-left lg:-rotate-90">
+                <span className="h-px w-8 bg-gold" />
+                <p className="font-sans text-[10px] tracking-[0.4em] uppercase text-gold">
+                  Lahore · Since {site.founded}
+                </p>
+              </div>
             </Reveal>
-            <Reveal delay={860} className="flex flex-wrap items-center gap-4">
-              <LuxLink to="/contact" tone="foil">
-                Begin an enquiry
-              </LuxLink>
-              <LuxLink to="/portfolio" tone="ghost">
-                View the work
-              </LuxLink>
+          </div>
+
+          {/* Headline column */}
+          <div className="col-span-12 flex flex-col lg:col-span-7">
+            <h1 className="font-display text-[3.4rem] leading-[0.9] font-light tracking-tight text-ivory sm:text-[5rem] lg:text-[7.6rem]">
+              <RevealWords text="An evening" delay={120} />
+              <span className="mt-1 block pl-10 md:pl-24">
+                <span className="italic text-gold-light">
+                  <RevealWords text="built" delay={340} />
+                </span>{" "}
+                <RevealWords text="before" delay={460} />
+              </span>
+              <span className="mt-1 block">
+                <RevealWords text="you arrive at it." delay={620} step={60} />
+              </span>
+            </h1>
+
+            <div className="mt-12 max-w-md">
+              <Reveal delay={780}>
+                <p className="font-sans text-[14px] leading-[2] font-light tracking-wide text-foreground/70">
+                  {site.description}
+                </p>
+              </Reveal>
+              <Reveal delay={900} className="mt-10 flex flex-wrap items-center gap-x-12 gap-y-6">
+                <LuxLink to="/contact" tone="rule" className="px-0 py-0">
+                  Begin an enquiry
+                </LuxLink>
+                <LuxLink to="/portfolio" tone="quiet" arrow={false} className="px-0 py-0 text-ivory">
+                  View the work
+                </LuxLink>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* Floating framed plate */}
+          <div className="hidden self-center lg:col-span-4 lg:block">
+            <Reveal variant="mask" delay={520}>
+              <div className="aspect-[3/4] w-full border-[0.5px] border-gold/30 p-4">
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src={photo("ae-05").url}
+                    alt={photo("ae-05").alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover contrast-125 transition-transform duration-[1400ms] [transition-timing-function:var(--ease-lux)] hover:scale-105"
+                  />
+                  <span className="pointer-events-none absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.45)]" />
+                </div>
+              </div>
             </Reveal>
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-8 bottom-10 hidden items-center gap-4 lg:flex">
-          <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-muted-foreground">
-            Scroll
-          </span>
-          <span className="h-16 w-px overflow-hidden bg-border-strong">
-            <span className="block h-6 w-px animate-[drift_2.6s_ease-in-out_infinite_alternate] bg-gold" />
+        <div className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-4">
+          <span className="h-12 w-px bg-gradient-to-b from-transparent via-gold to-transparent" />
+          <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-ivory/40">
+            Explore
           </span>
         </div>
       </section>
+
 
       {/* ── II. The count — type as architecture, no boxes ──────────── */}
       <section className="chapter light-left relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
