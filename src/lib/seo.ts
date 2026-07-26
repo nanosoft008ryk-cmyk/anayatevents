@@ -168,24 +168,31 @@ export function breadcrumbSchema(trail: Crumb[]) {
   };
 }
 
-
 export function serviceSchema(input: {
   name: string;
   description: string;
   path: string;
   category: string;
+  image?: string;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": `${input.path}#service`,
+    "@id": abs(`${input.path}#service`),
     name: input.name,
     description: input.description,
     serviceType: input.category,
-    url: input.path,
-    provider: { "@id": "/#business" },
+    url: abs(input.path),
+    ...(input.image ? { image: abs(input.image) } : {}),
+    provider: { "@id": abs("/#business") },
     areaServed: { "@type": "City", name: "Lahore" },
     audience: { "@type": "Audience", audienceType: "Private and corporate clients" },
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "PKR",
+      url: abs("/contact"),
+    },
   };
 }
 
@@ -194,25 +201,33 @@ export function areaServedSchema(input: {
   description: string;
   path: string;
   areaName: string;
+  image?: string;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": `${input.path}#area-service`,
+    "@id": abs(`${input.path}#area-service`),
     name: input.name,
     description: input.description,
     serviceType: "Event management and catering",
-    url: input.path,
-    provider: { "@id": "/#business" },
+    url: abs(input.path),
+    ...(input.image ? { image: abs(input.image) } : {}),
+    provider: { "@id": abs("/#business") },
     areaServed: {
       "@type": "Place",
       name: input.areaName,
       address: {
         "@type": "PostalAddress",
-        addressLocality: input.areaName,
+        addressLocality: `${input.areaName}, ${site.address.locality}`,
         addressRegion: site.address.region,
         addressCountry: site.address.country,
       },
+    },
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      priceCurrency: "PKR",
+      url: abs("/contact"),
     },
   };
 }
@@ -221,7 +236,8 @@ export function faqSchema(items: { q: string; a: string }[], path: string) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `${path}#faq`,
+    "@id": abs(`${path}#faq`),
+    url: abs(path),
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.q,
@@ -236,20 +252,35 @@ export function articleSchema(input: {
   path: string;
   datePublished: string;
   section: string;
+  image?: string;
+  wordCount?: number;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    "@id": `${input.path}#article`,
-    headline: input.title,
+    "@id": abs(`${input.path}#article`),
+    // Google truncates headlines beyond 110 characters.
+    headline: input.title.slice(0, 110),
     description: input.description,
     datePublished: input.datePublished,
     dateModified: input.datePublished,
     articleSection: input.section,
     inLanguage: "en",
-    mainEntityOfPage: { "@type": "WebPage", "@id": input.path },
-    author: { "@type": "Organization", name: site.name },
-    publisher: { "@id": "/#business" },
+    ...(input.image ? { image: [abs(input.image)] } : {}),
+    ...(input.wordCount ? { wordCount: input.wordCount } : {}),
+    url: abs(input.path),
+    isAccessibleForFree: true,
+    mainEntityOfPage: { "@type": "WebPage", "@id": abs(input.path) },
+    author: {
+      "@type": "Organization",
+      name: site.name,
+      url: abs("/"),
+    },
+    publisher: {
+      "@type": "Organization",
+      name: site.legalName,
+      logo: { "@type": "ImageObject", url: abs(logo) },
+    },
   };
 }
 
@@ -262,17 +293,21 @@ export function imageGallerySchema(input: {
   return {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
-    "@id": `${input.path}#gallery`,
+    "@id": abs(`${input.path}#gallery`),
     name: input.name,
     description: input.description,
-    url: input.path,
-    about: { "@id": "/#business" },
+    url: abs(input.path),
+    about: { "@id": abs("/#business") },
     associatedMedia: input.images.map((img) => ({
       "@type": "ImageObject",
-      contentUrl: img.url,
+      contentUrl: abs(img.url),
+      url: abs(img.url),
       name: img.caption,
+      caption: img.caption,
       description: img.alt,
       creditText: site.name,
+      copyrightNotice: site.legalName,
+      creator: { "@type": "Organization", name: site.legalName },
     })),
   };
 }
@@ -285,16 +320,19 @@ export function itemListSchema(input: {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "@id": `${input.path}#list`,
+    "@id": abs(`${input.path}#list`),
     name: input.name,
+    numberOfItems: input.items.length,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
     itemListElement: input.items.map((item, i) => ({
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      url: item.path,
+      url: abs(item.path),
     })),
   };
 }
+
 
 export function reviewCollectionSchema(
   path: string,
