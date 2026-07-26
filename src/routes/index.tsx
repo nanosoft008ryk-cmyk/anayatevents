@@ -65,12 +65,12 @@ function Home() {
 
         <div className="relative mx-auto grid w-full max-w-[92rem] grid-cols-12 items-end gap-x-6 px-6 pt-36 pb-28 md:px-12 lg:pl-24 lg:pb-24">
           {/* Headline column */}
-          <div className="col-span-12 flex flex-col lg:col-span-7">
+          <div className="col-span-12 flex flex-col lg:col-span-7 lg:pr-12">
             <p className="mb-8 flex items-center gap-4 font-sans text-[10px] tracking-[0.4em] uppercase text-gold lg:hidden">
               <span className="h-px w-8 bg-gold" />
               Lahore · Since {site.founded}
             </p>
-            <h1 className="font-display text-[3.4rem] leading-[0.9] font-light tracking-tight text-ivory sm:text-[5rem] lg:text-[7.6rem]">
+            <h1 className="font-display text-[3.4rem] leading-[0.9] font-light tracking-tight text-ivory sm:text-[5rem] lg:text-[6rem] xl:text-[7.4rem]">
               <RevealWords text="An evening" delay={120} />
               <span className="mt-1 block pl-10 md:pl-24">
                 <span className="italic text-gold-light">
@@ -89,7 +89,7 @@ function Home() {
                   {site.description}
                 </p>
               </Reveal>
-              <Reveal delay={900} className="mt-10 flex flex-wrap items-center gap-x-16 gap-y-6">
+              <Reveal delay={900} className="mt-10 flex flex-wrap items-center gap-x-20 gap-y-6">
                 <LuxLink to="/contact" tone="rule" className="px-0 py-0">
                   Begin an enquiry
                 </LuxLink>
