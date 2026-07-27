@@ -1,7 +1,7 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 
 import type { Photo } from "@/content/images";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import { cn } from "@/lib/utils";
 
 /**
@@ -80,13 +80,13 @@ export function Plate({
         className={cn("relative overflow-hidden", maskClass)}
         style={{ aspectRatio: ratio }}
       >
-        <img
-          ref={inner}
-          {...imgAttrs(image.id, image.url, sizes)}
+        <SmartImg
+          imgRef={inner}
+          id={image.id}
+          fallbackUrl={image.url}
+          sizes={sizes}
           alt={image.alt}
-          decoding="async"
-          loading={priority ? "eager" : "lazy"}
-          fetchPriority={priority ? "high" : "auto"}
+          priority={priority}
           className={cn(
             "h-full w-full object-cover transition-[transform,filter] duration-[1600ms] [transition-timing-function:var(--ease-lux)]",
             speed ? "" : "group-hover/plate:scale-[1.06]",
