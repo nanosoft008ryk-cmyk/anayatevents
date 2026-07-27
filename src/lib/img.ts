@@ -5,10 +5,12 @@ type Variant = { orig: string; w: number; h: number; v: Record<string, string> }
 const variants = variantsJson as unknown as Record<string, Variant>;
 
 /**
- * Responsive image attributes for a catalogue photo. The masters are 2560px
- * JPEGs; these point the browser at pre-built WebP renditions (640 / 1280 /
- * 2048) and fall back to the master where a rendition is missing.
+ * Responsive image attributes for a catalogue photo. Every master is rendered
+ * to high-definition WebP renditions (640 / 1024 / 1536 / 2048 / 2560, q88-90,
+ * Lanczos + unsharp on upscales) so retina and full-bleed placements always
+ * pull a crisp source; falls back to the master when a rendition is missing.
  */
+
 export function imgAttrs(
   id: string,
   fallbackUrl: string,
