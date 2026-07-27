@@ -4,6 +4,7 @@ import { photo } from "@/content/images";
 import { promisePage } from "@/content/about";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -118,6 +119,7 @@ function PromisePage() {
         title="Then ask us to prove it on your date."
         body="One message is enough to start. We will reply personally, and honestly, about what your evening needs."
       />
+      <RelatedConstellation path="/about/promise" heading="Continue" />
     </main>
   );
 }

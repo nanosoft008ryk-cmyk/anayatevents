@@ -4,6 +4,7 @@ import { photo, photosByIds } from "@/content/images";
 import { careersPage } from "@/content/about";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -148,6 +149,7 @@ function CareersPage() {
         title="Then perhaps you are planning something."
         body="The same crew, the same standard, applied to your evening. Send the date whenever you are ready."
       />
+      <RelatedConstellation path="/about/careers" heading="Continue" />
     </main>
   );
 }

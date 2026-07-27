@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { photo, photosByIds } from "@/content/images";
 import { craftPage } from "@/content/about";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -140,6 +141,7 @@ function CraftPage() {
         title="Every craft here is available to one evening at a time."
         body="Tell us what you are imagining. We will tell you which of these seven your evening will lean on."
       />
+      <RelatedConstellation path="/about/craftsmanship" heading="Continue" />
     </main>
   );
 }

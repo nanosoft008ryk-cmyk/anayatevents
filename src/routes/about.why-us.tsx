@@ -6,6 +6,7 @@ import { whyPage } from "@/content/about";
 import { site, stats } from "@/content/site";
 import { testimonials } from "@/content/testimonials";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -173,6 +174,7 @@ function WhyPage() {
         title="Ask us the difficult question first."
         body="Budget, date, family logistics — whatever you are unsure of. An honest answer costs you nothing."
       />
+      <RelatedConstellation path="/about/why-us" heading="Continue" />
     </main>
   );
 }

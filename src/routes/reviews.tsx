@@ -6,6 +6,7 @@ import { testimonials } from "@/content/testimonials";
 import { site } from "@/content/site";
 import { photo } from "@/content/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -25,6 +26,7 @@ import { googleReviewsQuery } from "@/lib/google-reviews";
 import {
   pageMeta,
   jsonLd,
+  jsonLdMaybe,
   breadcrumbSchema,
   reviewCollectionSchema,
   type Crumb,
@@ -56,12 +58,18 @@ export const Route = createFileRoute("/reviews")({
       jsonLd(breadcrumbSchema(trail)),
       // Marked up from the same live payload the page renders, so the
       // structured data never claims a review Google no longer shows.
-      jsonLd(
+      // Only reviews Google actually returned — with their real author,
+      // text and star rating — are marked up. Our own edited testimonials
+      // carry no verifiable rating, so they are never given one here.
+      ...jsonLdMaybe(
         reviewCollectionSchema(
           PATH,
-          (loaderData?.reviews ?? []).length > 0
-            ? loaderData!.reviews.map((r) => ({ quote: r.text, name: r.author }))
-            : testimonials.map((t) => ({ quote: t.quote, name: t.name })),
+          (loaderData?.reviews ?? []).map((r) => ({
+            quote: r.text,
+            name: r.author,
+            rating: r.rating,
+            published: r.publishTime || undefined,
+          })),
         ),
       ),
     ],
@@ -492,6 +500,7 @@ function ReviewsPage() {
           </Reveal>
         </div>
       </section>
+      <RelatedConstellation path="/reviews" heading="Continue" />
     </main>
   );
 }

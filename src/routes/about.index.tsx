@@ -4,6 +4,7 @@ import { site } from "@/content/site";
 import { photo, photosByIds } from "@/content/images";
 import { aboutChapters, aboutIntro, pillars } from "@/content/about";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
@@ -217,6 +218,7 @@ function AboutHub() {
         title="Let's create something extraordinary."
         body="Tell us the date and the feeling you want left behind. One planner replies personally, usually well within a day."
       />
+      <RelatedConstellation path="/about" heading="Continue" />
     </main>
   );
 }

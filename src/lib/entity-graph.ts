@@ -210,7 +210,10 @@ export function relatedFor(
 ): RelatedGroup[] {
   const from = getNode(kind, slug);
   if (!from) return [];
+  return groupsFrom(from, options);
+}
 
+function groupsFrom(from: GraphNode, options: RelatedOptions = {}): RelatedGroup[] {
   const kinds = options.kinds ?? (["service", "collection", "article", "area", "faq"] as NodeKind[]);
   const perKind = options.perKind ?? 3;
 
@@ -274,4 +277,133 @@ for (const category of portfolioCategories) claim(`/portfolio/${category.slug}`,
 /** The FAQs this page is allowed to mark up, after global de-duplication. */
 export function uniqueFaqs<T extends { q: string; a: string }>(pagePath: string, items: T[]): T[] {
   return items.filter((item) => owner.get(normalizeQuestion(item.q)) === pagePath);
+}
+
+/* --------------------------------------------------------------------------
+ * Nearby service areas, derived.
+ *
+ * A neighbour is not a hand-written list: it is whichever other area shares
+ * the most with this one — a declared adjacency, the same service mix, the
+ * same portfolio collections, or overlapping locality vocabulary. Each result
+ * carries the reason it surfaced so the page can say something true about the
+ * relationship instead of printing a bare list of names.
+ * ------------------------------------------------------------------------ */
+
+export interface NearbyArea {
+  slug: string;
+  name: string;
+  shortName: string;
+  path: string;
+  lede: string;
+  /** Services both areas are planned for, by name. */
+  sharedServices: string[];
+  /** Declared as an adjacency in the content model (vs purely inferred). */
+  declared: boolean;
+  /** One short, factual line explaining the connection. */
+  reason: string;
+}
+
+const serviceName = new Map(services.map((s) => [s.slug, s.name]));
+
+export function nearbyLocations(slug: string, limit = 5): NearbyArea[] {
+  const from = locations.find((l) => l.slug === slug);
+  const fromNode = getNode("area", slug);
+  if (!from || !fromNode) return [];
+
+  return locations
+    .filter((l) => l.slug !== slug)
+    .map((l) => {
+      const node = getNode("area", l.slug)!;
+      const declared = from.nearby.includes(l.slug) || l.nearby.includes(slug);
+      const sharedServices = from.services.filter((s) => l.services.includes(s));
+      const sharedCollections = from.categories.filter((c) => l.categories.includes(c));
+      const value =
+        score(fromNode, node) +
+        (declared ? 12 : 0) +
+        sharedServices.length * 2 +
+        sharedCollections.length;
+
+      const shared = sharedServices
+        .slice(0, 2)
+        .map((sv) => (serviceName.get(sv) ?? sv).toLowerCase());
+      const reason = declared
+        ? shared.length > 0
+          ? `Next door on the same crew route, and planned for the same work — ${shared.join(" and ")}.`
+          : `A neighbouring address on the same crew route as ${from.shortName}.`
+        : shared.length > 0
+          ? `Different audience, same commissions — ${shared.join(" and ")}.`
+          : `Reached by the same team travelling out of Green Acres.`;
+
+      return {
+        slug: l.slug,
+        name: l.name,
+        shortName: l.shortName,
+        path: `/areas/${l.slug}`,
+        lede: l.lede,
+        sharedServices: sharedServices.map((s) => serviceName.get(s) ?? s),
+        declared,
+        reason,
+        value,
+      };
+    })
+    .filter((n) => n.value > 0)
+    .sort((a, b) => b.value - a.value || a.shortName.localeCompare(b.shortName))
+    .slice(0, limit)
+    .map(({ value: _value, ...rest }) => rest);
+}
+
+/* --------------------------------------------------------------------------
+ * Graph-driven linking for pages that are not content records.
+ *
+ * Index pages, the about chapters, contact, reviews and the vault have no row
+ * in /src/content, so they are given a synthetic node built from their path
+ * and a short subject line. They then score against the real graph exactly
+ * like any other page, which means every route on the site — not only the
+ * generated ones — carries derived internal links.
+ * ------------------------------------------------------------------------ */
+
+const STATIC_SUBJECTS: Record<string, string> = {
+  "/": "luxury wedding planning catering decor design Lahore",
+  "/services": "wedding planning catering decor florals production management",
+  "/portfolio": "weddings walima corporate celebrations photography collections",
+  "/areas": "service areas neighbourhoods districts travel coverage",
+  "/journal": "planning guidance seasons budgets design writing",
+  "/faq": "questions planning booking pricing logistics answers",
+  "/contact": "enquiry proposal consultation booking dates",
+  "/reviews": "client reviews testimonials weddings catering experience",
+  "/vault": "photography gallery archive stages florals tablescapes",
+  "/about": "studio brand story craft team philosophy",
+  "/about/brand-story": "brand story origin kitchen workshop family",
+  "/about/story": "brand story origin kitchen workshop family heritage",
+  "/about/philosophy": "philosophy hosting restraint craft design",
+  "/about/journey": "journey milestones growth workshop kitchen",
+  "/about/team": "team planners chefs florists designers",
+  "/about/behind-the-scenes": "production build load-in crew workshop",
+  "/about/process": "process planning design production timeline",
+  "/about/why-us": "in-house team catering decor reliability",
+  "/about/craftsmanship": "craftsmanship stage build florals detail",
+  "/about/promise": "promise standards service guarantee hosting",
+  "/about/careers": "careers hiring kitchen planning crew",
+};
+
+function syntheticNode(path: string): GraphNode {
+  const subject = STATIC_SUBJECTS[path] ?? path.replace(/[^a-z]+/gi, " ");
+  return {
+    kind: "collection",
+    slug: `page${path}`,
+    path,
+    name: path,
+    blurb: "",
+    links: [],
+    tokens: tokenize(subject, path.split("/").join(" ")),
+  };
+}
+
+/**
+ * Related content for any route, content-backed or not. Static pages get a
+ * synthetic node so they participate in the same derived graph.
+ */
+export function relatedForPath(path: string, options: RelatedOptions = {}): RelatedGroup[] {
+  const known = nodes.find((n) => n.path === path);
+  return groupsFrom(known ?? syntheticNode(path), options);
 }

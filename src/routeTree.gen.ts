@@ -15,6 +15,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ImageSitemapDotxmlRouteImport } from './routes/image-sitemap[.]xml'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
@@ -70,6 +71,11 @@ const ReviewsRoute = ReviewsRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImageSitemapDotxmlRoute = ImageSitemapDotxmlRouteImport.update({
+  id: '/image-sitemap.xml',
+  path: '/image-sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CookiesRoute = CookiesRouteImport.update({
@@ -207,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
+  '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -241,6 +248,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
+  '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -276,6 +284,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
+  '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -312,6 +321,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/cookies'
+    | '/image-sitemap.xml'
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
@@ -346,6 +356,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/cookies'
+    | '/image-sitemap.xml'
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
@@ -380,6 +391,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/cookies'
+    | '/image-sitemap.xml'
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
@@ -415,6 +427,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
   CookiesRoute: typeof CookiesRoute
+  ImageSitemapDotxmlRoute: typeof ImageSitemapDotxmlRoute
   PrivacyRoute: typeof PrivacyRoute
   ReviewsRoute: typeof ReviewsRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
@@ -488,6 +501,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/image-sitemap.xml': {
+      id: '/image-sitemap.xml'
+      path: '/image-sitemap.xml'
+      fullPath: '/image-sitemap.xml'
+      preLoaderRoute: typeof ImageSitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cookies': {
@@ -679,6 +699,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   CookiesRoute: CookiesRoute,
+  ImageSitemapDotxmlRoute: ImageSitemapDotxmlRoute,
   PrivacyRoute: PrivacyRoute,
   ReviewsRoute: ReviewsRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,

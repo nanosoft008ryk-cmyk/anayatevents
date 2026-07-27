@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { photo } from "@/content/images";
 import { philosophyPage } from "@/content/about";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -130,6 +131,7 @@ function PhilosophyPage() {
         title="Beliefs are easy. Ask us to apply them to your date."
         body="Send the date, the guest count and the feeling. You will get a considered reply, not a brochure."
       />
+      <RelatedConstellation path="/about/philosophy" heading="Continue" />
     </main>
   );
 }

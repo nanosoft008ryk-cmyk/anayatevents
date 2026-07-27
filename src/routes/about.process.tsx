@@ -4,6 +4,7 @@ import { photo } from "@/content/images";
 import { processPage } from "@/content/about";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -137,6 +138,7 @@ function ProcessPage() {
         title="It starts with a dream, out loud."
         body="Tell us the date, the guest count and the feeling you want left behind. One planner replies personally."
       />
+      <RelatedConstellation path="/about/process" heading="Continue" />
     </main>
   );
 }
