@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { jsonLd, organizationSchema } from "../lib/seo";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
+import { ConciergeBar } from "../components/ConciergeBar";
 import { site } from "../content/site";
 
 
@@ -142,6 +143,7 @@ function RootComponent() {
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <SiteFooter />
+      <ConciergeBar />
     </QueryClientProvider>
   );
 }
