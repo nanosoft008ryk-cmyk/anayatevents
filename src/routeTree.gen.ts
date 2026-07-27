@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaultRouteImport } from './routes/vault'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ReviewsRouteImport } from './routes/reviews'
@@ -43,6 +44,11 @@ import { Route as JournalCategorySlugRouteImport } from './routes/journal.catego
 const VaultRoute = VaultRouteImport.update({
   id: '/vault',
   path: '/vault',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -198,6 +204,7 @@ export interface FileRoutesByFullPath {
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
   '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
   '/about/careers': typeof AboutCareersRoute
@@ -230,6 +237,7 @@ export interface FileRoutesByTo {
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
   '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
   '/about/careers': typeof AboutCareersRoute
@@ -263,6 +271,7 @@ export interface FileRoutesById {
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
   '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
   '/about/careers': typeof AboutCareersRoute
@@ -297,6 +306,7 @@ export interface FileRouteTypes {
     | '/reviews'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/terms'
     | '/vault'
     | '/about/behind-the-scenes'
     | '/about/careers'
@@ -329,6 +339,7 @@ export interface FileRouteTypes {
     | '/reviews'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/terms'
     | '/vault'
     | '/about/behind-the-scenes'
     | '/about/careers'
@@ -361,6 +372,7 @@ export interface FileRouteTypes {
     | '/reviews'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/terms'
     | '/vault'
     | '/about/behind-the-scenes'
     | '/about/careers'
@@ -394,6 +406,7 @@ export interface RootRouteChildren {
   ReviewsRoute: typeof ReviewsRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
   VaultRoute: typeof VaultRoute
   AboutBehindTheScenesRoute: typeof AboutBehindTheScenesRoute
   AboutCareersRoute: typeof AboutCareersRoute
@@ -427,6 +440,13 @@ declare module '@tanstack/react-router' {
       path: '/vault'
       fullPath: '/vault'
       preLoaderRoute: typeof VaultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -642,6 +662,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReviewsRoute: ReviewsRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
   VaultRoute: VaultRoute,
   AboutBehindTheScenesRoute: AboutBehindTheScenesRoute,
   AboutCareersRoute: AboutCareersRoute,
