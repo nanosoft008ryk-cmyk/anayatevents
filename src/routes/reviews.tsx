@@ -197,7 +197,7 @@ function ReviewsPage() {
               <LuxAnchor href={mapsUri} tone="foil">
                 View Google Business Profile
               </LuxAnchor>
-              <LuxAnchor href="#the-reviews" tone="outline" external={false}>
+              <LuxAnchor href="#the-reviews" tone="ghost" external={false}>
                 Read latest reviews
               </LuxAnchor>
               <LuxLink to="/contact" tone="quiet">
@@ -346,7 +346,7 @@ function ReviewsPage() {
                 <LuxAnchor href={writeReviewUri} tone="foil">
                   Write a Google review
                 </LuxAnchor>
-                <LuxAnchor href={mapsUri} tone="outline">
+                <LuxAnchor href={mapsUri} tone="ghost">
                   Read all on Google
                 </LuxAnchor>
               </div>
@@ -466,11 +466,11 @@ function ReviewsPage() {
               <LuxLink to="/contact" tone="foil">
                 Book a consultation
               </LuxLink>
-              <LuxAnchor href={site.whatsappUrl} tone="outline">
+              <LuxAnchor href={site.whatsappHref} tone="ghost">
                 WhatsApp
               </LuxAnchor>
-              <LuxAnchor href={`tel:${site.phonePrimaryRaw}`} tone="quiet" external={false}>
-                {site.phonePrimary}
+              <LuxAnchor href={site.phoneHref} tone="quiet" external={false}>
+                {site.phoneDisplay}
               </LuxAnchor>
             </div>
           </Reveal>
