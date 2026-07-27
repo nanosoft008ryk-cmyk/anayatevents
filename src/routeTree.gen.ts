@@ -26,6 +26,7 @@ import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
+import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as AboutStoryRouteImport } from './routes/about.story'
 import { Route as AboutProcessRouteImport } from './routes/about.process'
 import { Route as AboutPhilosophyRouteImport } from './routes/about.philosophy'
@@ -118,6 +119,11 @@ const AreasSlugRoute = AreasSlugRouteImport.update({
   path: '/areas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutTeamRoute = AboutTeamRouteImport.update({
+  id: '/about/team',
+  path: '/about/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutStoryRoute = AboutStoryRouteImport.update({
   id: '/about/story',
   path: '/about/story',
@@ -160,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
   '/about/story': typeof AboutStoryRoute
+  '/about/team': typeof AboutTeamRoute
   '/areas/$slug': typeof AreasSlugRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -185,6 +192,7 @@ export interface FileRoutesByTo {
   '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
   '/about/story': typeof AboutStoryRoute
+  '/about/team': typeof AboutTeamRoute
   '/areas/$slug': typeof AreasSlugRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -211,6 +219,7 @@ export interface FileRoutesById {
   '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
   '/about/story': typeof AboutStoryRoute
+  '/about/team': typeof AboutTeamRoute
   '/areas/$slug': typeof AreasSlugRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -238,6 +247,7 @@ export interface FileRouteTypes {
     | '/about/philosophy'
     | '/about/process'
     | '/about/story'
+    | '/about/team'
     | '/areas/$slug'
     | '/faq/$slug'
     | '/journal/$slug'
@@ -263,6 +273,7 @@ export interface FileRouteTypes {
     | '/about/philosophy'
     | '/about/process'
     | '/about/story'
+    | '/about/team'
     | '/areas/$slug'
     | '/faq/$slug'
     | '/journal/$slug'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/about/philosophy'
     | '/about/process'
     | '/about/story'
+    | '/about/team'
     | '/areas/$slug'
     | '/faq/$slug'
     | '/journal/$slug'
@@ -314,6 +326,7 @@ export interface RootRouteChildren {
   AboutPhilosophyRoute: typeof AboutPhilosophyRoute
   AboutProcessRoute: typeof AboutProcessRoute
   AboutStoryRoute: typeof AboutStoryRoute
+  AboutTeamRoute: typeof AboutTeamRoute
   AreasSlugRoute: typeof AreasSlugRoute
   FaqSlugRoute: typeof FaqSlugRoute
   JournalSlugRoute: typeof JournalSlugRoute
@@ -450,6 +463,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/team': {
+      id: '/about/team'
+      path: '/about/team'
+      fullPath: '/about/team'
+      preLoaderRoute: typeof AboutTeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about/story': {
       id: '/about/story'
       path: '/about/story'
@@ -506,6 +526,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutPhilosophyRoute: AboutPhilosophyRoute,
   AboutProcessRoute: AboutProcessRoute,
   AboutStoryRoute: AboutStoryRoute,
+  AboutTeamRoute: AboutTeamRoute,
   AreasSlugRoute: AreasSlugRoute,
   FaqSlugRoute: FaqSlugRoute,
   JournalSlugRoute: JournalSlugRoute,
