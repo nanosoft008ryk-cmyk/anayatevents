@@ -30,7 +30,7 @@ export function SmartImg({
   const a = imgAttrs(id, fallbackUrl, sizes);
 
   return (
-    <picture>
+    <picture className="contents">
       {a.avifSrcSet && <source type="image/avif" srcSet={a.avifSrcSet} sizes={sizes} />}
       {a.srcSet && <source type="image/webp" srcSet={a.srcSet} sizes={sizes} />}
       <img
