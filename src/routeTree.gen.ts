@@ -28,6 +28,7 @@ import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
 import { Route as AboutStoryRouteImport } from './routes/about.story'
 import { Route as AboutProcessRouteImport } from './routes/about.process'
+import { Route as AboutPhilosophyRouteImport } from './routes/about.philosophy'
 import { Route as PortfolioProjectSlugRouteImport } from './routes/portfolio.project.$slug'
 import { Route as JournalCategorySlugRouteImport } from './routes/journal.category.$slug'
 
@@ -126,6 +127,11 @@ const AboutProcessRoute = AboutProcessRouteImport.update({
   path: '/about/process',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutPhilosophyRoute = AboutPhilosophyRouteImport.update({
+  id: '/about/philosophy',
+  path: '/about/philosophy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortfolioProjectSlugRoute = PortfolioProjectSlugRouteImport.update({
   id: '/portfolio/project/$slug',
   path: '/portfolio/project/$slug',
@@ -144,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
+  '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
   '/about/story': typeof AboutStoryRoute
   '/areas/$slug': typeof AreasSlugRoute
@@ -167,6 +174,7 @@ export interface FileRoutesByTo {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
+  '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
   '/about/story': typeof AboutStoryRoute
   '/areas/$slug': typeof AreasSlugRoute
@@ -191,6 +199,7 @@ export interface FileRoutesById {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
+  '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
   '/about/story': typeof AboutStoryRoute
   '/areas/$slug': typeof AreasSlugRoute
@@ -216,6 +225,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/vault'
+    | '/about/philosophy'
     | '/about/process'
     | '/about/story'
     | '/areas/$slug'
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/vault'
+    | '/about/philosophy'
     | '/about/process'
     | '/about/story'
     | '/areas/$slug'
@@ -262,6 +273,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/vault'
+    | '/about/philosophy'
     | '/about/process'
     | '/about/story'
     | '/areas/$slug'
@@ -286,6 +298,7 @@ export interface RootRouteChildren {
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VaultRoute: typeof VaultRoute
+  AboutPhilosophyRoute: typeof AboutPhilosophyRoute
   AboutProcessRoute: typeof AboutProcessRoute
   AboutStoryRoute: typeof AboutStoryRoute
   AreasSlugRoute: typeof AreasSlugRoute
@@ -438,6 +451,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/philosophy': {
+      id: '/about/philosophy'
+      path: '/about/philosophy'
+      fullPath: '/about/philosophy'
+      preLoaderRoute: typeof AboutPhilosophyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portfolio/project/$slug': {
       id: '/portfolio/project/$slug'
       path: '/portfolio/project/$slug'
@@ -462,6 +482,7 @@ const rootRouteChildren: RootRouteChildren = {
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   VaultRoute: VaultRoute,
+  AboutPhilosophyRoute: AboutPhilosophyRoute,
   AboutProcessRoute: AboutProcessRoute,
   AboutStoryRoute: AboutStoryRoute,
   AreasSlugRoute: AreasSlugRoute,
