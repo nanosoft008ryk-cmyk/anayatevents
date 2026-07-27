@@ -25,10 +25,8 @@ const trail: Crumb[] = [
 ];
 
 export const Route = createFileRoute("/reviews")({
-  loader: ({ context }) => {
-    context.queryClient.ensureQueryData(googleReviewsQuery());
-  },
-  head: () => ({
+  loader: ({ context }) => context.queryClient.ensureQueryData(googleReviewsQuery()),
+  head: ({ loaderData }) => ({
     ...pageMeta({
       title: "Google Reviews — Anayat Events & Catering, Lahore",
       description:
@@ -38,14 +36,19 @@ export const Route = createFileRoute("/reviews")({
     }),
     scripts: [
       jsonLd(breadcrumbSchema(trail)),
+      // Marked up from the same live payload the page renders, so the
+      // structured data never claims a review Google no longer shows.
       jsonLd(
         reviewCollectionSchema(
           PATH,
-          testimonials.map((t) => ({ quote: t.quote, name: t.name })),
+          (loaderData?.reviews ?? []).length > 0
+            ? loaderData!.reviews.map((r) => ({ quote: r.text, name: r.author }))
+            : testimonials.map((t) => ({ quote: t.quote, name: t.name })),
         ),
       ),
     ],
   }),
+
   component: ReviewsPage,
 });
 
