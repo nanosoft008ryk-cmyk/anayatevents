@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useLiveRating } from "@/hooks/use-live-rating";
 
 import { site, consultationSteps, stats } from "@/content/site";
 import { photo, photosByIds } from "@/content/images";
@@ -62,6 +63,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const liveRating = useLiveRating();
   const frames = photosByIds(HERO_FRAMES);
   const gallery = photosByIds(HOME_PHOTOS);
   const featured = services.slice(0, 6);
@@ -116,7 +118,7 @@ function Home() {
                 </LuxLink>
               </Reveal>
               <Reveal delay={1020} className="mt-8">
-                <GoogleProfileLink label={`${site.rating.value} on Google · ${site.rating.count} reviews`} />
+                <GoogleProfileLink label={`${liveRating.rating} on Google · ${liveRating.count} reviews`} />
               </Reveal>
 
             </div>
@@ -430,7 +432,7 @@ function Home() {
       <section className="chapter light-left relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
         <Reveal>
           <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
-            {site.rating.value} from {site.rating.count} Google reviews
+            {liveRating.rating} from {liveRating.count} Google reviews
           </p>
         </Reveal>
 
