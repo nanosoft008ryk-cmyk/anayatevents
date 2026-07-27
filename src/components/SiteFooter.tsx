@@ -71,7 +71,7 @@ export function SiteFooter() {
       </div>
 
       {/* ── The index ──────────────────────────────────────────────────── */}
-      <div className="mx-auto max-w-[92rem] px-6 pb-36 md:px-12 lg:pb-20">
+      <div className="mx-auto max-w-[92rem] px-6 pb-16 md:px-12 lg:pb-20">
         <div className="grid gap-16 border-t border-border pt-16 lg:grid-cols-[1fr_2.6fr]">
           <div>
             <p className="font-sans text-[10px] tracking-[0.34em] uppercase text-gold-deep">
@@ -147,6 +147,18 @@ export function SiteFooter() {
           </p>
         </div>
       </div>
+
+      {/* ── Oversized wordmark, cropped by the base of the page ─────────── */}
+      <div aria-hidden className="select-none overflow-hidden pb-28 lg:pb-0">
+        <p
+          className="whitespace-nowrap text-center font-display font-light leading-[0.72] tracking-[-0.02em] text-ivory/[0.06] text-[clamp(4rem,15.6vw,17rem)]"
+          style={{ marginBottom: "-0.26em" }}
+        >
+          Anayat Events
+        </p>
+      </div>
     </footer>
+
+
   );
 }
