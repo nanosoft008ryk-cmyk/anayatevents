@@ -59,7 +59,7 @@ export const locations: LocationArea[] = [
     slug: "lahore",
     name: "Lahore",
     shortName: "Lahore",
-    metaTitle: "Luxury Event Management Serving Lahore | Anayat Events & Catering",
+    metaTitle: "Luxury Event Management in Lahore | Anayat Events",
     metaDescription:
       "Anayat Events & Catering serves clients throughout Lahore — weddings, corporate occasions and private celebrations planned, designed and catered by one in-house team.",
     heroHeadline: "Luxury Event Management Serving Lahore",
@@ -348,7 +348,7 @@ export const locations: LocationArea[] = [
     slug: "gulberg",
     name: "Gulberg",
     shortName: "Gulberg",
-    metaTitle: "Premium Event Planning & Catering for Gulberg Lahore | Anayat Events",
+    metaTitle: "Event Planning & Catering in Gulberg | Anayat Events",
     metaDescription:
       "Anayat Events serves clients in Gulberg Lahore — hotel ballrooms, boutique halls and heritage residences, produced with pre-assembled sets and tightly scheduled load-ins.",
     heroHeadline: "Premium Event Planning for Gulberg, Lahore",
@@ -532,7 +532,7 @@ export const locations: LocationArea[] = [
     slug: "johar-town",
     name: "Johar Town",
     shortName: "Johar Town",
-    metaTitle: "Wedding Planning & Catering Services for Johar Town | Anayat Events",
+    metaTitle: "Wedding Planning & Catering, Johar Town | Anayat Events",
     metaDescription:
       "Anayat Events serves clients in Johar Town Lahore — marriage halls, marquees and home functions with full decor overlays, in-house catering and honest venue advice.",
     heroHeadline: "Wedding Planning & Catering for Johar Town",
@@ -808,7 +808,7 @@ export const locations: LocationArea[] = [
     slug: "bedian-road",
     name: "Bedian Road",
     shortName: "Bedian Road",
-    metaTitle: "Garden & Farmhouse Wedding Planning on Bedian Road | Anayat Events",
+    metaTitle: "Farmhouse Weddings on Bedian Road | Anayat Events",
     metaDescription:
       "Anayat Events serves clients along Bedian Road Lahore — canal-side gardens and farmhouse weddings, planned with weather contingency, drainage awareness and full outdoor production.",
     heroHeadline: "Garden Wedding Planning Along Bedian Road",
