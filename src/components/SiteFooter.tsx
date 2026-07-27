@@ -8,6 +8,7 @@ import { imgAttrs } from "@/lib/img";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxAnchor } from "@/components/ui/LuxButton";
 import { GoogleProfileLink } from "@/components/GoogleProfileLink";
+import { useLiveRating } from "@/hooks/use-live-rating";
 
 /**
  * Cinematic finale. The footer opens with a full-bleed closing frame and the
@@ -15,6 +16,7 @@ import { GoogleProfileLink } from "@/components/GoogleProfileLink";
  * link soup, hairlines only.
  */
 export function SiteFooter() {
+  const liveRating = useLiveRating();
   const closing = photo("ae-08");
 
   return (
@@ -168,7 +170,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} {site.legalName}
           </p>
           <p className="font-sans text-[10px] tracking-[0.24em] uppercase text-ivory/70">
-            {site.serviceArea} · Rated {site.rating.value} from {site.rating.count} reviews
+            {site.serviceArea} · Rated {liveRating.rating} from {liveRating.count} reviews
           </p>
         </div>
       </div>
