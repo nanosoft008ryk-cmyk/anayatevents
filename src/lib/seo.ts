@@ -356,21 +356,45 @@ export function itemListSchema(input: {
 }
 
 
-export function reviewCollectionSchema(
-  path: string,
-  reviews: { quote: string; name: string }[],
-) {
+/**
+ * Review markup, emitted only when the underlying review is factual — a real
+ * author, real review text and a real star rating that came back from Google.
+ * Anything without all three (our own edited testimonials, for instance) is
+ * dropped rather than given an invented rating, and if nothing survives the
+ * filter no Review markup is emitted at all.
+ */
+export interface FactualReview {
+  quote: string;
+  name: string;
+  /** 1–5, exactly as Google returned it. Never inferred. */
+  rating?: number;
+  /** ISO date, when the source provides one. */
+  published?: string;
+}
+
+export function reviewCollectionSchema(path: string, reviews: FactualReview[]) {
+  const factual = reviews.filter(
+    (r) =>
+      typeof r.rating === "number" &&
+      r.rating >= 1 &&
+      r.rating <= 5 &&
+      r.quote.trim().length > 0 &&
+      r.name.trim().length > 0,
+  );
+  if (factual.length === 0) return null;
+
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "@id": abs(`${path}#reviews`),
-    numberOfItems: reviews.length,
-    itemListElement: reviews.map((r, i) => ({
+    numberOfItems: factual.length,
+    itemListElement: factual.map((r, i) => ({
       "@type": "ListItem",
       position: i + 1,
       item: {
         "@type": "Review",
         reviewBody: r.quote,
+        ...(r.published ? { datePublished: r.published } : {}),
         author: { "@type": "Person", name: r.name },
         itemReviewed: {
           "@type": "LocalBusiness",
@@ -382,13 +406,77 @@ export function reviewCollectionSchema(
         },
         reviewRating: {
           "@type": "Rating",
-          ratingValue: "5",
+          ratingValue: String(r.rating),
           bestRating: "5",
           worstRating: "1",
         },
       },
     })),
+  };
+}
 
+/**
+ * The ProfessionalService node for a service-area page. It describes the one
+ * business serving that locality — never a branch there — and carries the
+ * derived neighbouring areas as additional `areaServed` places.
+ */
+export function professionalServiceSchema(input: {
+  path: string;
+  areaName: string;
+  description: string;
+  image?: string;
+  nearby?: { name: string }[];
+}) {
+  const place = (name: string) => ({
+    "@type": "Place" as const,
+    name,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: `${name}, ${site.address.locality}`,
+      addressRegion: site.address.region,
+      addressCountry: site.address.country,
+    },
+  });
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": abs(`${input.path}#professional-service`),
+    name: `${site.legalName} — serving ${input.areaName}`,
+    description: input.description,
+    url: abs(input.path),
+    ...(input.image ? { image: abs(input.image) } : {}),
+    telephone: site.phoneE164,
+    priceRange: "$$$",
+    // The single base address. No second location is ever claimed.
+    address: postalAddress,
+    parentOrganization: { "@id": abs("/#business") },
+    areaServed: [place(input.areaName), ...(input.nearby ?? []).map((n) => place(n.name))],
+  };
+}
+
+/** Nearby areas as a linked list of Places, so crawlers see the coverage web. */
+export function nearbyPlacesSchema(
+  path: string,
+  areas: { name: string; path: string; reason?: string }[],
+) {
+  if (areas.length === 0) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": abs(`${path}#nearby`),
+    name: "Nearby service areas",
+    numberOfItems: areas.length,
+    itemListElement: areas.map((a, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Place",
+        name: a.name,
+        url: abs(a.path),
+        ...(a.reason ? { description: a.reason } : {}),
+      },
+    })),
   };
 }
 
