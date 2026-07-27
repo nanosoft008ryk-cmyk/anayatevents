@@ -18,6 +18,8 @@ export interface GoogleReviewsPayload {
   /** Total number of Google ratings — the number shown across the site. */
   ratingCount: number;
   mapsUri: string;
+  /** Deep link that opens Google's own "write a review" sheet for the place. */
+  writeReviewUri: string;
   reviews: GoogleReview[];
   /** True when Google could not be reached and the static fallback is shown. */
   stale: boolean;
@@ -25,6 +27,9 @@ export interface GoogleReviewsPayload {
 
 /** The business's Google Place — resolved once from Places Text Search. */
 const PLACE_ID = "ChIJw5brYgUBGTkRJO-Hwy3rsF4";
+
+/** Google's canonical write-a-review deep link for a place. */
+const WRITE_REVIEW_URI = `https://search.google.com/local/writereview?placeid=${PLACE_ID}`;
 
 const GATEWAY = "https://connector-gateway.lovable.dev/google_maps";
 
@@ -42,9 +47,11 @@ const FALLBACK: GoogleReviewsPayload = {
   ratingCount: 62,
   mapsUri:
     "https://www.google.com/maps/place/Anayat+Events+%26+Catering+%7C+Event+Management+Lahore/data=!4m2!3m1!1s0x3919010562eb96c3:0x5eb0eb2dc387ef24",
+  writeReviewUri: WRITE_REVIEW_URI,
   reviews: [],
   stale: true,
 };
+
 
 interface PlacesReview {
   name?: string;
