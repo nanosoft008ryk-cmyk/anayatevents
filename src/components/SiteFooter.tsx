@@ -33,9 +33,9 @@ function IndexColumn({ heading, items }: { heading: string; items: readonly Foot
   );
 
   return (
-    <div className="border-b border-border/70 sm:border-0">
-      {/* Phone: disclosure */}
-      <details className="group/col sm:hidden">
+    <div className="border-b border-border/70 lg:border-0">
+      {/* Phone and tablet: disclosure keeps the index scannable. */}
+      <details className="group/col lg:hidden">
         <summary className="flex cursor-pointer list-none items-center justify-between py-4 [&::-webkit-details-marker]:hidden">
           <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
             {heading}
@@ -51,14 +51,15 @@ function IndexColumn({ heading, items }: { heading: string; items: readonly Foot
         <div className="pb-5">{list}</div>
       </details>
 
-      {/* Tablet and up: always visible */}
-      <div className="hidden sm:block">
+      {/* Desktop: always visible */}
+      <div className="hidden lg:block">
         <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
           {heading}
         </p>
         <div className="mt-6">{list}</div>
       </div>
     </div>
+
   );
 }
 
