@@ -74,7 +74,7 @@ export function jsonLd(data: unknown) {
  * project's stable Lovable host; when a custom domain is attached, change this
  * one line and every URL on the site follows.
  */
-export const BASE_URL = "https://project--ca05bc7d-2f89-47fe-983b-5f1b9eeefe7a.lovable.app";
+export const BASE_URL = "https://anayatevents.lovable.app";
 
 
 export function abs(path: string): string {
@@ -384,5 +384,46 @@ export function reviewCollectionSchema(
       },
     })),
 
+  };
+}
+
+/* ------------------------- Page-type schema helpers ---------------------- */
+
+/**
+ * Generic WebPage node. Every leaf route emits exactly one of the WebPage
+ * family (WebPage / AboutPage / ContactPage / CollectionPage), tied back to
+ * the sitewide WebSite and LocalBusiness entities so nothing is duplicated.
+ */
+export function webPageSchema(input: {
+  name: string;
+  description: string;
+  path: string;
+  type?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
+  image?: string;
+  datePublished?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": input.type ?? "WebPage",
+    "@id": abs(`${input.path}#webpage`),
+    name: input.name,
+    description: input.description,
+    url: abs(input.path),
+    inLanguage: "en",
+    isPartOf: { "@id": abs("/#website") },
+    about: { "@id": abs("/#business") },
+    ...(input.image ? { primaryImageOfPage: { "@type": "ImageObject", url: abs(input.image) } } : {}),
+    ...(input.datePublished ? { datePublished: input.datePublished } : {}),
+  };
+}
+
+/** Primary navigation, emitted once from the root. */
+export function siteNavigationSchema(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "@id": abs("/#navigation"),
+    name: items.map((i) => i.name),
+    url: items.map((i) => abs(i.path)),
   };
 }

@@ -7,6 +7,7 @@ import { photo } from "@/content/images";
 import { imgAttrs } from "@/lib/img";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxAnchor } from "@/components/ui/LuxButton";
+import { GoogleProfileLink } from "@/components/GoogleProfileLink";
 
 /**
  * Cinematic finale. The footer opens with a full-bleed closing frame and the
@@ -111,7 +112,6 @@ export function SiteFooter() {
               {[
                 { label: "WhatsApp", href: site.whatsappHref },
                 { label: "Instagram", href: site.instagram },
-                { label: "Google", href: site.mapsUrl },
               ].map((l) => (
                 <a
                   key={l.label}
@@ -125,7 +125,11 @@ export function SiteFooter() {
                 </a>
               ))}
             </div>
+            <div className="mt-7">
+              <GoogleProfileLink label="Google Business Profile" showStars={false} />
+            </div>
           </div>
+
 
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
             {footerColumns.map((col) => (

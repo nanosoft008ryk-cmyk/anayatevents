@@ -12,6 +12,7 @@ import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
+import { GoogleProfileLink } from "@/components/GoogleProfileLink";
 import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
 import { imgAttrs } from "@/lib/img";
 
@@ -114,6 +115,10 @@ function Home() {
                   View the work
                 </LuxLink>
               </Reveal>
+              <Reveal delay={1020} className="mt-8">
+                <GoogleProfileLink label={`${site.rating.value} on Google · ${site.rating.count} reviews`} />
+              </Reveal>
+
             </div>
           </div>
 

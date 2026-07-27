@@ -1,0 +1,141 @@
+/* ---------------------------------------------------------------------------
+ * Automatic page discovery.
+ *
+ * Every page on this site is a file in src/routes. This module reads that
+ * directory at build time (Vite's import.meta.glob, keys only — no modules are
+ * evaluated), converts each filename into its public URL, and expands dynamic
+ * `$slug` routes from the static content modules that feed them.
+ *
+ * Consequence: adding, renaming or deleting a page file — or adding a service,
+ * area, article, portfolio project or FAQ topic to /src/content — updates the
+ * sitemap, the priority model and the crawl surface automatically. Nothing is
+ * registered by hand anywhere.
+ * ------------------------------------------------------------------------- */
+
+import { services } from "@/content/services";
+import { locations } from "@/content/locations";
+import { portfolioCategories, portfolioProjects } from "@/content/portfolio";
+import { articles, journalCategories } from "@/content/journal";
+import { faqTopics } from "@/content/faqs";
+import { photo } from "@/content/images";
+
+export interface PageEntry {
+  /** Absolute, slash-prefixed, lowercase, hyphen-separated path. */
+  path: string;
+  /** Only ever a real, page-specific date. Never a build timestamp. */
+  lastmod?: string;
+  /** Representative image for sitemap <image:image>. */
+  image?: string;
+  imageTitle?: string;
+}
+
+/** Files that are endpoints or shells, never indexable pages. */
+const NON_PAGE = /(^__|\[\.\]|README)/;
+
+/** Filename → URL pattern. `about.story.tsx` → `/about/story`. */
+function fileToPattern(file: string): string {
+  const rel = file.replace(/^\/src\/routes\//, "").replace(/\.tsx?$/, "");
+  if (NON_PAGE.test(rel)) return "";
+  const segments = rel.split(/[./]/).filter(Boolean);
+  const cleaned = segments.filter((s, i) => !(s === "index" && i === segments.length - 1));
+  return "/" + cleaned.join("/");
+}
+
+/** Slug hygiene: lowercase, hyphenated, no doubles, no trailing slash. */
+export function normalizeSlug(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9/]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/** One expander per dynamic pattern. Sourced from the same content the routes render. */
+const expanders: Record<string, () => PageEntry[]> = {
+  "/services/$slug": () =>
+    services.map((s) => ({
+      path: `/services/${normalizeSlug(s.slug)}`,
+      image: safePhoto(s.hero),
+      imageTitle: s.name,
+    })),
+  "/areas/$slug": () =>
+    locations.map((l) => ({
+      path: `/areas/${normalizeSlug(l.slug)}`,
+      image: safePhoto(l.hero),
+      imageTitle: l.name,
+    })),
+  "/portfolio/$slug": () =>
+    portfolioCategories.map((c) => ({
+      path: `/portfolio/${normalizeSlug(c.slug)}`,
+      image: safePhoto(c.hero),
+      imageTitle: c.name,
+    })),
+  "/portfolio/project/$slug": () =>
+    portfolioProjects.map((p) => ({
+      path: `/portfolio/project/${normalizeSlug(p.slug)}`,
+      image: safePhoto((p as { hero?: string }).hero),
+      imageTitle: p.title,
+    })),
+  "/journal/$slug": () =>
+    articles.map((a) => ({
+      path: `/journal/${normalizeSlug(a.slug)}`,
+      lastmod: a.date,
+      image: safePhoto(a.hero),
+      imageTitle: a.title,
+    })),
+  "/journal/category/$slug": () =>
+    journalCategories.map((c) => ({ path: `/journal/category/${normalizeSlug(c.slug)}` })),
+  "/faq/$slug": () => faqTopics.map((t) => ({ path: `/faq/${normalizeSlug(t.slug)}` })),
+};
+
+function safePhoto(id?: string): string | undefined {
+  if (!id) return undefined;
+  try {
+    return photo(id).url;
+  } catch {
+    return undefined;
+  }
+}
+
+/** Depth- and intent-aware priority, so the model never needs hand-tuning. */
+function priorityFor(path: string): string {
+  if (path === "/") return "1.0";
+  if (path === "/contact" || path === "/services" || path === "/areas") return "0.9";
+  if (/^\/(privacy|terms|cookies)$/.test(path)) return "0.3";
+  const depth = path.split("/").filter(Boolean).length;
+  return depth === 1 ? "0.8" : depth === 2 ? "0.7" : "0.6";
+}
+
+const discovered = Object.keys(
+  import.meta.glob("/src/routes/**/*.tsx", { eager: false }),
+)
+  .map(fileToPattern)
+  .filter(Boolean);
+
+/**
+ * Every indexable page on the site, deduplicated and ordered by hierarchy.
+ */
+export function allPages(): (PageEntry & { priority: string })[] {
+  const out: PageEntry[] = [];
+
+  for (const pattern of discovered) {
+    if (pattern.includes("$")) {
+      const expand = expanders[pattern];
+      if (expand) out.push(...expand());
+      continue;
+    }
+    out.push({ path: pattern === "" ? "/" : pattern });
+  }
+
+  const seen = new Set<string>();
+  return out
+    .filter((e) => {
+      if (seen.has(e.path)) return false;
+      seen.add(e.path);
+      return true;
+    })
+    .sort((a, b) => a.path.localeCompare(b.path))
+    .sort((a, b) => a.path.split("/").length - b.path.split("/").length)
+    .map((e) => ({ ...e, priority: priorityFor(e.path) }));
+}
