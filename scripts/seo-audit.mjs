@@ -24,7 +24,18 @@ const warnings = [];
 const fail = (url, msg) => errors.push(`${url} — ${msg}`);
 const warn = (url, msg) => warnings.push(`${url} — ${msg}`);
 
-const text = (html, re) => (html.match(re) || [])[1];
+const decode = (v) =>
+  v === undefined
+    ? v
+    : v
+        .replace(/&amp;/g, "&")
+        .replace(/&#x27;|&#39;/g, "'")
+        .replace(/&quot;/g, '"')
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">");
+
+// Lengths are measured on decoded text — "&amp;" is one character in a SERP.
+const text = (html, re) => decode((html.match(re) || [])[1]);
 const all = (html, re) => [...html.matchAll(re)];
 
 async function get(url) {
