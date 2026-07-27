@@ -24,6 +24,7 @@ User-agent: Google-Extended
 Allow: /
 
 Sitemap: ${BASE_URL}/sitemap.xml
+Sitemap: ${BASE_URL}/image-sitemap.xml
 `;
 
 export const Route = createFileRoute("/robots.txt")({
