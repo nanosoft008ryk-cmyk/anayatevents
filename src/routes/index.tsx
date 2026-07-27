@@ -124,7 +124,7 @@ function Home() {
 
         <div className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-4">
           <span className="h-12 w-px bg-gradient-to-b from-transparent via-gold to-transparent" />
-          <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-ivory/40">
+          <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-ivory/70">
             Explore
           </span>
         </div>
@@ -260,8 +260,8 @@ function Home() {
 
           <ol className="lg:pt-6">
             {featured.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 60}>
-                <li className="group/row relative">
+              <li key={s.slug} className="group/row relative">
+                <Reveal delay={i * 60}>
                   <Link
                     to="/services/$slug"
                     params={{ slug: s.slug }}
@@ -282,8 +282,8 @@ function Home() {
                     <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-100 bg-border" />
                     <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-gold transition-transform duration-[900ms] [transition-timing-function:var(--ease-lux)] group-hover/row:scale-x-100" />
                   </Link>
-                </li>
-              </Reveal>
+                </Reveal>
+              </li>
             ))}
           </ol>
         </div>
