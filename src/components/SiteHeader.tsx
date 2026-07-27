@@ -135,10 +135,10 @@ export function SiteHeader() {
             const wide = cols.length > 2;
             return (
               <div
-                className={`lux-panel panel-in pointer-events-auto mt-2 grid gap-x-12 gap-y-9 px-10 py-9 ${
+                className={`lux-panel panel-in pointer-events-auto mt-2 grid gap-x-10 gap-y-8 px-9 py-8 ${
                   wide ? "grid-cols-4" : cols.length === 2 ? "grid-cols-2" : "grid-cols-1"
                 }`}
-                style={{ maxWidth: wide ? "62rem" : "40rem" }}
+                style={{ maxWidth: wide ? "54rem" : "38rem" }}
               >
                 {cols.map((col, ci) => (
                   <div
