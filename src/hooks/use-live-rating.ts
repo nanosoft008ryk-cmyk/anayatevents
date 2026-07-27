@@ -15,6 +15,7 @@ export function useLiveRating() {
       rating: site.rating.value,
       ratingCount: site.rating.count,
       mapsUri: site.mapsUrl,
+      writeReviewUri: site.mapsUrl,
       reviews: [],
       stale: true,
     },
@@ -24,5 +25,7 @@ export function useLiveRating() {
     rating: data?.rating ?? site.rating.value,
     count: data?.ratingCount ?? site.rating.count,
     mapsUri: data?.mapsUri ?? site.mapsUrl,
+    writeReviewUri: data?.writeReviewUri ?? site.mapsUrl,
   };
+
 }
