@@ -28,7 +28,7 @@ export const Route = createFileRoute("/terms")({
 
 function Terms() {
   return (
-    <PolicyPage
+    <PolicyPage heroPhoto="ae-07"
       eyebrow="Legal"
       title="Terms of Service"
       lede="What you can expect from us, and what we ask in return."

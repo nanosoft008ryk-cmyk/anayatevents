@@ -27,7 +27,7 @@ export const Route = createFileRoute("/cookies")({
 
 function Cookies() {
   return (
-    <PolicyPage
+    <PolicyPage heroPhoto="ae-13"
       eyebrow="Legal"
       title="Cookie Policy"
       lede="A short policy, because there is very little to declare."
