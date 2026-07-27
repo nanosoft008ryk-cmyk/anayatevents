@@ -63,23 +63,20 @@ export function CinematicBackdrop({
         </div>
       ))}
 
-      {/* Legibility stack — grade, directional veil, vignette, grain. */}
+      {/* Smart legibility stack — directional veil + feathered haze beneath the
+          typography only, so the far side of the frame stays vivid. */}
+      <div className="absolute inset-0 read-veil" />
+      <div className="absolute inset-0 text-haze" />
       <div
-        className="absolute inset-0"
+        className="absolute inset-x-0 bottom-0 h-1/3"
         style={{
           background:
-            "linear-gradient(to right, color-mix(in oklab, var(--background) 82%, transparent) 0%, color-mix(in oklab, var(--background) 42%, transparent) 52%, transparent 100%)",
+            "linear-gradient(to top, var(--background) 0%, color-mix(in oklab, var(--background) 45%, transparent) 45%, transparent 100%)",
         }}
       />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to top, var(--background) 0%, color-mix(in oklab, var(--background) 55%, transparent) 32%, transparent 72%)",
-        }}
-      />
-      <div className="absolute inset-0 opacity-70 vignette" />
+      <div className="absolute inset-0 opacity-45 vignette" />
       <div className="absolute inset-0 grain" />
+
     </div>
   );
 }
