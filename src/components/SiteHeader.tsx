@@ -126,55 +126,69 @@ export function SiteHeader() {
         }`}
       />
 
-      {/* Desktop panel — editorial, with a plate on the right */}
+      {/* Desktop — floating boutique panel */}
       {open && (
-        <div className="hidden bg-background/95 backdrop-blur-2xl lg:block">
-          <div className="mx-auto grid max-w-[92rem] grid-cols-[1.6fr_0.6fr] gap-16 px-12 py-14">
-            <div className="grid gap-12 md:grid-cols-3">
-              {navigation
-                .find((g) => g.label === open)
-                ?.columns?.map((col, ci) => (
+        <div className="pointer-events-none hidden justify-center px-12 lg:flex">
+          {(() => {
+            const group = navigation.find((g) => g.label === open);
+            const cols = group?.columns ?? [];
+            const wide = cols.length > 2;
+            return (
+              <div
+                className={`lux-panel panel-in pointer-events-auto mt-2 grid gap-x-12 gap-y-9 px-10 py-9 ${
+                  wide ? "grid-cols-4" : cols.length === 2 ? "grid-cols-2" : "grid-cols-1"
+                }`}
+                style={{ maxWidth: wide ? "62rem" : "40rem" }}
+              >
+                {cols.map((col, ci) => (
                   <div
                     key={col.heading}
-                    className="animate-[fade-in_0.7s_var(--ease-lux)_both]"
-                    style={{ animationDelay: `${ci * 70}ms` }}
+                    className="min-w-[11rem] animate-[fade-in_0.6s_var(--ease-lux)_both]"
+                    style={{ animationDelay: `${60 + ci * 60}ms` }}
                   >
-                    <p className="font-sans text-[9px] tracking-[0.38em] uppercase text-gold-deep">
+                    <p className="font-sans text-[8.5px] tracking-[0.4em] uppercase text-gold-deep">
                       {col.heading}
                     </p>
-                    <span className="mt-4 block h-px w-full bg-border" />
-                    <ul className="mt-5 space-y-2.5">
+                    <span className="mt-3 block h-px w-8 bg-gold/40" />
+                    <ul className="mt-4 space-y-1">
                       {col.items.map((item) => (
                         <li key={`${item.to}-${item.label}`}>
                           <Link
                             to={item.to}
                             params={item.params as never}
-                            className="group/mi inline-flex items-center gap-3 font-display text-[1.15rem] font-light text-muted-foreground transition-colors duration-500 hover:text-gold"
+                            className="group/mi relative flex items-baseline gap-2 rounded-[12px] py-[5px] pr-2 pl-0 font-display text-[0.98rem] font-light text-muted-foreground transition-[color,transform,padding] duration-500 [transition-timing-function:var(--ease-lux)] hover:pl-2.5 hover:text-gold"
                           >
-                            <span className="h-px w-0 bg-gold transition-all duration-500 group-hover/mi:w-4" />
-                            {item.label}
+                            <span className="absolute inset-0 -z-10 rounded-[12px] bg-gold/0 transition-colors duration-500 group-hover/mi:bg-gold/[0.05]" />
+                            <span className="relative">
+                              {item.label}
+                              <span className="absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-gold/60 transition-transform duration-[600ms] [transition-timing-function:var(--ease-lux)] group-hover/mi:origin-left group-hover/mi:scale-x-100" />
+                            </span>
                           </Link>
                         </li>
                       ))}
                     </ul>
                   </div>
                 ))}
-            </div>
-            <div className="animate-[fade-in_0.9s_var(--ease-lux)_both]">
-              <img
-                {...imgAttrs("ae-13", photo("ae-13").url, "20vw")}
-                alt=""
-                loading="lazy"
-                decoding="async"
-                className="aspect-[3/4] w-full object-cover [mask-image:linear-gradient(to_bottom,black_70%,transparent)]"
-              />
-              <p className="mt-4 font-sans text-[9px] tracking-[0.3em] uppercase text-muted-foreground">
-                {site.tagline}
-              </p>
-            </div>
-          </div>
+                <div
+                  className={`animate-[fade-in_0.7s_var(--ease-lux)_both] ${wide ? "col-span-4" : "col-span-full"} mt-1 flex items-center justify-between border-t border-border/70 pt-5`}
+                >
+                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-muted-foreground">
+                    {site.tagline}
+                  </p>
+                  <Link
+                    to={group!.to}
+                    className="group/all relative font-sans text-[9px] tracking-[0.34em] uppercase text-gold"
+                  >
+                    View all {group!.label}
+                    <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform duration-[600ms] [transition-timing-function:var(--ease-lux)] group-hover/all:origin-left group-hover/all:scale-x-100" />
+                  </Link>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       )}
+
 
       {/* Mobile — full-height cinematic drawer */}
       {mobile && (
