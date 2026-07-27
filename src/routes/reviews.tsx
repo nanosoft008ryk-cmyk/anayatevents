@@ -168,11 +168,19 @@ function ReviewsPage() {
         <CinematicBackdrop frames={[photo("ae-21"), photo("ae-13"), photo("ae-05"), photo("ae-24")]} />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_top,color-mix(in_oklab,var(--background)_96%,transparent)_4%,color-mix(in_oklab,var(--background)_72%,transparent)_42%,color-mix(in_oklab,var(--background)_60%,transparent)_100%)]"
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(to top, color-mix(in oklab, var(--background) 97%, transparent) 3%, color-mix(in oklab, var(--background) 74%, transparent) 45%, color-mix(in oklab, var(--background) 55%, transparent) 100%)",
+          }}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,color-mix(in_oklab,var(--background)_86%,transparent)_0%,transparent_62%)]"
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(to right, color-mix(in oklab, var(--background) 88%, transparent) 0%, color-mix(in oklab, var(--background) 40%, transparent) 45%, transparent 72%)",
+          }}
         />
 
         <div className="mx-auto w-full max-w-[92rem] px-6 pt-40 pb-24 md:px-12 md:pb-32">
@@ -187,7 +195,7 @@ function ReviewsPage() {
 
           <h1 className="mt-10 max-w-[15ch] font-display text-[3rem] leading-[0.98] font-light text-ivory md:text-[6.4rem]">
             <RevealWords text="Every review here is" />
-            <span className="foil-text mt-2 block italic">
+            <span className="mt-2 block text-gold italic">
               <RevealWords text="a real celebration." delay={220} />
             </span>
           </h1>
