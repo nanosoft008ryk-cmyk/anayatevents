@@ -410,13 +410,13 @@ function Home() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-16 lg:mt-24" innerClassName="flex flex-wrap gap-x-8 gap-y-4 sm:gap-x-10 sm:gap-y-5">
+        <Reveal className="mt-12 sm:mt-16 lg:mt-24" innerClassName="flex flex-wrap gap-x-8 gap-y-2 sm:gap-y-4 sm:gap-x-10 sm:gap-y-5">
           {portfolioCategories.map((c) => (
             <Link
               key={c.slug}
               to="/portfolio/$slug"
               params={{ slug: c.slug }}
-              className="group/cat relative font-display text-xl font-light text-muted-foreground transition-colors duration-500 hover:text-gold sm:text-2xl lg:text-3xl"
+              className="group/cat relative inline-flex min-h-11 items-center font-display text-xl font-light sm:min-h-0 text-muted-foreground transition-colors duration-500 hover:text-gold sm:text-2xl lg:text-3xl"
             >
               {c.name}
               <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform duration-[800ms] [transition-timing-function:var(--ease-lux)] group-hover/cat:origin-left group-hover/cat:scale-x-100" />
