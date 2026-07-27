@@ -23,7 +23,7 @@ export const Route = createFileRoute("/terms")({
       jsonLd(breadcrumbSchema(trail)),
     ],
   }),
-  component: Terms;
+  component: Terms,
 });
 
 function Terms() {
