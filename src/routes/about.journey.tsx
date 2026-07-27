@@ -4,6 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { photo } from "@/content/images";
 import { journeyPage } from "@/content/about";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
@@ -65,7 +66,8 @@ function JourneyPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: a running year ticker, minimal image ──────────────────── */}
-      <section className="mx-auto max-w-[92rem] px-6 pt-36 pb-16 md:px-12 md:pt-48">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-24 md:px-12 md:pt-48">
+        <HeroBackdrop id="ae-05" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
         <p className="font-sans text-[10px] tracking-[0.46em] uppercase text-gold">
           {journeyPage.hero.eyebrow}

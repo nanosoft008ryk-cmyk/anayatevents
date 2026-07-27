@@ -4,6 +4,7 @@ import { photo } from "@/content/images";
 import { promisePage } from "@/content/about";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
@@ -46,7 +47,8 @@ function PromisePage() {
   return (
     <main className="bg-background">
       {/* ── Hero: the quietest page on the site. Type on air. ───────────── */}
-      <section className="mx-auto max-w-3xl px-6 pt-40 pb-16 text-center md:pt-52">
+      <section className="relative isolate mx-auto max-w-3xl px-6 pt-40 pb-24 text-center md:pt-52">
+        <HeroBackdrop id="ae-09" priority />
         <Breadcrumbs trail={trail} className="mb-14 justify-center [&_ol]:justify-center" />
         <p className="font-sans text-[10px] tracking-[0.48em] uppercase text-gold">
           {promisePage.hero.eyebrow}

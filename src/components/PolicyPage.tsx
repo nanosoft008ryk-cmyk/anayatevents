@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+
 /**
  * Shared editorial shell for legal pages. Quiet typography, generous measure,
  * same house voice as the rest of the site.
@@ -9,17 +11,20 @@ export function PolicyPage({
   title,
   lede,
   trailNode,
+  heroPhoto = "ae-02",
   children,
 }: {
   eyebrow: string;
   title: string;
   lede: string;
   trailNode?: ReactNode;
+  heroPhoto?: string;
   children: ReactNode;
 }) {
   return (
     <main className="bg-background">
-      <section className="mx-auto max-w-[92rem] px-6 pt-40 pb-16 md:px-12">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-40 pb-24 md:px-12">
+        <HeroBackdrop id={heroPhoto} priority />
         {trailNode}
         <p className="mt-10 font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
           {eyebrow}

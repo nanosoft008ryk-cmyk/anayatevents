@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
 import { faqTopics, getFaqTopic, type FaqTopic } from "@/content/faqs";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { pageMeta, jsonLd, breadcrumbSchema, faqScripts, type Crumb } from "@/lib/seo";
@@ -49,7 +50,8 @@ function FaqTopicPage() {
 
   return (
     <main className="bg-background">
-      <section className="mx-auto max-w-7xl px-6 pt-32 pb-12 md:px-10 md:pt-40">
+      <section className="relative isolate mx-auto max-w-7xl px-6 pt-32 pb-24 md:px-10 md:pt-40">
+        <HeroBackdrop id="ae-16" priority />
         <Breadcrumbs trail={trail} className="mb-8" />
         <p className="font-sans text-[11px] tracking-[0.34em] uppercase text-gold">FAQ</p>
         <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.02] font-light text-ivory md:text-6xl">
