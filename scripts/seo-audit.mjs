@@ -52,8 +52,12 @@ const shingleSets = new Map();
 const linkedTo = new Set(["/"]);
 const pages = [];
 
+// Similarity is measured on <main> only — shared header, footer and
+// related-links chrome would otherwise make every page look like every other.
+const mainOf = (body) => (body.match(/<main[\s\S]*?<\/main>/i) || [body])[0];
+
 const shingles = (body) => {
-  const words = body
+  const words = mainOf(body)
     .replace(/<script[\s\S]*?<\/script>/g, " ")
     .replace(/<style[\s\S]*?<\/style>/g, " ")
     .replace(/<[^>]+>/g, " ")
