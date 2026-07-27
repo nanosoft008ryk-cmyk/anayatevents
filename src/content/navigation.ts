@@ -2,6 +2,7 @@ import { services } from "./services";
 import { locations } from "./locations";
 import { portfolioCategories } from "./portfolio";
 import { faqTopics } from "./faqs";
+import { journalCategories } from "./journal";
 
 export interface NavChild {
   label: string;
@@ -85,6 +86,20 @@ export const navigation: NavGroup[] = [
   {
     label: "Journal",
     to: "/journal",
+    columns: [
+      {
+        heading: "Departments",
+        items: journalCategories.map((c) => ({
+          label: c.name,
+          to: "/journal/category/$slug",
+          params: { slug: c.slug },
+        })),
+      },
+      {
+        heading: "Reading",
+        items: [{ label: "All stories", to: "/journal" }],
+      },
+    ],
   },
   {
     label: "About",
@@ -139,6 +154,17 @@ export const footerColumns = [
         params: { slug: c.slug },
       })),
       { label: "The Vault", to: "/vault" },
+    ],
+  },
+  {
+    heading: "Journal",
+    items: [
+      ...journalCategories.map((c) => ({
+        label: c.name,
+        to: "/journal/category/$slug",
+        params: { slug: c.slug },
+      })),
+      { label: "All stories", to: "/journal" },
     ],
   },
   {
