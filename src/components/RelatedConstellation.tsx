@@ -1,6 +1,11 @@
 import { Link } from "@tanstack/react-router";
 
-import { relatedFor, type NodeKind, type RelatedOptions } from "@/lib/entity-graph";
+import {
+  relatedFor,
+  relatedForPath,
+  type NodeKind,
+  type RelatedOptions,
+} from "@/lib/entity-graph";
 
 /**
  * The derived internal-linking block. It renders whatever the entity graph
@@ -11,15 +16,20 @@ import { relatedFor, type NodeKind, type RelatedOptions } from "@/lib/entity-gra
 export function RelatedConstellation({
   kind,
   slug,
+  path,
   heading = "Continue",
   options,
 }: {
-  kind: NodeKind;
-  slug: string;
+  /** Content-backed pages pass their node identity… */
+  kind?: NodeKind;
+  slug?: string;
+  /** …and pages with no content record pass their route path instead. */
+  path?: string;
   heading?: string;
   options?: RelatedOptions;
 }) {
-  const groups = relatedFor(kind, slug, options);
+  const groups =
+    kind && slug ? relatedFor(kind, slug, options) : relatedForPath(path ?? "/", options);
   if (groups.length === 0) return null;
 
   return (
