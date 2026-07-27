@@ -32,8 +32,10 @@ export const Route = createFileRoute("/about/behind-the-scenes")({
       jsonLd(
         imageGallerySchema({
           name: "Behind the scenes of an Anayat Events build",
+          description:
+            "Unretouched frames from Anayat Events builds across Lahore: fabrication, floral installation, lighting focus and dressing before guests arrive.",
           path: PATH,
-          photos: photosByIds(behindPage.contactSheet),
+          images: photosByIds(behindPage.contactSheet),
         }),
       ),
     ],
