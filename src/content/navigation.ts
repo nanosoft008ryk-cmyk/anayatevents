@@ -123,7 +123,6 @@ export const navigation: NavGroup[] = [
         heading: "The craft",
         items: [
           ...aboutChapters.slice(5).map((c) => ({ label: c.title, to: c.to })),
-          { label: "Reviews", to: "/reviews" },
         ],
       },
       {
