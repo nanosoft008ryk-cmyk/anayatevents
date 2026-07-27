@@ -516,7 +516,7 @@ export const portfolioProjects: PortfolioProject[] = [
     venue: "Covered marquee",
     area: "DHA Lahore",
     season: "Autumn",
-    metaTitle: "Crystal Rain — Walima Stage Case Study, DHA Lahore | Anayat Events",
+    metaTitle: "Crystal Rain — Walima Stage Case Study | Anayat Events",
     metaDescription:
       "Case study of Crystal Rain: a suspended crystal ceiling and white settee walima stage in DHA Lahore, with layered chandeliers and a fully rigged marquee build.",
     hero: "ae-02",
@@ -678,9 +678,9 @@ export const portfolioProjects: PortfolioProject[] = [
     venue: "Private farmhouse",
     area: "Raiwind Road",
     season: "Winter",
-    metaTitle: "Chandeliers in the Trees — Farmhouse Wedding Case Study, Lahore | Anayat Events",
+    metaTitle: "Chandeliers in the Trees — Farmhouse Wedding | Anayat Events",
     metaDescription:
-      "Case study of a farmhouse garden wedding near Raiwind Road, Lahore — chandeliers rigged into mature trees, temporary power, a field kitchen and full site reinstatement.",
+      "A farmhouse garden wedding near Raiwind Road — chandeliers rigged into mature trees, temporary power and a field kitchen.",
     hero: "ae-10",
     heroFrames: ["ae-10", "ae-25", "ae-26"],
     lede: "Twenty-two chandeliers rigged into living trees, over ground that had no power that morning.",
@@ -732,7 +732,7 @@ export const portfolioProjects: PortfolioProject[] = [
     venue: "Lawn",
     area: "DHA Lahore",
     season: "Spring",
-    metaTitle: "Garden Banquet — Open-Air Dining Case Study, Lahore | Anayat Events",
+    metaTitle: "Garden Banquet — Open-Air Dining | Anayat Events",
     metaDescription:
       "Case study of Garden Banquet: an open-air long-table dinner in Lahore with lantern-lit lawn dining, live counters and full plated service inside eleven minutes.",
     hero: "ae-04",

@@ -6,6 +6,7 @@ import { photo } from "@/content/images";
 import { locations } from "@/content/locations";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink } from "@/components/ui/LuxButton";
@@ -17,10 +18,11 @@ import {
   jsonLd,
   breadcrumbSchema,
   serviceSchema,
-  faqSchema,
+  faqScripts,
   imageGallerySchema,
   type Crumb,
 } from "@/lib/seo";
+import { uniqueFaqs } from "@/lib/entity-graph";
 
 function trailFor(slug: string): Crumb[] {
   const service = getService(slug);
@@ -87,7 +89,7 @@ export const Route = createFileRoute("/services/$slug")({
             image: photo(service.hero).url,
           }),
         ),
-        jsonLd(faqSchema(service.faqs, path)),
+        ...faqScripts(uniqueFaqs(path, service.faqs), path),
         jsonLd(
           imageGallerySchema({
             name: `${service.name} — recent work`,
@@ -107,6 +109,7 @@ export const Route = createFileRoute("/services/$slug")({
 
 function ServicePage() {
   const { service } = Route.useLoaderData() as { service: Service };
+  const params = Route.useParams();
   const trail = trailFor(service.slug);
   const hero = photo(service.hero);
   const gallery = service.gallery.map(photo);
@@ -407,6 +410,8 @@ function ServicePage() {
           </div>
         </section>
       )}
+
+      <RelatedConstellation kind="service" slug={params.slug} options={{ kinds: ["collection", "article", "area", "faq"] }} />
 
       <CtaBand
         eyebrow="Let us begin"

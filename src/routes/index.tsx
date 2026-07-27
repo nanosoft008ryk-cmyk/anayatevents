@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
     const meta = pageMeta({
       title: "Anayat Events & Catering — Luxury Event Management in Lahore",
       description:
-        "Lahore's luxury event management and catering house. Weddings, mehndi, walima, corporate and private celebrations — designed, built and served by one accountable team.",
+        "Lahore's luxury event management and catering house. Weddings, walimas and corporate celebrations, designed and served by one accountable team.",
       path: "/",
       image: photo(HERO).url,
     });

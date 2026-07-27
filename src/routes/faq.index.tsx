@@ -8,10 +8,11 @@ import {
   pageMeta,
   jsonLd,
   breadcrumbSchema,
-  faqSchema,
+  faqScripts,
   itemListSchema,
   type Crumb,
 } from "@/lib/seo";
+import { uniqueFaqs } from "@/lib/entity-graph";
 
 const PATH = "/faq";
 
@@ -31,7 +32,7 @@ export const Route = createFileRoute("/faq/")({
     }),
     scripts: [
       jsonLd(breadcrumbSchema(trail)),
-      jsonLd(faqSchema(topFaqs, PATH)),
+      ...faqScripts(uniqueFaqs(PATH, topFaqs), PATH),
       jsonLd(
         itemListSchema({
           name: "FAQ topics",

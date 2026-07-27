@@ -35,9 +35,9 @@ function pick(slug: string) {
 export const Route = createFileRoute("/journal/")({
   head: () => ({
     ...pageMeta({
-      title: "The Anayat Journal — Luxury Weddings, Design & Hospitality in Lahore",
+      title: "The Anayat Journal — Weddings, Design & Hospitality",
       description:
-        "An editorial publication on celebration craft from Lahore: planning timelines, stage architecture, floral work, catering discipline and venue guides, written by the team that builds them.",
+        "Celebration craft from Lahore: planning timelines, stage architecture, floral work, catering and venue guides, written by the team that builds them.",
       path: PATH,
       image: photo(pick(featuredSlugs[0]).hero).url,
     }),

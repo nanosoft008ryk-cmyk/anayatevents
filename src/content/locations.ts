@@ -59,9 +59,9 @@ export const locations: LocationArea[] = [
     slug: "lahore",
     name: "Lahore",
     shortName: "Lahore",
-    metaTitle: "Luxury Event Management Serving Lahore | Anayat Events & Catering",
+    metaTitle: "Luxury Event Management in Lahore | Anayat Events",
     metaDescription:
-      "Anayat Events & Catering serves clients throughout Lahore — weddings, corporate occasions and private celebrations planned, designed and catered by one in-house team.",
+      "Weddings, corporate occasions and private celebrations across Lahore — planned, designed and catered by one in-house team.",
     heroHeadline: "Luxury Event Management Serving Lahore",
     heroKicker: "Our home city",
     hero: "ae-22",
@@ -166,7 +166,7 @@ export const locations: LocationArea[] = [
     shortName: "DHA Lahore",
     metaTitle: "Luxury Wedding Planner Serving DHA Lahore | Anayat Events",
     metaDescription:
-      "Anayat Events plans and caters celebrations for clients across DHA Lahore — house lawns, club halls and private residences from Phase 1 to Phase 8, with discreet compact crews.",
+      "Celebrations across DHA Lahore — house lawns, club halls and residences from Phase 1 to Phase 8, run by discreet, compact crews.",
     heroHeadline: "Luxury Wedding Planner Serving DHA Lahore",
     heroKicker: "Phases 1 – 8",
     hero: "ae-19",
@@ -348,9 +348,9 @@ export const locations: LocationArea[] = [
     slug: "gulberg",
     name: "Gulberg",
     shortName: "Gulberg",
-    metaTitle: "Premium Event Planning & Catering for Gulberg Lahore | Anayat Events",
+    metaTitle: "Event Planning & Catering in Gulberg | Anayat Events",
     metaDescription:
-      "Anayat Events serves clients in Gulberg Lahore — hotel ballrooms, boutique halls and heritage residences, produced with pre-assembled sets and tightly scheduled load-ins.",
+      "Gulberg ballrooms, boutique halls and heritage residences, produced with pre-assembled sets and tightly scheduled load-ins.",
     heroHeadline: "Premium Event Planning for Gulberg, Lahore",
     heroKicker: "Ballrooms & heritage houses",
     hero: "ae-07",
@@ -532,7 +532,7 @@ export const locations: LocationArea[] = [
     slug: "johar-town",
     name: "Johar Town",
     shortName: "Johar Town",
-    metaTitle: "Wedding Planning & Catering Services for Johar Town | Anayat Events",
+    metaTitle: "Wedding Planning & Catering, Johar Town | Anayat Events",
     metaDescription:
       "Anayat Events serves clients in Johar Town Lahore — marriage halls, marquees and home functions with full decor overlays, in-house catering and honest venue advice.",
     heroHeadline: "Wedding Planning & Catering for Johar Town",
@@ -626,7 +626,7 @@ export const locations: LocationArea[] = [
     shortName: "Cantt & Askari",
     metaTitle: "Formal Event Management for Lahore Cantt & Askari | Anayat Events",
     metaDescription:
-      "Anayat Events serves clients in Lahore Cantt and Askari — messes, garrison clubs and residential lawns, with cleared crews, submitted documentation and exact timings.",
+      "Cantt and Askari messes, garrison clubs and residential lawns — cleared crews, filed documentation and exact timings.",
     heroHeadline: "Formal Event Management for Lahore Cantt & Askari",
     heroKicker: "Protocol & precision",
     hero: "ae-03",
@@ -808,9 +808,9 @@ export const locations: LocationArea[] = [
     slug: "bedian-road",
     name: "Bedian Road",
     shortName: "Bedian Road",
-    metaTitle: "Garden & Farmhouse Wedding Planning on Bedian Road | Anayat Events",
+    metaTitle: "Farmhouse Weddings on Bedian Road | Anayat Events",
     metaDescription:
-      "Anayat Events serves clients along Bedian Road Lahore — canal-side gardens and farmhouse weddings, planned with weather contingency, drainage awareness and full outdoor production.",
+      "Canal-side gardens and farmhouse weddings along Bedian Road, planned with weather contingency and full outdoor production.",
     heroHeadline: "Garden Wedding Planning Along Bedian Road",
     heroKicker: "Canal-side gardens",
     hero: "ae-24",
@@ -902,7 +902,7 @@ export const locations: LocationArea[] = [
     shortName: "Green Acres",
     metaTitle: "Event Management in Green Acres Lahore | Anayat Events & Catering",
     metaDescription:
-      "Green Acres Housing Society is home to Anayat Events & Catering. Our workshop, floral store and kitchen operate from The Palms 7 Farmhouse, serving events across the society and beyond.",
+      "Green Acres is home to Anayat Events. Our workshop, floral store and kitchen sit at The Palms 7 Farmhouse, serving the whole society.",
     heroHeadline: "Event Management in Green Acres, Lahore",
     heroKicker: "Where we are actually based",
     hero: "ae-26",
@@ -994,7 +994,7 @@ export const locations: LocationArea[] = [
     shortName: "Wapda Town",
     metaTitle: "Family Event Planning & Catering for Wapda Town | Anayat Events",
     metaDescription:
-      "Anayat Events serves clients in Wapda Town Lahore — home lawns, community halls and multi-generation family celebrations with full decor, seating comfort and in-house catering.",
+      "Wapda Town home lawns, community halls and multi-generation family celebrations — full decor, seating comfort and in-house catering.",
     heroHeadline: "Family Celebration Planning for Wapda Town",
     heroKicker: "Home lawns & community halls",
     hero: "ae-06",

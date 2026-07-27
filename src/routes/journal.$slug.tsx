@@ -15,6 +15,7 @@ import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { CtaBand } from "@/components/CtaBand";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { imgAttrs } from "@/lib/img";
 import {
   pageMeta,
@@ -123,6 +124,7 @@ function ReadingRule() {
 
 function ArticlePage() {
   const { article } = Route.useLoaderData() as { article: Article };
+  const params = Route.useParams();
   const trail = trailFor(article.slug);
   const hero = photo(article.hero);
   const extras = articleExtras(article.slug);
@@ -314,6 +316,8 @@ function ArticlePage() {
           </div>
         </section>
       )}
+
+      <RelatedConstellation kind="article" slug={params.slug} options={{ kinds: ["service", "collection", "area", "faq"] }} />
 
       <CtaBand
         eyebrow="From reading to building"

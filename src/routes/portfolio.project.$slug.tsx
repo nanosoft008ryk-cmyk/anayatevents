@@ -11,6 +11,7 @@ import { getService } from "@/content/services";
 import { getLocation } from "@/content/locations";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -73,6 +74,7 @@ export const Route = createFileRoute("/portfolio/project/$slug")({
 
 function ProjectCaseStudy() {
   const { project } = Route.useLoaderData() as { project: PortfolioProject };
+  const params = Route.useParams();
   const trail = trailFor(project.slug);
   const category = getPortfolioCategory(project.category);
   const gallery = project.gallery.map(photo);
@@ -408,7 +410,9 @@ function ProjectCaseStudy() {
       </section>
 
       <div className="mt-32 md:mt-44">
-        <CtaBand />
+      <RelatedConstellation kind="project" slug={params.slug} options={{ kinds: ["collection", "service", "area", "article"] }} />
+
+      <CtaBand />
       </div>
     </main>
   );

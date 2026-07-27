@@ -11,6 +11,7 @@ import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { CtaBand } from "@/components/CtaBand";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { AreaMap } from "@/components/AreaMap";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import {
@@ -18,10 +19,11 @@ import {
   jsonLd,
   breadcrumbSchema,
   areaServedSchema,
-  faqSchema,
+  faqScripts,
   imageGallerySchema,
   type Crumb,
 } from "@/lib/seo";
+import { uniqueFaqs } from "@/lib/entity-graph";
 
 /** One trail feeds both the visible breadcrumbs and the BreadcrumbList JSON-LD. */
 function trailFor(slug: string): Crumb[] {
@@ -78,7 +80,7 @@ export const Route = createFileRoute("/areas/$slug")({
             }),
           }),
         ),
-        jsonLd(faqSchema(area.faqs, path)),
+        ...faqScripts(uniqueFaqs(path, area.faqs), path),
       ],
     };
   },
@@ -114,6 +116,7 @@ const rhythmClass: Record<
 
 function AreaPage() {
   const { area } = Route.useLoaderData() as { area: LocationArea };
+  const params = Route.useParams();
   const trail = trailFor(area.slug);
   const rhythm = rhythmClass[area.rhythm];
   const heroPhoto = photo(area.hero);
@@ -590,6 +593,8 @@ function AreaPage() {
       )}
 
       {/* XIII. Close */}
+      <RelatedConstellation kind="area" slug={params.slug} options={{ kinds: ["service", "area", "collection", "article", "faq"] }} />
+
       <CtaBand
         eyebrow={`Planning in ${area.shortName}`}
         title={`Tell us about your ${area.shortName} celebration.`}

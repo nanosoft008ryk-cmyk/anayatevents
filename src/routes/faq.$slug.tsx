@@ -3,7 +3,9 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { faqTopics, getFaqTopic, type FaqTopic } from "@/content/faqs";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
-import { pageMeta, jsonLd, breadcrumbSchema, faqSchema, type Crumb } from "@/lib/seo";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
+import { pageMeta, jsonLd, breadcrumbSchema, faqScripts, type Crumb } from "@/lib/seo";
+import { uniqueFaqs } from "@/lib/entity-graph";
 
 function trailFor(slug: string): Crumb[] {
   const topic = getFaqTopic(slug);
@@ -33,7 +35,7 @@ export const Route = createFileRoute("/faq/$slug")({
         description: topic.metaDescription,
         path,
       }),
-      scripts: [jsonLd(breadcrumbSchema(trail)), jsonLd(faqSchema(topic.items, path))],
+      scripts: [jsonLd(breadcrumbSchema(trail)), ...faqScripts(uniqueFaqs(path, topic.items), path)],
     };
   },
   component: FaqTopicPage,
@@ -41,6 +43,7 @@ export const Route = createFileRoute("/faq/$slug")({
 
 function FaqTopicPage() {
   const { topic } = Route.useLoaderData() as { topic: FaqTopic };
+  const params = Route.useParams();
   const trail = trailFor(topic.slug);
   const others = faqTopics.filter((t) => t.slug !== topic.slug);
 
@@ -93,6 +96,7 @@ function FaqTopicPage() {
         </div>
       </section>
 
+      <RelatedConstellation kind="faq" slug={params.slug} options={{ kinds: ["service", "area", "collection", "article"] }} />
       <CtaBand />
     </main>
   );

@@ -11,6 +11,7 @@ import { getService } from "@/content/services";
 import { getLocation } from "@/content/locations";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -19,9 +20,10 @@ import {
   jsonLd,
   breadcrumbSchema,
   imageGallerySchema,
-  faqSchema,
+  faqScripts,
   type Crumb,
 } from "@/lib/seo";
+import { uniqueFaqs } from "@/lib/entity-graph";
 
 function trailFor(slug: string): Crumb[] {
   const category = getPortfolioCategory(slug);
@@ -65,7 +67,7 @@ export const Route = createFileRoute("/portfolio/$slug")({
             }),
           }),
         ),
-        jsonLd(faqSchema(category.faqs, path)),
+        ...faqScripts(uniqueFaqs(path, category.faqs), path),
       ],
     };
   },
@@ -89,6 +91,7 @@ const spans: Record<PortfolioCategory["personality"], string[]> = {
 
 function PortfolioCategoryPage() {
   const { category } = Route.useLoaderData() as { category: PortfolioCategory };
+  const params = Route.useParams();
   const trail = trailFor(category.slug);
   const frames = category.photos.map(photo);
   const projects = projectsForCategory(category.slug);
@@ -391,7 +394,9 @@ function PortfolioCategoryPage() {
       </section>
 
       <div className="mt-32 md:mt-44">
-        <CtaBand />
+      <RelatedConstellation kind="collection" slug={params.slug} options={{ kinds: ["service", "project", "area", "article"] }} />
+
+      <CtaBand />
       </div>
     </main>
   );
