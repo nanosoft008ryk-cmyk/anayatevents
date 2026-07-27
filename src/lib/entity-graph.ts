@@ -20,7 +20,7 @@ import { services } from "@/content/services";
 import { locations } from "@/content/locations";
 import { portfolioCategories, portfolioProjects } from "@/content/portfolio";
 import { articles } from "@/content/journal";
-import { faqTopics } from "@/content/faqs";
+import { faqTopics, topFaqs } from "@/content/faqs";
 
 export type NodeKind = "service" | "area" | "collection" | "project" | "article" | "faq";
 
@@ -248,7 +248,7 @@ export function nearbyAreas(slug: string, limit = 5): RelatedItem[] {
 /**
  * Global question ledger, resolved deterministically at module load.
  *
- * Ownership priority: the FAQ centre owns a question first, then the service
+ * Ownership priority: the FAQ hub owns its headline questions first, then each topic page, then the service
  * that answers it, then the area page, then the portfolio collection. Every
  * later claimant drops the duplicate, so no two pages of this site can ever
  * emit the same FAQPage entry — the most common reason Google quietly ignores
@@ -265,6 +265,7 @@ function claim(pageKey: string, items: { q: string }[]) {
   }
 }
 
+claim("/faq", topFaqs);
 for (const topic of faqTopics) claim(`/faq/${topic.slug}`, topic.items);
 for (const service of services) claim(`/services/${service.slug}`, service.faqs);
 for (const area of locations) claim(`/areas/${area.slug}`, area.faqs);
