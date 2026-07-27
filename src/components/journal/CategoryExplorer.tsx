@@ -57,7 +57,7 @@ export function CategoryExplorer() {
             return (
               <SmartImg
                 key={c.slug}
-                id={p.id} fallbackUrl={p.url} sizes="(min-width: 1024px) 40vw
+                id={p.id} fallbackUrl={p.url} sizes="(min-width: 1024px) 40vw, 100vw"
                 alt={i === 0 ? p.alt : ""}
                 aria-hidden={i !== active}
                 loading="lazy"

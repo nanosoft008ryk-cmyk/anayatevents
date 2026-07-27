@@ -217,7 +217,7 @@ function ServicesIndex() {
           <div className="grid items-center gap-12 lg:grid-cols-12">
             <div className="relative lg:col-span-7">
               <SmartImg
-                id={flagshipHero.id} fallbackUrl={flagshipHero.url} sizes="(min-width: 1024px) 58vw
+                id={flagshipHero.id} fallbackUrl={flagshipHero.url} sizes="(min-width: 1024px) 58vw, 100vw"
                 alt={flagshipHero.alt}
                 loading="lazy"
                 decoding="async"

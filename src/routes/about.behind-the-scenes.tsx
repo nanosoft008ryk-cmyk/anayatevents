@@ -140,7 +140,7 @@ function BehindPage() {
             {sheet.map((p, i) => (
               <figure key={p.id} className="group/f relative overflow-hidden bg-background">
                 <SmartImg
-                  id={p.id} fallbackUrl={p.url} sizes="(min-width: 640px) 25vw
+                  id={p.id} fallbackUrl={p.url} sizes="(min-width: 640px) 25vw, 50vw"
                   alt={p.alt}
                   loading="lazy"
                   decoding="async"

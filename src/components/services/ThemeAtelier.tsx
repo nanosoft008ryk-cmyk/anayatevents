@@ -66,7 +66,7 @@ export function ThemeAtelier({ themes }: { themes: AtelierTheme[] }) {
           return (
             <SmartImg
               key={t.key}
-              id={img.id} fallbackUrl={img.url} sizes="(min-width: 1024px) 55vw
+              id={img.id} fallbackUrl={img.url} sizes="(min-width: 1024px) 55vw, 100vw"
               alt={img.alt}
               loading="lazy"
               decoding="async"

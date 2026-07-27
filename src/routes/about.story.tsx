@@ -42,7 +42,7 @@ function StoryPage() {
       <section className="grid min-h-[92svh] lg:grid-cols-[1fr_1.05fr]">
         <div className="relative order-2 min-h-[46svh] overflow-hidden lg:order-1 lg:min-h-full">
           <SmartImg
-            id={hero.id} fallbackUrl={hero.url} sizes="(min-width: 1024px) 50vw
+            id={hero.id} fallbackUrl={hero.url} sizes="(min-width: 1024px) 50vw, 100vw"
             alt={hero.alt}
             className="h-full w-full object-cover brightness-[0.8] kenburns"
             fetchPriority="high"

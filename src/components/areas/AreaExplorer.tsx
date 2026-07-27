@@ -41,7 +41,7 @@ export function AreaExplorer() {
                   return (
                     <SmartImg
                       key={l.slug}
-                      id={l.hero} fallbackUrl={img.url} sizes="(min-width: 1024px) 44vw
+                      id={l.hero} fallbackUrl={img.url} sizes="(min-width: 1024px) 44vw, 100vw"
                       alt={img.alt}
                       loading="lazy"
                       decoding="async"
