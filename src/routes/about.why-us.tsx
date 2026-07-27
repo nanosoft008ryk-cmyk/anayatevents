@@ -52,7 +52,7 @@ function WhyPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: split — a single quiet plate beside a wide type column ── */}
-      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-48">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-48 overflow-hidden">
         <HeroBackdrop id="ae-04" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
         <div className="grid gap-14 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:gap-24">

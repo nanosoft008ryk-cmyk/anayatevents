@@ -23,7 +23,7 @@ export function PolicyPage({
 }) {
   return (
     <main className="bg-background">
-      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-40 pb-16 md:px-12">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-40 pb-24 md:px-12 overflow-hidden">
         <HeroBackdrop id={heroPhoto} height="short" priority />
         {trailNode}
         <p className="mt-10 font-sans text-[10px] tracking-[0.42em] uppercase text-gold">

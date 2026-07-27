@@ -50,7 +50,7 @@ function CraftPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: architectural — three vertical plates of different height ─ */}
-      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-16 md:px-12 md:pt-44">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-24 md:px-12 md:pt-44 overflow-hidden">
         <HeroBackdrop id="ae-21" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
         <div className="grid items-end gap-8 md:grid-cols-3 md:gap-10">
