@@ -47,7 +47,7 @@ function PromisePage() {
   return (
     <main className="bg-background">
       {/* ── Hero: the quietest page on the site. Type on air. ───────────── */}
-      <section className="relative isolate mx-auto max-w-3xl px-6 pt-40 pb-24 text-center md:pt-52 overflow-hidden">
+      <section className="relative isolate mx-auto max-w-3xl px-6 pt-40 pb-24 text-center md:pt-52">
         <HeroBackdrop id="ae-09" priority />
         <Breadcrumbs trail={trail} className="mb-14 justify-center [&_ol]:justify-center" />
         <p className="font-sans text-[10px] tracking-[0.48em] uppercase text-gold">

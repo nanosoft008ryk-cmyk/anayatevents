@@ -46,7 +46,7 @@ function PhilosophyPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: typography-first. No photograph. Rules and air. ───────── */}
-      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-24 md:px-12 md:pt-48 lg:pb-36 overflow-hidden">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-24 md:px-12 md:pt-48 lg:pb-36">
         <HeroBackdrop id="ae-17" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
         <p className="font-sans text-[10px] tracking-[0.46em] uppercase text-gold">

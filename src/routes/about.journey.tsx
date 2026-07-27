@@ -66,7 +66,7 @@ function JourneyPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: a running year ticker, minimal image ──────────────────── */}
-      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-24 md:px-12 md:pt-48 overflow-hidden">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-24 md:px-12 md:pt-48">
         <HeroBackdrop id="ae-05" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
         <p className="font-sans text-[10px] tracking-[0.46em] uppercase text-gold">

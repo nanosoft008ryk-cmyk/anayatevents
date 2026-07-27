@@ -8,12 +8,9 @@ import { imgAttrs } from "@/lib/img";
  */
 export function HeroBackdrop({
   id,
-  height = "tall",
   priority = false,
 }: {
   id: string;
-  /** How far the frame reaches down the opening section. */
-  height?: "tall" | "short";
   priority?: boolean;
 }) {
   const image = photo(id);
@@ -21,9 +18,7 @@ export function HeroBackdrop({
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute inset-0 -z-10 overflow-hidden ${
-        height === "tall" ? "" : ""
-      }`}
+      className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2 overflow-hidden"
     >
       <img
         {...imgAttrs(image.id, image.url, "100vw")}

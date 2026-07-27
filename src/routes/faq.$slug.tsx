@@ -50,7 +50,7 @@ function FaqTopicPage() {
 
   return (
     <main className="bg-background">
-      <section className="relative isolate mx-auto max-w-7xl px-6 pt-32 pb-24 md:px-10 md:pt-40 overflow-hidden">
+      <section className="relative isolate mx-auto max-w-7xl px-6 pt-32 pb-24 md:px-10 md:pt-40">
         <HeroBackdrop id="ae-16" priority />
         <Breadcrumbs trail={trail} className="mb-8" />
         <p className="font-sans text-[11px] tracking-[0.34em] uppercase text-gold">FAQ</p>

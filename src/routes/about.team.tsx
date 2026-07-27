@@ -38,7 +38,7 @@ function TeamPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: floating composition — offset plates, type between them ─ */}
-      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-44 overflow-hidden">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-44">
         <HeroBackdrop id="ae-11" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
         <div className="grid items-end gap-10 lg:grid-cols-[0.55fr_1fr_0.4fr] lg:gap-14">
