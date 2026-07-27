@@ -323,14 +323,16 @@ export function nearbyLocations(slug: string, limit = 5): NearbyArea[] {
         sharedServices.length * 2 +
         sharedCollections.length;
 
+      const shared = sharedServices
+        .slice(0, 2)
+        .map((sv) => (serviceName.get(sv) ?? sv).toLowerCase());
       const reason = declared
-        ? `A neighbouring address on the same crew route as ${from.shortName}.`
-        : sharedServices.length > 0
-          ? `Planned for the same commissions — ${sharedServices
-              .slice(0, 2)
-              .map((s) => (serviceName.get(s) ?? s).toLowerCase())
-              .join(" and ")}.`
-          : `Served by the same team travelling out of Green Acres.`;
+        ? shared.length > 0
+          ? `Next door on the same crew route, and planned for the same work — ${shared.join(" and ")}.`
+          : `A neighbouring address on the same crew route as ${from.shortName}.`
+        : shared.length > 0
+          ? `Different audience, same commissions — ${shared.join(" and ")}.`
+          : `Reached by the same team travelling out of Green Acres.`;
 
       return {
         slug: l.slug,
