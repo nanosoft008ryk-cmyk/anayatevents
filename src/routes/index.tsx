@@ -12,6 +12,7 @@ import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
+import { GoogleProfileLink } from "@/components/GoogleProfileLink";
 import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
 import { imgAttrs } from "@/lib/img";
 
