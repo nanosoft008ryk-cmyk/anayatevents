@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { photo } from "@/content/images";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 
 export interface AtelierTheme {
   key: string;
@@ -64,9 +64,9 @@ export function ThemeAtelier({ themes }: { themes: AtelierTheme[] }) {
         {themes.map((t, i) => {
           const img = photo(t.image);
           return (
-            <img
+            <SmartImg
               key={t.key}
-              {...imgAttrs(img.id, img.url, "(min-width: 1024px) 55vw, 100vw")}
+              id={img.id} fallbackUrl={img.url} sizes="(min-width: 1024px) 55vw, 100vw"
               alt={img.alt}
               loading="lazy"
               decoding="async"

@@ -1,5 +1,5 @@
 import { photo } from "@/content/images";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 
 /**
  * Full-bleed cinematic photograph that sits behind a page's opening section.
@@ -20,12 +20,12 @@ export function HeroBackdrop({
       aria-hidden
       className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2 overflow-hidden"
     >
-      <img
-        {...imgAttrs(image.id, image.url, "100vw")}
+      <SmartImg
+        id={image.id}
+        fallbackUrl={image.url}
+        sizes="100vw"
         alt=""
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
-        fetchPriority={priority ? "high" : "auto"}
+        priority={priority}
         className="h-full w-full object-cover opacity-40 kenburns"
       />
       <span

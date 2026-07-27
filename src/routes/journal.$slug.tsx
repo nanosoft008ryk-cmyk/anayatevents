@@ -16,7 +16,7 @@ import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import {
   pageMeta,
   jsonLd,
@@ -141,8 +141,8 @@ function ArticlePage() {
       <article>
         <header className="relative isolate flex min-h-[86svh] flex-col justify-end overflow-hidden">
           <div className="absolute inset-0 -z-10">
-            <img
-              {...imgAttrs(hero.id, hero.url, "100vw")}
+            <SmartImg
+              id={hero.id} fallbackUrl={hero.url} sizes="100vw"
               alt={hero.alt}
               className="h-full w-full object-cover kenburns"
               decoding="async"

@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 
 import { locations } from "@/content/locations";
 import { photo } from "@/content/images";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
@@ -39,9 +39,9 @@ export function AreaExplorer() {
                 {locations.map((l, i) => {
                   const img = photo(l.hero);
                   return (
-                    <img
+                    <SmartImg
                       key={l.slug}
-                      {...imgAttrs(l.hero, img.url, "(min-width: 1024px) 44vw, 100vw")}
+                      id={l.hero} fallbackUrl={img.url} sizes="(min-width: 1024px) 44vw, 100vw"
                       alt={img.alt}
                       loading="lazy"
                       decoding="async"

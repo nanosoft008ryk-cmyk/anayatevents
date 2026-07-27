@@ -1,7 +1,7 @@
 import { photo, type Photo } from "@/content/images";
 import { Plate } from "@/components/Plate";
 import { Reveal } from "@/components/motion/Reveal";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import { cn } from "@/lib/utils";
 import type { GoogleReview } from "@/lib/google-reviews.functions";
 
@@ -185,8 +185,8 @@ export function ReviewMovementBlock({
   if (movement === "glass") {
     return (
       <figure className={cn(shell, "relative isolate overflow-hidden")}>
-        <img
-          {...imgAttrs(image.id, image.url, "100vw")}
+        <SmartImg
+          id={image.id} fallbackUrl={image.url} sizes="100vw"
           alt=""
           loading="lazy"
           decoding="async"

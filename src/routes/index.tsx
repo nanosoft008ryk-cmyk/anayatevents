@@ -17,7 +17,8 @@ import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { GoogleProfileLink } from "@/components/GoogleProfileLink";
 import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
-import { imgAttrs } from "@/lib/img";
+import { preloadLinks } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 
 const HERO = "ae-22";
 const HERO_FRAMES = ["ae-22", "ae-13", "ae-16", "ae-26"];
@@ -32,20 +33,13 @@ export const Route = createFileRoute("/")({
       path: "/",
       image: photo(HERO).url,
     });
-    const hero = imgAttrs(HERO, photo(HERO).url, "100vw");
+    const heroPreload = preloadLinks(HERO, photo(HERO).url, "100vw");
     return {
     ...meta,
     links: [
       ...(meta.links ?? []),
       // Discover the first cinematic frame in the initial document.
-      {
-        rel: "preload",
-        as: "image",
-        href: hero.src,
-        imageSrcSet: hero.srcSet,
-        imageSizes: "100vw",
-        fetchPriority: "high",
-      },
+      ...heroPreload,
     ],
     scripts: [
       jsonLd(
@@ -85,16 +79,16 @@ function Home() {
           <span className="h-16 w-px bg-gradient-to-b from-gold to-transparent" />
         </div>
 
-        <div className="relative mx-auto grid w-full max-w-[92rem] grid-cols-12 items-end gap-x-6 px-5 pt-32 pb-32 sm:px-6 md:px-12 lg:pl-24 lg:pb-24">
+        <div className="relative mx-auto grid w-full max-w-[92rem] grid-cols-12 items-end gap-x-6 px-5 pt-28 pb-24 sm:px-6 sm:pt-32 sm:pb-28 md:px-12 lg:pl-24 lg:pb-24">
           {/* Headline column */}
           <div className="col-span-12 flex min-w-0 flex-col lg:col-span-7 lg:pr-12">
-            <p className="mb-6 flex items-center gap-4 font-sans text-[10px] tracking-[0.4em] uppercase text-gold sm:mb-8 lg:hidden">
+            <p className="mb-5 flex items-center gap-4 font-sans text-[10px] tracking-[0.4em] uppercase text-gold sm:mb-8 lg:hidden">
               <span className="h-px w-8 shrink-0 bg-gold" />
               Lahore · Since {site.founded}
             </p>
-            <h1 className="font-display text-[clamp(2.9rem,13vw,5rem)] leading-[0.92] font-light tracking-tight text-ivory lg:text-[6rem] xl:text-[7.4rem]">
+            <h1 className="font-display text-[clamp(2.6rem,12vw,5rem)] leading-[0.94] font-light tracking-tight text-ivory lg:text-[6rem] xl:text-[7.4rem]">
               <RevealWords text="An evening" delay={120} />
-              <span className="mt-1 block pl-6 sm:pl-10 md:pl-24">
+              <span className="mt-1 block pl-4 sm:pl-10 md:pl-24">
                 <span className="italic text-gold-light">
                   <RevealWords text="built" delay={340} />
                 </span>{" "}
@@ -107,20 +101,45 @@ function Home() {
 
             <div className="mt-6 max-w-md">
               <Reveal delay={780}>
-                <p className="font-sans text-[14px] leading-[1.95] font-light tracking-wide text-foreground/80">
+                <p className="font-sans text-[15px] leading-[1.85] font-light tracking-wide text-foreground/80 sm:text-[14px] sm:leading-[1.95]">
                   {site.description}
                 </p>
               </Reveal>
-              <Reveal delay={900} className="mt-9" innerClassName="flex flex-wrap items-center gap-x-12 gap-y-6">
-
-                <LuxLink to="/contact" tone="rule" className="px-0 py-0">
+              {/* Mobile: full-width, thumb-sized actions. Desktop keeps the
+                  hairline typographic links. */}
+              <Reveal
+                delay={900}
+                className="mt-8 sm:mt-9"
+                innerClassName="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-12 sm:gap-y-6"
+              >
+                <LuxLink
+                  to="/contact"
+                  tone="foil"
+                  className="w-full justify-center py-4 text-center sm:hidden"
+                >
                   Begin an enquiry
                 </LuxLink>
-                <LuxLink to="/portfolio" tone="quiet" arrow={false} className="px-0 py-0 text-ivory">
+                <LuxLink
+                  to="/portfolio"
+                  tone="ghost"
+                  className="w-full justify-center py-4 text-center sm:hidden"
+                >
+                  View the work
+                </LuxLink>
+
+                <LuxLink to="/contact" tone="rule" className="hidden px-0 py-0 sm:inline-flex">
+                  Begin an enquiry
+                </LuxLink>
+                <LuxLink
+                  to="/portfolio"
+                  tone="quiet"
+                  arrow={false}
+                  className="hidden px-0 py-0 text-ivory sm:inline-flex"
+                >
                   View the work
                 </LuxLink>
               </Reveal>
-              <Reveal delay={1020} className="mt-8">
+              <Reveal delay={1020} className="mt-7 sm:mt-8">
                 <GoogleProfileLink label={`${liveRating.rating} on Google · ${liveRating.count} reviews`} />
               </Reveal>
 
@@ -134,11 +153,11 @@ function Home() {
             <Reveal variant="mask" delay={520}>
               <div className="aspect-[3/4] w-full border-[0.5px] border-gold/30 p-4">
                 <div className="relative h-full w-full overflow-hidden">
-                  <img
-                    {...imgAttrs("ae-05", photo("ae-05").url, "(min-width: 1024px) 33vw, 100vw")}
+                  <SmartImg
+                    id="ae-05"
+                    fallbackUrl={photo("ae-05").url}
+                    sizes="(min-width: 1024px) 33vw, 100vw"
                     alt={photo("ae-05").alt}
-                    loading="lazy"
-                    decoding="async"
                     className="h-full w-full object-cover contrast-125 transition-transform duration-[1400ms] [transition-timing-function:var(--ease-lux)] hover:scale-105"
                   />
                   <span className="pointer-events-none absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.45)]" />
@@ -148,7 +167,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute bottom-24 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 sm:gap-4 lg:bottom-10">
+        <div className="pointer-events-none absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 sm:flex sm:bottom-16 sm:gap-4 lg:bottom-10">
           <span className="h-9 w-px bg-gradient-to-b from-transparent via-gold to-transparent sm:h-12" />
           <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-ivory/70">
             Explore
@@ -158,17 +177,17 @@ function Home() {
 
 
       {/* ── II. The count — type as architecture, no boxes ──────────── */}
-      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
-        <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 sm:gap-x-16 sm:gap-y-16 lg:grid-cols-4">
+      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-x-16 sm:gap-y-16 lg:grid-cols-4">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 110} className="relative min-w-0">
-              <p className="font-display text-[3.4rem] leading-[0.85] font-light text-foil sm:text-[4.5rem] lg:text-[5.5rem]">
+              <p className="font-display text-[2.6rem] leading-[0.85] font-light text-foil sm:text-[4.5rem] lg:text-[5.5rem]">
                 {s.value}
               </p>
-              <p className="mt-4 font-sans text-[10px] tracking-[0.34em] uppercase text-ivory sm:mt-6">
+              <p className="mt-3 font-sans text-[10px] tracking-[0.28em] uppercase text-ivory sm:mt-6 sm:tracking-[0.34em]">
                 {s.label}
               </p>
-              <p className="mt-2 max-w-[26ch] font-sans text-[13px] leading-relaxed font-light text-muted-foreground">
+              <p className="mt-2 max-w-[26ch] font-sans text-[12.5px] leading-relaxed font-light text-muted-foreground sm:text-[13px]">
                 {s.sub}
               </p>
             </Reveal>
@@ -177,8 +196,9 @@ function Home() {
       </section>
 
 
+
       {/* ── III. Manifesto — type-led, hairline creed, twin small plates ── */}
-      <section className="chapter relative overflow-hidden pt-20 pb-20 md:pt-24 md:pb-24 lg:pt-36 lg:pb-40">
+      <section className="chapter relative overflow-hidden pt-16 pb-16 sm:pt-20 sm:pb-20 md:pt-24 md:pb-24 lg:pt-36 lg:pb-40">
         <div className="mx-auto max-w-[92rem] px-5 sm:px-6 md:px-12">
           <div className="grid gap-y-12 md:gap-y-16 lg:grid-cols-12 lg:gap-x-16">
             {/* Statement */}
@@ -274,7 +294,7 @@ function Home() {
       </section>
 
       {/* ── IV. Disciplines — staggered editorial index, no card grid ── */}
-      <section className="chapter light-right relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+      <section className="chapter light-right relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
         <div className="grid gap-10 md:gap-12 lg:grid-cols-[0.9fr_1.3fr]">
           <Reveal className="min-w-0 lg:sticky lg:top-32 lg:self-start">
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">What we do</p>
@@ -294,7 +314,7 @@ function Home() {
                   <Link
                     to="/services/$slug"
                     params={{ slug: s.slug }}
-                    className="relative grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-5 py-7 sm:gap-x-8 md:py-9 lg:ml-[var(--row-indent)] lg:gap-x-14"
+                    className="relative grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-4 py-6 sm:gap-x-8 sm:py-7 md:py-9 lg:ml-[var(--row-indent)] lg:gap-x-14"
                     style={{ "--row-indent": `${(i % 3) * 1.75}rem` } as CSSProperties}
 
                   >
@@ -353,7 +373,7 @@ function Home() {
 
 
       {/* ── VI. Selected work — floating, uneven, magazine framing ──── */}
-      <section className="chapter relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+      <section className="chapter relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
         <div className="flex flex-wrap items-end justify-between gap-6 md:gap-8">
           <Reveal className="min-w-0">
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
@@ -390,13 +410,13 @@ function Home() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-16 lg:mt-24" innerClassName="flex flex-wrap gap-x-8 gap-y-4 sm:gap-x-10 sm:gap-y-5">
+        <Reveal className="mt-12 sm:mt-16 lg:mt-24" innerClassName="flex flex-wrap gap-x-8 gap-y-2 sm:gap-y-4 sm:gap-x-10 sm:gap-y-5">
           {portfolioCategories.map((c) => (
             <Link
               key={c.slug}
               to="/portfolio/$slug"
               params={{ slug: c.slug }}
-              className="group/cat relative font-display text-xl font-light text-muted-foreground transition-colors duration-500 hover:text-gold sm:text-2xl lg:text-3xl"
+              className="group/cat relative inline-flex min-h-11 items-center font-display text-xl font-light sm:min-h-0 text-muted-foreground transition-colors duration-500 hover:text-gold sm:text-2xl lg:text-3xl"
             >
               {c.name}
               <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform duration-[800ms] [transition-timing-function:var(--ease-lux)] group-hover/cat:origin-left group-hover/cat:scale-x-100" />
@@ -406,13 +426,13 @@ function Home() {
       </section>
 
       {/* ── VII. Process — horizontal timeline over a dark plate ────── */}
-      <section className="relative isolate overflow-hidden py-20 md:py-28 lg:py-40">
+      <section className="relative isolate overflow-hidden py-16 sm:py-20 md:py-28 lg:py-40">
         <div className="absolute inset-0 -z-10">
-          <img
-            {...imgAttrs("ae-08", photo("ae-08").url, "100vw")}
+          <SmartImg
+            id="ae-08"
+            fallbackUrl={photo("ae-08").url}
+            sizes="100vw"
             alt=""
-            loading="lazy"
-            decoding="async"
             className="h-full w-full object-cover opacity-[0.18] drift-slow"
           />
           {/* Legibility stack — this section is entirely type over photography. */}
@@ -457,7 +477,7 @@ function Home() {
 
 
       {/* ── VIII. Voices — oversized pull quotes, no card walls ─────── */}
-      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
         <Reveal>
           <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
             {liveRating.rating} from {liveRating.count} Google reviews
@@ -522,7 +542,7 @@ function Home() {
                   key={l.slug}
                   to="/areas/$slug"
                   params={{ slug: l.slug }}
-                  className="group/area relative font-sans text-[11px] tracking-[0.22em] uppercase text-muted-foreground transition-colors duration-500 hover:text-gold sm:tracking-[0.26em]"
+                  className="group/area relative inline-flex min-h-11 items-center font-sans text-[11px] tracking-[0.22em] uppercase text-muted-foreground transition-colors duration-500 hover:text-gold sm:min-h-0 sm:tracking-[0.26em]"
                 >
                   {l.shortName}
                   <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform duration-700 group-hover/area:origin-left group-hover/area:scale-x-100" />
@@ -539,7 +559,7 @@ function Home() {
       </section>
 
       {/* ── X. Journal — one lead story, two whispers ───────────────── */}
-      <section className="chapter relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+      <section className="chapter relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
         <div className="flex flex-wrap items-end justify-between gap-6 md:gap-8">
           <Reveal className="min-w-0">
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">

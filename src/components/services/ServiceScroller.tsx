@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 
 import type { Service } from "@/content/services";
 import { photo } from "@/content/images";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
@@ -41,9 +41,9 @@ export function ServiceScroller({ items }: { items: Service[] }) {
               {items.map((s, i) => {
                 const img = photo(s.hero);
                 return (
-                  <img
+                  <SmartImg
                     key={`${s.slug}-plate`}
-                    {...imgAttrs(img.id, img.url, "45vw")}
+                    id={img.id} fallbackUrl={img.url} sizes="45vw"
                     alt={img.alt}
                     loading={i === 0 ? "eager" : "lazy"}
                     decoding="async"
@@ -85,8 +85,8 @@ export function ServiceScroller({ items }: { items: Service[] }) {
 
                 {/* Mobile plate — edge-to-edge, never boxed */}
                 <div className="relative -mx-6 mt-6 lg:hidden">
-                  <img
-                    {...imgAttrs(img.id, img.url, "100vw")}
+                  <SmartImg
+                    id={img.id} fallbackUrl={img.url} sizes="100vw"
                     alt={img.alt}
                     loading="lazy"
                     decoding="async"

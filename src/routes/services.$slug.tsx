@@ -12,7 +12,7 @@ import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink } from "@/components/ui/LuxButton";
 import { JourneyRail } from "@/components/services/JourneyRail";
 import { LuxAccordion } from "@/components/services/LuxAccordion";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import { AnswerBlock } from "@/components/aeo/AnswerBlock";
 import { FactTable } from "@/components/aeo/FactTable";
 import { serviceAnswerItems, serviceFacts } from "@/content/answers";
@@ -137,8 +137,8 @@ function ServicePage() {
     <main className="bg-background">
       {/* ─── Hero ──────────────────────────────────────────────────── */}
       <section className="relative isolate flex min-h-[100svh] overflow-hidden">
-        <img
-          {...imgAttrs(hero.id, hero.url, "100vw")}
+        <SmartImg
+          id={hero.id} fallbackUrl={hero.url} sizes="100vw"
           alt={hero.alt}
           fetchPriority="high"
           decoding="async"
@@ -289,8 +289,8 @@ function ServicePage() {
       {/* ─── Quote ─────────────────────────────────────────────────── */}
       {quote && (
         <section className="relative isolate overflow-hidden py-28 lg:py-40">
-          <img
-            {...imgAttrs(gallery[0]?.id ?? hero.id, gallery[0]?.url ?? hero.url, "100vw")}
+          <SmartImg
+            id={gallery[0]?.id ?? hero.id} fallbackUrl={gallery[0]?.url ?? hero.url} sizes="100vw"
             alt=""
             aria-hidden="true"
             loading="lazy"

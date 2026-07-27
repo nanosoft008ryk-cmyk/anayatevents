@@ -4,7 +4,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { navigation } from "@/content/navigation";
 import { site } from "@/content/site";
 import { logo, photo } from "@/content/images";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 
 export function SiteHeader() {
   const [open, setOpen] = useState<string | null>(null);
@@ -205,11 +205,11 @@ export function SiteHeader() {
       {/* Mobile — full-height cinematic drawer */}
       {mobile && (
         <div className="relative h-[calc(100svh-4.5rem)] overflow-y-auto bg-background lg:hidden">
-          <img
-            {...imgAttrs("ae-22", photo("ae-22").url, "100vw")}
+          <SmartImg
+            id="ae-22"
+            fallbackUrl={photo("ae-22").url}
+            sizes="100vw"
             alt=""
-            loading="lazy"
-            decoding="async"
             className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.14]"
           />
           <div className="relative px-6 pt-6 pb-16">

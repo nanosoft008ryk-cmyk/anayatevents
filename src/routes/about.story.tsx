@@ -8,7 +8,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import { pageMeta, jsonLd, breadcrumbSchema, type Crumb } from "@/lib/seo";
 
 const PATH = "/about/story";
@@ -41,8 +41,8 @@ function StoryPage() {
       {/* ── Hero: split editorial — full-height plate against a type column ─ */}
       <section className="grid min-h-[92svh] lg:grid-cols-[1fr_1.05fr]">
         <div className="relative order-2 min-h-[46svh] overflow-hidden lg:order-1 lg:min-h-full">
-          <img
-            {...imgAttrs(hero.id, hero.url, "(min-width: 1024px) 50vw, 100vw")}
+          <SmartImg
+            id={hero.id} fallbackUrl={hero.url} sizes="(min-width: 1024px) 50vw, 100vw"
             alt={hero.alt}
             className="h-full w-full object-cover brightness-[0.8] kenburns"
             fetchPriority="high"

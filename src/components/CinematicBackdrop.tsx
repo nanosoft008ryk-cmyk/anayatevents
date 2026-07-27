@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import type { Photo } from "@/content/images";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 
 /**
  * Cinematic hero backdrop: slow ken-burns frames that cross-dissolve on a long
@@ -16,14 +16,26 @@ export function CinematicBackdrop({
   interval?: number;
 }) {
   const [index, setIndex] = useState(0);
+  // Only the opening frame is fetched with the document; the rest are armed
+  // once the browser is idle so mobile never competes with the LCP image.
+  const [armed, setArmed] = useState(false);
   const plate = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
+    const id = w.requestIdleCallback
+      ? w.requestIdleCallback(() => setArmed(true))
+      : window.setTimeout(() => setArmed(true), 2000);
+    return () => window.clearTimeout(id as number);
+  }, []);
+
+  useEffect(() => {
     if (frames.length < 2) return;
+    if (!armed) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = window.setInterval(() => setIndex((i) => (i + 1) % frames.length), interval);
     return () => window.clearInterval(id);
-  }, [frames.length, interval]);
+  }, [frames.length, interval, armed]);
 
   useEffect(() => {
     let raf = 0;
@@ -51,15 +63,18 @@ export function CinematicBackdrop({
           className="absolute inset-0 transition-opacity duration-[2600ms] [transition-timing-function:var(--ease-lux)]"
           style={{ opacity: i === index ? 1 : 0 }}
         >
-          <img
-            {...imgAttrs(f.id, f.url, "100vw")}
-            alt={i === 0 ? f.alt : ""}
-            decoding="async"
-            fetchPriority={i === 0 ? "high" : "low"}
-            loading={i === 0 ? "eager" : "lazy"}
-            className="h-full w-full object-cover kenburns"
-            style={{ animationDelay: `${i * -4}s` }}
-          />
+          {(i === 0 || armed) && (
+            <SmartImg
+              id={f.id}
+              fallbackUrl={f.url}
+              sizes="100vw"
+              alt={i === 0 ? f.alt : ""}
+              priority={i === 0}
+              fetchPriority={i === 0 ? "high" : "low"}
+              className="h-full w-full object-cover kenburns"
+              style={{ animationDelay: `${i * -4}s` }}
+            />
+          )}
         </div>
       ))}
 
