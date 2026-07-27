@@ -182,6 +182,9 @@ export const footerColumns = [
       { label: "Reviews", to: "/reviews" },
       { label: "FAQ centre", to: "/faq" },
       { label: "Enquire", to: "/contact" },
+      { label: "Privacy Policy", to: "/privacy" },
+      { label: "Terms of Service", to: "/terms" },
+      { label: "Cookie Policy", to: "/cookies" },
     ],
   },
 ];
