@@ -117,7 +117,11 @@ function AreaPage() {
   const trail = trailFor(area.slug);
   const rhythm = rhythmClass[area.rhythm];
   const heroPhoto = photo(area.hero);
-  const frames = [area.hero, ...area.inspiration.gallery.slice(0, 3)].map(photo);
+  const frames = [
+    ...new Set([area.hero, ...area.inspiration.gallery]),
+  ]
+    .slice(0, 4)
+    .map(photo);
   const gallery = area.inspiration.gallery.map(photo);
 
   const services = area.services
