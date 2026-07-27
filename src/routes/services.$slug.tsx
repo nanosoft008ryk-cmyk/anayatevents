@@ -6,12 +6,19 @@ import { photo } from "@/content/images";
 import { locations } from "@/content/locations";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
+import { Plate } from "@/components/Plate";
+import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { LuxLink } from "@/components/ui/LuxButton";
+import { JourneyRail } from "@/components/services/JourneyRail";
+import { LuxAccordion } from "@/components/services/LuxAccordion";
+import { imgAttrs } from "@/lib/img";
 import {
   pageMeta,
   jsonLd,
   breadcrumbSchema,
   serviceSchema,
   faqSchema,
+  imageGallerySchema,
   type Crumb,
 } from "@/lib/seo";
 
@@ -23,6 +30,31 @@ function trailFor(slug: string): Crumb[] {
     { name: service?.name ?? "Service", path: `/services/${slug}` },
   ];
 }
+
+/** Deterministic per-page atmosphere so no two service pages share a mood. */
+function atmosphere(slug: string) {
+  let h = 0;
+  for (let i = 0; i < slug.length; i += 1) h = (h * 31 + slug.charCodeAt(i)) % 9973;
+  return {
+    mirrored: h % 2 === 0,
+    heroAlign: h % 3, // 0 bottom-left, 1 centre, 2 bottom-right
+    ratio: ["4/5", "5/4", "3/4", "1/1"][h % 4],
+    openingWord: ["Presence", "Arrival", "Hush", "Roar", "Light", "Warmth"][h % 6],
+  };
+}
+
+const stages = [
+  { label: "Inquiry", body: "One conversation, no forms. We listen for the evening you keep describing." },
+  { label: "Concept", body: "A written direction: palette, materials, light, the emotional arc of the night." },
+  { label: "Design", body: "Elevations, floral schedules and a lighting plot — issued, not improvised." },
+  { label: "Execution", body: "A rehearsed run of show, held by the planner who read your first message." },
+  { label: "Celebration", body: "The part you are allowed to forget about entirely." },
+];
+
+const craft = [
+  "Florals", "Textures", "Lighting", "Furniture", "Cuisine",
+  "Table styling", "Invitations", "Sound", "Fragrance", "Timing",
+];
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
@@ -56,6 +88,17 @@ export const Route = createFileRoute("/services/$slug")({
           }),
         ),
         jsonLd(faqSchema(service.faqs, path)),
+        jsonLd(
+          imageGallerySchema({
+            name: `${service.name} — recent work`,
+            description: `Photographs from recent ${service.name.toLowerCase()} produced by Anayat Events & Catering in Lahore.`,
+            path,
+            images: service.gallery.map((id) => {
+              const p = photo(id);
+              return { url: p.url, alt: p.alt, caption: p.caption };
+            }),
+          }),
+        ),
       ],
     };
   },
@@ -68,131 +111,257 @@ function ServicePage() {
   const hero = photo(service.hero);
   const gallery = service.gallery.map(photo);
   const quote = getTestimonial(service.testimonial);
+  const mood = atmosphere(service.slug);
   const related = service.related
     .map((slug) => services.find((s) => s.slug === slug))
     .filter((s): s is Service => Boolean(s));
 
+  const alignClass =
+    mood.heroAlign === 1
+      ? "justify-center text-center items-center"
+      : mood.heroAlign === 2
+        ? "justify-end lg:items-end lg:text-right"
+        : "justify-end";
+
   return (
     <main className="bg-background">
-      <section className="relative min-h-[78vh] w-full overflow-hidden">
-        <img src={hero.url} alt={hero.alt} className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "var(--gradient-veil)" }} />
-        <div className="relative mx-auto flex min-h-[78vh] max-w-7xl flex-col justify-end px-6 pt-32 pb-16 md:px-10 md:pb-24">
-          <Breadcrumbs trail={trail} className="mb-8" />
-          <p className="font-sans text-[11px] tracking-[0.34em] uppercase text-gold">
-            {service.eyebrow}
-          </p>
-          <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.02] font-light text-ivory md:text-7xl">
-            {service.title}
+      {/* ─── Hero ──────────────────────────────────────────────────── */}
+      <section className="relative isolate flex min-h-[100svh] overflow-hidden">
+        <img
+          {...imgAttrs(hero.id, hero.url, "100vw")}
+          alt={hero.alt}
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 -z-10 h-full w-full object-cover kenburns"
+        />
+        <span aria-hidden="true" className="absolute inset-0 -z-10 veil" />
+        <span aria-hidden="true" className="absolute inset-0 -z-10 vignette" />
+        <span aria-hidden="true" className="absolute inset-0 -z-10 grain" />
+
+        <div
+          className={`mx-auto flex w-full max-w-[92rem] flex-col px-6 pt-36 pb-24 md:px-12 ${alignClass}`}
+        >
+          <Breadcrumbs trail={trail} className="mb-10" />
+          <Reveal variant="fade">
+            <p className="eyebrow">{service.eyebrow}</p>
+          </Reveal>
+          <h1 className="mt-7 max-w-5xl font-display text-[3rem] leading-[0.94] font-light text-ivory sm:text-7xl lg:text-[6.5rem]">
+            <RevealWords text={service.title} />
           </h1>
-          <p className="mt-7 max-w-2xl font-display text-xl leading-relaxed font-light italic text-muted-foreground md:text-2xl">
-            {service.lede}
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-28">
-        <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <h2 className="font-display text-3xl leading-tight font-light text-ivory md:text-4xl">
-            The work itself
-          </h2>
-          <div className="space-y-6">
-            {service.body.map((para) => (
-              <p
-                key={para.slice(0, 40)}
-                className="font-sans text-[15px] leading-[1.85] font-light text-muted-foreground"
-              >
-                {para}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-border bg-surface/30">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-24">
-          <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
-            What is included
-          </p>
-          <div className="mt-12 grid gap-px border border-border bg-border sm:grid-cols-2">
-            {service.inclusions.map((item) => (
-              <div key={item.title} className="bg-background p-8 md:p-10">
-                <h3 className="font-display text-2xl font-light text-ivory">{item.title}</h3>
-                <p className="mt-3 font-sans text-sm leading-relaxed font-light text-muted-foreground">
-                  {item.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-24">
-          <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">Recent work</p>
-          <div className="mt-12 columns-1 gap-6 sm:columns-2 lg:columns-3 [&>*]:mb-6">
-            {gallery.map((img) => (
-              <figure key={img.id} className="break-inside-avoid">
-                <img
-                  src={img.url}
-                  alt={img.alt}
-                  loading="lazy"
-                  className="w-full border border-border object-cover"
-                />
-                <figcaption className="mt-3 font-sans text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
-                  {img.caption}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {quote && (
-        <section className="border-t border-border bg-surface/30">
-          <div className="mx-auto max-w-4xl px-6 py-20 text-center md:px-10 lg:py-28">
-            <blockquote className="font-display text-3xl leading-snug font-light italic text-ivory md:text-4xl">
-              “{quote.quote}”
-            </blockquote>
-            <p className="mt-8 font-sans text-[11px] tracking-[0.24em] uppercase text-muted-foreground">
-              {quote.name} · {quote.event} · {quote.area}
+          <Reveal variant="rise" delay={200}>
+            <p className="mt-8 max-w-2xl font-display text-xl leading-[1.5] font-light text-ivory/80 italic md:text-3xl">
+              {service.lede}
             </p>
+          </Reveal>
+          <Reveal variant="fade" delay={320}>
+            <div className="mt-12">
+              <LuxLink to="/contact" tone="foil">
+                Request a consultation
+              </LuxLink>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ─── Introduction: emotion first ───────────────────────────── */}
+      <section className="chapter light-left relative overflow-hidden py-28 lg:py-44">
+        <p
+          aria-hidden="true"
+          className="ghost-word absolute -top-10 right-0 text-[20vw] opacity-60 select-none"
+        >
+          {mood.openingWord}
+        </p>
+        <div className="relative mx-auto max-w-[92rem] px-6 md:px-12">
+          <Reveal variant="mask" duration={1400}>
+            <p className="max-w-4xl font-display text-[2rem] leading-[1.2] font-light text-ivory sm:text-5xl lg:text-[3.5rem]">
+              {service.body[0]}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ─── The experience: editorial spread ──────────────────────── */}
+      <section className="relative overflow-hidden pb-24 lg:pb-40">
+        <div className="mx-auto grid max-w-[92rem] items-center gap-12 px-6 md:px-12 lg:grid-cols-12 lg:gap-20">
+          <div className={`lg:col-span-6 ${mood.mirrored ? "lg:order-2" : ""}`}>
+            <Plate
+              image={gallery[1] ?? hero}
+              ratio={mood.ratio}
+              speed={0.16}
+              fade={mood.mirrored ? "top" : "bottom"}
+              caption
+              sizes="(min-width: 1024px) 48vw, 100vw"
+            />
+          </div>
+          <div className={`lg:col-span-6 ${mood.mirrored ? "lg:order-1" : ""}`}>
+            <Reveal variant="fade">
+              <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold-deep">
+                The experience
+              </p>
+            </Reveal>
+            <div className="mt-8 space-y-7">
+              {service.body.slice(1).map((para, i) => (
+                <Reveal key={para.slice(0, 32)} variant="rise" delay={i * 70}>
+                  <p className="max-w-xl font-sans text-[15px] leading-[2.05] font-light text-ivory/70">
+                    {para}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Signature highlights — storytelling blocks ────────────── */}
+      <section className="chapter light-right relative overflow-hidden py-24 lg:py-36">
+        <div className="mx-auto max-w-[92rem] px-6 md:px-12">
+          <Reveal variant="fade">
+            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold-deep">
+              Signature highlights
+            </p>
+          </Reveal>
+          <div className="mt-14 space-y-16 lg:space-y-24">
+            {service.inclusions.map((inc, i) => (
+              <Reveal key={inc.title} variant="rise" delay={i * 60}>
+                <div
+                  className="grid gap-6 lg:grid-cols-12 lg:items-baseline"
+                  style={{ paddingLeft: `${(i % 3) * 2}rem` }}
+                >
+                  <p className="font-display text-3xl leading-none font-light text-gold/40 lg:col-span-2">
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <h2 className="font-display text-[2rem] leading-tight font-light text-ivory lg:col-span-4 lg:text-5xl">
+                    {inc.title}
+                  </h2>
+                  <p className="max-w-xl font-sans text-[15px] leading-[2] font-light text-ivory/65 lg:col-span-6">
+                    {inc.body}
+                  </p>
+                </div>
+                <span className="mt-10 block hairline" />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Showcase — asymmetric magazine crops ──────────────────── */}
+      <section className="relative py-8 lg:py-16">
+        <div className="mx-auto max-w-[92rem] px-6 md:px-12">
+          <Reveal variant="fade">
+            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold-deep">
+              Showcase
+            </p>
+          </Reveal>
+        </div>
+        <div className="mx-auto mt-12 grid max-w-[92rem] grid-cols-12 gap-4 px-6 md:gap-8 md:px-12">
+          {gallery.map((img, i) => {
+            const span = [12, 7, 5, 6, 6, 8, 4][i % 7];
+            const ratio = [16 / 9, 3 / 4, 4 / 5, 1, 4 / 3, 16 / 10, 3 / 4][i % 7];
+            return (
+              <div
+                key={img.id}
+                className="col-span-12"
+                style={{ gridColumn: `span ${span} / span ${span}` }}
+              >
+                <Plate
+                  image={img}
+                  ratio={String(ratio)}
+                  speed={i % 2 === 0 ? 0.12 : 0}
+                  caption
+                  sizes="(min-width: 1024px) 55vw, 100vw"
+                />
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ─── Quote ─────────────────────────────────────────────────── */}
+      {quote && (
+        <section className="relative isolate overflow-hidden py-28 lg:py-40">
+          <img
+            {...imgAttrs(gallery[0]?.id ?? hero.id, gallery[0]?.url ?? hero.url, "100vw")}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 -z-10 h-full w-full object-cover opacity-20 drift-slow"
+          />
+          <span aria-hidden="true" className="absolute inset-0 -z-10 veil" />
+          <div className="mx-auto max-w-4xl px-6 text-center md:px-12">
+            <Reveal variant="mask" duration={1300}>
+              <blockquote className="font-display text-[1.9rem] leading-[1.28] font-light text-ivory italic md:text-[3rem]">
+                “{quote.quote}”
+              </blockquote>
+            </Reveal>
+            <Reveal variant="fade" delay={100}>
+              <p className="mt-9 font-sans text-[10px] tracking-[0.34em] uppercase text-gold">
+                {quote.name} · {quote.event} · {quote.area}
+              </p>
+            </Reveal>
           </div>
         </section>
       )}
 
-      <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:py-24">
-          <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-            <h2 className="font-display text-3xl leading-tight font-light text-ivory md:text-4xl">
-              {service.name}, answered
-            </h2>
-            <dl className="divide-y divide-border border-y border-border">
-              {service.faqs.map((faq) => (
-                <div key={faq.q} className="py-8">
-                  <dt className="font-display text-xl font-light text-ivory">{faq.q}</dt>
-                  <dd className="mt-3 font-sans text-sm leading-[1.85] font-light text-muted-foreground">
-                    {faq.a}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+      {/* ─── Planning journey ──────────────────────────────────────── */}
+      <section className="relative py-24 lg:py-36">
+        <div className="mx-auto max-w-[92rem] px-6 md:px-12">
+          <Reveal variant="fade">
+            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold-deep">
+              How {service.name.toLowerCase()} is planned
+            </p>
+          </Reveal>
+          <div className="mt-16">
+            <JourneyRail stages={stages} />
           </div>
         </div>
       </section>
 
-      <section className="border-t border-border bg-surface/30">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-20">
-          <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
+      {/* ─── Luxury details — a running band of craft ──────────────── */}
+      <section className="relative overflow-hidden py-16">
+        <div className="mx-auto max-w-[92rem] px-6 md:px-12">
+          <span className="block hairline" />
+          <ul className="mt-8 flex flex-wrap items-baseline gap-x-10 gap-y-4">
+            {craft.map((c, i) => (
+              <Reveal as="li" key={c} variant="fade" delay={i * 40}>
+                <span className="font-display text-2xl font-light text-ivory/45 transition-colors duration-500 hover:text-gold md:text-4xl">
+                  {c}
+                </span>
+              </Reveal>
+            ))}
+          </ul>
+          <span className="mt-8 block hairline" />
+        </div>
+      </section>
+
+      {/* ─── FAQ ───────────────────────────────────────────────────── */}
+      <section className="relative py-24 lg:py-36">
+        <div className="mx-auto grid max-w-[92rem] gap-12 px-6 md:px-12 lg:grid-cols-[0.4fr_0.6fr] lg:gap-20">
+          <div>
+            <Reveal variant="mask" duration={1200}>
+              <h2 className="font-display text-4xl leading-[1.04] font-light text-ivory md:text-5xl">
+                {service.name},
+                <span className="block italic text-gold">answered.</span>
+              </h2>
+            </Reveal>
+          </div>
+          <LuxAccordion items={service.faqs} />
+        </div>
+      </section>
+
+      {/* ─── Locations ─────────────────────────────────────────────── */}
+      <section className="py-12">
+        <div className="mx-auto max-w-[92rem] px-6 md:px-12">
+          <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold-deep">
             {service.name} across Lahore
           </p>
           <ul className="mt-8 flex flex-wrap gap-4">
-            {locations.slice(0, 8).map((l) => (
+            {locations.map((l) => (
               <li key={l.slug}>
                 <Link
                   to="/areas/$slug"
                   params={{ slug: l.slug }}
-                  className="btn-shape btn-shape inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.2em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+                  className="btn-shape inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[10px] tracking-[0.26em] uppercase text-ivory/80 transition-colors hover:border-gold hover:text-gold"
                 >
                   {l.shortName}
                 </Link>
@@ -202,34 +371,48 @@ function ServicePage() {
         </div>
       </section>
 
+      {/* ─── Related — editorial recommendations ───────────────────── */}
       {related.length > 0 && (
-        <section className="border-t border-border">
-          <div className="mx-auto max-w-7xl px-6 py-20 md:px-10">
-            <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
-              Often taken together
-            </p>
-            <div className="mt-10 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-              {related.map((r) => (
-                <Link
-                  key={r.slug}
-                  to="/services/$slug"
-                  params={{ slug: r.slug }}
-                  className="group bg-background p-8"
-                >
-                  <h3 className="font-display text-xl font-light text-ivory transition-colors group-hover:text-gold">
-                    {r.name}
-                  </h3>
-                  <p className="mt-3 font-sans text-[13px] leading-relaxed font-light text-muted-foreground">
-                    {r.lede}
-                  </p>
-                </Link>
+        <section className="relative py-20 lg:py-32">
+          <div className="mx-auto max-w-[92rem] px-6 md:px-12">
+            <Reveal variant="fade">
+              <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold-deep">
+                Often taken together
+              </p>
+            </Reveal>
+            <ul className="mt-10">
+              {related.map((r, i) => (
+                <Reveal as="li" key={r.slug} variant="rise" delay={i * 60}>
+                  <Link
+                    to="/services/$slug"
+                    params={{ slug: r.slug }}
+                    className="group/rel grid items-center gap-4 border-t border-border py-10 lg:grid-cols-12"
+                  >
+                    <span className="font-sans text-[10px] tracking-[0.34em] uppercase text-gold-deep lg:col-span-2">
+                      {r.family}
+                    </span>
+                    <span className="font-display text-3xl leading-tight font-light text-ivory transition-colors duration-500 group-hover/rel:text-gold lg:col-span-4 lg:text-5xl">
+                      {r.name}
+                    </span>
+                    <span className="font-sans text-sm leading-[1.9] font-light text-ivory/60 lg:col-span-5">
+                      {r.lede}
+                    </span>
+                    <span className="font-sans text-gold opacity-0 transition-all duration-500 group-hover/rel:translate-x-2 group-hover/rel:opacity-100 lg:col-span-1 lg:text-right">
+                      &#8594;
+                    </span>
+                  </Link>
+                </Reveal>
               ))}
-            </div>
+            </ul>
           </div>
         </section>
       )}
 
-      <CtaBand />
+      <CtaBand
+        eyebrow="Let us begin"
+        title="Let's create something unforgettable."
+        body={`Tell us the date and the guest count for your ${service.name.toLowerCase()}. One planner reads every enquiry and replies within 12 working hours.`}
+      />
     </main>
   );
 }
