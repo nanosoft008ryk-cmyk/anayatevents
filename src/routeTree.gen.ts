@@ -34,6 +34,7 @@ import { Route as AboutProcessRouteImport } from './routes/about.process'
 import { Route as AboutPhilosophyRouteImport } from './routes/about.philosophy'
 import { Route as AboutJourneyRouteImport } from './routes/about.journey'
 import { Route as AboutCraftsmanshipRouteImport } from './routes/about.craftsmanship'
+import { Route as AboutCareersRouteImport } from './routes/about.careers'
 import { Route as AboutBehindTheScenesRouteImport } from './routes/about.behind-the-scenes'
 import { Route as PortfolioProjectSlugRouteImport } from './routes/portfolio.project.$slug'
 import { Route as JournalCategorySlugRouteImport } from './routes/journal.category.$slug'
@@ -163,6 +164,11 @@ const AboutCraftsmanshipRoute = AboutCraftsmanshipRouteImport.update({
   path: '/about/craftsmanship',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutCareersRoute = AboutCareersRouteImport.update({
+  id: '/about/careers',
+  path: '/about/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutBehindTheScenesRoute = AboutBehindTheScenesRouteImport.update({
   id: '/about/behind-the-scenes',
   path: '/about/behind-the-scenes',
@@ -187,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
   '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
+  '/about/careers': typeof AboutCareersRoute
   '/about/craftsmanship': typeof AboutCraftsmanshipRoute
   '/about/journey': typeof AboutJourneyRoute
   '/about/philosophy': typeof AboutPhilosophyRoute
@@ -217,6 +224,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
   '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
+  '/about/careers': typeof AboutCareersRoute
   '/about/craftsmanship': typeof AboutCraftsmanshipRoute
   '/about/journey': typeof AboutJourneyRoute
   '/about/philosophy': typeof AboutPhilosophyRoute
@@ -248,6 +256,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
   '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
+  '/about/careers': typeof AboutCareersRoute
   '/about/craftsmanship': typeof AboutCraftsmanshipRoute
   '/about/journey': typeof AboutJourneyRoute
   '/about/philosophy': typeof AboutPhilosophyRoute
@@ -280,6 +289,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/vault'
     | '/about/behind-the-scenes'
+    | '/about/careers'
     | '/about/craftsmanship'
     | '/about/journey'
     | '/about/philosophy'
@@ -310,6 +320,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/vault'
     | '/about/behind-the-scenes'
+    | '/about/careers'
     | '/about/craftsmanship'
     | '/about/journey'
     | '/about/philosophy'
@@ -340,6 +351,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/vault'
     | '/about/behind-the-scenes'
+    | '/about/careers'
     | '/about/craftsmanship'
     | '/about/journey'
     | '/about/philosophy'
@@ -371,6 +383,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VaultRoute: typeof VaultRoute
   AboutBehindTheScenesRoute: typeof AboutBehindTheScenesRoute
+  AboutCareersRoute: typeof AboutCareersRoute
   AboutCraftsmanshipRoute: typeof AboutCraftsmanshipRoute
   AboutJourneyRoute: typeof AboutJourneyRoute
   AboutPhilosophyRoute: typeof AboutPhilosophyRoute
@@ -571,6 +584,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutCraftsmanshipRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/careers': {
+      id: '/about/careers'
+      path: '/about/careers'
+      fullPath: '/about/careers'
+      preLoaderRoute: typeof AboutCareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about/behind-the-scenes': {
       id: '/about/behind-the-scenes'
       path: '/about/behind-the-scenes'
@@ -603,6 +623,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   VaultRoute: VaultRoute,
   AboutBehindTheScenesRoute: AboutBehindTheScenesRoute,
+  AboutCareersRoute: AboutCareersRoute,
   AboutCraftsmanshipRoute: AboutCraftsmanshipRoute,
   AboutJourneyRoute: AboutJourneyRoute,
   AboutPhilosophyRoute: AboutPhilosophyRoute,
