@@ -111,7 +111,6 @@ export function SiteFooter() {
               {[
                 { label: "WhatsApp", href: site.whatsappHref },
                 { label: "Instagram", href: site.instagram },
-                { label: "Google", href: site.mapsUrl },
               ].map((l) => (
                 <a
                   key={l.label}
@@ -125,7 +124,11 @@ export function SiteFooter() {
                 </a>
               ))}
             </div>
+            <div className="mt-7">
+              <GoogleProfileLink label="Google Business Profile" showStars={false} />
+            </div>
           </div>
+
 
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
             {footerColumns.map((col) => (
