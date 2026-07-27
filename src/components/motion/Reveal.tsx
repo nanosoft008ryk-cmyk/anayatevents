@@ -23,6 +23,7 @@ export function Reveal({
   delay = 0,
   duration = 1100,
   className,
+  innerClassName,
   once = true,
 }: {
   children: ReactNode;
@@ -31,6 +32,8 @@ export function Reveal({
   delay?: number;
   duration?: number;
   className?: string;
+  /** Layout classes for the animated inner element (use for flex/grid rows). */
+  innerClassName?: string;
   once?: boolean;
 }) {
   const Tag = (as ?? "div") as ElementType;
@@ -71,6 +74,7 @@ export function Reveal({
         className={cn(
           "will-change-[transform,opacity,clip-path]",
           Tag === "span" ? "inline-block" : "block h-full",
+          innerClassName,
           shown
             ? "translate-y-0 opacity-100 blur-0 [clip-path:inset(0_0_0_0)]"
             : variantClass[variant],
@@ -87,6 +91,7 @@ export function Reveal({
     </Tag>
   );
 }
+
 
 
 /** Splits a line into words and staggers them in — used for oversized headlines. */

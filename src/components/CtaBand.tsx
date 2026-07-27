@@ -35,8 +35,8 @@ export function CtaBand({
         <div className="absolute inset-0 grain" />
       </div>
 
-      <div className="mx-auto max-w-[92rem] px-6 py-32 md:px-12 lg:py-44">
-        <div className="grid gap-14 lg:grid-cols-[1.45fr_1fr] lg:items-end">
+      <div className="mx-auto max-w-[92rem] px-5 py-24 sm:px-6 md:px-12 md:py-32 lg:py-44">
+        <div className="grid gap-10 md:gap-14 lg:grid-cols-[1.45fr_1fr] lg:items-end">
           <div>
             <Reveal>
               <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
@@ -44,27 +44,31 @@ export function CtaBand({
               </p>
             </Reveal>
             <Reveal delay={120} variant="mask">
-              <h2 className="mt-8 max-w-[16ch] font-display text-[2.6rem] leading-[1.02] font-light text-ivory lg:text-[4.2rem]">
+              <h2 className="mt-6 max-w-[16ch] font-display text-[clamp(2.1rem,8.5vw,4.2rem)] leading-[1.04] font-light text-ivory md:mt-8">
                 {title}
               </h2>
             </Reveal>
             <Reveal delay={220}>
-              <p className="mt-8 max-w-xl font-sans text-[15px] leading-[2] font-light text-muted-foreground">
+              <p className="mt-6 max-w-xl font-sans text-[14px] leading-[1.9] font-light text-muted-foreground md:mt-8 md:text-[15px] md:leading-[2]">
                 {body}
               </p>
             </Reveal>
           </div>
 
-          <Reveal delay={300} className="flex flex-wrap gap-4 lg:justify-end">
-            <LuxLink to="/contact" tone="foil">
+          <Reveal
+            delay={300}
+            innerClassName="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:justify-end"
+          >
+            <LuxLink to="/contact" tone="foil" className="justify-center">
               Start an enquiry
             </LuxLink>
-            <LuxAnchor href={site.whatsappHref} tone="ghost">
+            <LuxAnchor href={site.whatsappHref} tone="ghost" className="justify-center">
               WhatsApp
             </LuxAnchor>
           </Reveal>
         </div>
       </div>
+
     </section>
   );
 }
