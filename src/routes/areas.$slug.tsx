@@ -592,6 +592,8 @@ function AreaPage() {
       )}
 
       {/* XIII. Close */}
+      <RelatedConstellation kind="area" slug={params.slug} options={{ kinds: ["service", "area", "collection", "article", "faq"] }} />
+
       <CtaBand
         eyebrow={`Planning in ${area.shortName}`}
         title={`Tell us about your ${area.shortName} celebration.`}
@@ -603,7 +605,6 @@ function AreaPage() {
       <span className="sr-only">
         {locations.length} service areas across {site.address.locality}.
       </span>
-    <RelatedConstellation kind="area" slug={params.slug} options={{ kinds: ["service", "area", "collection", "article", "faq"] }} />
     </main>
   );
 }

@@ -393,7 +393,8 @@ function PortfolioCategoryPage() {
       </section>
 
       <div className="mt-32 md:mt-44">
-        <RelatedConstellation kind="collection" slug={params.slug} options={{ kinds: ["service", "project", "area", "article"] }} />
+      <RelatedConstellation kind="collection" slug={params.slug} options={{ kinds: ["service", "project", "area", "article"] }} />
+
       <CtaBand />
       </div>
     </main>

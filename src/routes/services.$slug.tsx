@@ -410,12 +410,13 @@ function ServicePage() {
         </section>
       )}
 
+      <RelatedConstellation kind="service" slug={params.slug} options={{ kinds: ["collection", "article", "area", "faq"] }} />
+
       <CtaBand
         eyebrow="Let us begin"
         title="Let's create something unforgettable."
         body={`Tell us the date and the guest count for your ${service.name.toLowerCase()}. One planner reads every enquiry and replies within 12 working hours.`}
       />
-    <RelatedConstellation kind="service" slug={params.slug} options={{ kinds: ["collection", "article", "area", "faq"] }} />
     </main>
   );
 }

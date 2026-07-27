@@ -410,7 +410,8 @@ function ProjectCaseStudy() {
       </section>
 
       <div className="mt-32 md:mt-44">
-        <RelatedConstellation kind="project" slug={params.slug} options={{ kinds: ["collection", "service", "area", "article"] }} />
+      <RelatedConstellation kind="project" slug={params.slug} options={{ kinds: ["collection", "service", "area", "article"] }} />
+
       <CtaBand />
       </div>
     </main>
