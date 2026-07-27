@@ -179,7 +179,7 @@ function ReviewsPage() {
 
           <h1 className="mt-10 max-w-[15ch] font-display text-[3rem] leading-[0.98] font-light text-ivory md:text-[6.4rem]">
             <RevealWords text="Every review here is" />
-            <span className="mt-2 block italic text-foil">
+            <span className="foil-text mt-2 block italic">
               <RevealWords text="a real celebration." delay={220} />
             </span>
           </h1>
