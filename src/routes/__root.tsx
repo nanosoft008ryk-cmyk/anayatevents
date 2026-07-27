@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { jsonLd, organizationSchema } from "../lib/seo";
+import { jsonLd, organizationSchema, websiteSchema } from "../lib/seo";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { ConciergeBar } from "../components/ConciergeBar";
@@ -127,7 +127,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@200;300;400;500&display=swap",
       },
     ],
-    scripts: [jsonLd(organizationSchema())],
+    scripts: [jsonLd(organizationSchema()), jsonLd(websiteSchema())],
   }),
 
   shellComponent: RootShell,

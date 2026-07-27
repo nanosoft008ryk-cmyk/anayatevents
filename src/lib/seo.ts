@@ -148,6 +148,21 @@ export function organizationSchema() {
   };
 }
 
+/** Sitewide WebSite entity, emitted once from __root.tsx alongside the business. */
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": abs("/#website"),
+    name: site.name,
+    alternateName: site.legalName,
+    description: site.description,
+    url: abs("/"),
+    inLanguage: "en",
+    publisher: { "@id": abs("/#business") },
+  };
+}
+
 export interface Crumb {
   name: string;
   path: string;
