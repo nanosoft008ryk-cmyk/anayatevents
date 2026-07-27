@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { photo, photosByIds } from "@/content/images";
 import { behindPage } from "@/content/about";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -171,6 +172,7 @@ function BehindPage() {
         title="The workshop is open on most afternoons."
         body="See a set standing before it travels. It is the fastest way to understand what we mean by in-house."
       />
+      <RelatedConstellation path="/about/behind-the-scenes" heading="Continue" />
     </main>
   );
 }

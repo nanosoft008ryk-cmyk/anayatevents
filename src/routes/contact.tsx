@@ -4,6 +4,7 @@ import { site, consultationSteps } from "@/content/site";
 import { photo, photosByIds } from "@/content/images";
 import { testimonials } from "@/content/testimonials";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { AreaMap } from "@/components/AreaMap";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
@@ -271,6 +272,7 @@ function ContactPage() {
         areaName="Lahore"
         travelNote="The studio sits in Green Acres Housing Society, minutes from Bedian Road and within easy reach of DHA, Bahria Town and the Ring Road."
       />
+      <RelatedConstellation path="/contact" heading="Continue" />
     </main>
   );
 }

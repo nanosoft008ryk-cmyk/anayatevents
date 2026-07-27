@@ -8,6 +8,7 @@ import {
 } from "@/content/portfolio";
 import { photo } from "@/content/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
@@ -308,6 +309,7 @@ function PortfolioIndex() {
       <div className="mt-32 md:mt-44">
         <CtaBand />
       </div>
+      <RelatedConstellation path="/portfolio" heading="Continue" />
     </main>
   );
 }

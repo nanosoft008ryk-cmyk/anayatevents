@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { photos } from "@/content/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import {
   pageMeta,
@@ -81,6 +82,7 @@ function Vault() {
       </section>
 
       <CtaBand />
+      <RelatedConstellation path="/vault" heading="Continue" />
     </main>
   );
 }

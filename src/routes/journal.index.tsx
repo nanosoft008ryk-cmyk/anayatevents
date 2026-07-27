@@ -12,6 +12,7 @@ import {
 } from "@/content/journal";
 import { photo, photosByIds } from "@/content/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -354,6 +355,7 @@ function JournalIndex() {
         title="Bring the inspiration to a table with us."
         body={`Every piece here began as a real commission. If something you have read belongs in your own evening, tell us the date — ${journalCategories.length} departments of thinking arrive with the planner.`}
       />
+      <RelatedConstellation path="/journal" heading="Continue" />
     </main>
   );
 }

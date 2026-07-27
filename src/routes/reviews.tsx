@@ -6,6 +6,7 @@ import { testimonials } from "@/content/testimonials";
 import { site } from "@/content/site";
 import { photo } from "@/content/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -499,6 +500,7 @@ function ReviewsPage() {
           </Reveal>
         </div>
       </section>
+      <RelatedConstellation path="/reviews" heading="Continue" />
     </main>
   );
 }

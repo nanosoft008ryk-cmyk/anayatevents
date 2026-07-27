@@ -4,6 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { photo } from "@/content/images";
 import { journeyPage } from "@/content/about";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -174,6 +175,7 @@ function JourneyPage() {
         title="The next year is written with someone's evening."
         body="It could be yours. Send the date and we will tell you honestly whether we can do it properly."
       />
+      <RelatedConstellation path="/about/journey" heading="Continue" />
     </main>
   );
 }

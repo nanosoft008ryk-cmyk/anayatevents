@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { photo } from "@/content/images";
 import { storyPage } from "@/content/about";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -146,6 +147,7 @@ function StoryPage() {
         title="Every story here started with one message."
         body="Send the date and a sentence about the evening you imagine. We will write back personally."
       />
+      <RelatedConstellation path="/about/story" heading="Continue" />
     </main>
   );
 }

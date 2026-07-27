@@ -5,6 +5,7 @@ import { photo } from "@/content/images";
 import { testimonials } from "@/content/testimonials";
 import { locations } from "@/content/locations";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
@@ -489,6 +490,7 @@ function ServicesIndex() {
         title="Let's create something unforgettable."
         body="Tell us the date and the number of guests. One planner reads every enquiry and replies within 12 working hours — never a template."
       />
+      <RelatedConstellation path="/services" heading="Continue" />
     </main>
   );
 }

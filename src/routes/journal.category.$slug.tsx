@@ -11,6 +11,7 @@ import {
 import { getService } from "@/content/services";
 import { photo, photosByIds } from "@/content/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -254,6 +255,7 @@ function CategoryPage() {
         title="Turn this thinking into an evening of your own."
         body="Tell us the date and the feeling you want to leave behind. A planner replies personally, with the same candour you have just read."
       />
+      <RelatedConstellation path={`/journal/category/${params.slug}`} heading="Continue reading" />
     </main>
   );
 }

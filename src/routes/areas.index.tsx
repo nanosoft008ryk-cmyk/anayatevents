@@ -4,6 +4,7 @@ import { locations, featuredAreaSlugs, getLocation } from "@/content/locations";
 import { photo } from "@/content/images";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
@@ -192,6 +193,7 @@ function AreasIndex() {
         title="Tell us where the evening is, and we will come to it."
         body="Send the area, the date and the rough guest count. One planner reads every enquiry and replies within 12 working hours."
       />
+      <RelatedConstellation path="/areas" heading="Continue" />
     </main>
   );
 }

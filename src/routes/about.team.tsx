@@ -4,6 +4,7 @@ import { photo } from "@/content/images";
 import { teamPage } from "@/content/about";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -195,6 +196,7 @@ function TeamPage() {
         title="Tea at the studio, whenever you're ready."
         body="Come and see the workshop, the bench and the kitchen. Bring your date; bring your doubts."
       />
+      <RelatedConstellation path="/about/team" heading="Continue" />
     </main>
   );
 }

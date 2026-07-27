@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { faqTopics, topFaqs } from "@/content/faqs";
 import { photo } from "@/content/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import {
   pageMeta,
@@ -107,6 +108,7 @@ function FaqIndex() {
       </section>
 
       <CtaBand />
+      <RelatedConstellation path="/faq" heading="Continue" />
     </main>
   );
 }
