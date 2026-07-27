@@ -164,14 +164,17 @@ function AreaPage() {
       </section>
 
       {/* II. Local introduction */}
-      <section className="relative isolate overflow-hidden">
-        <span
-          aria-hidden
-          className={`pointer-events-none absolute top-10 select-none font-display leading-none font-light text-ivory/[0.035] ${rhythm.ghost}`}
-        >
-          {area.shortName}
-        </span>
-        <div className="relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
+      <section className="relative isolate overflow-hidden pt-16 lg:pt-24">
+        <div className="pointer-events-none relative h-[14vw] select-none overflow-hidden lg:h-[16vw]">
+          <span
+            aria-hidden
+            className={`absolute top-0 whitespace-nowrap font-display leading-[0.82] font-light text-ivory/[0.045] ${rhythm.ghost}`}
+          >
+            {area.shortName}
+          </span>
+        </div>
+        <div className="relative mx-auto max-w-[92rem] px-6 pt-10 pb-28 md:px-12 lg:pt-16 lg:pb-40">
+
           <div className={`grid gap-12 ${rhythm.introGrid} lg:gap-24`}>
             <div>
               <Reveal>
