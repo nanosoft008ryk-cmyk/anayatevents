@@ -166,6 +166,14 @@ function ReviewsPage() {
       {/* I — Cinematic opening */}
       <section className="relative isolate flex min-h-dvh flex-col justify-end overflow-hidden">
         <CinematicBackdrop frames={[photo("ae-21"), photo("ae-13"), photo("ae-05"), photo("ae-24")]} />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_top,color-mix(in_oklab,var(--background)_96%,transparent)_4%,color-mix(in_oklab,var(--background)_72%,transparent)_42%,color-mix(in_oklab,var(--background)_60%,transparent)_100%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,color-mix(in_oklab,var(--background)_86%,transparent)_0%,transparent_62%)]"
+        />
 
         <div className="mx-auto w-full max-w-[92rem] px-6 pt-40 pb-24 md:px-12 md:pb-32">
           <Breadcrumbs trail={trail} className="mb-12" />
