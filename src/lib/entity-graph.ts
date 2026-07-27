@@ -372,6 +372,7 @@ const STATIC_SUBJECTS: Record<string, string> = {
   "/vault": "photography gallery archive stages florals tablescapes",
   "/about": "studio brand story craft team philosophy",
   "/about/brand-story": "brand story origin kitchen workshop family",
+  "/about/story": "brand story origin kitchen workshop family heritage",
   "/about/philosophy": "philosophy hosting restraint craft design",
   "/about/journey": "journey milestones growth workshop kitchen",
   "/about/team": "team planners chefs florists designers",
