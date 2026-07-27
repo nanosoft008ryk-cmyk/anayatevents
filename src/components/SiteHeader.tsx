@@ -4,7 +4,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { navigation } from "@/content/navigation";
 import { site } from "@/content/site";
 import { logo, photo } from "@/content/images";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 
 export function SiteHeader() {
   const [open, setOpen] = useState<string | null>(null);
@@ -65,7 +65,7 @@ export function SiteHeader() {
         }`}
       >
         <Link to="/" className="group/logo flex items-center gap-4" aria-label={`${site.name} — home`}>
-          <img
+          <SmartImg
             src={logo}
             alt=""
             className={`rounded-full object-cover transition-all duration-700 [transition-timing-function:var(--ease-lux)] ${
@@ -206,7 +206,7 @@ export function SiteHeader() {
       {mobile && (
         <div className="relative h-[calc(100svh-4.5rem)] overflow-y-auto bg-background lg:hidden">
           <img
-            {...imgAttrs("ae-22", photo("ae-22").url, "100vw")}
+            id="ae-22" fallbackUrl={photo("ae-22").url} sizes="100vw"
             alt=""
             loading="lazy"
             decoding="async"

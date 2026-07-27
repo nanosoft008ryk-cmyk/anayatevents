@@ -139,8 +139,8 @@ function BehindPage() {
           <div className="mt-10 grid grid-cols-2 gap-px bg-border sm:grid-cols-4">
             {sheet.map((p, i) => (
               <figure key={p.id} className="group/f relative overflow-hidden bg-background">
-                <img
-                  {...imgAttrs(p.id, p.url, "(min-width: 640px) 25vw, 50vw")}
+                <SmartImg
+                  id={p.id} fallbackUrl={p.url} sizes="(min-width: 640px) 25vw
                   alt={p.alt}
                   loading="lazy"
                   decoding="async"

@@ -2,7 +2,7 @@ import { site } from "@/content/site";
 import { photo } from "@/content/images";
 import { Reveal } from "@/components/motion/Reveal";
 import { LuxLink, LuxAnchor } from "@/components/ui/LuxButton";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 
 export function CtaBand({
   eyebrow = "Begin",
@@ -17,8 +17,8 @@ export function CtaBand({
     <section className="relative isolate overflow-hidden">
       {/* Plate dissolves into the page above and the footer below — no band edges. */}
       <div className="absolute inset-0 -z-10">
-        <img
-          {...imgAttrs("ae-16", photo("ae-16").url, "100vw")}
+        <SmartImg
+          id="ae-16" fallbackUrl={photo("ae-16").url} sizes="100vw"
           alt=""
           loading="lazy"
           decoding="async"

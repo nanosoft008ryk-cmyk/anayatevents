@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 
 import { journalCategories, articlesInCategory } from "@/content/journal";
 import { photo } from "@/content/images";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
@@ -55,9 +55,9 @@ export function CategoryExplorer() {
           {journalCategories.map((c, i) => {
             const p = photo(c.heroFrames[0]);
             return (
-              <img
+              <SmartImg
                 key={c.slug}
-                {...imgAttrs(p.id, p.url, "(min-width: 1024px) 40vw, 100vw")}
+                id={p.id} fallbackUrl={p.url} sizes="(min-width: 1024px) 40vw
                 alt={i === 0 ? p.alt : ""}
                 aria-hidden={i !== active}
                 loading="lazy"

@@ -14,7 +14,7 @@ import { LuxLink } from "@/components/ui/LuxButton";
 import { ServiceScroller } from "@/components/services/ServiceScroller";
 import { JourneyRail } from "@/components/services/JourneyRail";
 import { ThemeAtelier } from "@/components/services/ThemeAtelier";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import {
   pageMeta,
   jsonLd,
@@ -216,8 +216,8 @@ function ServicesIndex() {
         <div className="relative mx-auto max-w-[92rem] px-6 md:px-12">
           <div className="grid items-center gap-12 lg:grid-cols-12">
             <div className="relative lg:col-span-7">
-              <img
-                {...imgAttrs(flagshipHero.id, flagshipHero.url, "(min-width: 1024px) 58vw, 100vw")}
+              <SmartImg
+                id={flagshipHero.id} fallbackUrl={flagshipHero.url} sizes="(min-width: 1024px) 58vw
                 alt={flagshipHero.alt}
                 loading="lazy"
                 decoding="async"
@@ -337,8 +337,8 @@ function ServicesIndex() {
 
       {/* ─── VII. Culinary ─────────────────────────────────────────── */}
       <section className="relative isolate overflow-hidden py-28 lg:py-40">
-        <img
-          {...imgAttrs("ae-04", photo("ae-04").url, "100vw")}
+        <SmartImg
+          id="ae-04" fallbackUrl={photo("ae-04").url} sizes="100vw"
           alt=""
           aria-hidden="true"
           loading="lazy"
