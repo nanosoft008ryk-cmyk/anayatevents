@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { photo, photosByIds } from "@/content/images";
 import { craftPage } from "@/content/about";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
@@ -49,7 +50,8 @@ function CraftPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: architectural — three vertical plates of different height ─ */}
-      <section className="mx-auto max-w-[92rem] px-6 pt-36 pb-16 md:px-12 md:pt-44">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-16 md:px-12 md:pt-44">
+        <HeroBackdrop id="ae-21" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
         <div className="grid items-end gap-8 md:grid-cols-3 md:gap-10">
           {plates.map((p, i) => (

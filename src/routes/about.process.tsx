@@ -4,6 +4,7 @@ import { photo } from "@/content/images";
 import { processPage } from "@/content/about";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
@@ -46,7 +47,8 @@ function ProcessPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: one word per movement, set as a masthead ──────────────── */}
-      <section className="mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-48 lg:pb-28">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-48 lg:pb-28">
+        <HeroBackdrop id="ae-14" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
         <p className="font-sans text-[10px] tracking-[0.46em] uppercase text-gold">
           {processPage.hero.eyebrow}

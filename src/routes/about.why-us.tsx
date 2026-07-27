@@ -6,6 +6,7 @@ import { whyPage } from "@/content/about";
 import { site, stats } from "@/content/site";
 import { testimonials } from "@/content/testimonials";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
@@ -51,7 +52,8 @@ function WhyPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: split — a single quiet plate beside a wide type column ── */}
-      <section className="mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-48">
+      <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-48">
+        <HeroBackdrop id="ae-04" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
         <div className="grid gap-14 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:gap-24">
           <div>

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { photos } from "@/content/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import {
@@ -47,7 +48,8 @@ export const Route = createFileRoute("/vault")({
 function Vault() {
   return (
     <main className="bg-background">
-      <section className="mx-auto max-w-7xl px-6 pt-32 pb-12 md:px-10 md:pt-40">
+      <section className="relative isolate mx-auto max-w-7xl px-6 pt-32 pb-12 md:px-10 md:pt-40">
+        <HeroBackdrop id="ae-23" priority />
         <Breadcrumbs trail={trail} className="mb-8" />
         <p className="font-sans text-[11px] tracking-[0.34em] uppercase text-gold">
           {photos.length} frames · complete archive
