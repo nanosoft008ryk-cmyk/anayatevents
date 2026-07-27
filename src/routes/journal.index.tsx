@@ -37,7 +37,7 @@ export const Route = createFileRoute("/journal/")({
     ...pageMeta({
       title: "The Anayat Journal — Luxury Weddings, Design & Hospitality in Lahore",
       description:
-        "An editorial publication on celebration craft from Lahore: planning timelines, stage architecture, floral work, catering discipline and venue guides, written by the team that builds them.",
+        "Celebration craft from Lahore: planning timelines, stage architecture, floral work, catering and venue guides, written by the team that builds them.",
       path: PATH,
       image: photo(pick(featuredSlugs[0]).hero).url,
     }),

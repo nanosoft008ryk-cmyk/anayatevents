@@ -37,7 +37,7 @@ export const Route = createFileRoute("/reviews")({
     ...pageMeta({
       title: "Google Reviews — Anayat Events & Catering, Lahore",
       description:
-        "Live Google reviews for Anayat Events & Catering in Lahore — read what families and companies say about our weddings, mehndi nights, walimas and corporate evenings, straight from our Google Business Profile.",
+        "Live Google reviews for Anayat Events & Catering in Lahore — what families and companies say about our weddings, walimas and corporate evenings.",
       path: PATH,
       image: photo("ae-21").url,
     }),

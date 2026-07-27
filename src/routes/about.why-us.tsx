@@ -25,7 +25,7 @@ export const Route = createFileRoute("/about/why-us")({
     ...pageMeta({
       title: "Why Choose Us — How An Anayat Evening Actually Feels",
       description:
-        "One planner throughout, nothing sub-contracted, a build that finishes early and a crew still there at one in the morning. What tends to be different, without the superlatives.",
+        "One planner throughout, nothing sub-contracted, a build that finishes early and a crew still there at one in the morning.",
       path: PATH,
       image: photo("ae-18").url,
     }),

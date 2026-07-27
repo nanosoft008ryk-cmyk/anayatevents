@@ -31,7 +31,7 @@ export const Route = createFileRoute("/areas/")({
     ...pageMeta({
       title: "Areas We Serve Across Lahore | Anayat Events & Catering",
       description:
-        "Anayat Events & Catering serves clients throughout Lahore — DHA, Bahria Town, Gulberg, Model Town, Johar Town, Cantt, Wapda Town, Raiwind Road, Bedian Road and Green Acres.",
+        "We serve clients throughout Lahore — DHA, Bahria Town, Gulberg, Model Town, Johar Town, Cantt, Wapda Town, Raiwind and Bedian Road.",
       path: PATH,
       image: photo("ae-22").url,
     }),
