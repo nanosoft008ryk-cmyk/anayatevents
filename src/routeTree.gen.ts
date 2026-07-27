@@ -26,7 +26,16 @@ import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
+import { Route as AboutWhyUsRouteImport } from './routes/about.why-us'
+import { Route as AboutTeamRouteImport } from './routes/about.team'
+import { Route as AboutStoryRouteImport } from './routes/about.story'
+import { Route as AboutPromiseRouteImport } from './routes/about.promise'
 import { Route as AboutProcessRouteImport } from './routes/about.process'
+import { Route as AboutPhilosophyRouteImport } from './routes/about.philosophy'
+import { Route as AboutJourneyRouteImport } from './routes/about.journey'
+import { Route as AboutCraftsmanshipRouteImport } from './routes/about.craftsmanship'
+import { Route as AboutCareersRouteImport } from './routes/about.careers'
+import { Route as AboutBehindTheScenesRouteImport } from './routes/about.behind-the-scenes'
 import { Route as PortfolioProjectSlugRouteImport } from './routes/portfolio.project.$slug'
 import { Route as JournalCategorySlugRouteImport } from './routes/journal.category.$slug'
 
@@ -115,9 +124,54 @@ const AreasSlugRoute = AreasSlugRouteImport.update({
   path: '/areas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutWhyUsRoute = AboutWhyUsRouteImport.update({
+  id: '/about/why-us',
+  path: '/about/why-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutTeamRoute = AboutTeamRouteImport.update({
+  id: '/about/team',
+  path: '/about/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutStoryRoute = AboutStoryRouteImport.update({
+  id: '/about/story',
+  path: '/about/story',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutPromiseRoute = AboutPromiseRouteImport.update({
+  id: '/about/promise',
+  path: '/about/promise',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutProcessRoute = AboutProcessRouteImport.update({
   id: '/about/process',
   path: '/about/process',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutPhilosophyRoute = AboutPhilosophyRouteImport.update({
+  id: '/about/philosophy',
+  path: '/about/philosophy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutJourneyRoute = AboutJourneyRouteImport.update({
+  id: '/about/journey',
+  path: '/about/journey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutCraftsmanshipRoute = AboutCraftsmanshipRouteImport.update({
+  id: '/about/craftsmanship',
+  path: '/about/craftsmanship',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutCareersRoute = AboutCareersRouteImport.update({
+  id: '/about/careers',
+  path: '/about/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutBehindTheScenesRoute = AboutBehindTheScenesRouteImport.update({
+  id: '/about/behind-the-scenes',
+  path: '/about/behind-the-scenes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortfolioProjectSlugRoute = PortfolioProjectSlugRouteImport.update({
@@ -138,7 +192,16 @@ export interface FileRoutesByFullPath {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
+  '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
+  '/about/careers': typeof AboutCareersRoute
+  '/about/craftsmanship': typeof AboutCraftsmanshipRoute
+  '/about/journey': typeof AboutJourneyRoute
+  '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
+  '/about/promise': typeof AboutPromiseRoute
+  '/about/story': typeof AboutStoryRoute
+  '/about/team': typeof AboutTeamRoute
+  '/about/why-us': typeof AboutWhyUsRoute
   '/areas/$slug': typeof AreasSlugRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -160,7 +223,16 @@ export interface FileRoutesByTo {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
+  '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
+  '/about/careers': typeof AboutCareersRoute
+  '/about/craftsmanship': typeof AboutCraftsmanshipRoute
+  '/about/journey': typeof AboutJourneyRoute
+  '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
+  '/about/promise': typeof AboutPromiseRoute
+  '/about/story': typeof AboutStoryRoute
+  '/about/team': typeof AboutTeamRoute
+  '/about/why-us': typeof AboutWhyUsRoute
   '/areas/$slug': typeof AreasSlugRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -183,7 +255,16 @@ export interface FileRoutesById {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
+  '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
+  '/about/careers': typeof AboutCareersRoute
+  '/about/craftsmanship': typeof AboutCraftsmanshipRoute
+  '/about/journey': typeof AboutJourneyRoute
+  '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
+  '/about/promise': typeof AboutPromiseRoute
+  '/about/story': typeof AboutStoryRoute
+  '/about/team': typeof AboutTeamRoute
+  '/about/why-us': typeof AboutWhyUsRoute
   '/areas/$slug': typeof AreasSlugRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -207,7 +288,16 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/vault'
+    | '/about/behind-the-scenes'
+    | '/about/careers'
+    | '/about/craftsmanship'
+    | '/about/journey'
+    | '/about/philosophy'
     | '/about/process'
+    | '/about/promise'
+    | '/about/story'
+    | '/about/team'
+    | '/about/why-us'
     | '/areas/$slug'
     | '/faq/$slug'
     | '/journal/$slug'
@@ -229,7 +319,16 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/vault'
+    | '/about/behind-the-scenes'
+    | '/about/careers'
+    | '/about/craftsmanship'
+    | '/about/journey'
+    | '/about/philosophy'
     | '/about/process'
+    | '/about/promise'
+    | '/about/story'
+    | '/about/team'
+    | '/about/why-us'
     | '/areas/$slug'
     | '/faq/$slug'
     | '/journal/$slug'
@@ -251,7 +350,16 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/vault'
+    | '/about/behind-the-scenes'
+    | '/about/careers'
+    | '/about/craftsmanship'
+    | '/about/journey'
+    | '/about/philosophy'
     | '/about/process'
+    | '/about/promise'
+    | '/about/story'
+    | '/about/team'
+    | '/about/why-us'
     | '/areas/$slug'
     | '/faq/$slug'
     | '/journal/$slug'
@@ -274,7 +382,16 @@ export interface RootRouteChildren {
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VaultRoute: typeof VaultRoute
+  AboutBehindTheScenesRoute: typeof AboutBehindTheScenesRoute
+  AboutCareersRoute: typeof AboutCareersRoute
+  AboutCraftsmanshipRoute: typeof AboutCraftsmanshipRoute
+  AboutJourneyRoute: typeof AboutJourneyRoute
+  AboutPhilosophyRoute: typeof AboutPhilosophyRoute
   AboutProcessRoute: typeof AboutProcessRoute
+  AboutPromiseRoute: typeof AboutPromiseRoute
+  AboutStoryRoute: typeof AboutStoryRoute
+  AboutTeamRoute: typeof AboutTeamRoute
+  AboutWhyUsRoute: typeof AboutWhyUsRoute
   AreasSlugRoute: typeof AreasSlugRoute
   FaqSlugRoute: typeof FaqSlugRoute
   JournalSlugRoute: typeof JournalSlugRoute
@@ -411,11 +528,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/why-us': {
+      id: '/about/why-us'
+      path: '/about/why-us'
+      fullPath: '/about/why-us'
+      preLoaderRoute: typeof AboutWhyUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/team': {
+      id: '/about/team'
+      path: '/about/team'
+      fullPath: '/about/team'
+      preLoaderRoute: typeof AboutTeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/story': {
+      id: '/about/story'
+      path: '/about/story'
+      fullPath: '/about/story'
+      preLoaderRoute: typeof AboutStoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/promise': {
+      id: '/about/promise'
+      path: '/about/promise'
+      fullPath: '/about/promise'
+      preLoaderRoute: typeof AboutPromiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about/process': {
       id: '/about/process'
       path: '/about/process'
       fullPath: '/about/process'
       preLoaderRoute: typeof AboutProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/philosophy': {
+      id: '/about/philosophy'
+      path: '/about/philosophy'
+      fullPath: '/about/philosophy'
+      preLoaderRoute: typeof AboutPhilosophyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/journey': {
+      id: '/about/journey'
+      path: '/about/journey'
+      fullPath: '/about/journey'
+      preLoaderRoute: typeof AboutJourneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/craftsmanship': {
+      id: '/about/craftsmanship'
+      path: '/about/craftsmanship'
+      fullPath: '/about/craftsmanship'
+      preLoaderRoute: typeof AboutCraftsmanshipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/careers': {
+      id: '/about/careers'
+      path: '/about/careers'
+      fullPath: '/about/careers'
+      preLoaderRoute: typeof AboutCareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/behind-the-scenes': {
+      id: '/about/behind-the-scenes'
+      path: '/about/behind-the-scenes'
+      fullPath: '/about/behind-the-scenes'
+      preLoaderRoute: typeof AboutBehindTheScenesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portfolio/project/$slug': {
@@ -442,7 +622,16 @@ const rootRouteChildren: RootRouteChildren = {
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   VaultRoute: VaultRoute,
+  AboutBehindTheScenesRoute: AboutBehindTheScenesRoute,
+  AboutCareersRoute: AboutCareersRoute,
+  AboutCraftsmanshipRoute: AboutCraftsmanshipRoute,
+  AboutJourneyRoute: AboutJourneyRoute,
+  AboutPhilosophyRoute: AboutPhilosophyRoute,
   AboutProcessRoute: AboutProcessRoute,
+  AboutPromiseRoute: AboutPromiseRoute,
+  AboutStoryRoute: AboutStoryRoute,
+  AboutTeamRoute: AboutTeamRoute,
+  AboutWhyUsRoute: AboutWhyUsRoute,
   AreasSlugRoute: AreasSlugRoute,
   FaqSlugRoute: FaqSlugRoute,
   JournalSlugRoute: JournalSlugRoute,

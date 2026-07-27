@@ -3,6 +3,7 @@ import { locations } from "./locations";
 import { portfolioCategories } from "./portfolio";
 import { faqTopics } from "./faqs";
 import { journalCategories } from "./journal";
+import { aboutChapters } from "./about";
 
 export interface NavChild {
   label: string;
@@ -108,8 +109,14 @@ export const navigation: NavGroup[] = [
       {
         heading: "The house",
         items: [
-          { label: "Our story", to: "/about" },
-          { label: "How we work", to: "/about/process" },
+          { label: "About the house", to: "/about" },
+          ...aboutChapters.slice(0, 5).map((c) => ({ label: c.title, to: c.to })),
+        ],
+      },
+      {
+        heading: "The craft",
+        items: [
+          ...aboutChapters.slice(5).map((c) => ({ label: c.title, to: c.to })),
           { label: "Reviews", to: "/reviews" },
         ],
       },
@@ -170,9 +177,8 @@ export const footerColumns = [
   {
     heading: "House",
     items: [
-      { label: "Our story", to: "/about" },
-      { label: "How we work", to: "/about/process" },
-      { label: "Journal", to: "/journal" },
+      { label: "About the house", to: "/about" },
+      ...aboutChapters.map((c) => ({ label: c.title, to: c.to })),
       { label: "Reviews", to: "/reviews" },
       { label: "FAQ centre", to: "/faq" },
       { label: "Enquire", to: "/contact" },

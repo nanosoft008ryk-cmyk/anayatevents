@@ -6,6 +6,7 @@ import { locations } from "@/content/locations";
 import { portfolioCategories, portfolioProjects } from "@/content/portfolio";
 import { articles, journalCategories } from "@/content/journal";
 import { faqTopics } from "@/content/faqs";
+import { aboutChapters } from "@/content/about";
 
 /**
  * Generated from the same content modules that build the routes, so the
@@ -16,7 +17,7 @@ function entries(): { path: string; priority: string; lastmod?: string }[] {
   return [
     { path: "/", priority: "1.0" },
     { path: "/about", priority: "0.8" },
-    { path: "/about/process", priority: "0.7" },
+    ...aboutChapters.map((c) => ({ path: c.to, priority: "0.7" })),
     { path: "/reviews", priority: "0.7" },
     { path: "/services", priority: "0.9" },
     ...services.map((s) => ({ path: `/services/${s.slug}`, priority: "0.8" })),
