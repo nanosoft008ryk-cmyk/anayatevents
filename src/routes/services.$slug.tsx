@@ -22,6 +22,7 @@ import {
   imageGallerySchema,
   type Crumb,
 } from "@/lib/seo";
+import { uniqueFaqs } from "@/lib/entity-graph";
 
 function trailFor(slug: string): Crumb[] {
   const service = getService(slug);
@@ -88,7 +89,7 @@ export const Route = createFileRoute("/services/$slug")({
             image: photo(service.hero).url,
           }),
         ),
-        jsonLd(faqSchema(service.faqs, path)),
+        jsonLd(faqSchema(uniqueFaqs(path, service.faqs), path)),
         jsonLd(
           imageGallerySchema({
             name: `${service.name} — recent work`,

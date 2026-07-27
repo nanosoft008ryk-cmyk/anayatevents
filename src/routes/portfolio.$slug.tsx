@@ -23,6 +23,7 @@ import {
   faqSchema,
   type Crumb,
 } from "@/lib/seo";
+import { uniqueFaqs } from "@/lib/entity-graph";
 
 function trailFor(slug: string): Crumb[] {
   const category = getPortfolioCategory(slug);
@@ -66,7 +67,7 @@ export const Route = createFileRoute("/portfolio/$slug")({
             }),
           }),
         ),
-        jsonLd(faqSchema(category.faqs, path)),
+        jsonLd(faqSchema(uniqueFaqs(path, category.faqs), path)),
       ],
     };
   },

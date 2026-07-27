@@ -246,21 +246,31 @@ export function nearbyAreas(slug: string, limit = 5): RelatedItem[] {
 /* ------------------------------ FAQ engine ------------------------------- */
 
 /**
- * Global question ledger. The first page to claim a question keeps it; every
- * later page silently drops the duplicate. This guarantees no two pages emit
- * the same FAQPage entry — the single most common cause of Google ignoring
+ * Global question ledger, resolved deterministically at module load.
+ *
+ * Ownership priority: the FAQ centre owns a question first, then the service
+ * that answers it, then the area page, then the portfolio collection. Every
+ * later claimant drops the duplicate, so no two pages of this site can ever
+ * emit the same FAQPage entry — the most common reason Google quietly ignores
  * FAQ structured data across a large site.
  */
-const claimed = new Map<string, string>();
-
 const normalizeQuestion = (q: string) => q.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
-export function uniqueFaqs<T extends { q: string; a: string }>(pageKey: string, items: T[]): T[] {
-  return items.filter((item) => {
+const owner = new Map<string, string>();
+
+function claim(pageKey: string, items: { q: string }[]) {
+  for (const item of items) {
     const id = normalizeQuestion(item.q);
-    const owner = claimed.get(id);
-    if (owner && owner !== pageKey) return false;
-    claimed.set(id, pageKey);
-    return true;
-  });
+    if (!owner.has(id)) owner.set(id, pageKey);
+  }
+}
+
+for (const topic of faqTopics) claim(`/faq/${topic.slug}`, topic.items);
+for (const service of services) claim(`/services/${service.slug}`, service.faqs);
+for (const area of locations) claim(`/areas/${area.slug}`, area.faqs);
+for (const category of portfolioCategories) claim(`/portfolio/${category.slug}`, category.faqs);
+
+/** The FAQs this page is allowed to mark up, after global de-duplication. */
+export function uniqueFaqs<T extends { q: string; a: string }>(pagePath: string, items: T[]): T[] {
+  return items.filter((item) => owner.get(normalizeQuestion(item.q)) === pagePath);
 }

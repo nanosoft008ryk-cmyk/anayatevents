@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { pageMeta, jsonLd, breadcrumbSchema, faqSchema, type Crumb } from "@/lib/seo";
+import { uniqueFaqs } from "@/lib/entity-graph";
 
 function trailFor(slug: string): Crumb[] {
   const topic = getFaqTopic(slug);
@@ -34,7 +35,7 @@ export const Route = createFileRoute("/faq/$slug")({
         description: topic.metaDescription,
         path,
       }),
-      scripts: [jsonLd(breadcrumbSchema(trail)), jsonLd(faqSchema(topic.items, path))],
+      scripts: [jsonLd(breadcrumbSchema(trail)), jsonLd(faqSchema(uniqueFaqs(path, topic.items), path))],
     };
   },
   component: FaqTopicPage,

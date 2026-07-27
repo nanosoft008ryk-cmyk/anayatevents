@@ -23,6 +23,7 @@ import {
   imageGallerySchema,
   type Crumb,
 } from "@/lib/seo";
+import { uniqueFaqs } from "@/lib/entity-graph";
 
 /** One trail feeds both the visible breadcrumbs and the BreadcrumbList JSON-LD. */
 function trailFor(slug: string): Crumb[] {
@@ -79,7 +80,7 @@ export const Route = createFileRoute("/areas/$slug")({
             }),
           }),
         ),
-        jsonLd(faqSchema(area.faqs, path)),
+        jsonLd(faqSchema(uniqueFaqs(path, area.faqs), path)),
       ],
     };
   },
