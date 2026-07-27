@@ -128,6 +128,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:locale", content: "en_PK" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#0d0d0d" },
+      { httpEquiv: "content-language", content: "en-PK" },
+      // Ownership verification — paste tokens in src/content/verification.ts.
+      ...verificationMeta,
       { title: "Anayat Events" },
       { property: "og:title", content: "Anayat Events" },
       { name: "twitter:title", content: "Anayat Events" },
