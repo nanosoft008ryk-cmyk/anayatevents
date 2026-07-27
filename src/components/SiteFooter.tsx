@@ -86,7 +86,7 @@ export function SiteFooter() {
             <span className="grain absolute inset-0" />
             {/* Two lines on small screens so the full wordmark fits the
                 viewport; one cinematic line from lg up. */}
-            <p className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-display font-light leading-[0.86] tracking-[-0.02em] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_11%,transparent),color-mix(in_oklab,var(--gold)_5%,transparent)_65%,transparent)] [background-clip:text] [-webkit-background-clip:text] text-[19vw] lg:whitespace-nowrap lg:text-[clamp(6rem,10.5vw,10.5rem)]">
+            <p className="absolute inset-x-0 bottom-2 text-center font-display font-light leading-[0.86] tracking-[-0.02em] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_15%,transparent),color-mix(in_oklab,var(--gold)_6%,transparent)_65%,transparent)] [background-clip:text] [-webkit-background-clip:text] text-[21vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 lg:whitespace-nowrap lg:text-[clamp(6rem,10.5vw,10.5rem)]">
               <span className="block lg:inline">Anayat</span>{" "}
               <span className="block lg:inline">Events</span>
             </p>
@@ -165,7 +165,7 @@ export function SiteFooter() {
 
         {/* Last element on the page. The only space beneath it is the
             clearance the fixed concierge bar needs, nothing more. */}
-        <div className="mt-16 flex flex-col gap-3 border-t border-border pt-8 pb-[max(5.5rem,env(safe-area-inset-bottom))] sm:flex-row sm:items-center sm:justify-between lg:pb-10">
+        <div className="mt-16 flex flex-col gap-3 border-t border-border pt-8 pb-[max(6.5rem,calc(4.5rem+env(safe-area-inset-bottom)))] sm:flex-row sm:items-center sm:justify-between lg:pb-24">
           <p className="font-sans text-[10px] tracking-[0.24em] uppercase text-ivory/70">
             © {new Date().getFullYear()} {site.legalName}
           </p>
