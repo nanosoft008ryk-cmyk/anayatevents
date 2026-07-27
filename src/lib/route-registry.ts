@@ -17,7 +17,7 @@ import { locations } from "@/content/locations";
 import { portfolioCategories, portfolioProjects } from "@/content/portfolio";
 import { articles, journalCategories } from "@/content/journal";
 import { faqTopics } from "@/content/faqs";
-import { photo } from "@/content/images";
+import { photo, photos } from "@/content/images";
 
 export interface PageEntry {
   /** Absolute, slash-prefixed, lowercase, hyphen-separated path. */
@@ -138,4 +138,73 @@ export function allPages(): (PageEntry & { priority: string })[] {
     .sort((a, b) => a.path.localeCompare(b.path))
     .sort((a, b) => a.path.split("/").length - b.path.split("/").length)
     .map((e) => ({ ...e, priority: priorityFor(e.path) }));
+}
+
+/* --------------------------------------------------------------------------
+ * Image inventory, per page.
+ *
+ * The image sitemap is generated from the same content the pages render, so a
+ * photograph that appears on a page is declared for that page and nowhere it
+ * does not appear. The vault carries the complete archive.
+ * ------------------------------------------------------------------------ */
+
+export interface PageImage {
+  url: string;
+  title: string;
+  caption?: string;
+}
+
+export interface PageImages {
+  path: string;
+  images: PageImage[];
+}
+
+function resolve(ids: (string | undefined)[]): PageImage[] {
+  const out: PageImage[] = [];
+  const seen = new Set<string>();
+  for (const id of ids) {
+    if (!id) continue;
+    try {
+      const p = photo(id);
+      if (seen.has(p.url)) continue;
+      seen.add(p.url);
+      out.push({ url: p.url, title: p.alt, caption: p.caption });
+    } catch {
+      /* an id that no longer exists simply drops out */
+    }
+  }
+  return out;
+}
+
+export function allPageImages(): PageImages[] {
+  const entries: PageImages[] = [
+    { path: "/vault", images: resolve(photos.map((p) => p.id)) },
+    ...services.map((s) => ({
+      path: `/services/${normalizeSlug(s.slug)}`,
+      images: resolve([s.hero, ...((s as { gallery?: string[] }).gallery ?? [])]),
+    })),
+    ...locations.map((l) => ({
+      path: `/areas/${normalizeSlug(l.slug)}`,
+      images: resolve([l.hero, ...l.inspiration.gallery]),
+    })),
+    ...portfolioCategories.map((c) => ({
+      path: `/portfolio/${normalizeSlug(c.slug)}`,
+      images: resolve([c.hero, ...c.heroFrames]),
+    })),
+    ...portfolioProjects.map((p) => ({
+      path: `/portfolio/project/${normalizeSlug(p.slug)}`,
+      images: resolve([
+        (p as { hero?: string }).hero,
+        ...((p as { heroFrames?: string[] }).heroFrames ?? []),
+        ...((p as { gallery?: string[] }).gallery ?? []),
+      ]),
+    })),
+    ...articles.map((a) => ({
+      path: `/journal/${normalizeSlug(a.slug)}`,
+      images: resolve([a.hero]),
+    })),
+  ];
+
+  const known = new Set(allPages().map((p) => p.path));
+  return entries.filter((e) => known.has(e.path) && e.images.length > 0);
 }
