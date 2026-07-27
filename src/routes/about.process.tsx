@@ -1,9 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { consultationSteps, site } from "@/content/site";
 import { photo } from "@/content/images";
+import { processPage } from "@/content/about";
+import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
+import { Plate } from "@/components/Plate";
+import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { LuxTextLink } from "@/components/ui/LuxButton";
 import { pageMeta, jsonLd, breadcrumbSchema, itemListSchema, type Crumb } from "@/lib/seo";
 
 const PATH = "/about/process";
@@ -17,9 +21,9 @@ const trail: Crumb[] = [
 export const Route = createFileRoute("/about/process")({
   head: () => ({
     ...pageMeta({
-      title: "Our Process — From Enquiry to Evening | Anayat Events Lahore",
+      title: "Our Process — Dream, Discovery, Concept, Celebration, Memory",
       description:
-        "The five stages of an Anayat Events commission: enquiry, conversation, designed proposal, production build and the evening itself — with timelines and what you receive.",
+        "Eight movements from your first sentence to the photographs you keep: how Anayat Events designs, plans, builds and serves a Lahore celebration.",
       path: PATH,
       image: photo("ae-06").url,
     }),
@@ -27,9 +31,9 @@ export const Route = createFileRoute("/about/process")({
       jsonLd(breadcrumbSchema(trail)),
       jsonLd(
         itemListSchema({
-          name: "Our planning process",
+          name: "The Anayat Events process",
           path: PATH,
-          items: consultationSteps.map((s) => ({ name: s.title, path: PATH })),
+          items: processPage.movements.map((m) => ({ name: m.name, path: PATH })),
         }),
       ),
     ],
@@ -38,56 +42,99 @@ export const Route = createFileRoute("/about/process")({
 });
 
 function ProcessPage() {
-  const hero = photo("ae-06");
-
   return (
     <main className="bg-background">
-      <section className="mx-auto max-w-7xl px-6 pt-32 pb-12 md:px-10 md:pt-40">
-        <Breadcrumbs trail={trail} className="mb-8" />
-        <p className="font-sans text-[11px] tracking-[0.34em] uppercase text-gold">The method</p>
-        <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.02] font-light text-ivory md:text-7xl">
-          Five stages,
-          <span className="block italic">no surprises on the day.</span>
-        </h1>
-        <p className="mt-7 max-w-2xl font-sans text-[15px] leading-[1.85] font-light text-muted-foreground">
-          Every commission runs the same way, whether it is a nikah for forty at home or a full
-          wedding week for eight hundred. Replies within {site.responseTime.toLowerCase()}.
+      {/* ── Hero: one word per movement, set as a masthead ──────────────── */}
+      <section className="mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-48 lg:pb-28">
+        <Breadcrumbs trail={trail} className="mb-12" />
+        <p className="font-sans text-[10px] tracking-[0.46em] uppercase text-gold">
+          {processPage.hero.eyebrow}
         </p>
-      </section>
+        <h1 className="mt-9 max-w-[16ch] font-display text-[2.8rem] leading-[0.97] font-light text-ivory sm:text-5xl lg:text-[6rem]">
+          <RevealWords text={processPage.hero.title} />
+        </h1>
+        <Reveal delay={520}>
+          <p className="mt-12 max-w-xl font-sans text-[15px] leading-[2.1] font-light text-muted-foreground">
+            {processPage.hero.lede} Replies {site.responseTime.toLowerCase()}.
+          </p>
+        </Reveal>
 
-      <section>
-        <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <img
-            src={hero.url}
-            alt={hero.alt}
-            className="aspect-[16/9] w-full border border-border object-cover"
-          />
-        </div>
-      </section>
-
-      <section className="border-t border-border mt-16 md:mt-24">
-        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
-          <ol className="divide-y divide-border border-y border-border">
-            {consultationSteps.map((step) => (
-              <li key={step.step} className="grid gap-6 py-12 md:grid-cols-[140px_1fr] md:gap-14">
-                <p className="font-display text-5xl font-light text-gold-deep">{step.step}</p>
-                <div className="max-w-2xl">
-                  <h2 className="font-display text-3xl font-light text-ivory md:text-4xl">
-                    {step.title}
-                  </h2>
-                  <p className="mt-4 font-sans text-base leading-[1.9] font-light text-muted-foreground">
-                    {step.body}
-                  </p>
-                </div>
-              </li>
+        <Reveal delay={640}>
+          <p className="mt-20 flex flex-wrap items-baseline gap-x-5 gap-y-2 border-t border-border pt-10 font-display text-xl font-light text-muted-foreground/55 lg:text-3xl">
+            {processPage.movements.map((m, i) => (
+              <span key={m.name} className="flex items-baseline gap-5">
+                <span className={i === 0 ? "text-gold" : ""}>{m.name}</span>
+                {i < processPage.movements.length - 1 && (
+                  <span aria-hidden className="text-gold-deep/60 text-sm">
+                    ↓
+                  </span>
+                )}
+              </span>
             ))}
-          </ol>
+          </p>
+        </Reveal>
+      </section>
+
+      {/* ── Movements: full-bleed plate per stage, type floating over it ── */}
+      {processPage.movements.map((m, i) => (
+        <section key={m.index} className="relative isolate overflow-hidden">
+          <div className="mx-auto max-w-[92rem] px-6 py-10 md:px-12 lg:py-16">
+            <div
+              className={`relative grid gap-8 lg:grid-cols-12 lg:items-center ${
+                i % 2 ? "" : ""
+              }`}
+            >
+              <Reveal
+                variant="mask"
+                className={`lg:col-span-8 ${i % 2 ? "lg:col-start-5" : "lg:col-start-1"}`}
+              >
+                <Plate
+                  image={photo(m.photo)}
+                  ratio="16/9"
+                  speed={i % 2 ? -10 : 10}
+                  fade={i % 3 === 0 ? "sides" : undefined}
+                  imgClassName="brightness-[0.78]"
+                  sizes="(min-width: 1024px) 66vw, 100vw"
+                />
+              </Reveal>
+
+              <div
+                className={`relative z-10 lg:col-span-6 lg:row-start-1 ${
+                  i % 2 ? "lg:col-start-1 lg:-mr-10" : "lg:col-start-7 lg:-ml-10"
+                }`}
+              >
+                <div className="glass rounded-[25px] px-7 py-10 md:px-12 md:py-14">
+                  <p className="font-sans text-[10px] tracking-[0.44em] uppercase text-gold-deep">
+                    {m.index} · {m.caption}
+                  </p>
+                  <Reveal delay={80} variant="mask">
+                    <h2 className="mt-6 font-display text-[2.6rem] leading-[0.98] font-light text-ivory lg:text-[4rem]">
+                      {m.name}
+                    </h2>
+                  </Reveal>
+                  <Reveal delay={160}>
+                    <p className="mt-7 max-w-md font-sans text-[15px] leading-[2.05] font-light text-muted-foreground">
+                      {m.body}
+                    </p>
+                  </Reveal>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <section className="mx-auto max-w-[92rem] px-6 py-24 md:px-12">
+        <div className="flex flex-wrap gap-x-12 gap-y-5 border-t border-border pt-10">
+          <LuxTextLink to="/about/craftsmanship">What happens in the workshop</LuxTextLink>
+          <LuxTextLink to="/about/promise">What we promise along the way</LuxTextLink>
+          <LuxTextLink to="/services">Services in full</LuxTextLink>
         </div>
       </section>
 
       <CtaBand
-        eyebrow="Stage one"
-        title="Send the date. We will take it from there."
+        eyebrow="Movement one"
+        title="It starts with a dream, out loud."
         body="Tell us the date, the guest count and the feeling you want left behind. One planner replies personally."
       />
     </main>
