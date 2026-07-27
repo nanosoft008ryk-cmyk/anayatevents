@@ -11,7 +11,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { jsonLd, organizationSchema, websiteSchema } from "../lib/seo";
+import { jsonLd, organizationSchema, websiteSchema, siteNavigationSchema } from "../lib/seo";
+import { verificationMeta } from "../content/verification";
+import { navigation } from "../content/navigation";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { ConciergeBar } from "../components/ConciergeBar";
