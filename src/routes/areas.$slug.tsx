@@ -13,6 +13,9 @@ import { Plate } from "@/components/Plate";
 import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { AreaMap } from "@/components/AreaMap";
+import { AnswerBlock } from "@/components/aeo/AnswerBlock";
+import { FactTable } from "@/components/aeo/FactTable";
+import { locationAnswerItems, locationFacts } from "@/content/answers";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import {
   pageMeta,
@@ -102,7 +105,10 @@ export const Route = createFileRoute("/areas/$slug")({
             }),
           }),
         ),
-        ...faqScripts(uniqueFaqs(path, area.faqs), path),
+        ...faqScripts(
+          uniqueFaqs(path, [...locationAnswerItems(params.slug), ...area.faqs]),
+          path,
+        ),
       ],
     };
   },
