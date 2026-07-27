@@ -40,7 +40,7 @@ export function RelatedConstellation({
                 {group.items.map((item) => (
                   <li key={item.path}>
                     <Link
-                      to={item.path}
+                      to={item.path as never}
                       className="group block"
                       aria-label={`${item.name} — ${group.label.toLowerCase()}`}
                     >
