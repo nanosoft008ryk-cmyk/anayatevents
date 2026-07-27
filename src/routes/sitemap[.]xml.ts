@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { BASE_URL } from "@/lib/seo";
 import { services } from "@/content/services";
 import { locations } from "@/content/locations";
-import { portfolioCategories } from "@/content/portfolio";
+import { portfolioCategories, portfolioProjects } from "@/content/portfolio";
 import { articles } from "@/content/journal";
 import { faqTopics } from "@/content/faqs";
 
@@ -24,6 +24,7 @@ function entries(): { path: string; priority: string; lastmod?: string }[] {
     ...locations.map((l) => ({ path: `/areas/${l.slug}`, priority: "0.8" })),
     { path: "/portfolio", priority: "0.8" },
     ...portfolioCategories.map((c) => ({ path: `/portfolio/${c.slug}`, priority: "0.7" })),
+    ...portfolioProjects.map((p) => ({ path: `/portfolio/project/${p.slug}`, priority: "0.7" })),
     { path: "/vault", priority: "0.6" },
     { path: "/journal", priority: "0.8" },
     ...articles.map((a) => ({
