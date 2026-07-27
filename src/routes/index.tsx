@@ -148,38 +148,88 @@ function Home() {
         </div>
       </section>
 
-      {/* ── III. Manifesto — overlapping plate, asymmetric ──────────── */}
-      <section className="chapter relative overflow-hidden py-16 lg:py-28">
-        <div className="mx-auto grid max-w-[92rem] items-center gap-y-16 px-6 md:px-12 lg:grid-cols-12 lg:gap-x-0">
-          <Reveal variant="mask" className="lg:col-span-6 lg:col-start-1 lg:-mr-24">
-            <Plate image={photo("ae-05")} ratio="4/5" speed={1.1} fade="both" />
-          </Reveal>
+      {/* ── III. Manifesto — type-led, hairline creed, twin small plates ── */}
+      <section className="chapter relative overflow-hidden pt-24 pb-24 lg:pt-36 lg:pb-40">
+        <div className="mx-auto max-w-[92rem] px-6 md:px-12">
+          <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-16">
+            {/* Statement */}
+            <Reveal className="lg:col-span-7">
+              <p className="flex items-center gap-5 font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
+                <span className="h-px w-10 bg-gold/60" />
+                The house
+              </p>
+              <h2 className="mt-10 font-display text-[2.6rem] leading-[0.98] font-light text-ivory lg:text-[4.2rem]">
+                We do not sell decor.
+                <span className="mt-2 block pl-8 italic text-gold-light lg:pl-20">
+                  We take responsibility
+                </span>
+                <span className="block">for an evening.</span>
+              </h2>
+            </Reveal>
 
-          <Reveal
-            delay={200}
-            className="relative z-10 lg:col-span-6 lg:col-start-6 lg:pl-16 xl:pl-24"
-          >
-            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">The house</p>
-            <h2 className="mt-8 font-display text-[2.5rem] leading-[1.04] font-light text-ivory lg:text-[3.6rem]">
-              We do not sell decor.
-              <span className="block italic text-gold-light">
-                We take responsibility for an evening.
-              </span>
-            </h2>
-            <p className="mt-10 max-w-lg font-sans text-[15px] leading-[2] font-light text-muted-foreground">
-              Design, fabrication, florals, lighting and the kitchen all sit inside one house.
-              Nothing is subcontracted to a stranger and then hoped for. The person who reads your
-              first message stands at your gate on the night.
-            </p>
-            <p className="mt-6 max-w-lg font-sans text-[15px] leading-[2] font-light text-muted-foreground">
-              That is the whole difference. It is why a family of four hundred can sit down within
-              minutes of each other, and why the marigold is still fresh at one in the morning.
-            </p>
-            <LuxTextLink to="/about" className="mt-10">
-              Our story
-            </LuxTextLink>
-          </Reveal>
+            {/* Offset narrow plate */}
+            <Reveal variant="mask" delay={180} className="lg:col-span-4 lg:col-start-9 lg:mt-6">
+              <div className="relative ml-auto w-full max-w-[19rem]">
+                <Plate image={photo("ae-05")} ratio="3/4" speed={0.5} />
+                <span className="pointer-events-none absolute -inset-3 border-[0.5px] border-gold/20" />
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Creed — three tenets on hairlines, breaking the grid */}
+          <div className="mt-20 grid gap-y-14 lg:mt-28 lg:grid-cols-12 lg:gap-x-16">
+            <Reveal delay={120} className="lg:col-span-3 lg:col-start-1 lg:pt-24">
+              <div className="relative w-full max-w-[15rem]">
+                <Plate image={photo("ae-17")} ratio="4/5" speed={0.9} fade="bottom" />
+              </div>
+            </Reveal>
+
+            <div className="lg:col-span-8 lg:col-start-5">
+              {[
+                {
+                  n: "I",
+                  head: "One house, no strangers",
+                  body: "Design, fabrication, florals, lighting and the kitchen all sit under one roof. Nothing is handed to a subcontractor and then hoped for.",
+                },
+                {
+                  n: "II",
+                  head: "The same face, first to last",
+                  body: "The person who reads your first message stands at your gate on the night, and is still standing there when the last car leaves.",
+                },
+                {
+                  n: "III",
+                  head: "Held to the hour",
+                  body: "It is why four hundred guests sit down within minutes of each other, and why the marigold is still fresh at one in the morning.",
+                },
+              ].map((t, i) => (
+                <Reveal key={t.n} delay={i * 110}>
+                  <article className="group/creed relative grid grid-cols-[auto_1fr] items-start gap-x-8 py-10 lg:gap-x-14">
+                    <span className="font-display text-[1.5rem] leading-none font-light text-gold-deep transition-colors duration-700 group-hover/creed:text-gold">
+                      {t.n}
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="font-display text-[1.5rem] leading-tight font-light text-ivory lg:text-[2rem]">
+                        {t.head}
+                      </h3>
+                      <p className="mt-4 max-w-xl font-sans text-[14px] leading-[2] font-light text-muted-foreground">
+                        {t.body}
+                      </p>
+                    </div>
+                    <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-border" />
+                    <span className="pointer-events-none absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-gold transition-transform duration-[900ms] [transition-timing-function:var(--ease-lux)] group-hover/creed:scale-x-100" />
+                  </article>
+                </Reveal>
+              ))}
+
+              <Reveal delay={260}>
+                <LuxTextLink to="/about" className="mt-10">
+                  Our story
+                </LuxTextLink>
+              </Reveal>
+            </div>
+          </div>
         </div>
+
 
         <Reveal
           variant="fade"
