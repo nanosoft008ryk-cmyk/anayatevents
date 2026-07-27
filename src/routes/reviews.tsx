@@ -74,6 +74,11 @@ function ReviewCard({ review }: { review: GoogleReview }) {
             src={review.photoUri}
             alt=""
             loading="lazy"
+            // Google's avatar CDN rejects requests carrying a referrer.
+            referrerPolicy="no-referrer"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
             width={36}
             height={36}
             className="h-9 w-9 rounded-full object-cover grayscale"
