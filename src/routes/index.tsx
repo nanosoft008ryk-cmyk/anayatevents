@@ -17,7 +17,7 @@ import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { GoogleProfileLink } from "@/components/GoogleProfileLink";
 import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
-import { imgAttrs, preloadLinks } from "@/lib/img";
+import { preloadLinks } from "@/lib/img";
 import { SmartImg } from "@/components/ui/SmartImg";
 
 const HERO = "ae-22";
