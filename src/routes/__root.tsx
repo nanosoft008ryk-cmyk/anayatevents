@@ -88,6 +88,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:locale", content: "en_PK" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#0d0d0d" },
+      { title: "Anayat Events" },
+      { property: "og:title", content: "Anayat Events" },
+      { name: "twitter:title", content: "Anayat Events" },
+      { name: "description", content: "Anayat Luxe Events is a premium event management and catering website showcasing luxury services." },
+      { property: "og:description", content: "Anayat Luxe Events is a premium event management and catering website showcasing luxury services." },
+      { name: "twitter:description", content: "Anayat Luxe Events is a premium event management and catering website showcasing luxury services." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/MWYvK9OKoZNhCCTgMs8DanFwdj93/social-images/social-1785160503867-WhatsApp_Image_2026-07-25_at_5.07.55_PM.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/MWYvK9OKoZNhCCTgMs8DanFwdj93/social-images/social-1785160503867-WhatsApp_Image_2026-07-25_at_5.07.55_PM.webp" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       {
@@ -100,7 +109,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@200;300;400;500&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
     scripts: [jsonLd(organizationSchema())],
   }),
