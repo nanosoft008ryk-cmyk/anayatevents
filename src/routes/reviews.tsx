@@ -27,7 +27,12 @@ const trail: Crumb[] = [
 ];
 
 export const Route = createFileRoute("/reviews")({
+  // Sort order lives in the URL so a sorted view is shareable.
+  validateSearch: (search: Record<string, unknown>) => ({
+    sort: search.sort === "rating" ? ("rating" as const) : ("newest" as const),
+  }),
   loader: ({ context }) => context.queryClient.ensureQueryData(googleReviewsQuery()),
+
   head: ({ loaderData }) => ({
     ...pageMeta({
       title: "Google Reviews — Anayat Events & Catering, Lahore",
