@@ -146,7 +146,15 @@ export function SiteFooter() {
             {site.serviceArea} · Rated {site.rating.value} from {site.rating.count} reviews
           </p>
         </div>
+
+        {/* Oversized wordmark, cropped by the base of the page. */}
+        <div aria-hidden className="mt-14 -mb-[0.16em] select-none overflow-hidden">
+          <p className="whitespace-nowrap text-center font-display font-light leading-[0.78] tracking-[-0.02em] text-ivory/[0.055] text-[clamp(3.4rem,15.6vw,17rem)]">
+            Anayat Events
+          </p>
+        </div>
       </div>
     </footer>
+
   );
 }
