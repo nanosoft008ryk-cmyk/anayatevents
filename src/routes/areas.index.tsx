@@ -77,7 +77,7 @@ function AreasIndex() {
             </span>
           </h1>
           <Reveal delay={620}>
-            <p className="mt-10 max-w-2xl font-sans text-[15px] leading-[2] font-light text-muted-foreground">
+            <p className="mt-5 max-w-2xl font-sans text-[15px] leading-[2] font-light text-muted-foreground">
               One production house, one standard, and a team that travels to wherever
               your story is being told.
             </p>

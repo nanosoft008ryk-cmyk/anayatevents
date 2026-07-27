@@ -51,7 +51,7 @@ function TeamPage() {
               <RevealWords text={teamPage.hero.title} />
             </h1>
             <Reveal delay={520}>
-              <p className="mt-10 max-w-xl font-sans text-[15px] leading-[2.1] font-light text-muted-foreground">
+              <p className="mt-5 max-w-xl font-sans text-[15px] leading-[2.1] font-light text-muted-foreground">
                 {teamPage.hero.lede}
               </p>
             </Reveal>

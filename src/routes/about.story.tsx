@@ -59,7 +59,7 @@ function StoryPage() {
             <RevealWords text={storyPage.hero.title} />
           </h1>
           <Reveal delay={520}>
-            <span aria-hidden className="mt-12 block h-px w-24 bg-gold" />
+            <span aria-hidden className="mt-5 block h-px w-24 bg-gold" />
           </Reveal>
         </div>
       </section>

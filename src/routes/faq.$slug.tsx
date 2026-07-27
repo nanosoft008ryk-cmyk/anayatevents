@@ -52,7 +52,7 @@ function FaqTopicPage() {
         <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.02] font-light text-ivory md:text-6xl">
           {topic.name}
         </h1>
-        <p className="mt-7 max-w-2xl font-display text-xl leading-relaxed font-light italic text-muted-foreground md:text-2xl">
+        <p className="mt-5 max-w-2xl font-display text-xl leading-relaxed font-light italic text-muted-foreground md:text-2xl">
           {topic.lede}
         </p>
       </section>

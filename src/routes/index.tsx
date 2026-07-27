@@ -100,7 +100,7 @@ function Home() {
               </span>
             </h1>
 
-            <div className="mt-12 max-w-md">
+            <div className="mt-5 max-w-md">
               <Reveal delay={780}>
                 <p className="font-sans text-[14px] leading-[2] font-light tracking-wide text-foreground/70">
                   {site.description}

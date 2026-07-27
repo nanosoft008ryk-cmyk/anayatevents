@@ -149,7 +149,7 @@ function ServicePage() {
             <RevealWords text={service.title} />
           </h1>
           <Reveal variant="rise" delay={200}>
-            <p className="mt-8 max-w-2xl font-display text-xl leading-[1.5] font-light text-ivory/80 italic md:text-3xl">
+            <p className="mt-5 max-w-2xl font-display text-xl leading-[1.5] font-light text-ivory/80 italic md:text-3xl">
               {service.lede}
             </p>
           </Reveal>

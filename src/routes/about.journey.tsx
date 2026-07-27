@@ -73,7 +73,7 @@ function JourneyPage() {
           <RevealWords text={journeyPage.hero.title} />
         </h1>
         <Reveal delay={520}>
-          <div className="mt-16 flex flex-wrap items-baseline gap-x-8 gap-y-3 border-t border-border pt-8">
+          <div className="mt-5 flex flex-wrap items-baseline gap-x-8 gap-y-3 border-t border-border pt-8">
             {journeyPage.milestones.map((m) => (
               <span
                 key={m.year}

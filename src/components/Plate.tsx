@@ -95,7 +95,9 @@ export function Plate({
           )}
           style={speed ? { transform: "scale(1.14)" } : undefined}
         />
-        <span className="pointer-events-none absolute inset-0 opacity-70 vignette" />
+        {/* No blanket overlay — captions sit outside the frame, so the
+            photography stays clean and vivid. */}
+
       </div>
       {caption && (
         <figcaption className="mt-4 font-sans text-[10px] leading-relaxed tracking-[0.26em] uppercase text-muted-foreground transition-colors duration-500 group-hover/plate:text-gold-deep">

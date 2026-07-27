@@ -53,7 +53,7 @@ function PhilosophyPage() {
           <RevealWords text={philosophyPage.hero.title} />
         </h1>
         <Reveal delay={500}>
-          <p className="mt-14 max-w-lg font-sans text-[15px] leading-[2.1] font-light text-muted-foreground">
+          <p className="mt-5 max-w-lg font-sans text-[15px] leading-[2.1] font-light text-muted-foreground">
             {philosophyPage.hero.lede}
           </p>
         </Reveal>

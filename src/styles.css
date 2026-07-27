@@ -339,6 +339,81 @@
   animation: drift 26s ease-in-out infinite alternate;
 }
 
+/* ── Smart overlay system ─────────────────────────────────────────────
+   Applied ONLY behind typography. Photography without text stays clean. */
+
+/* Feathered radial haze that darkens just under a text block. */
+@utility text-haze {
+  background: radial-gradient(
+    120% 90% at 20% 78%,
+    color-mix(in oklab, var(--background) 82%, transparent) 0%,
+    color-mix(in oklab, var(--background) 52%, transparent) 42%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(120% 100% at 20% 78%, black 0%, transparent 85%);
+}
+
+/* Directional cinematic gradient — keeps the far side of the frame vivid. */
+@utility read-veil {
+  background: linear-gradient(
+    100deg,
+    color-mix(in oklab, var(--background) 78%, transparent) 0%,
+    color-mix(in oklab, var(--background) 46%, transparent) 38%,
+    transparent 72%
+  );
+}
+
+/* Localised glass shelf behind a headline block. */
+@utility text-shelf {
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--background) 70%, transparent),
+    transparent
+  );
+  backdrop-filter: blur(3px);
+}
+
+/* ── Floating boutique navigation panel ──────────────────────────────── */
+@utility lux-panel {
+  background: color-mix(in oklab, var(--surface) 74%, transparent);
+  backdrop-filter: blur(28px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--gold) 16%, transparent);
+  border-radius: 22px;
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, var(--gold-light) 10%, transparent) inset,
+    0 40px 90px -50px oklch(0 0 0 / 92%),
+    0 10px 40px -28px oklch(0.752 0.108 85.5 / 22%);
+}
+
+@utility panel-in {
+  animation: panel-in 0.6s var(--ease-lux) both;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
+/* Depth field behind the oversized footer wordmark. */
+@utility wordmark-bed {
+  background:
+    radial-gradient(
+      60% 120% at 50% 100%,
+      color-mix(in oklab, var(--gold) 12%, transparent) 0%,
+      transparent 70%
+    ),
+    linear-gradient(to top, color-mix(in oklab, var(--surface) 70%, transparent), transparent);
+}
+
+
 @keyframes drift {
   from {
     transform: translate3d(0, 0, 0);

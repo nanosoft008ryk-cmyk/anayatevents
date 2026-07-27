@@ -69,7 +69,7 @@ function ContactPage() {
                 </span>
               </h1>
               <Reveal delay={480}>
-                <p className="mt-9 max-w-xl font-sans text-[15px] leading-[2] font-light text-ivory/70">
+                <p className="mt-5 max-w-xl font-sans text-[15px] leading-[2] font-light text-ivory/70">
                   There is no queue and no ticket number. One planner reads every enquiry and
                   answers it themselves — {site.responseTime.toLowerCase()} in writing, and
                   immediately by phone during studio hours.

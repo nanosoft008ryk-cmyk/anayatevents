@@ -113,7 +113,7 @@ function JournalIndex() {
                 </span>
               </h1>
               <Reveal delay={520}>
-                <p className="mt-10 max-w-xl font-sans text-[15px] leading-[2] font-light text-ivory/70">
+                <p className="mt-5 max-w-xl font-sans text-[15px] leading-[2] font-light text-ivory/70">
                   Ideas, inspiration and craftsmanship — recorded from the production floor
                   in Lahore, where the ladders, the flowers and the kitchens actually are.
                 </p>
