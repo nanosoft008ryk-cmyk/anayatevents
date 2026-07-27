@@ -17,7 +17,8 @@ import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { GoogleProfileLink } from "@/components/GoogleProfileLink";
 import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
-import { imgAttrs } from "@/lib/img";
+import { imgAttrs, preloadLinks } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 
 const HERO = "ae-22";
 const HERO_FRAMES = ["ae-22", "ae-13", "ae-16", "ae-26"];
@@ -32,20 +33,13 @@ export const Route = createFileRoute("/")({
       path: "/",
       image: photo(HERO).url,
     });
-    const hero = imgAttrs(HERO, photo(HERO).url, "100vw");
+    const heroPreload = preloadLinks(HERO, photo(HERO).url, "100vw");
     return {
     ...meta,
     links: [
       ...(meta.links ?? []),
       // Discover the first cinematic frame in the initial document.
-      {
-        rel: "preload",
-        as: "image",
-        href: hero.src,
-        imageSrcSet: hero.srcSet,
-        imageSizes: "100vw",
-        fetchPriority: "high",
-      },
+      ...heroPreload,
     ],
     scripts: [
       jsonLd(
@@ -134,11 +128,11 @@ function Home() {
             <Reveal variant="mask" delay={520}>
               <div className="aspect-[3/4] w-full border-[0.5px] border-gold/30 p-4">
                 <div className="relative h-full w-full overflow-hidden">
-                  <img
-                    {...imgAttrs("ae-05", photo("ae-05").url, "(min-width: 1024px) 33vw, 100vw")}
+                  <SmartImg
+                    id="ae-05"
+                    fallbackUrl={photo("ae-05").url}
+                    sizes="(min-width: 1024px) 33vw, 100vw"
                     alt={photo("ae-05").alt}
-                    loading="lazy"
-                    decoding="async"
                     className="h-full w-full object-cover contrast-125 transition-transform duration-[1400ms] [transition-timing-function:var(--ease-lux)] hover:scale-105"
                   />
                   <span className="pointer-events-none absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.45)]" />
@@ -408,11 +402,11 @@ function Home() {
       {/* ── VII. Process — horizontal timeline over a dark plate ────── */}
       <section className="relative isolate overflow-hidden py-20 md:py-28 lg:py-40">
         <div className="absolute inset-0 -z-10">
-          <img
-            {...imgAttrs("ae-08", photo("ae-08").url, "100vw")}
+          <SmartImg
+            id="ae-08"
+            fallbackUrl={photo("ae-08").url}
+            sizes="100vw"
             alt=""
-            loading="lazy"
-            decoding="async"
             className="h-full w-full object-cover opacity-[0.18] drift-slow"
           />
           {/* Legibility stack — this section is entirely type over photography. */}
