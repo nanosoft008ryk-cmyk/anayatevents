@@ -78,6 +78,7 @@
   --ring: oklch(0.752 0.108 85.5 / 60%);
 
   --radius: 2px;
+  --radius-btn: 25px;
 
   --gradient-foil: linear-gradient(
     100deg,
@@ -403,5 +404,32 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ---------- Button shape system ---------- */
+
+/*
+ * Single source of truth for every button/CTA surface: soft 25px radius,
+ * tactile press state, and a uniform disabled treatment. Applies to links,
+ * buttons and dialog actions alike so hover/active/disabled stay identical
+ * across mobile and desktop.
+ */
+@utility btn-shape {
+  border-radius: var(--radius-btn);
+  min-height: 2.75rem;
+  transition-property: transform, color, background-color, border-color, box-shadow, opacity;
+  transition-duration: 500ms;
+  transition-timing-function: var(--ease-lux);
+
+  &:active:not(:disabled):not([aria-disabled="true"]) {
+    transform: scale(0.975);
+  }
+
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.45;
+    pointer-events: none;
+    cursor: not-allowed;
   }
 }

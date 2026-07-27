@@ -105,7 +105,7 @@ export function ProposalDialog({ children }: { children: ReactNode }) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
-        className="max-h-[88vh] max-w-xl overflow-y-auto rounded-[20px] border-[0.5px] border-gold/30 bg-[color-mix(in_oklab,var(--background)_94%,transparent)] p-8 backdrop-blur-xl md:p-10"
+        className="max-h-[88vh] max-w-xl overflow-y-auto rounded-[25px] border-[0.5px] border-gold/30 bg-[color-mix(in_oklab,var(--background)_94%,transparent)] p-8 backdrop-blur-xl md:p-10"
       >
         <DialogHeader className="space-y-3 text-left">
           <p className="font-sans text-[10px] tracking-[0.32em] uppercase text-gold">
@@ -222,7 +222,7 @@ export function ProposalDialog({ children }: { children: ReactNode }) {
             {site.email && (
               <button
                 type="submit"
-                className="group inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-[18px] border-[0.5px] border-gold/50 bg-gold/10 px-6 py-3.5 font-sans text-[10px] tracking-[0.28em] uppercase text-gold transition-colors duration-500 hover:bg-gold/20"
+                className="group inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-[25px] border-[0.5px] border-gold/50 bg-gold/10 px-6 py-3.5 font-sans text-[10px] tracking-[0.28em] uppercase text-gold transition-colors duration-500 hover:bg-gold/20"
               >
                 <Mail className="size-4" strokeWidth={1.25} aria-hidden="true" />
                 Send by email
@@ -231,7 +231,7 @@ export function ProposalDialog({ children }: { children: ReactNode }) {
             <button
               type="button"
               onClick={submit("whatsapp")}
-              className="group inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-[18px] border-[0.5px] border-border-strong px-6 py-3.5 font-sans text-[10px] tracking-[0.28em] uppercase text-ivory/80 transition-colors duration-500 hover:border-gold/50 hover:text-gold"
+              className="group inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-[25px] border-[0.5px] border-border-strong px-6 py-3.5 font-sans text-[10px] tracking-[0.28em] uppercase text-ivory/80 transition-colors duration-500 hover:border-gold/50 hover:text-gold"
             >
               <MessageCircle className="size-4" strokeWidth={1.25} aria-hidden="true" />
               Send on WhatsApp
