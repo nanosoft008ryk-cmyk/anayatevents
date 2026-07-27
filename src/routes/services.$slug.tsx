@@ -108,6 +108,7 @@ export const Route = createFileRoute("/services/$slug")({
 
 function ServicePage() {
   const { service } = Route.useLoaderData() as { service: Service };
+  const params = Route.useParams();
   const trail = trailFor(service.slug);
   const hero = photo(service.hero);
   const gallery = service.gallery.map(photo);
@@ -414,7 +415,7 @@ function ServicePage() {
         title="Let's create something unforgettable."
         body={`Tell us the date and the guest count for your ${service.name.toLowerCase()}. One planner reads every enquiry and replies within 12 working hours.`}
       />
+    <RelatedConstellation kind="service" slug={params.slug} options={{ kinds: ["collection", "article", "area", "faq"] }} />
     </main>
   );
-}<RelatedConstellation kind="service" slug={params.slug} options={{ kinds: ["collection", "article", "area", "faq"] }} />
-      
+}

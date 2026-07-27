@@ -42,6 +42,7 @@ export const Route = createFileRoute("/faq/$slug")({
 
 function FaqTopicPage() {
   const { topic } = Route.useLoaderData() as { topic: FaqTopic };
+  const params = Route.useParams();
   const trail = trailFor(topic.slug);
   const others = faqTopics.filter((t) => t.slug !== topic.slug);
 

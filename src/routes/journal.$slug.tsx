@@ -124,6 +124,7 @@ function ReadingRule() {
 
 function ArticlePage() {
   const { article } = Route.useLoaderData() as { article: Article };
+  const params = Route.useParams();
   const trail = trailFor(article.slug);
   const hero = photo(article.hero);
   const extras = articleExtras(article.slug);
@@ -321,7 +322,7 @@ function ArticlePage() {
         title="If this is the evening you want, tell us the date."
         body="Everything written here was learnt on a real night in Lahore. A planner replies personally — never a template."
       />
+    <RelatedConstellation kind="article" slug={params.slug} options={{ kinds: ["service", "collection", "area", "faq"] }} />
     </main>
   );
-}<RelatedConstellation kind="article" slug={params.slug} options={{ kinds: ["service", "collection", "area", "faq"] }} />
-      
+}

@@ -74,6 +74,7 @@ export const Route = createFileRoute("/portfolio/project/$slug")({
 
 function ProjectCaseStudy() {
   const { project } = Route.useLoaderData() as { project: PortfolioProject };
+  const params = Route.useParams();
   const trail = trailFor(project.slug);
   const category = getPortfolioCategory(project.category);
   const gallery = project.gallery.map(photo);

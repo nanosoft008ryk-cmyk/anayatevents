@@ -90,6 +90,7 @@ const spans: Record<PortfolioCategory["personality"], string[]> = {
 
 function PortfolioCategoryPage() {
   const { category } = Route.useLoaderData() as { category: PortfolioCategory };
+  const params = Route.useParams();
   const trail = trailFor(category.slug);
   const frames = category.photos.map(photo);
   const projects = projectsForCategory(category.slug);

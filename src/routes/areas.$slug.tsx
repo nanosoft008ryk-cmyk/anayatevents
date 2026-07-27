@@ -115,6 +115,7 @@ const rhythmClass: Record<
 
 function AreaPage() {
   const { area } = Route.useLoaderData() as { area: LocationArea };
+  const params = Route.useParams();
   const trail = trailFor(area.slug);
   const rhythm = rhythmClass[area.rhythm];
   const heroPhoto = photo(area.hero);
@@ -602,7 +603,7 @@ function AreaPage() {
       <span className="sr-only">
         {locations.length} service areas across {site.address.locality}.
       </span>
+    <RelatedConstellation kind="area" slug={params.slug} options={{ kinds: ["service", "area", "collection", "article", "faq"] }} />
     </main>
   );
-}<RelatedConstellation kind="area" slug={params.slug} options={{ kinds: ["service", "area", "collection", "article", "faq"] }} />
-      
+}
