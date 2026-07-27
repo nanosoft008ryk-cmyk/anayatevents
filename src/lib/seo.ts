@@ -386,3 +386,44 @@ export function reviewCollectionSchema(
 
   };
 }
+
+/* ------------------------- Page-type schema helpers ---------------------- */
+
+/**
+ * Generic WebPage node. Every leaf route emits exactly one of the WebPage
+ * family (WebPage / AboutPage / ContactPage / CollectionPage), tied back to
+ * the sitewide WebSite and LocalBusiness entities so nothing is duplicated.
+ */
+export function webPageSchema(input: {
+  name: string;
+  description: string;
+  path: string;
+  type?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
+  image?: string;
+  datePublished?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": input.type ?? "WebPage",
+    "@id": abs(`${input.path}#webpage`),
+    name: input.name,
+    description: input.description,
+    url: abs(input.path),
+    inLanguage: "en",
+    isPartOf: { "@id": abs("/#website") },
+    about: { "@id": abs("/#business") },
+    ...(input.image ? { primaryImageOfPage: { "@type": "ImageObject", url: abs(input.image) } } : {}),
+    ...(input.datePublished ? { datePublished: input.datePublished } : {}),
+  };
+}
+
+/** Primary navigation, emitted once from the root. */
+export function siteNavigationSchema(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "@id": abs("/#navigation"),
+    name: items.map((i) => i.name),
+    url: items.map((i) => abs(i.path)),
+  };
+}
