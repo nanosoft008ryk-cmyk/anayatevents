@@ -422,6 +422,8 @@ export const articles: Article[] = [
 
 export const articleCategories = ["Planning", "Design", "Catering", "Venues"] as const;
 
+export type ArticleCategory = (typeof articleCategories)[number];
+
 const map = new Map(articles.map((a) => [a.slug, a]));
 
 export function getArticle(slug: string) {
@@ -429,3 +431,214 @@ export function getArticle(slug: string) {
 }
 
 export const articlesByDate = [...articles].sort((a, b) => (a.date < b.date ? 1 : -1));
+
+/* ---------------------------------------------------------------------------
+ * Editorial layer.
+ *
+ * The Journal is edited, not archived: a masthead note, a small set of
+ * featured stories laid out unequally, and picks chosen by hand. Everything
+ * below is written editorially — nothing is generated from the article list.
+ * ------------------------------------------------------------------------- */
+
+export interface ArticleExtras {
+  /** Standfirst rendered under the hero — a magazine deck, not a summary. */
+  deck: string;
+  /** One line lifted from the piece and set large, mid-read. */
+  pullQuote: string;
+  /** Inline plate ids, dropped between sections at reading pace. */
+  gallery: string[];
+}
+
+const extras: Record<string, ArticleExtras> = {
+  "planning-a-lahore-wedding-week": {
+    deck: "Four functions, three families, and fourteen usable weekends in the season. The timeline we actually work to — written plainly enough that you can hold us to it.",
+    pullQuote:
+      "If a family member is on the phone to a florist at noon on the day, the plan failed somewhere in month six.",
+    gallery: ["ae-01", "ae-11"],
+  },
+  "choosing-a-farmhouse-in-lahore": {
+    deck: "Every farmhouse photographs well at golden hour. What separates them is power, drainage and the width of a service road you will never see.",
+    pullQuote:
+      "Ask where the generator sits. The answer tells you more about your evening than the lawn ever will.",
+    gallery: ["ae-10", "ae-21"],
+  },
+  "why-fresh-flowers-matter": {
+    deck: "A stage is architecture. Flowers are the part guests touch, lean into and remember by scent — which is why we never economise there first.",
+    pullQuote:
+      "Guests do not photograph structure. They photograph the twelve inches of bloom in front of it.",
+    gallery: ["ae-12", "ae-20"],
+  },
+  "designing-a-stage-that-photographs": {
+    deck: "The couple sees the stage once. Everyone else sees it forever, through a lens. Designing for both is a discipline, not a compromise.",
+    pullQuote:
+      "Design the stage for the frame it will live in, and the room takes care of itself.",
+    gallery: ["ae-05", "ae-13"],
+  },
+  "the-service-standard-nobody-talks-about": {
+    deck: "Menus get all the attention. Service is what guests actually experience — and the difference between the two is measured in minutes.",
+    pullQuote:
+      "A dish served eleven minutes late is a different dish. Temperature is a recipe ingredient.",
+    gallery: ["ae-04", "ae-23"],
+  },
+  "outdoor-catering-in-lahore-heat": {
+    deck: "Building a working kitchen on a lawn in June: cold chain, staging, fuel, and the quiet engineering behind a plate that arrives correct.",
+    pullQuote:
+      "In outdoor catering, the cold chain is the menu. Everything else is decoration.",
+    gallery: ["ae-18", "ae-09"],
+  },
+  "what-a-wedding-actually-costs": {
+    deck: "Where the money genuinely goes in a Lahore wedding week, which line items move the number, and which ones only feel expensive.",
+    pullQuote:
+      "Two hundred extra guests will cost you more than every flower across the entire week.",
+    gallery: ["ae-07", "ae-19"],
+  },
+  "an-intimate-nikah-at-home": {
+    deck: "Forty people, one drawing room, nowhere to hide. Small events are the hardest brief we accept — and the one we love most.",
+    pullQuote:
+      "Restraint reads as confidence at this scale. One decisive gesture beats five arrangements.",
+    gallery: ["ae-15", "ae-17"],
+  },
+};
+
+export function articleExtras(slug: string): ArticleExtras {
+  return (
+    extras[slug] ?? {
+      deck: getArticle(slug)?.excerpt ?? "",
+      pullQuote: "",
+      gallery: [],
+    }
+  );
+}
+
+export interface JournalCategory {
+  slug: string;
+  /** Must match Article["category"]. */
+  category: ArticleCategory;
+  name: string;
+  kicker: string;
+  metaTitle: string;
+  metaDescription: string;
+  heroFrames: string[];
+  headline: string;
+  headlineItalic: string;
+  lede: string;
+  intro: string[];
+  /** Service slugs offered as a natural next step from this reading. */
+  relatedServices: string[];
+}
+
+export const journalCategories: JournalCategory[] = [
+  {
+    slug: "planning",
+    category: "Planning",
+    name: "Planning & Timelines",
+    kicker: "The Order of Things",
+    metaTitle: "Wedding & Event Planning Writing | The Anayat Journal",
+    metaDescription:
+      "Timelines, budgets and the sequence of decisions behind a Lahore wedding week — written from the production floor, not from a template.",
+    heroFrames: ["ae-22", "ae-07"],
+    headline: "Everything beautiful",
+    headlineItalic: "begins as a sequence.",
+    lede: "Nine months, four functions, one calendar. Writing on how a celebration is actually ordered — and what it costs when the order slips.",
+    intro: [
+      "A wedding week looks like design and tastes like food, but it runs on sequence. Which decision must be made before which; which one becomes ten times more expensive if it waits a fortnight.",
+      "These pieces are the working knowledge we would otherwise only share across a table at the farmhouse: budgets set out honestly, timelines written as we hold ourselves to them, and the failure points we watch for because we have seen them.",
+    ],
+    relatedServices: ["wedding-planning", "luxury-weddings", "venue-management"],
+  },
+  {
+    slug: "design",
+    category: "Design",
+    name: "Design & Decor",
+    kicker: "Light, Bloom, Structure",
+    metaTitle: "Event Design & Decor Inspiration | The Anayat Journal",
+    metaDescription:
+      "Stage architecture, floral craft and colour stories from Lahore celebrations — how rooms are composed, lit and made to photograph.",
+    heroFrames: ["ae-14", "ae-13"],
+    headline: "A room is composed",
+    headlineItalic: "long before it is decorated.",
+    lede: "Stage architecture, floral craft, colour and light — the design thinking behind the rooms we build, told without mood-board vocabulary.",
+    intro: [
+      "Decor is the last five percent of a design process that begins with sightlines, ceiling heights and where the light will fall at nine in the evening.",
+      "We write about the craft in the order we practise it: structure, then light, then bloom, then the small restraint that stops a beautiful room from becoming a loud one.",
+    ],
+    relatedServices: ["stage-decoration", "floral-design", "private-events"],
+  },
+  {
+    slug: "catering",
+    category: "Catering",
+    name: "Catering & Hospitality",
+    kicker: "The Kitchen Behind It",
+    metaTitle: "Luxury Catering & Hospitality Writing | The Anayat Journal",
+    metaDescription:
+      "Menus, service standards and outdoor kitchens in Lahore — how food arrives hot, together and correct for four hundred guests.",
+    heroFrames: ["ae-04", "ae-18"],
+    headline: "Hospitality is a discipline",
+    headlineItalic: "disguised as generosity.",
+    lede: "Menus, live stations and the quiet engineering that gets four hundred plates to the table at the same temperature.",
+    intro: [
+      "Guests remember two things about the food: whether it was hot, and whether their table was served with the others. Both are logistics problems dressed as culinary ones.",
+      "Here we write about the kitchen side of a celebration — cold chains built on lawns, service brigades rehearsed like a run-of-show, and menus designed backwards from the moment they are eaten.",
+    ],
+    relatedServices: ["luxury-catering", "live-bbq-catering", "outdoor-catering"],
+  },
+  {
+    slug: "venues",
+    category: "Venues",
+    name: "Venues & Places",
+    kicker: "Where It Happens",
+    metaTitle: "Lahore Venue Guides & Farmhouse Notes | The Anayat Journal",
+    metaDescription:
+      "How to read a Lahore venue properly — farmhouse power and drainage, banquet acoustics, parking depth and the questions worth asking.",
+    heroFrames: ["ae-25", "ae-10"],
+    headline: "Choose the ground",
+    headlineItalic: "before you choose the palette.",
+    lede: "Farmhouses, lawns, banquet halls and private homes across Lahore — read the way a production team reads them.",
+    intro: [
+      "A venue is not a backdrop. It is a set of constraints — power, water, access, acoustics — that will quietly decide what your evening can and cannot be.",
+      "These guides teach the site visit: what to look at while everyone else admires the lawn, and the four questions that reveal how a place actually behaves at eleven at night in December.",
+    ],
+    relatedServices: ["farmhouse-events", "venue-management", "outdoor-catering"],
+  },
+];
+
+export function getJournalCategory(slug: string) {
+  return journalCategories.find((c) => c.slug === slug);
+}
+
+export function categorySlugFor(category: ArticleCategory) {
+  return journalCategories.find((c) => c.category === category)?.slug ?? "planning";
+}
+
+export function categoryNameFor(category: ArticleCategory) {
+  return journalCategories.find((c) => c.category === category)?.name ?? category;
+}
+
+export function articlesInCategory(category: ArticleCategory) {
+  return articlesByDate.filter((a) => a.category === category);
+}
+
+/** Hand-picked cover story plus its two supporting features. */
+export const featuredSlugs = [
+  "planning-a-lahore-wedding-week",
+  "why-fresh-flowers-matter",
+  "choosing-a-farmhouse-in-lahore",
+];
+
+/** The editor's shelf — chosen for pleasure, not for recency. */
+export const editorsPickSlugs = [
+  "designing-a-stage-that-photographs",
+  "an-intimate-nikah-at-home",
+  "the-service-standard-nobody-talks-about",
+];
+
+export const editorsNote = {
+  eyebrow: "Editor's note",
+  lines: [
+    "We started writing because the same conversations kept happening across a table at the farmhouse — about light, about timing, about why the flowers arrive at four in the morning.",
+    "The Anayat Journal is where those conversations are set down properly. Not advice borrowed from elsewhere, and not a catalogue of our own work: craft written by the people who carry the ladders, taste the trials and stand at the back of the room while a family walks in for the first time.",
+    "Read it slowly. Everything here was learnt on an actual evening, in an actual room, in Lahore.",
+  ],
+  signature: "Mian Saif — Anayat Events & Catering",
+};
+

@@ -4,7 +4,7 @@ import { BASE_URL } from "@/lib/seo";
 import { services } from "@/content/services";
 import { locations } from "@/content/locations";
 import { portfolioCategories, portfolioProjects } from "@/content/portfolio";
-import { articles } from "@/content/journal";
+import { articles, journalCategories } from "@/content/journal";
 import { faqTopics } from "@/content/faqs";
 
 /**
@@ -27,6 +27,10 @@ function entries(): { path: string; priority: string; lastmod?: string }[] {
     ...portfolioProjects.map((p) => ({ path: `/portfolio/project/${p.slug}`, priority: "0.7" })),
     { path: "/vault", priority: "0.6" },
     { path: "/journal", priority: "0.8" },
+    ...journalCategories.map((c) => ({
+      path: `/journal/category/${c.slug}`,
+      priority: "0.7",
+    })),
     ...articles.map((a) => ({
       path: `/journal/${a.slug}`,
       priority: "0.7",
