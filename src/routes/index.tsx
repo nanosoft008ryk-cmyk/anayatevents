@@ -13,6 +13,7 @@ import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
+import { imgAttrs } from "@/lib/img";
 
 const HERO = "ae-22";
 const HERO_FRAMES = ["ae-22", "ae-13", "ae-16", "ae-26"];
@@ -108,9 +109,10 @@ function Home() {
               <div className="aspect-[3/4] w-full border-[0.5px] border-gold/30 p-4">
                 <div className="relative h-full w-full overflow-hidden">
                   <img
-                    src={photo("ae-05").url}
+                    {...imgAttrs("ae-05", photo("ae-05").url, "(min-width: 1024px) 33vw, 100vw")}
                     alt={photo("ae-05").alt}
                     loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover contrast-125 transition-transform duration-[1400ms] [transition-timing-function:var(--ease-lux)] hover:scale-105"
                   />
                   <span className="pointer-events-none absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.45)]" />
@@ -364,9 +366,10 @@ function Home() {
       <section className="relative isolate overflow-hidden py-28 lg:py-40">
         <div className="absolute inset-0 -z-10">
           <img
-            src={photo("ae-08").url}
+            {...imgAttrs("ae-08", photo("ae-08").url, "100vw")}
             alt=""
             loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover opacity-[0.22] drift-slow"
           />
           <div className="absolute inset-0 veil" />
