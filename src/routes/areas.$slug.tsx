@@ -19,7 +19,7 @@ import {
   jsonLd,
   breadcrumbSchema,
   areaServedSchema,
-  faqSchema,
+  faqScripts,
   imageGallerySchema,
   type Crumb,
 } from "@/lib/seo";
@@ -80,7 +80,7 @@ export const Route = createFileRoute("/areas/$slug")({
             }),
           }),
         ),
-        jsonLd(faqSchema(uniqueFaqs(path, area.faqs), path)),
+        ...faqScripts(uniqueFaqs(path, area.faqs), path),
       ],
     };
   },

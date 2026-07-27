@@ -4,7 +4,7 @@ import { faqTopics, getFaqTopic, type FaqTopic } from "@/content/faqs";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
-import { pageMeta, jsonLd, breadcrumbSchema, faqSchema, type Crumb } from "@/lib/seo";
+import { pageMeta, jsonLd, breadcrumbSchema, faqScripts, type Crumb } from "@/lib/seo";
 import { uniqueFaqs } from "@/lib/entity-graph";
 
 function trailFor(slug: string): Crumb[] {

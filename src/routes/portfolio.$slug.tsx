@@ -20,7 +20,7 @@ import {
   jsonLd,
   breadcrumbSchema,
   imageGallerySchema,
-  faqSchema,
+  faqScripts,
   type Crumb,
 } from "@/lib/seo";
 import { uniqueFaqs } from "@/lib/entity-graph";
@@ -67,7 +67,7 @@ export const Route = createFileRoute("/portfolio/$slug")({
             }),
           }),
         ),
-        jsonLd(faqSchema(uniqueFaqs(path, category.faqs), path)),
+        ...faqScripts(uniqueFaqs(path, category.faqs), path),
       ],
     };
   },

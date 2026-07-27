@@ -18,7 +18,7 @@ import {
   jsonLd,
   breadcrumbSchema,
   serviceSchema,
-  faqSchema,
+  faqScripts,
   imageGallerySchema,
   type Crumb,
 } from "@/lib/seo";
@@ -89,7 +89,7 @@ export const Route = createFileRoute("/services/$slug")({
             image: photo(service.hero).url,
           }),
         ),
-        jsonLd(faqSchema(uniqueFaqs(path, service.faqs), path)),
+        ...faqScripts(uniqueFaqs(path, service.faqs), path),
         jsonLd(
           imageGallerySchema({
             name: `${service.name} — recent work`,

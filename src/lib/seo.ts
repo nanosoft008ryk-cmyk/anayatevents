@@ -263,6 +263,11 @@ export function faqSchema(items: { q: string; a: string }[], path: string) {
   };
 }
 
+/** Emits FAQ markup only when questions survive global de-duplication. */
+export function faqScripts(items: { q: string; a: string }[], path: string) {
+  return items.length > 0 ? [jsonLd(faqSchema(items, path))] : [];
+}
+
 export function articleSchema(input: {
   title: string;
   description: string;
