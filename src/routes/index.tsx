@@ -20,14 +20,29 @@ const HERO_FRAMES = ["ae-22", "ae-13", "ae-16", "ae-26"];
 const HOME_PHOTOS = ["ae-13", "ae-14", "ae-10", "ae-16", "ae-26", "ae-03"];
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    ...pageMeta({
+  head: () => {
+    const meta = pageMeta({
       title: "Anayat Events & Catering — Luxury Event Management in Lahore",
       description:
         "Lahore's luxury event management and catering house. Weddings, mehndi, walima, corporate and private celebrations — designed, built and served by one accountable team.",
       path: "/",
       image: photo(HERO).url,
-    }),
+    });
+    const hero = imgAttrs(HERO, photo(HERO).url, "100vw");
+    return {
+    ...meta,
+    links: [
+      ...(meta.links ?? []),
+      // Discover the first cinematic frame in the initial document.
+      {
+        rel: "preload",
+        as: "image",
+        href: hero.src,
+        imagesrcset: hero.srcSet,
+        imagesizes: "100vw",
+        fetchpriority: "high",
+      },
+    ],
     scripts: [
       jsonLd(
         itemListSchema({
@@ -40,7 +55,8 @@ export const Route = createFileRoute("/")({
         }),
       ),
     ],
-  }),
+    };
+  },
   component: Home,
 });
 
