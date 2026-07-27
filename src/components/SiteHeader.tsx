@@ -65,7 +65,7 @@ export function SiteHeader() {
         }`}
       >
         <Link to="/" className="group/logo flex items-center gap-4" aria-label={`${site.name} — home`}>
-          <SmartImg
+          <img
             src={logo}
             alt=""
             className={`rounded-full object-cover transition-all duration-700 [transition-timing-function:var(--ease-lux)] ${
@@ -205,11 +205,11 @@ export function SiteHeader() {
       {/* Mobile — full-height cinematic drawer */}
       {mobile && (
         <div className="relative h-[calc(100svh-4.5rem)] overflow-y-auto bg-background lg:hidden">
-          <img
-            id="ae-22" fallbackUrl={photo("ae-22").url} sizes="100vw"
+          <SmartImg
+            id="ae-22"
+            fallbackUrl={photo("ae-22").url}
+            sizes="100vw"
             alt=""
-            loading="lazy"
-            decoding="async"
             className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.14]"
           />
           <div className="relative px-6 pt-6 pb-16">
