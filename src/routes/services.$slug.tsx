@@ -352,7 +352,18 @@ function ServicePage() {
         </div>
       </section>
 
+      {/* ─── Answer-first explanations (AEO) ───────────────────────── */}
+      <AnswerBlock
+        id="service-answers"
+        eyebrow="Common questions, answered plainly"
+        heading={`What ${service.name.toLowerCase()} involves`}
+        items={answers}
+      />
+
+      <FactTable caption={`${service.name} at a glance`} rows={serviceFacts(service.slug)} />
+
       {/* ─── Locations ─────────────────────────────────────────────── */}
+
       <section className="py-12">
         <div className="mx-auto max-w-[92rem] px-6 md:px-12">
           <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold-deep">
