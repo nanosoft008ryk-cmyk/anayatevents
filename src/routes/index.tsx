@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useLiveRating } from "@/hooks/use-live-rating";
 
 import { site, consultationSteps, stats } from "@/content/site";
 import { photo, photosByIds } from "@/content/images";
