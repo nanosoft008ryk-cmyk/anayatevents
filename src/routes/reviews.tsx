@@ -67,7 +67,7 @@ export const Route = createFileRoute("/reviews")({
             quote: r.text,
             name: r.author,
             rating: r.rating,
-            published: r.publishedAt,
+            published: r.publishTime || undefined,
           })),
         ),
       ),
