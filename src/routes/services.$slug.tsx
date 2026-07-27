@@ -13,6 +13,9 @@ import { LuxLink } from "@/components/ui/LuxButton";
 import { JourneyRail } from "@/components/services/JourneyRail";
 import { LuxAccordion } from "@/components/services/LuxAccordion";
 import { imgAttrs } from "@/lib/img";
+import { AnswerBlock } from "@/components/aeo/AnswerBlock";
+import { FactTable } from "@/components/aeo/FactTable";
+import { serviceAnswerItems, serviceFacts } from "@/content/answers";
 import {
   pageMeta,
   jsonLd,
@@ -89,7 +92,10 @@ export const Route = createFileRoute("/services/$slug")({
             image: photo(service.hero).url,
           }),
         ),
-        ...faqScripts(uniqueFaqs(path, service.faqs), path),
+        ...faqScripts(
+          uniqueFaqs(path, [...serviceAnswerItems(params.slug), ...service.faqs]),
+          path,
+        ),
         jsonLd(
           imageGallerySchema({
             name: `${service.name} — recent work`,
@@ -115,6 +121,7 @@ function ServicePage() {
   const gallery = service.gallery.map(photo);
   const quote = getTestimonial(service.testimonial);
   const mood = atmosphere(service.slug);
+  const answers = serviceAnswerItems(service.slug);
   const related = service.related
     .map((slug) => services.find((s) => s.slug === slug))
     .filter((s): s is Service => Boolean(s));
@@ -352,7 +359,18 @@ function ServicePage() {
         </div>
       </section>
 
+      {/* ─── Answer-first explanations (AEO) ───────────────────────── */}
+      <AnswerBlock
+        id="service-answers"
+        eyebrow="Common questions, answered plainly"
+        heading={`What ${service.name.toLowerCase()} involves`}
+        items={answers}
+      />
+
+      <FactTable caption={`${service.name} at a glance`} rows={serviceFacts(service.slug)} />
+
       {/* ─── Locations ─────────────────────────────────────────────── */}
+
       <section className="py-12">
         <div className="mx-auto max-w-[92rem] px-6 md:px-12">
           <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold-deep">
