@@ -197,7 +197,7 @@ export function SiteFooter() {
             {/* The index */}
             <nav
               aria-label="Footer"
-              className="grid gap-x-10 gap-y-0 sm:gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+              className="grid gap-x-10 gap-y-0 sm:grid-cols-2 lg:grid-cols-5 lg:gap-y-10"
             >
               {footerColumns.map((col) => (
                 <IndexColumn key={col.heading} heading={col.heading} items={col.items} />
