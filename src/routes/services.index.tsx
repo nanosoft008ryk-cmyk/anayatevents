@@ -128,7 +128,7 @@ function ServicesIndex() {
           <h1 className="mt-7 max-w-5xl font-display text-[3rem] leading-[0.94] font-light text-ivory sm:text-7xl lg:text-[7.5rem]">
             <RevealWords text="Every celebration begins" />
             <span className="mt-2 block italic sm:ml-[8%]">
-              <RevealWords text="with an extraordinary vision." delay={220} wordClassName="text-foil" />
+              <RevealWords text="with an extraordinary vision." delay={220} wordClassName="foil-text" />
             </span>
           </h1>
           <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
