@@ -70,9 +70,22 @@ export function SiteFooter() {
         </Reveal>
       </div>
 
-      {/* ── The index ──────────────────────────────────────────────────── */}
-      <div className="mx-auto max-w-[92rem] px-6 pb-16 md:px-12 lg:pb-20">
+      {/* ── The index (wordmark sits behind this block) ─────────────────── */}
+      <div className="relative isolate mx-auto max-w-[92rem] px-6 pb-16 md:px-12 lg:pb-20">
+        {/* Background wordmark */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 select-none overflow-hidden"
+        >
+          <span className="absolute inset-0 wordmark-bed" />
+          <span className="grain absolute inset-0" />
+          <p className="absolute inset-x-0 top-1/2 -translate-y-1/2 whitespace-nowrap text-center font-display font-light leading-[0.9] tracking-[-0.02em] text-[clamp(3rem,11vw,11rem)] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_16%,transparent),color-mix(in_oklab,var(--gold)_7%,transparent)_60%,transparent)] [background-clip:text] [-webkit-background-clip:text]">
+            Anayat Events
+          </p>
+        </div>
+
         <div className="grid gap-16 border-t border-border pt-16 lg:grid-cols-[1fr_2.6fr]">
+
           <div>
             <p className="font-sans text-[10px] tracking-[0.34em] uppercase text-gold-deep">
               The studio
@@ -148,17 +161,6 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* ── Oversized wordmark, only the lowest tip clipped by the page base ── */}
-      <div aria-hidden className="relative select-none overflow-hidden pb-24 lg:pb-16">
-        <span className="pointer-events-none absolute inset-x-0 bottom-0 h-full wordmark-bed" />
-        <span className="grain pointer-events-none absolute inset-0" />
-        <p
-          className="relative whitespace-nowrap text-center font-display font-light leading-[0.92] tracking-[-0.02em] text-[clamp(4rem,15.6vw,17rem)] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_22%,transparent),color-mix(in_oklab,var(--gold)_9%,transparent)_55%,transparent)] [background-clip:text] [-webkit-background-clip:text]"
-          style={{ marginBottom: "-0.04em" }}
-        >
-          Anayat Events
-        </p>
-      </div>
 
     </footer>
 
