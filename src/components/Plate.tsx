@@ -78,8 +78,9 @@ export function Plate({
       >
         <img
           ref={inner}
-          src={image.url}
+          {...imgAttrs(image.id, image.url, sizes)}
           alt={image.alt}
+          decoding="async"
           loading={priority ? "eager" : "lazy"}
           fetchPriority={priority ? "high" : "auto"}
           className={cn(
