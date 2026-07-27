@@ -210,7 +210,10 @@ export function relatedFor(
 ): RelatedGroup[] {
   const from = getNode(kind, slug);
   if (!from) return [];
+  return groupsFrom(from, options);
+}
 
+function groupsFrom(from: GraphNode, options: RelatedOptions = {}): RelatedGroup[] {
   const kinds = options.kinds ?? (["service", "collection", "article", "area", "faq"] as NodeKind[]);
   const perKind = options.perKind ?? 3;
 
