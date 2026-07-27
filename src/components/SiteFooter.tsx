@@ -72,7 +72,7 @@ export function SiteFooter() {
 
       {/* ── The index ──────────────────────────────────────────────────── */}
       <div className="mx-auto max-w-[92rem] px-6 pb-36 md:px-12 lg:pb-20">
-        <div className="grid gap-16 border-t border-border pt-16 lg:grid-cols-[1fr_2.1fr]">
+        <div className="grid gap-16 border-t border-border pt-16 lg:grid-cols-[1fr_2.6fr]">
           <div>
             <p className="font-sans text-[10px] tracking-[0.34em] uppercase text-gold-deep">
               The studio
@@ -114,7 +114,7 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
             {footerColumns.map((col) => (
               <div key={col.heading}>
                 <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
