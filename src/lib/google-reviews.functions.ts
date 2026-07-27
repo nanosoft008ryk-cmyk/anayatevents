@@ -124,6 +124,7 @@ export const getGoogleReviews = createServerFn({ method: "GET" }).handler(
         rating: (data.rating ?? 5).toFixed(1),
         ratingCount: data.userRatingCount ?? FALLBACK.ratingCount,
         mapsUri: data.googleMapsUri ?? FALLBACK.mapsUri,
+        writeReviewUri: WRITE_REVIEW_URI,
         reviews,
         stale: false,
       };
