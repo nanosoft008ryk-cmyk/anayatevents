@@ -102,9 +102,15 @@ export const navigation: NavGroup[] = [
       },
     ],
   },
+  // Live Google reviews — a top-level item, not buried under About.
+  {
+    label: "Reviews",
+    to: "/reviews",
+  },
   {
     label: "About",
     to: "/about",
+
     columns: [
       {
         heading: "The house",
