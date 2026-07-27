@@ -62,6 +62,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const liveRating = useLiveRating();
   const frames = photosByIds(HERO_FRAMES);
   const gallery = photosByIds(HOME_PHOTOS);
   const featured = services.slice(0, 6);

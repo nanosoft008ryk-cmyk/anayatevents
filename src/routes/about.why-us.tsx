@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useLiveRating } from "@/hooks/use-live-rating";
 
 import { photo } from "@/content/images";
 import { whyPage } from "@/content/about";
@@ -43,6 +44,7 @@ export const Route = createFileRoute("/about/why-us")({
 });
 
 function WhyPage() {
+  const liveRating = useLiveRating();
   const voices = testimonials.slice(0, 3);
 
   return (
