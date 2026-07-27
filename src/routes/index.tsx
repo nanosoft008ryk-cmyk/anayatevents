@@ -198,7 +198,7 @@ function Home() {
 
 
       {/* ── III. Manifesto — type-led, hairline creed, twin small plates ── */}
-      <section className="chapter relative overflow-hidden pt-20 pb-20 md:pt-24 md:pb-24 lg:pt-36 lg:pb-40">
+      <section className="chapter relative overflow-hidden pt-16 pb-16 sm:pt-20 sm:pb-20 md:pt-24 md:pb-24 lg:pt-36 lg:pb-40">
         <div className="mx-auto max-w-[92rem] px-5 sm:px-6 md:px-12">
           <div className="grid gap-y-12 md:gap-y-16 lg:grid-cols-12 lg:gap-x-16">
             {/* Statement */}
@@ -294,7 +294,7 @@ function Home() {
       </section>
 
       {/* ── IV. Disciplines — staggered editorial index, no card grid ── */}
-      <section className="chapter light-right relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+      <section className="chapter light-right relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
         <div className="grid gap-10 md:gap-12 lg:grid-cols-[0.9fr_1.3fr]">
           <Reveal className="min-w-0 lg:sticky lg:top-32 lg:self-start">
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">What we do</p>
@@ -314,7 +314,7 @@ function Home() {
                   <Link
                     to="/services/$slug"
                     params={{ slug: s.slug }}
-                    className="relative grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-5 py-7 sm:gap-x-8 md:py-9 lg:ml-[var(--row-indent)] lg:gap-x-14"
+                    className="relative grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-4 py-6 sm:gap-x-8 sm:py-7 md:py-9 lg:ml-[var(--row-indent)] lg:gap-x-14"
                     style={{ "--row-indent": `${(i % 3) * 1.75}rem` } as CSSProperties}
 
                   >
@@ -373,7 +373,7 @@ function Home() {
 
 
       {/* ── VI. Selected work — floating, uneven, magazine framing ──── */}
-      <section className="chapter relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+      <section className="chapter relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
         <div className="flex flex-wrap items-end justify-between gap-6 md:gap-8">
           <Reveal className="min-w-0">
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
@@ -426,7 +426,7 @@ function Home() {
       </section>
 
       {/* ── VII. Process — horizontal timeline over a dark plate ────── */}
-      <section className="relative isolate overflow-hidden py-20 md:py-28 lg:py-40">
+      <section className="relative isolate overflow-hidden py-16 sm:py-20 md:py-28 lg:py-40">
         <div className="absolute inset-0 -z-10">
           <SmartImg
             id="ae-08"
@@ -477,7 +477,7 @@ function Home() {
 
 
       {/* ── VIII. Voices — oversized pull quotes, no card walls ─────── */}
-      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
         <Reveal>
           <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
             {liveRating.rating} from {liveRating.count} Google reviews
@@ -542,7 +542,7 @@ function Home() {
                   key={l.slug}
                   to="/areas/$slug"
                   params={{ slug: l.slug }}
-                  className="group/area relative font-sans text-[11px] tracking-[0.22em] uppercase text-muted-foreground transition-colors duration-500 hover:text-gold sm:tracking-[0.26em]"
+                  className="group/area relative inline-flex min-h-11 items-center font-sans text-[11px] tracking-[0.22em] uppercase text-muted-foreground transition-colors duration-500 hover:text-gold sm:min-h-0 sm:tracking-[0.26em]"
                 >
                   {l.shortName}
                   <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform duration-700 group-hover/area:origin-left group-hover/area:scale-x-100" />
@@ -559,7 +559,7 @@ function Home() {
       </section>
 
       {/* ── X. Journal — one lead story, two whispers ───────────────── */}
-      <section className="chapter relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+      <section className="chapter relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
         <div className="flex flex-wrap items-end justify-between gap-6 md:gap-8">
           <Reveal className="min-w-0">
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
