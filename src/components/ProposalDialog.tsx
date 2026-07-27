@@ -222,7 +222,7 @@ export function ProposalDialog({ children }: { children: ReactNode }) {
             {site.email && (
               <button
                 type="submit"
-                className="group inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-[25px] border-[0.5px] border-gold/50 bg-gold/10 px-6 py-3.5 font-sans text-[10px] tracking-[0.28em] uppercase text-gold transition-colors duration-500 hover:bg-gold/20"
+                className="group btn-shape inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-[25px] border-[0.5px] border-gold/50 bg-gold/10 px-6 py-3.5 font-sans text-[10px] tracking-[0.28em] uppercase text-gold transition-colors duration-500 hover:bg-gold/20"
               >
                 <Mail className="size-4" strokeWidth={1.25} aria-hidden="true" />
                 Send by email
@@ -231,7 +231,7 @@ export function ProposalDialog({ children }: { children: ReactNode }) {
             <button
               type="button"
               onClick={submit("whatsapp")}
-              className="group inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-[25px] border-[0.5px] border-border-strong px-6 py-3.5 font-sans text-[10px] tracking-[0.28em] uppercase text-ivory/80 transition-colors duration-500 hover:border-gold/50 hover:text-gold"
+              className="group btn-shape inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-[25px] border-[0.5px] border-border-strong px-6 py-3.5 font-sans text-[10px] tracking-[0.28em] uppercase text-ivory/80 transition-colors duration-500 hover:border-gold/50 hover:text-gold"
             >
               <MessageCircle className="size-4" strokeWidth={1.25} aria-hidden="true" />
               Send on WhatsApp

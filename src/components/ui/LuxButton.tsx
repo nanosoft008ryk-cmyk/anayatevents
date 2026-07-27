@@ -82,7 +82,7 @@ function Inner({ children, tone, arrow }: { children: ReactNode; tone: LuxTone; 
 }
 
 const base =
-  "group/lux relative isolate inline-flex items-center justify-center overflow-hidden rounded-[25px] px-9 py-[1.15rem] font-sans text-[11px] font-normal tracking-[0.3em] uppercase transition-[transform,color,box-shadow] duration-500 [transition-timing-function:var(--ease-lux)] will-change-transform";
+  "group/lux btn-shape relative isolate inline-flex items-center justify-center overflow-hidden rounded-[25px] px-9 py-[1.15rem] font-sans text-[11px] font-normal tracking-[0.3em] uppercase transition-[transform,color,box-shadow] duration-500 [transition-timing-function:var(--ease-lux)] will-change-transform";
 
 const ring: Record<LuxTone, string> = {
   foil: "shadow-[0_18px_50px_-28px_var(--gold)] hover:shadow-[0_26px_70px_-26px_var(--gold)]",
