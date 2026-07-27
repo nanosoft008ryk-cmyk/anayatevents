@@ -67,6 +67,11 @@ export function jsonLd(data: unknown) {
   return { type: "application/ld+json", children: JSON.stringify(data) };
 }
 
+/** Emits nothing when a builder declines to make a claim it cannot support. */
+export function jsonLdMaybe(data: unknown | null) {
+  return data ? [jsonLd(data)] : [];
+}
+
 /* ------------------------------- Schema.org ------------------------------ */
 
 /**
