@@ -67,10 +67,10 @@ function ContactPage() {
                 </p>
                 <p className="mt-5 font-display text-3xl font-light text-ivory">{c.name}</p>
                 <p className="mt-2 font-display text-2xl font-light text-gold">{c.display}</p>
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-8 flex flex-wrap gap-4">
                   <a
                     href={c.tel}
-                    className="border border-gold bg-gold px-7 py-3.5 font-sans text-[11px] tracking-[0.24em] uppercase text-primary-foreground transition-opacity hover:opacity-90"
+                    className="btn-shape inline-flex items-center border border-gold bg-gold px-7 py-3.5 font-sans text-[11px] tracking-[0.24em] uppercase text-primary-foreground transition-opacity hover:opacity-90"
                   >
                     Call
                   </a>
@@ -78,7 +78,7 @@ function ContactPage() {
                     href={c.whatsapp}
                     target="_blank"
                     rel="noreferrer"
-                    className="border border-border-strong px-7 py-3.5 font-sans text-[11px] tracking-[0.24em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+                    className="btn-shape inline-flex items-center border border-border-strong px-7 py-3.5 font-sans text-[11px] tracking-[0.24em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
                   >
                     WhatsApp
                   </a>

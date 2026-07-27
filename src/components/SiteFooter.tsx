@@ -29,12 +29,12 @@ export function SiteFooter() {
                 </a>
               ))}
             </div>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-4">
               <a
                 href={site.whatsappHref}
                 target="_blank"
                 rel="noreferrer"
-                className="border border-border-strong px-5 py-3 font-sans text-[10px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+                className="btn-shape inline-flex items-center border border-border-strong px-5 py-3 font-sans text-[10px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
               >
                 WhatsApp
               </a>
@@ -42,7 +42,7 @@ export function SiteFooter() {
                 href={site.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="border border-border-strong px-5 py-3 font-sans text-[10px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+                className="btn-shape inline-flex items-center border border-border-strong px-5 py-3 font-sans text-[10px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
               >
                 Instagram
               </a>
@@ -50,7 +50,7 @@ export function SiteFooter() {
                 href={site.mapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="border border-border-strong px-5 py-3 font-sans text-[10px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+                className="btn-shape inline-flex items-center border border-border-strong px-5 py-3 font-sans text-[10px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
               >
                 Google
               </a>

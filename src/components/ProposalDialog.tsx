@@ -218,7 +218,7 @@ export function ProposalDialog({ children }: { children: ReactNode }) {
             </p>
           )}
 
-          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+          <div className="flex flex-col gap-4 pt-2 sm:flex-row">
             {site.email && (
               <button
                 type="submit"

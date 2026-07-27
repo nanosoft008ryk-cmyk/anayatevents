@@ -73,12 +73,12 @@ export function AreaMap({
             </div>
           </dl>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10 flex flex-wrap gap-4">
             <a
               href={googleDirections}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center border border-gold bg-gold px-6 py-3 font-sans text-[11px] tracking-[0.22em] uppercase text-primary-foreground transition-colors hover:bg-gold-light"
+              className="btn-shape inline-flex items-center border border-gold bg-gold px-6 py-3 font-sans text-[11px] tracking-[0.22em] uppercase text-primary-foreground transition-colors hover:bg-gold-light"
             >
               Directions from {areaName}
             </a>
@@ -86,7 +86,7 @@ export function AreaMap({
               href={appleDirections}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+              className="btn-shape inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
             >
               Apple Maps
             </a>
@@ -94,13 +94,13 @@ export function AreaMap({
               href={wazeDirections}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+              className="btn-shape inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
             >
               Waze
             </a>
             <a
               href={site.phoneHref}
-              className="inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+              className="btn-shape inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
             >
               Call {site.phoneDisplay}
             </a>

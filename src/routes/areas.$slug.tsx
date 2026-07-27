@@ -220,13 +220,13 @@ function AreaPage() {
             <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
               Nearby areas
             </p>
-            <ul className="mt-10 flex flex-wrap gap-3">
+            <ul className="mt-10 flex flex-wrap gap-4">
               {nearby.map((n) => (
                 <li key={n.slug}>
                   <Link
                     to="/areas/$slug"
                     params={{ slug: n.slug }}
-                    className="inline-flex border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+                    className="btn-shape btn-shape inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.22em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
                   >
                     {n.shortName}
                   </Link>

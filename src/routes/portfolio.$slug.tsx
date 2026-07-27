@@ -118,13 +118,13 @@ function PortfolioCategoryPage() {
           <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
             Other collections
           </p>
-          <ul className="mt-8 flex flex-wrap gap-3">
+          <ul className="mt-8 flex flex-wrap gap-4">
             {others.map((c) => (
               <li key={c.slug}>
                 <Link
                   to="/portfolio/$slug"
                   params={{ slug: c.slug }}
-                  className="inline-flex border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.2em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+                  className="btn-shape btn-shape inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.2em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
                 >
                   {c.name}
                 </Link>

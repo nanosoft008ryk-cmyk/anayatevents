@@ -216,16 +216,16 @@ export function SiteHeader() {
                 )}
               </div>
             ))}
-            <div className="flex flex-col gap-3 pt-10">
+            <div className="flex flex-col gap-4 pt-10">
               <Link
                 to="/contact"
-                className="bg-gold px-6 py-4 text-center font-sans text-[11px] tracking-[0.3em] uppercase text-primary-foreground"
+                className="btn-shape flex items-center justify-center bg-gold px-6 py-4 text-center font-sans text-[11px] tracking-[0.3em] uppercase text-primary-foreground"
               >
                 Enquire
               </Link>
               <a
                 href={site.phoneHref}
-                className="border border-border-strong px-6 py-4 text-center font-sans text-[11px] tracking-[0.3em] uppercase text-ivory"
+                className="btn-shape flex items-center justify-center border border-border-strong px-6 py-4 text-center font-sans text-[11px] tracking-[0.3em] uppercase text-ivory"
               >
                 Call {site.phoneDisplay}
               </a>
