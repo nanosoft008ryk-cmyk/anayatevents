@@ -26,6 +26,7 @@ import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
+import { Route as AboutStoryRouteImport } from './routes/about.story'
 import { Route as AboutProcessRouteImport } from './routes/about.process'
 import { Route as PortfolioProjectSlugRouteImport } from './routes/portfolio.project.$slug'
 import { Route as JournalCategorySlugRouteImport } from './routes/journal.category.$slug'
@@ -115,6 +116,11 @@ const AreasSlugRoute = AreasSlugRouteImport.update({
   path: '/areas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutStoryRoute = AboutStoryRouteImport.update({
+  id: '/about/story',
+  path: '/about/story',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutProcessRoute = AboutProcessRouteImport.update({
   id: '/about/process',
   path: '/about/process',
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
   '/about/process': typeof AboutProcessRoute
+  '/about/story': typeof AboutStoryRoute
   '/areas/$slug': typeof AreasSlugRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
   '/about/process': typeof AboutProcessRoute
+  '/about/story': typeof AboutStoryRoute
   '/areas/$slug': typeof AreasSlugRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -184,6 +192,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
   '/about/process': typeof AboutProcessRoute
+  '/about/story': typeof AboutStoryRoute
   '/areas/$slug': typeof AreasSlugRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -208,6 +217,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/vault'
     | '/about/process'
+    | '/about/story'
     | '/areas/$slug'
     | '/faq/$slug'
     | '/journal/$slug'
@@ -230,6 +240,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/vault'
     | '/about/process'
+    | '/about/story'
     | '/areas/$slug'
     | '/faq/$slug'
     | '/journal/$slug'
@@ -252,6 +263,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/vault'
     | '/about/process'
+    | '/about/story'
     | '/areas/$slug'
     | '/faq/$slug'
     | '/journal/$slug'
@@ -275,6 +287,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VaultRoute: typeof VaultRoute
   AboutProcessRoute: typeof AboutProcessRoute
+  AboutStoryRoute: typeof AboutStoryRoute
   AreasSlugRoute: typeof AreasSlugRoute
   FaqSlugRoute: typeof FaqSlugRoute
   JournalSlugRoute: typeof JournalSlugRoute
@@ -411,6 +424,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/story': {
+      id: '/about/story'
+      path: '/about/story'
+      fullPath: '/about/story'
+      preLoaderRoute: typeof AboutStoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about/process': {
       id: '/about/process'
       path: '/about/process'
@@ -443,6 +463,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   VaultRoute: VaultRoute,
   AboutProcessRoute: AboutProcessRoute,
+  AboutStoryRoute: AboutStoryRoute,
   AreasSlugRoute: AreasSlugRoute,
   FaqSlugRoute: FaqSlugRoute,
   JournalSlugRoute: JournalSlugRoute,
