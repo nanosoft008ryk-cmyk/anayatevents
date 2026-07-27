@@ -74,7 +74,7 @@ export function jsonLd(data: unknown) {
  * project's stable Lovable host; when a custom domain is attached, change this
  * one line and every URL on the site follows.
  */
-export const BASE_URL = "https://project--ca05bc7d-2f89-47fe-983b-5f1b9eeefe7a.lovable.app";
+export const BASE_URL = "https://anayatevents.lovable.app";
 
 
 export function abs(path: string): string {
