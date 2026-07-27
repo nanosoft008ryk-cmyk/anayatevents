@@ -7,7 +7,7 @@ import { logo } from "@/content/images";
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-surface/40">
-      <div className="mx-auto max-w-7xl px-6 py-20 md:px-10">
+      <div className="mx-auto max-w-7xl px-6 pt-20 pb-36 md:px-10 lg:pb-20">
         <div className="grid gap-14 lg:grid-cols-[1.2fr_2fr]">
           <div>
             <img src={logo} alt={`${site.name} logo`} className="h-16 w-16 rounded-full object-cover" />
