@@ -1,7 +1,7 @@
-import { Link } from "@tanstack/react-router";
 import { MessageCircle, Phone, PenLine } from "lucide-react";
 
 import { site } from "@/content/site";
+import { ProposalDialog } from "@/components/ProposalDialog";
 
 /**
  * Sticky concierge bar — one tap to WhatsApp, call, or request a proposal.
@@ -38,11 +38,13 @@ export function ConciergeBar() {
 
         <span className="my-3 w-px bg-gold/20" aria-hidden="true" />
 
-        <Link to="/contact" className={item} aria-label="Request a proposal">
-          <PenLine className="size-4 shrink-0" strokeWidth={1.25} aria-hidden="true" />
-          <span className="hidden sm:inline">Request a proposal</span>
-          <span className="sm:hidden">Proposal</span>
-        </Link>
+        <ProposalDialog>
+          <button type="button" className={item} aria-label="Request a proposal">
+            <PenLine className="size-4 shrink-0" strokeWidth={1.25} aria-hidden="true" />
+            <span className="hidden sm:inline">Request a proposal</span>
+            <span className="sm:hidden">Proposal</span>
+          </button>
+        </ProposalDialog>
       </nav>
     </div>
   );
