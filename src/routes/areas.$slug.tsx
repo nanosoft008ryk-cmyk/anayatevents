@@ -12,6 +12,7 @@ import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
+import { nearbyLocations } from "@/lib/entity-graph";
 import { AreaMap } from "@/components/AreaMap";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import {
@@ -19,6 +20,9 @@ import {
   jsonLd,
   breadcrumbSchema,
   areaServedSchema,
+  professionalServiceSchema,
+  nearbyPlacesSchema,
+  jsonLdMaybe,
   faqScripts,
   imageGallerySchema,
   type Crumb,
@@ -60,6 +64,25 @@ export const Route = createFileRoute("/areas/$slug")({
       }),
       scripts: [
         jsonLd(breadcrumbSchema(trail)),
+        jsonLd(
+          professionalServiceSchema({
+            path,
+            areaName: area.shortName,
+            description: area.metaDescription,
+            image: heroPhoto.url,
+            nearby: nearbyLocations(params.slug).map((n) => ({ name: n.shortName })),
+          }),
+        ),
+        ...jsonLdMaybe(
+          nearbyPlacesSchema(
+            path,
+            nearbyLocations(params.slug).map((n) => ({
+              name: n.shortName,
+              path: n.path,
+              reason: n.reason,
+            })),
+          ),
+        ),
         jsonLd(
           areaServedSchema({
             name: area.name,
@@ -139,9 +162,9 @@ function AreaPage() {
   const reads = area.articles
     .map(getArticle)
     .filter((a): a is NonNullable<typeof a> => Boolean(a));
-  const nearby = area.nearby
-    .map(getLocation)
-    .filter((l): l is LocationArea => Boolean(l));
+  // Derived, not hand-listed: declared adjacencies first, then areas that
+  // share the same service mix and portfolio collections.
+  const nearby = nearbyLocations(area.slug);
 
   return (
     <main className="bg-background">
@@ -558,7 +581,7 @@ function AreaPage() {
         </div>
       </section>
 
-      {/* XII. Nearby */}
+      {/* XII. Nearby — derived from shared services and adjacency */}
       {nearby.length > 0 && (
         <section className="relative isolate border-t border-border">
           <div className="mx-auto max-w-[92rem] px-6 py-20 md:px-12 lg:py-28">
@@ -566,28 +589,43 @@ function AreaPage() {
               <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
                 Nearby service areas
               </p>
+              <p className="mt-6 max-w-[52ch] font-sans text-[15px] leading-[1.9] font-light text-muted-foreground">
+                The same team travels out of Green Acres to each of these. We keep no
+                second address anywhere in the city.
+              </p>
             </Reveal>
-            <ul className="mt-10 flex flex-wrap gap-x-12 gap-y-6">
-              {nearby.map((n) => (
+
+            <ul className="mt-14 grid gap-x-14 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+              {nearby.map((n, i) => (
                 <li key={n.slug}>
-                  <Link
-                    to="/areas/$slug"
-                    params={{ slug: n.slug }}
-                    className="group inline-flex items-baseline gap-4 font-display text-[1.5rem] font-light text-ivory transition-colors duration-700 hover:text-gold lg:text-[2rem]"
-                  >
-                    {n.shortName}
-                    <span className="text-[0.7em] text-gold transition-transform duration-[800ms] group-hover:translate-x-1.5">
-                      &#8594;
-                    </span>
-                  </Link>
+                  <Reveal delay={i * 60}>
+                    <Link
+                      to="/areas/$slug"
+                      params={{ slug: n.slug }}
+                      className="group block"
+                      aria-label={`Event management serving ${n.shortName}`}
+                    >
+                      <span className="font-display text-[1.6rem] font-light text-ivory transition-colors duration-700 group-hover:text-gold lg:text-[2.1rem]">
+                        {n.shortName}
+                      </span>
+                      <span className="mt-3 block h-px w-10 bg-gold/40 transition-all duration-700 group-hover:w-24" />
+                      <span className="mt-4 block max-w-[38ch] font-sans text-[13.5px] leading-[1.85] font-light text-muted-foreground">
+                        {n.reason}
+                      </span>
+                      {n.sharedServices.length > 0 && (
+                        <span className="mt-3 block font-sans text-[10px] tracking-[0.3em] uppercase text-gold/70">
+                          {n.sharedServices.slice(0, 2).join(" · ")}
+                        </span>
+                      )}
+                    </Link>
+                  </Reveal>
                 </li>
               ))}
-              <li>
-                <LuxTextLink to="/areas" className="self-center">
-                  All areas
-                </LuxTextLink>
-              </li>
             </ul>
+
+            <div className="mt-16">
+              <LuxTextLink to="/areas">Every area we serve</LuxTextLink>
+            </div>
           </div>
         </section>
       )}
