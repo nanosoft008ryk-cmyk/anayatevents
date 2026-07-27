@@ -29,6 +29,7 @@ import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
 import { Route as AboutWhyUsRouteImport } from './routes/about.why-us'
 import { Route as AboutTeamRouteImport } from './routes/about.team'
 import { Route as AboutStoryRouteImport } from './routes/about.story'
+import { Route as AboutPromiseRouteImport } from './routes/about.promise'
 import { Route as AboutProcessRouteImport } from './routes/about.process'
 import { Route as AboutPhilosophyRouteImport } from './routes/about.philosophy'
 import { Route as AboutJourneyRouteImport } from './routes/about.journey'
@@ -137,6 +138,11 @@ const AboutStoryRoute = AboutStoryRouteImport.update({
   path: '/about/story',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutPromiseRoute = AboutPromiseRouteImport.update({
+  id: '/about/promise',
+  path: '/about/promise',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutProcessRoute = AboutProcessRouteImport.update({
   id: '/about/process',
   path: '/about/process',
@@ -185,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/about/journey': typeof AboutJourneyRoute
   '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
+  '/about/promise': typeof AboutPromiseRoute
   '/about/story': typeof AboutStoryRoute
   '/about/team': typeof AboutTeamRoute
   '/about/why-us': typeof AboutWhyUsRoute
@@ -214,6 +221,7 @@ export interface FileRoutesByTo {
   '/about/journey': typeof AboutJourneyRoute
   '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
+  '/about/promise': typeof AboutPromiseRoute
   '/about/story': typeof AboutStoryRoute
   '/about/team': typeof AboutTeamRoute
   '/about/why-us': typeof AboutWhyUsRoute
@@ -244,6 +252,7 @@ export interface FileRoutesById {
   '/about/journey': typeof AboutJourneyRoute
   '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
+  '/about/promise': typeof AboutPromiseRoute
   '/about/story': typeof AboutStoryRoute
   '/about/team': typeof AboutTeamRoute
   '/about/why-us': typeof AboutWhyUsRoute
@@ -275,6 +284,7 @@ export interface FileRouteTypes {
     | '/about/journey'
     | '/about/philosophy'
     | '/about/process'
+    | '/about/promise'
     | '/about/story'
     | '/about/team'
     | '/about/why-us'
@@ -304,6 +314,7 @@ export interface FileRouteTypes {
     | '/about/journey'
     | '/about/philosophy'
     | '/about/process'
+    | '/about/promise'
     | '/about/story'
     | '/about/team'
     | '/about/why-us'
@@ -333,6 +344,7 @@ export interface FileRouteTypes {
     | '/about/journey'
     | '/about/philosophy'
     | '/about/process'
+    | '/about/promise'
     | '/about/story'
     | '/about/team'
     | '/about/why-us'
@@ -363,6 +375,7 @@ export interface RootRouteChildren {
   AboutJourneyRoute: typeof AboutJourneyRoute
   AboutPhilosophyRoute: typeof AboutPhilosophyRoute
   AboutProcessRoute: typeof AboutProcessRoute
+  AboutPromiseRoute: typeof AboutPromiseRoute
   AboutStoryRoute: typeof AboutStoryRoute
   AboutTeamRoute: typeof AboutTeamRoute
   AboutWhyUsRoute: typeof AboutWhyUsRoute
@@ -523,6 +536,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutStoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/promise': {
+      id: '/about/promise'
+      path: '/about/promise'
+      fullPath: '/about/promise'
+      preLoaderRoute: typeof AboutPromiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about/process': {
       id: '/about/process'
       path: '/about/process'
@@ -587,6 +607,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutJourneyRoute: AboutJourneyRoute,
   AboutPhilosophyRoute: AboutPhilosophyRoute,
   AboutProcessRoute: AboutProcessRoute,
+  AboutPromiseRoute: AboutPromiseRoute,
   AboutStoryRoute: AboutStoryRoute,
   AboutTeamRoute: AboutTeamRoute,
   AboutWhyUsRoute: AboutWhyUsRoute,
