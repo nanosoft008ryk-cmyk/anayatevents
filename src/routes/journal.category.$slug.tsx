@@ -255,7 +255,7 @@ function CategoryPage() {
         title="Turn this thinking into an evening of your own."
         body="Tell us the date and the feeling you want to leave behind. A planner replies personally, with the same candour you have just read."
       />
-      <RelatedConstellation path={`/journal/category/${params.slug}`} heading="Continue reading" />
+      <RelatedConstellation path={`/journal/category/${category.slug}`} heading="Continue reading" />
     </main>
   );
 }
