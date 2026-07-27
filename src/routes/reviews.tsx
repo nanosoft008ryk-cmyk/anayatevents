@@ -186,4 +186,3 @@ function ReviewsPage() {
   );
 }
 
-export { site };
