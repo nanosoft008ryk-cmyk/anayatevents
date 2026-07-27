@@ -175,7 +175,7 @@ function ArticlePage() {
             </h1>
             {extras.deck && (
               <Reveal delay={420}>
-                <p className="mt-9 max-w-2xl font-display text-xl leading-[1.6] font-light italic text-ivory/75 md:text-[1.6rem]">
+                <p className="mt-5 max-w-2xl font-display text-xl leading-[1.6] font-light italic text-ivory/75 md:text-[1.6rem]">
                   {extras.deck}
                 </p>
               </Reveal>

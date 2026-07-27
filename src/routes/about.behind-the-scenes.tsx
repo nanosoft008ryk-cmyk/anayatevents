@@ -78,7 +78,7 @@ function BehindPage() {
             <RevealWords text={behindPage.hero.title} />
           </h1>
           <Reveal delay={560}>
-            <p className="mt-12 max-w-xl border-l border-gold/50 pl-6 font-sans text-[13px] leading-[2] font-light tracking-[0.02em] text-muted-foreground">
+            <p className="mt-5 max-w-xl border-l border-gold/50 pl-6 font-sans text-[13px] leading-[2] font-light tracking-[0.02em] text-muted-foreground">
               {behindPage.lede}
             </p>
           </Reveal>

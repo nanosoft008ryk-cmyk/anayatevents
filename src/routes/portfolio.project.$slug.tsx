@@ -96,7 +96,7 @@ function ProjectCaseStudy() {
             <RevealWords text={project.title} delay={120} />
           </h1>
           <Reveal variant="rise" delay={480}>
-            <p className="mt-8 max-w-2xl font-display text-xl leading-relaxed font-light italic text-muted-foreground md:text-2xl">
+            <p className="mt-5 max-w-2xl font-display text-xl leading-relaxed font-light italic text-muted-foreground md:text-2xl">
               {project.lede}
             </p>
           </Reveal>

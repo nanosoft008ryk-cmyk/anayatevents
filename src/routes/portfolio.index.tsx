@@ -74,7 +74,7 @@ function PortfolioIndex() {
             </span>
           </h1>
 
-          <Reveal variant="rise" delay={700} className="mt-12">
+          <Reveal variant="rise" delay={700} className="mt-5">
             <p className="max-w-xl font-sans text-[15px] leading-[1.9] font-light text-muted-foreground">
               Eight collections and seven case studies, drawn entirely from our own archive. No
               stock photography, no borrowed sets — every frame is a room this crew built in Lahore

@@ -54,7 +54,7 @@ function FaqIndex() {
           The questions
           <span className="block italic">most companies avoid.</span>
         </h1>
-        <p className="mt-7 max-w-2xl font-sans text-[15px] leading-[1.85] font-light text-muted-foreground">
+        <p className="mt-5 max-w-2xl font-sans text-[15px] leading-[1.85] font-light text-muted-foreground">
           Four clusters covering how we plan, what things cost, how the kitchen works and what a
           venue actually demands.
         </p>

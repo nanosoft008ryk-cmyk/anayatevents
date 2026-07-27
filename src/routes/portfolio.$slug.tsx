@@ -122,7 +122,7 @@ function PortfolioCategoryPage() {
           </h1>
           <Reveal variant="rise" delay={520}>
             <p
-              className={`mt-9 max-w-xl font-display text-xl leading-relaxed font-light italic text-muted-foreground md:text-2xl ${mirrored ? "md:ml-auto" : ""}`}
+              className={`mt-5 max-w-xl font-display text-xl leading-relaxed font-light italic text-muted-foreground md:text-2xl ${mirrored ? "md:ml-auto" : ""}`}
             >
               {category.lede}
             </p>

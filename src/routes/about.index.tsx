@@ -65,7 +65,7 @@ function AboutHub() {
                 </span>
               </h1>
               <Reveal delay={620}>
-                <p className="mt-12 max-w-xl font-sans text-[15px] leading-[2] font-light text-muted-foreground">
+                <p className="mt-5 max-w-xl font-sans text-[15px] leading-[2] font-light text-muted-foreground">
                   {aboutIntro.lede}
                 </p>
               </Reveal>

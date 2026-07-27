@@ -54,7 +54,7 @@ function Vault() {
         <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.02] font-light text-ivory md:text-7xl">
           The Vault
         </h1>
-        <p className="mt-7 max-w-2xl font-sans text-[15px] leading-[1.85] font-light text-muted-foreground">
+        <p className="mt-5 max-w-2xl font-sans text-[15px] leading-[1.85] font-light text-muted-foreground">
           Everything we have photographed, in one place and in no particular order — the way an
           archive should be read.
         </p>

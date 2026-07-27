@@ -54,7 +54,7 @@ function PromisePage() {
           <RevealWords text={promisePage.hero.title} />
         </h1>
         <Reveal delay={520}>
-          <span aria-hidden className="mx-auto mt-12 block h-px w-16 bg-gold" />
+          <span aria-hidden className="mx-auto mt-5 block h-px w-16 bg-gold" />
         </Reveal>
         <Reveal delay={620}>
           <p className="mx-auto mt-12 max-w-xl font-display text-xl leading-[1.7] font-light italic text-muted-foreground">

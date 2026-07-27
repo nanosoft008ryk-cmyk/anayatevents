@@ -54,7 +54,7 @@ function ProcessPage() {
           <RevealWords text={processPage.hero.title} />
         </h1>
         <Reveal delay={520}>
-          <p className="mt-12 max-w-xl font-sans text-[15px] leading-[2.1] font-light text-muted-foreground">
+          <p className="mt-5 max-w-xl font-sans text-[15px] leading-[2.1] font-light text-muted-foreground">
             {processPage.hero.lede} Replies {site.responseTime.toLowerCase()}.
           </p>
         </Reveal>

@@ -54,7 +54,7 @@ function ReviewsPage() {
           In their words,
           <span className="block italic">not ours.</span>
         </h1>
-        <p className="mt-7 max-w-2xl font-sans text-[15px] leading-[1.85] font-light text-muted-foreground">
+        <p className="mt-5 max-w-2xl font-sans text-[15px] leading-[1.85] font-light text-muted-foreground">
           Families and companies across Lahore, on the evenings we built for them.
         </p>
         <a

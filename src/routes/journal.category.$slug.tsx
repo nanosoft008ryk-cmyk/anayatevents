@@ -89,7 +89,7 @@ function CategoryPage() {
             </span>
           </h1>
           <Reveal delay={460}>
-            <p className="mt-9 max-w-xl font-sans text-[15px] leading-[2] font-light text-ivory/70">
+            <p className="mt-5 max-w-xl font-sans text-[15px] leading-[2] font-light text-ivory/70">
               {category.lede}
             </p>
           </Reveal>

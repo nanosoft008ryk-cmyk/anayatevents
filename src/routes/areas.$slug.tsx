@@ -156,7 +156,7 @@ function AreaPage() {
             <RevealWords text={area.heroHeadline} />
           </h1>
           <Reveal delay={520}>
-            <p className="mt-9 max-w-2xl font-display text-[1.25rem] leading-[1.7] font-light italic text-muted-foreground md:text-[1.6rem]">
+            <p className="mt-5 max-w-2xl font-display text-[1.25rem] leading-[1.7] font-light italic text-muted-foreground md:text-[1.6rem]">
               {area.lede}
             </p>
           </Reveal>

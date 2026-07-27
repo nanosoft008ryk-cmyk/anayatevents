@@ -131,7 +131,7 @@ function ServicesIndex() {
               <RevealWords text="with an extraordinary vision." delay={220} wordClassName="foil-text" />
             </span>
           </h1>
-          <div className="mt-12 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div className="mt-5 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <Reveal variant="rise" delay={200}>
               <p className="max-w-xl font-sans text-[15px] leading-[2] font-light text-ivory/75">
                 Seventeen disciplines, one house, one accountable line. Planning, design,
