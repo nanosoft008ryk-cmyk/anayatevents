@@ -1,6 +1,7 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 
 import type { Photo } from "@/content/images";
+import { imgAttrs } from "@/lib/img";
 import { cn } from "@/lib/utils";
 
 /**
@@ -17,6 +18,7 @@ export function Plate({
   className,
   imgClassName,
   priority,
+  sizes = "(min-width: 1024px) 50vw, 100vw",
   style,
 }: {
   image: Photo;
@@ -28,6 +30,8 @@ export function Plate({
   className?: string;
   imgClassName?: string;
   priority?: boolean;
+  /** Responsive sizes hint; defaults to a half-width editorial plate. */
+  sizes?: string;
   style?: CSSProperties;
 }) {
   const wrap = useRef<HTMLDivElement | null>(null);
