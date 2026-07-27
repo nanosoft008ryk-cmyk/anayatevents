@@ -76,23 +76,24 @@ export function SiteFooter() {
       {/* ── The index (wordmark sits behind this block) ─────────────────── */}
       <div className="mx-auto max-w-[92rem] px-6 md:px-12">
         <div className="relative isolate">
-          {/* Background wordmark — scoped to the index grid only, so it never
-              sits under the copyright row or dilutes the link column. */}
+          {/* Background wordmark — full-bleed, edge to edge, no framing rule.
+              The gradient bleeds off both sides of the viewport. */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 -z-10 select-none overflow-hidden"
+            className="pointer-events-none absolute top-0 left-1/2 -z-10 h-full w-screen -translate-x-1/2 select-none overflow-hidden"
           >
             <span className="absolute inset-0 wordmark-bed" />
             <span className="grain absolute inset-0" />
             {/* Two lines on small screens so the full wordmark fits the
-                viewport; one cinematic line from lg up. */}
-            <p className="absolute inset-x-0 bottom-2 text-center font-display font-light leading-[0.86] tracking-[-0.02em] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_15%,transparent),color-mix(in_oklab,var(--gold)_6%,transparent)_65%,transparent)] [background-clip:text] [-webkit-background-clip:text] text-[21vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 lg:whitespace-nowrap lg:text-[clamp(6rem,10.5vw,10.5rem)]">
+                viewport; one cinematic edge-to-edge line from lg up. */}
+            <p className="absolute inset-x-0 bottom-2 text-center font-display font-light leading-[0.84] tracking-[-0.03em] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_17%,transparent),color-mix(in_oklab,var(--gold)_7%,transparent)_65%,transparent)] [background-clip:text] [-webkit-background-clip:text] text-[25vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 lg:whitespace-nowrap lg:text-[14.2vw]">
               <span className="block lg:inline">Anayat</span>{" "}
               <span className="block lg:inline">Events</span>
             </p>
           </div>
 
-          <div className="grid gap-16 border-t border-border pt-16 lg:grid-cols-[1fr_2.6fr]">
+          <div className="grid gap-16 pt-16 lg:grid-cols-[1fr_2.6fr]">
+
 
             <div>
               <p className="font-sans text-[10px] tracking-[0.34em] uppercase text-gold-deep">
