@@ -31,6 +31,7 @@ import { Route as AboutStoryRouteImport } from './routes/about.story'
 import { Route as AboutProcessRouteImport } from './routes/about.process'
 import { Route as AboutPhilosophyRouteImport } from './routes/about.philosophy'
 import { Route as AboutJourneyRouteImport } from './routes/about.journey'
+import { Route as AboutBehindTheScenesRouteImport } from './routes/about.behind-the-scenes'
 import { Route as PortfolioProjectSlugRouteImport } from './routes/portfolio.project.$slug'
 import { Route as JournalCategorySlugRouteImport } from './routes/journal.category.$slug'
 
@@ -144,6 +145,11 @@ const AboutJourneyRoute = AboutJourneyRouteImport.update({
   path: '/about/journey',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutBehindTheScenesRoute = AboutBehindTheScenesRouteImport.update({
+  id: '/about/behind-the-scenes',
+  path: '/about/behind-the-scenes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortfolioProjectSlugRoute = PortfolioProjectSlugRouteImport.update({
   id: '/portfolio/project/$slug',
   path: '/portfolio/project/$slug',
@@ -162,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
+  '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
   '/about/journey': typeof AboutJourneyRoute
   '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
@@ -188,6 +195,7 @@ export interface FileRoutesByTo {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
+  '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
   '/about/journey': typeof AboutJourneyRoute
   '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
@@ -215,6 +223,7 @@ export interface FileRoutesById {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vault': typeof VaultRoute
+  '/about/behind-the-scenes': typeof AboutBehindTheScenesRoute
   '/about/journey': typeof AboutJourneyRoute
   '/about/philosophy': typeof AboutPhilosophyRoute
   '/about/process': typeof AboutProcessRoute
@@ -243,6 +252,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/vault'
+    | '/about/behind-the-scenes'
     | '/about/journey'
     | '/about/philosophy'
     | '/about/process'
@@ -269,6 +279,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/vault'
+    | '/about/behind-the-scenes'
     | '/about/journey'
     | '/about/philosophy'
     | '/about/process'
@@ -295,6 +306,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/vault'
+    | '/about/behind-the-scenes'
     | '/about/journey'
     | '/about/philosophy'
     | '/about/process'
@@ -322,6 +334,7 @@ export interface RootRouteChildren {
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VaultRoute: typeof VaultRoute
+  AboutBehindTheScenesRoute: typeof AboutBehindTheScenesRoute
   AboutJourneyRoute: typeof AboutJourneyRoute
   AboutPhilosophyRoute: typeof AboutPhilosophyRoute
   AboutProcessRoute: typeof AboutProcessRoute
@@ -498,6 +511,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutJourneyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about/behind-the-scenes': {
+      id: '/about/behind-the-scenes'
+      path: '/about/behind-the-scenes'
+      fullPath: '/about/behind-the-scenes'
+      preLoaderRoute: typeof AboutBehindTheScenesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portfolio/project/$slug': {
       id: '/portfolio/project/$slug'
       path: '/portfolio/project/$slug'
@@ -522,6 +542,7 @@ const rootRouteChildren: RootRouteChildren = {
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   VaultRoute: VaultRoute,
+  AboutBehindTheScenesRoute: AboutBehindTheScenesRoute,
   AboutJourneyRoute: AboutJourneyRoute,
   AboutPhilosophyRoute: AboutPhilosophyRoute,
   AboutProcessRoute: AboutProcessRoute,
