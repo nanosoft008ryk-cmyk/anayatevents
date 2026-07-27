@@ -12,7 +12,6 @@ import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
-import { nearbyLocations } from "@/lib/entity-graph";
 import { AreaMap } from "@/components/AreaMap";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import {
@@ -27,7 +26,7 @@ import {
   imageGallerySchema,
   type Crumb,
 } from "@/lib/seo";
-import { uniqueFaqs } from "@/lib/entity-graph";
+import { uniqueFaqs, nearbyLocations } from "@/lib/entity-graph";
 
 /** One trail feeds both the visible breadcrumbs and the BreadcrumbList JSON-LD. */
 function trailFor(slug: string): Crumb[] {
