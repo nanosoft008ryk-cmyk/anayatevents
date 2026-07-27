@@ -137,7 +137,7 @@ export function SiteFooter() {
         >
           <span className="absolute inset-0 wordmark-bed" />
           <span className="grain absolute inset-0" />
-          <p className="absolute inset-x-0 bottom-[6%] text-center font-display font-light leading-[0.82] tracking-[-0.035em] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_19%,transparent),color-mix(in_oklab,var(--gold)_8%,transparent)_65%,transparent)] [background-clip:text] [-webkit-background-clip:text] text-[26vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 lg:whitespace-nowrap lg:text-[14.4vw]">
+          <p className="absolute inset-x-0 bottom-[6%] text-center font-display font-light leading-[0.82] tracking-[-0.035em] text-transparent opacity-55 [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_19%,transparent),color-mix(in_oklab,var(--gold)_8%,transparent)_65%,transparent)] [background-clip:text] [-webkit-background-clip:text] text-[26vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 lg:whitespace-nowrap lg:text-[14.4vw] lg:opacity-100">
             <span className="block lg:inline">Anayat</span>{" "}
             <span className="block lg:inline">Events</span>
           </p>
