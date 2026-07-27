@@ -28,6 +28,7 @@ import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
 import { Route as AboutProcessRouteImport } from './routes/about.process'
 import { Route as PortfolioProjectSlugRouteImport } from './routes/portfolio.project.$slug'
+import { Route as JournalCategorySlugRouteImport } from './routes/journal.category.$slug'
 
 const VaultRoute = VaultRouteImport.update({
   id: '/vault',
@@ -124,6 +125,11 @@ const PortfolioProjectSlugRoute = PortfolioProjectSlugRouteImport.update({
   path: '/portfolio/project/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JournalCategorySlugRoute = JournalCategorySlugRouteImport.update({
+  id: '/journal/category/$slug',
+  path: '/journal/category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -144,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/journal/': typeof JournalIndexRoute
   '/portfolio/': typeof PortfolioIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/journal/category/$slug': typeof JournalCategorySlugRoute
   '/portfolio/project/$slug': typeof PortfolioProjectSlugRoute
 }
 export interface FileRoutesByTo {
@@ -165,6 +172,7 @@ export interface FileRoutesByTo {
   '/journal': typeof JournalIndexRoute
   '/portfolio': typeof PortfolioIndexRoute
   '/services': typeof ServicesIndexRoute
+  '/journal/category/$slug': typeof JournalCategorySlugRoute
   '/portfolio/project/$slug': typeof PortfolioProjectSlugRoute
 }
 export interface FileRoutesById {
@@ -187,6 +195,7 @@ export interface FileRoutesById {
   '/journal/': typeof JournalIndexRoute
   '/portfolio/': typeof PortfolioIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/journal/category/$slug': typeof JournalCategorySlugRoute
   '/portfolio/project/$slug': typeof PortfolioProjectSlugRoute
 }
 export interface FileRouteTypes {
@@ -210,6 +219,7 @@ export interface FileRouteTypes {
     | '/journal/'
     | '/portfolio/'
     | '/services/'
+    | '/journal/category/$slug'
     | '/portfolio/project/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -231,6 +241,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/portfolio'
     | '/services'
+    | '/journal/category/$slug'
     | '/portfolio/project/$slug'
   id:
     | '__root__'
@@ -252,6 +263,7 @@ export interface FileRouteTypes {
     | '/journal/'
     | '/portfolio/'
     | '/services/'
+    | '/journal/category/$slug'
     | '/portfolio/project/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -274,6 +286,7 @@ export interface RootRouteChildren {
   JournalIndexRoute: typeof JournalIndexRoute
   PortfolioIndexRoute: typeof PortfolioIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
+  JournalCategorySlugRoute: typeof JournalCategorySlugRoute
   PortfolioProjectSlugRoute: typeof PortfolioProjectSlugRoute
 }
 
@@ -412,6 +425,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioProjectSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journal/category/$slug': {
+      id: '/journal/category/$slug'
+      path: '/journal/category/$slug'
+      fullPath: '/journal/category/$slug'
+      preLoaderRoute: typeof JournalCategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -434,6 +454,7 @@ const rootRouteChildren: RootRouteChildren = {
   JournalIndexRoute: JournalIndexRoute,
   PortfolioIndexRoute: PortfolioIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
+  JournalCategorySlugRoute: JournalCategorySlugRoute,
   PortfolioProjectSlugRoute: PortfolioProjectSlugRoute,
 }
 export const routeTree = rootRouteImport

@@ -159,16 +159,19 @@ export function LuxAnchor({
 /** Inline text link with a drawing gold rule — used for section "more" links. */
 export function LuxTextLink({
   to,
+  params,
   children,
   className,
 }: {
   to: string;
+  params?: Record<string, string>;
   children: ReactNode;
   className?: string;
 }) {
   return (
     <Link
       to={to as never}
+      params={params as never}
       className={cn(
         "group/txt relative inline-flex items-center gap-3 font-sans text-[11px] tracking-[0.3em] uppercase text-gold transition-colors hover:text-gold-light",
         className,
