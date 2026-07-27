@@ -27,6 +27,9 @@ export const site = {
   whatsappDisplay: "0321 416 9707",
   whatsappHref: "https://wa.me/923214169707",
   instagram: "https://www.instagram.com/anayat_events_catering/",
+  /** No email is published on the GMB listing yet. Set it here and the
+   *  proposal modal instantly gains a mailto: submission route. */
+  email: "" as string,
 
   hours: "Open daily, 2:00 PM – 10:00 PM",
   hoursSchema: ["Mo-Su 14:00-22:00"],

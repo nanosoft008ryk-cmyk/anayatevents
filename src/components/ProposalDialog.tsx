@@ -1,5 +1,5 @@
 import { useMemo, useState, type FormEvent, type ReactNode } from "react";
-import { X, Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 
 import { site } from "@/content/site";
 import { services } from "@/content/services";
@@ -105,18 +105,8 @@ export function ProposalDialog({ children }: { children: ReactNode }) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
-        showCloseButton={false}
         className="max-h-[88vh] max-w-xl overflow-y-auto rounded-none border-[0.5px] border-gold/30 bg-[color-mix(in_oklab,var(--background)_94%,transparent)] p-8 backdrop-blur-xl md:p-10"
       >
-        <button
-          type="button"
-          onClick={() => setOpen(false)}
-          aria-label="Close"
-          className="absolute top-5 right-5 text-muted-foreground transition-colors hover:text-gold"
-        >
-          <X className="size-4" strokeWidth={1.25} aria-hidden="true" />
-        </button>
-
         <DialogHeader className="space-y-3 text-left">
           <p className="font-sans text-[10px] tracking-[0.32em] uppercase text-gold">
             Concierge
