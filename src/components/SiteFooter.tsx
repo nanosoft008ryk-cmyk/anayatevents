@@ -4,7 +4,7 @@ import { footerColumns } from "@/content/navigation";
 import { site } from "@/content/site";
 import { logo } from "@/content/images";
 import { photo } from "@/content/images";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxAnchor } from "@/components/ui/LuxButton";
 import { GoogleProfileLink } from "@/components/GoogleProfileLink";
@@ -75,8 +75,8 @@ export function SiteFooter() {
     <footer className="relative isolate overflow-hidden border-t border-border">
       {/* Closing frame dissolves out of the page above. */}
       <div className="absolute inset-x-0 top-0 -z-10 h-[60svh] md:h-[70svh]">
-        <img
-          {...imgAttrs(closing.id, closing.url, "100vw")}
+        <SmartImg
+          id={closing.id} fallbackUrl={closing.url} sizes="100vw"
           alt=""
           loading="lazy"
           decoding="async"

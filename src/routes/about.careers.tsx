@@ -9,7 +9,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxAnchor, LuxTextLink } from "@/components/ui/LuxButton";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import { pageMeta, jsonLd, breadcrumbSchema, type Crumb } from "@/lib/seo";
 
 const PATH = "/about/careers";
@@ -48,8 +48,8 @@ function CareersPage() {
         <div className="grid grid-cols-3 gap-px bg-border">
           {mosaic.map((p, i) => (
             <div key={p.id} className="overflow-hidden bg-background">
-              <img
-                {...imgAttrs(p.id, p.url, "33vw")}
+              <SmartImg
+                id={p.id} fallbackUrl={p.url} sizes="33vw"
                 alt={p.alt}
                 fetchPriority={i === 0 ? "high" : "auto"}
                 className="h-[26svh] w-full object-cover brightness-[0.66] saturate-[0.8] md:h-[42svh] kenburns"

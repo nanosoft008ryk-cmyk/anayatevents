@@ -8,7 +8,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
-import { imgAttrs } from "@/lib/img";
+import { SmartImg } from "@/components/ui/SmartImg";
 import { pageMeta, jsonLd, breadcrumbSchema, imageGallerySchema, type Crumb } from "@/lib/seo";
 
 const PATH = "/about/behind-the-scenes";
@@ -53,8 +53,8 @@ function BehindPage() {
       {/* ── Hero: full-bleed documentary still with a film-slate caption ── */}
       <section className="relative isolate flex min-h-[92svh] flex-col justify-end overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <img
-            {...imgAttrs(hero.id, hero.url, "100vw")}
+          <SmartImg
+            id={hero.id} fallbackUrl={hero.url} sizes="100vw"
             alt={hero.alt}
             fetchPriority="high"
             className="h-full w-full object-cover brightness-[0.55] saturate-[0.75] drift-slow"
