@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import type { Photo } from "@/content/images";
+import { imgAttrs } from "@/lib/img";
 
 /**
  * Cinematic hero backdrop: slow ken-burns frames that cross-dissolve on a long
@@ -51,8 +52,9 @@ export function CinematicBackdrop({
           style={{ opacity: i === index ? 1 : 0 }}
         >
           <img
-            src={f.url}
+            {...imgAttrs(f.id, f.url, "100vw")}
             alt={i === 0 ? f.alt : ""}
+            decoding="async"
             fetchPriority={i === 0 ? "high" : "low"}
             loading={i === 0 ? "eager" : "lazy"}
             className="h-full w-full object-cover kenburns"

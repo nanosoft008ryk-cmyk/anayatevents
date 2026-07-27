@@ -25,8 +25,11 @@ import a24 from "@/assets/ae-24.jpg.asset.json";
 import a25 from "@/assets/ae-25.jpg.asset.json";
 import a26 from "@/assets/ae-26.jpg.asset.json";
 import logoAsset from "@/assets/ae-logo.jpg.asset.json";
+import variants from "@/content/variants.json";
 
-export const logo = logoAsset.url;
+// Small WebP rendition — the logo never renders larger than ~80px.
+export const logo =
+  (variants as Record<string, { v: Record<string, string> }>)["ae-logo"]?.v["640"] ?? logoAsset.url;
 
 export type PhotoTag =
   | "stage"

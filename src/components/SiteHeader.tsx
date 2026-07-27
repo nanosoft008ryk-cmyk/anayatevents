@@ -4,6 +4,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { navigation } from "@/content/navigation";
 import { site } from "@/content/site";
 import { logo, photo } from "@/content/images";
+import { imgAttrs } from "@/lib/img";
 
 export function SiteHeader() {
   const [open, setOpen] = useState<string | null>(null);
@@ -161,9 +162,10 @@ export function SiteHeader() {
             </div>
             <div className="animate-[fade-in_0.9s_var(--ease-lux)_both]">
               <img
-                src={photo("ae-13").url}
+                {...imgAttrs("ae-13", photo("ae-13").url, "20vw")}
                 alt=""
                 loading="lazy"
+                decoding="async"
                 className="aspect-[3/4] w-full object-cover [mask-image:linear-gradient(to_bottom,black_70%,transparent)]"
               />
               <p className="mt-4 font-sans text-[9px] tracking-[0.3em] uppercase text-muted-foreground">
@@ -178,8 +180,10 @@ export function SiteHeader() {
       {mobile && (
         <div className="relative h-[calc(100svh-4.5rem)] overflow-y-auto bg-background lg:hidden">
           <img
-            src={photo("ae-22").url}
+            {...imgAttrs("ae-22", photo("ae-22").url, "100vw")}
             alt=""
+            loading="lazy"
+            decoding="async"
             className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.14]"
           />
           <div className="relative px-6 pt-6 pb-16">

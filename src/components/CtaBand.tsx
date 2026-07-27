@@ -2,6 +2,7 @@ import { site } from "@/content/site";
 import { photo } from "@/content/images";
 import { Reveal } from "@/components/motion/Reveal";
 import { LuxLink, LuxAnchor } from "@/components/ui/LuxButton";
+import { imgAttrs } from "@/lib/img";
 
 export function CtaBand({
   eyebrow = "Begin",
@@ -17,9 +18,10 @@ export function CtaBand({
       {/* Plate dissolves into the page above and the footer below — no band edges. */}
       <div className="absolute inset-0 -z-10">
         <img
-          src={photo("ae-16").url}
+          {...imgAttrs("ae-16", photo("ae-16").url, "100vw")}
           alt=""
           loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover opacity-30 drift-slow"
         />
         <div

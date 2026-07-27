@@ -13,20 +13,36 @@ import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
+import { imgAttrs } from "@/lib/img";
 
 const HERO = "ae-22";
 const HERO_FRAMES = ["ae-22", "ae-13", "ae-16", "ae-26"];
 const HOME_PHOTOS = ["ae-13", "ae-14", "ae-10", "ae-16", "ae-26", "ae-03"];
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    ...pageMeta({
+  head: () => {
+    const meta = pageMeta({
       title: "Anayat Events & Catering — Luxury Event Management in Lahore",
       description:
         "Lahore's luxury event management and catering house. Weddings, mehndi, walima, corporate and private celebrations — designed, built and served by one accountable team.",
       path: "/",
       image: photo(HERO).url,
-    }),
+    });
+    const hero = imgAttrs(HERO, photo(HERO).url, "100vw");
+    return {
+    ...meta,
+    links: [
+      ...(meta.links ?? []),
+      // Discover the first cinematic frame in the initial document.
+      {
+        rel: "preload",
+        as: "image",
+        href: hero.src,
+        imageSrcSet: hero.srcSet,
+        imageSizes: "100vw",
+        fetchPriority: "high",
+      },
+    ],
     scripts: [
       jsonLd(
         itemListSchema({
@@ -39,7 +55,8 @@ export const Route = createFileRoute("/")({
         }),
       ),
     ],
-  }),
+    };
+  },
   component: Home,
 });
 
@@ -108,9 +125,10 @@ function Home() {
               <div className="aspect-[3/4] w-full border-[0.5px] border-gold/30 p-4">
                 <div className="relative h-full w-full overflow-hidden">
                   <img
-                    src={photo("ae-05").url}
+                    {...imgAttrs("ae-05", photo("ae-05").url, "(min-width: 1024px) 33vw, 100vw")}
                     alt={photo("ae-05").alt}
                     loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover contrast-125 transition-transform duration-[1400ms] [transition-timing-function:var(--ease-lux)] hover:scale-105"
                   />
                   <span className="pointer-events-none absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.45)]" />
@@ -122,7 +140,7 @@ function Home() {
 
         <div className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-4">
           <span className="h-12 w-px bg-gradient-to-b from-transparent via-gold to-transparent" />
-          <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-ivory/40">
+          <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-ivory/70">
             Explore
           </span>
         </div>
@@ -258,8 +276,8 @@ function Home() {
 
           <ol className="lg:pt-6">
             {featured.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 60}>
-                <li className="group/row relative">
+              <li key={s.slug} className="group/row relative">
+                <Reveal delay={i * 60}>
                   <Link
                     to="/services/$slug"
                     params={{ slug: s.slug }}
@@ -280,8 +298,8 @@ function Home() {
                     <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-100 bg-border" />
                     <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-gold transition-transform duration-[900ms] [transition-timing-function:var(--ease-lux)] group-hover/row:scale-x-100" />
                   </Link>
-                </li>
-              </Reveal>
+                </Reveal>
+              </li>
             ))}
           </ol>
         </div>
@@ -364,9 +382,10 @@ function Home() {
       <section className="relative isolate overflow-hidden py-28 lg:py-40">
         <div className="absolute inset-0 -z-10">
           <img
-            src={photo("ae-08").url}
+            {...imgAttrs("ae-08", photo("ae-08").url, "100vw")}
             alt=""
             loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover opacity-[0.22] drift-slow"
           />
           <div className="absolute inset-0 veil" />
