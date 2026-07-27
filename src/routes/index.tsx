@@ -114,6 +114,10 @@ function Home() {
                   View the work
                 </LuxLink>
               </Reveal>
+              <Reveal delay={1020} className="mt-8">
+                <GoogleProfileLink label={`${site.rating.value} on Google · ${site.rating.count} reviews`} />
+              </Reveal>
+
             </div>
           </div>
 
