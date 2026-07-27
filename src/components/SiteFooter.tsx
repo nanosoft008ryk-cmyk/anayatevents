@@ -161,17 +161,6 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* ── Oversized wordmark, only the lowest tip clipped by the page base ── */}
-      <div aria-hidden className="relative select-none overflow-hidden pb-24 lg:pb-16">
-        <span className="pointer-events-none absolute inset-x-0 bottom-0 h-full wordmark-bed" />
-        <span className="grain pointer-events-none absolute inset-0" />
-        <p
-          className="relative whitespace-nowrap text-center font-display font-light leading-[0.92] tracking-[-0.02em] text-[clamp(4rem,15.6vw,17rem)] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_22%,transparent),color-mix(in_oklab,var(--gold)_9%,transparent)_55%,transparent)] [background-clip:text] [-webkit-background-clip:text]"
-          style={{ marginBottom: "-0.04em" }}
-        >
-          Anayat Events
-        </p>
-      </div>
 
     </footer>
 
