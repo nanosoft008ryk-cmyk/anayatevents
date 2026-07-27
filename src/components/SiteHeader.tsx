@@ -44,9 +44,21 @@ export function SiteHeader() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,backdrop-filter] duration-[900ms] [transition-timing-function:var(--ease-lux)] ${
         hidden && !open && !mobile ? "-translate-y-full" : "translate-y-0"
-      } ${solid ? "bg-background/85 backdrop-blur-2xl" : "bg-transparent"}`}
+      } ${solid ? "bg-background/92 backdrop-blur-2xl" : "bg-background/35 backdrop-blur-md"}`}
       onMouseLeave={() => setOpen(null)}
     >
+      {/* Legibility scrim — keeps nav type readable over any photograph. */}
+      <span
+        aria-hidden
+        className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[190%] transition-opacity duration-[900ms] ${
+          solid ? "opacity-0" : "opacity-100"
+        }`}
+        style={{
+          background:
+            "linear-gradient(to bottom, color-mix(in oklab, var(--background) 88%, transparent) 0%, color-mix(in oklab, var(--background) 55%, transparent) 55%, transparent 100%)",
+        }}
+      />
+
       <div
         className={`mx-auto flex max-w-[92rem] items-center justify-between px-6 transition-[padding] duration-700 md:px-12 ${
           solid ? "py-3.5" : "py-7"
