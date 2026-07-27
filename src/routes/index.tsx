@@ -79,16 +79,16 @@ function Home() {
           <span className="h-16 w-px bg-gradient-to-b from-gold to-transparent" />
         </div>
 
-        <div className="relative mx-auto grid w-full max-w-[92rem] grid-cols-12 items-end gap-x-6 px-5 pt-32 pb-32 sm:px-6 md:px-12 lg:pl-24 lg:pb-24">
+        <div className="relative mx-auto grid w-full max-w-[92rem] grid-cols-12 items-end gap-x-6 px-5 pt-28 pb-24 sm:px-6 sm:pt-32 sm:pb-28 md:px-12 lg:pl-24 lg:pb-24">
           {/* Headline column */}
           <div className="col-span-12 flex min-w-0 flex-col lg:col-span-7 lg:pr-12">
-            <p className="mb-6 flex items-center gap-4 font-sans text-[10px] tracking-[0.4em] uppercase text-gold sm:mb-8 lg:hidden">
+            <p className="mb-5 flex items-center gap-4 font-sans text-[10px] tracking-[0.4em] uppercase text-gold sm:mb-8 lg:hidden">
               <span className="h-px w-8 shrink-0 bg-gold" />
               Lahore · Since {site.founded}
             </p>
-            <h1 className="font-display text-[clamp(2.9rem,13vw,5rem)] leading-[0.92] font-light tracking-tight text-ivory lg:text-[6rem] xl:text-[7.4rem]">
+            <h1 className="font-display text-[clamp(2.6rem,12vw,5rem)] leading-[0.94] font-light tracking-tight text-ivory lg:text-[6rem] xl:text-[7.4rem]">
               <RevealWords text="An evening" delay={120} />
-              <span className="mt-1 block pl-6 sm:pl-10 md:pl-24">
+              <span className="mt-1 block pl-4 sm:pl-10 md:pl-24">
                 <span className="italic text-gold-light">
                   <RevealWords text="built" delay={340} />
                 </span>{" "}
@@ -101,20 +101,45 @@ function Home() {
 
             <div className="mt-6 max-w-md">
               <Reveal delay={780}>
-                <p className="font-sans text-[14px] leading-[1.95] font-light tracking-wide text-foreground/80">
+                <p className="font-sans text-[15px] leading-[1.85] font-light tracking-wide text-foreground/80 sm:text-[14px] sm:leading-[1.95]">
                   {site.description}
                 </p>
               </Reveal>
-              <Reveal delay={900} className="mt-9" innerClassName="flex flex-wrap items-center gap-x-12 gap-y-6">
-
-                <LuxLink to="/contact" tone="rule" className="px-0 py-0">
+              {/* Mobile: full-width, thumb-sized actions. Desktop keeps the
+                  hairline typographic links. */}
+              <Reveal
+                delay={900}
+                className="mt-8 sm:mt-9"
+                innerClassName="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-12 sm:gap-y-6"
+              >
+                <LuxLink
+                  to="/contact"
+                  tone="foil"
+                  className="w-full justify-center py-4 text-center sm:hidden"
+                >
                   Begin an enquiry
                 </LuxLink>
-                <LuxLink to="/portfolio" tone="quiet" arrow={false} className="px-0 py-0 text-ivory">
+                <LuxLink
+                  to="/portfolio"
+                  tone="ghost"
+                  className="w-full justify-center py-4 text-center sm:hidden"
+                >
+                  View the work
+                </LuxLink>
+
+                <LuxLink to="/contact" tone="rule" className="hidden px-0 py-0 sm:inline-flex">
+                  Begin an enquiry
+                </LuxLink>
+                <LuxLink
+                  to="/portfolio"
+                  tone="quiet"
+                  arrow={false}
+                  className="hidden px-0 py-0 text-ivory sm:inline-flex"
+                >
                   View the work
                 </LuxLink>
               </Reveal>
-              <Reveal delay={1020} className="mt-8">
+              <Reveal delay={1020} className="mt-7 sm:mt-8">
                 <GoogleProfileLink label={`${liveRating.rating} on Google · ${liveRating.count} reviews`} />
               </Reveal>
 
@@ -142,7 +167,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute bottom-24 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 sm:gap-4 lg:bottom-10">
+        <div className="pointer-events-none absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 sm:flex sm:bottom-16 sm:gap-4 lg:bottom-10">
           <span className="h-9 w-px bg-gradient-to-b from-transparent via-gold to-transparent sm:h-12" />
           <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-ivory/70">
             Explore
@@ -152,23 +177,24 @@ function Home() {
 
 
       {/* ── II. The count — type as architecture, no boxes ──────────── */}
-      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
-        <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 sm:gap-x-16 sm:gap-y-16 lg:grid-cols-4">
+      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-x-16 sm:gap-y-16 lg:grid-cols-4">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 110} className="relative min-w-0">
-              <p className="font-display text-[3.4rem] leading-[0.85] font-light text-foil sm:text-[4.5rem] lg:text-[5.5rem]">
+              <p className="font-display text-[2.6rem] leading-[0.85] font-light text-foil sm:text-[4.5rem] lg:text-[5.5rem]">
                 {s.value}
               </p>
-              <p className="mt-4 font-sans text-[10px] tracking-[0.34em] uppercase text-ivory sm:mt-6">
+              <p className="mt-3 font-sans text-[10px] tracking-[0.28em] uppercase text-ivory sm:mt-6 sm:tracking-[0.34em]">
                 {s.label}
               </p>
-              <p className="mt-2 max-w-[26ch] font-sans text-[13px] leading-relaxed font-light text-muted-foreground">
+              <p className="mt-2 max-w-[26ch] font-sans text-[12.5px] leading-relaxed font-light text-muted-foreground sm:text-[13px]">
                 {s.sub}
               </p>
             </Reveal>
           ))}
         </div>
       </section>
+
 
 
       {/* ── III. Manifesto — type-led, hairline creed, twin small plates ── */}
