@@ -19,26 +19,65 @@ import { site } from "../content/site";
 
 
 function NotFoundComponent() {
+  const routes: { to: string; label: string; note: string }[] = [
+    { to: "/services", label: "Services", note: "Weddings, catering, design & production" },
+    { to: "/portfolio", label: "Portfolio", note: "Collections and completed case studies" },
+    { to: "/journal", label: "Journal", note: "Planning notes from the house" },
+    { to: "/areas", label: "Areas we serve", note: "DHA, Bahria Town and across Lahore" },
+    { to: "/contact", label: "Enquire", note: "Begin a conversation with a planner" },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+    <main className="bg-background">
+      <section className="mx-auto max-w-[92rem] px-6 pt-40 pb-28 md:px-12">
+        <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">Error 404</p>
+        <h1 className="mt-6 max-w-[18ch] font-display text-[2.8rem] leading-[0.95] font-light text-ivory lg:text-[5rem]">
+          This page has left the room.
+        </h1>
+        <p className="mt-5 max-w-lg font-sans text-[14px] leading-[2] font-light text-foreground/70">
+          The address you followed no longer exists — or never did. Everything worth reading is one
+          line below.
         </p>
-        <div className="mt-6">
+
+        <div className="mt-16 hairline opacity-60" />
+
+        <ul className="mt-2 divide-y divide-border">
+          {routes.map((r) => (
+            <li key={r.to}>
+              <Link
+                to={r.to}
+                className="group/nf flex flex-col gap-1 py-7 transition-colors sm:flex-row sm:items-baseline sm:justify-between"
+              >
+                <span className="font-display text-2xl font-light text-ivory transition-colors group-hover/nf:text-gold lg:text-3xl">
+                  {r.label}
+                </span>
+                <span className="font-sans text-[12px] font-light text-muted-foreground">
+                  {r.note}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-14 flex flex-wrap items-center gap-x-14 gap-y-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold transition-colors hover:text-ivory"
           >
-            Go home
+            Return home
           </Link>
+          <a
+            href={site.phoneHref}
+            className="font-sans text-[10px] tracking-[0.3em] uppercase text-ivory transition-colors hover:text-gold"
+          >
+            Call {site.phoneDisplay}
+          </a>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
+
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
