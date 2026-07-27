@@ -435,7 +435,8 @@
 }
 
 /* Foil text that must win over inherited color utilities (unlayered = higher precedence) */
-.foil-text {
+.foil-text,
+.foil-text * {
   background: var(--gradient-foil);
   background-size: 220% 100%;
   background-clip: text;
