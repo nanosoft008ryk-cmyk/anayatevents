@@ -70,9 +70,22 @@ export function SiteFooter() {
         </Reveal>
       </div>
 
-      {/* ── The index ──────────────────────────────────────────────────── */}
-      <div className="mx-auto max-w-[92rem] px-6 pb-16 md:px-12 lg:pb-20">
+      {/* ── The index (wordmark sits behind this block) ─────────────────── */}
+      <div className="relative isolate mx-auto max-w-[92rem] px-6 pb-16 md:px-12 lg:pb-20">
+        {/* Background wordmark */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 select-none overflow-hidden"
+        >
+          <span className="absolute inset-0 wordmark-bed" />
+          <span className="grain absolute inset-0" />
+          <p className="absolute inset-x-0 bottom-6 whitespace-nowrap text-center font-display font-light leading-[0.9] tracking-[-0.02em] text-[clamp(3rem,11vw,11rem)] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_16%,transparent),color-mix(in_oklab,var(--gold)_7%,transparent)_60%,transparent)] [background-clip:text] [-webkit-background-clip:text]">
+            Anayat Events
+          </p>
+        </div>
+
         <div className="grid gap-16 border-t border-border pt-16 lg:grid-cols-[1fr_2.6fr]">
+
           <div>
             <p className="font-sans text-[10px] tracking-[0.34em] uppercase text-gold-deep">
               The studio
