@@ -10,10 +10,61 @@ import { LuxLink, LuxAnchor } from "@/components/ui/LuxButton";
 import { GoogleProfileLink } from "@/components/GoogleProfileLink";
 import { useLiveRating } from "@/hooks/use-live-rating";
 
+type FooterItem = { label: string; to: string; params?: Record<string, string> };
+
+/** One index column. Collapses into a disclosure below `sm`, opens as a plain
+ *  list from `sm` up — so the phone footer is a short, scannable menu rather
+ *  than a fifty-link scroll. */
+function IndexColumn({ heading, items }: { heading: string; items: readonly FooterItem[] }) {
+  const list = (
+    <ul className="space-y-3 pb-2 sm:pb-0">
+      {items.map((item) => (
+        <li key={`${item.to}-${item.label}`}>
+          <Link
+            to={item.to}
+            params={item.params as never}
+            className="inline-block py-0.5 font-sans text-[13px] leading-relaxed font-light text-ivory/72 transition-colors hover:text-gold"
+          >
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+
+  return (
+    <div className="border-b border-border/70 sm:border-0">
+      {/* Phone: disclosure */}
+      <details className="group/col sm:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between py-4 [&::-webkit-details-marker]:hidden">
+          <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
+            {heading}
+          </span>
+          <span
+            aria-hidden
+            className="relative grid h-6 w-6 shrink-0 place-items-center text-gold"
+          >
+            <span className="absolute h-px w-3 bg-current" />
+            <span className="absolute h-3 w-px bg-current transition-transform duration-500 [transition-timing-function:var(--ease-lux)] group-open/col:rotate-90 group-open/col:opacity-0" />
+          </span>
+        </summary>
+        <div className="pb-5">{list}</div>
+      </details>
+
+      {/* Tablet and up: always visible */}
+      <div className="hidden sm:block">
+        <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
+          {heading}
+        </p>
+        <div className="mt-6">{list}</div>
+      </div>
+    </div>
+  );
+}
+
 /**
- * Cinematic finale. The footer opens with a full-bleed closing frame and the
- * house line, then settles into a quiet editorial index — no boxes, no
- * link soup, hairlines only.
+ * Cinematic finale. A closing frame and the house line, a contact rail, a
+ * collapsible index and the copyright — the last element on every page.
  */
 export function SiteFooter() {
   const liveRating = useLiveRating();
@@ -22,7 +73,7 @@ export function SiteFooter() {
   return (
     <footer className="relative isolate overflow-hidden border-t border-border">
       {/* Closing frame dissolves out of the page above. */}
-      <div className="absolute inset-x-0 top-0 -z-10 h-[70svh]">
+      <div className="absolute inset-x-0 top-0 -z-10 h-[60svh] md:h-[70svh]">
         <img
           {...imgAttrs(closing.id, closing.url, "100vw")}
           alt=""
@@ -34,89 +85,93 @@ export function SiteFooter() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 62%, transparent) 40%, var(--background) 100%)",
+              "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 70%, transparent) 40%, var(--background) 100%)",
           }}
         />
         <div className="absolute inset-0 vignette" />
         <div className="absolute inset-0 grain" />
       </div>
 
-      {/* ── The last word ──────────────────────────────────────────────── */}
-      <div className="mx-auto max-w-[92rem] px-6 pt-28 pb-20 text-center md:px-12 md:pt-40">
+      {/* ── I. The last word ───────────────────────────────────────────── */}
+      <div className="mx-auto max-w-[92rem] px-5 pt-20 pb-14 text-center sm:px-6 md:px-12 md:pt-32 md:pb-20">
         <Reveal>
           <img
             src={logo}
             alt={`${site.name} logo`}
             width={96}
             height={96}
-            className="mx-auto h-20 w-20 rounded-full object-cover md:h-24 md:w-24"
+            className="mx-auto h-16 w-16 rounded-full object-cover sm:h-20 sm:w-20 md:h-24 md:w-24"
           />
         </Reveal>
-        <h2 className="mx-auto mt-10 max-w-[14ch] font-display text-[2.6rem] leading-[0.98] font-light text-ivory md:text-[4.6rem]">
+        <h2 className="mx-auto mt-8 max-w-[14ch] font-display text-[clamp(2.15rem,11vw,4.6rem)] leading-[0.98] font-light text-ivory md:mt-10">
           <RevealWords text="You think." />
-          <span className="block italic text-foil">
+          <span className="foil-text block italic">
             <RevealWords text="We do." delay={180} />
           </span>
         </h2>
         <Reveal delay={420}>
-          <p className="mx-auto mt-8 max-w-xl font-sans text-[15px] leading-[2] font-light text-ivory/65">
+          <p className="mx-auto mt-6 max-w-xl font-sans text-[14px] leading-[1.9] font-light text-ivory/70 sm:text-[15px] sm:leading-[2] md:mt-8">
             {site.description}
           </p>
         </Reveal>
-        <Reveal delay={520} className="mt-12 flex flex-wrap justify-center gap-4">
-          <LuxLink to="/contact" tone="foil">
+        <Reveal
+          delay={520}
+          className="mt-9 md:mt-12"
+          innerClassName="flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4"
+        >
+          <LuxLink to="/contact" tone="foil" className="justify-center">
             Begin an enquiry
           </LuxLink>
-          <LuxAnchor href={site.whatsappHref} tone="ghost">
+          <LuxAnchor href={site.whatsappHref} tone="ghost" className="justify-center">
             WhatsApp a planner
           </LuxAnchor>
         </Reveal>
       </div>
 
-      {/* ── The index (wordmark sits behind this block) ─────────────────── */}
-      <div className="mx-auto max-w-[92rem] px-6 md:px-12">
-        <div className="relative isolate">
-          {/* Background wordmark — full-bleed, edge to edge, no framing rule.
-              The gradient bleeds off both sides of the viewport. */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute top-0 left-1/2 -z-10 h-full w-screen -translate-x-1/2 select-none overflow-hidden"
-          >
-            <span className="absolute inset-0 wordmark-bed" />
-            <span className="grain absolute inset-0" />
-            {/* Two lines on small screens so the full wordmark fits the
-                viewport; one cinematic edge-to-edge line from lg up. */}
-            <p className="absolute inset-x-0 bottom-2 text-center font-display font-light leading-[0.84] tracking-[-0.03em] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_17%,transparent),color-mix(in_oklab,var(--gold)_7%,transparent)_65%,transparent)] [background-clip:text] [-webkit-background-clip:text] text-[25vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 lg:whitespace-nowrap lg:text-[14.2vw]">
-              <span className="block lg:inline">Anayat</span>{" "}
-              <span className="block lg:inline">Events</span>
-            </p>
-          </div>
+      {/* ── II. Contact rail + index (wordmark bleeds behind) ──────────── */}
+      <div className="relative isolate">
+        {/* Background wordmark — full-bleed, edge to edge, no framing rule. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 select-none overflow-hidden"
+        >
+          <span className="absolute inset-0 wordmark-bed" />
+          <span className="grain absolute inset-0" />
+          <p className="absolute inset-x-0 bottom-[6%] text-center font-display font-light leading-[0.82] tracking-[-0.035em] text-transparent [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--gold-light)_19%,transparent),color-mix(in_oklab,var(--gold)_8%,transparent)_65%,transparent)] [background-clip:text] [-webkit-background-clip:text] text-[26vw] lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2 lg:whitespace-nowrap lg:text-[14.4vw]">
+            <span className="block lg:inline">Anayat</span>{" "}
+            <span className="block lg:inline">Events</span>
+          </p>
+        </div>
 
-          <div className="grid gap-16 pt-16 lg:grid-cols-[1fr_2.6fr]">
-
-
-            <div>
+        <div className="mx-auto max-w-[92rem] px-5 pt-12 sm:px-6 md:px-12 md:pt-16">
+          <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.6fr)]">
+            {/* The studio */}
+            <div className="min-w-0">
               <p className="font-sans text-[10px] tracking-[0.34em] uppercase text-gold-deep">
                 The studio
               </p>
-              <p className="mt-6 max-w-xs font-sans text-sm leading-[1.95] font-light text-ivory/70">
-                {site.address.full}
-              </p>
-              <p className="mt-4 font-sans text-sm font-light text-ivory/70">
-                {site.hours}
-              </p>
-              <div className="mt-8 space-y-2">
-                {site.contacts.map((c) => (
-                  <a
-                    key={c.tel}
-                    href={c.tel}
-                    className="block font-display text-lg font-light text-ivory transition-colors hover:text-gold"
-                  >
-                    {c.name} — {c.display}
-                  </a>
-                ))}
+              <div className="mt-6 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-1 lg:gap-y-0">
+                <div>
+                  <p className="max-w-xs font-sans text-[13.5px] leading-[1.9] font-light text-ivory/70">
+                    {site.address.full}
+                  </p>
+                  <p className="mt-3 font-sans text-[13.5px] font-light text-ivory/70">
+                    {site.hours}
+                  </p>
+                </div>
+                <div className="space-y-2 lg:mt-8">
+                  {site.contacts.map((c) => (
+                    <a
+                      key={c.tel}
+                      href={c.tel}
+                      className="block font-display text-[1.05rem] leading-snug font-light text-ivory transition-colors hover:text-gold sm:text-lg"
+                    >
+                      {c.name} — {c.display}
+                    </a>
+                  ))}
+                </div>
               </div>
-              <div className="mt-8 flex flex-wrap gap-6">
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
                 {[
                   { label: "WhatsApp", href: site.whatsappHref },
                   { label: "Instagram", href: site.instagram },
@@ -138,44 +193,29 @@ export function SiteFooter() {
               </div>
             </div>
 
-
-            <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+            {/* The index */}
+            <nav
+              aria-label="Footer"
+              className="grid gap-x-10 gap-y-0 sm:gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+            >
               {footerColumns.map((col) => (
-                <div key={col.heading}>
-                  <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
-                    {col.heading}
-                  </p>
-                  <ul className="mt-6 space-y-3">
-                    {col.items.map((item) => (
-                      <li key={`${item.to}-${item.label}`}>
-                        <Link
-                          to={item.to}
-                          params={(item as { params?: Record<string, string> }).params as never}
-                          className="font-sans text-[13px] font-light text-ivory/72 transition-colors hover:text-gold"
-                        >
-                          {item.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <IndexColumn key={col.heading} heading={col.heading} items={col.items} />
               ))}
-            </div>
+            </nav>
           </div>
-        </div>
 
-        {/* Last element on the page. The only space beneath it is the
-            clearance the fixed concierge bar needs, nothing more. */}
-        <div className="mt-16 flex flex-col gap-3 border-t border-border pt-8 pb-[max(6.5rem,calc(4.5rem+env(safe-area-inset-bottom)))] sm:flex-row sm:items-center sm:justify-between lg:pb-24">
-          <p className="font-sans text-[10px] tracking-[0.24em] uppercase text-ivory/70">
-            © {new Date().getFullYear()} {site.legalName}
-          </p>
-          <p className="font-sans text-[10px] tracking-[0.24em] uppercase text-ivory/70">
-            {site.serviceArea} · Rated {liveRating.rating} from {liveRating.count} reviews
-          </p>
+          {/* Last element on the page. The only space beneath it is the
+              clearance the fixed concierge bar needs, nothing more. */}
+          <div className="mt-12 flex flex-col gap-3 border-t border-border pt-7 pb-[max(6.5rem,calc(4.5rem+env(safe-area-inset-bottom)))] sm:flex-row sm:items-center sm:justify-between md:mt-16 md:pt-8 lg:pb-24">
+            <p className="font-sans text-[9.5px] leading-relaxed tracking-[0.22em] uppercase text-ivory/70 sm:text-[10px] sm:tracking-[0.24em]">
+              © {new Date().getFullYear()} {site.legalName}
+            </p>
+            <p className="font-sans text-[9.5px] leading-relaxed tracking-[0.22em] uppercase text-ivory/70 sm:text-right sm:text-[10px] sm:tracking-[0.24em]">
+              {site.serviceArea} · Rated {liveRating.rating} from {liveRating.count} reviews
+            </p>
+          </div>
         </div>
       </div>
     </footer>
   );
 }
-

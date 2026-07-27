@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import type { CSSProperties } from "react";
 import { useLiveRating } from "@/hooks/use-live-rating";
+
 
 import { site, consultationSteps, stats } from "@/content/site";
 import { photo, photosByIds } from "@/content/images";
@@ -83,16 +85,16 @@ function Home() {
           <span className="h-16 w-px bg-gradient-to-b from-gold to-transparent" />
         </div>
 
-        <div className="relative mx-auto grid w-full max-w-[92rem] grid-cols-12 items-end gap-x-6 px-6 pt-36 pb-28 md:px-12 lg:pl-24 lg:pb-24">
+        <div className="relative mx-auto grid w-full max-w-[92rem] grid-cols-12 items-end gap-x-6 px-5 pt-32 pb-32 sm:px-6 md:px-12 lg:pl-24 lg:pb-24">
           {/* Headline column */}
-          <div className="col-span-12 flex flex-col lg:col-span-7 lg:pr-12">
-            <p className="mb-8 flex items-center gap-4 font-sans text-[10px] tracking-[0.4em] uppercase text-gold lg:hidden">
-              <span className="h-px w-8 bg-gold" />
+          <div className="col-span-12 flex min-w-0 flex-col lg:col-span-7 lg:pr-12">
+            <p className="mb-6 flex items-center gap-4 font-sans text-[10px] tracking-[0.4em] uppercase text-gold sm:mb-8 lg:hidden">
+              <span className="h-px w-8 shrink-0 bg-gold" />
               Lahore · Since {site.founded}
             </p>
-            <h1 className="font-display text-[3.4rem] leading-[0.9] font-light tracking-tight text-ivory sm:text-[5rem] lg:text-[6rem] xl:text-[7.4rem]">
+            <h1 className="font-display text-[clamp(2.9rem,13vw,5rem)] leading-[0.92] font-light tracking-tight text-ivory lg:text-[6rem] xl:text-[7.4rem]">
               <RevealWords text="An evening" delay={120} />
-              <span className="mt-1 block pl-10 md:pl-24">
+              <span className="mt-1 block pl-6 sm:pl-10 md:pl-24">
                 <span className="italic text-gold-light">
                   <RevealWords text="built" delay={340} />
                 </span>{" "}
@@ -103,13 +105,14 @@ function Home() {
               </span>
             </h1>
 
-            <div className="mt-5 max-w-md">
+            <div className="mt-6 max-w-md">
               <Reveal delay={780}>
-                <p className="font-sans text-[14px] leading-[2] font-light tracking-wide text-foreground/70">
+                <p className="font-sans text-[14px] leading-[1.95] font-light tracking-wide text-foreground/80">
                   {site.description}
                 </p>
               </Reveal>
-              <Reveal delay={900} className="mt-10 flex flex-wrap items-center gap-x-20 gap-y-6">
+              <Reveal delay={900} className="mt-9" innerClassName="flex flex-wrap items-center gap-x-12 gap-y-6">
+
                 <LuxLink to="/contact" tone="rule" className="px-0 py-0">
                   Begin an enquiry
                 </LuxLink>
@@ -145,8 +148,8 @@ function Home() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-4">
-          <span className="h-12 w-px bg-gradient-to-b from-transparent via-gold to-transparent" />
+        <div className="pointer-events-none absolute bottom-24 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 sm:gap-4 lg:bottom-10">
+          <span className="h-9 w-px bg-gradient-to-b from-transparent via-gold to-transparent sm:h-12" />
           <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-ivory/70">
             Explore
           </span>
@@ -155,17 +158,17 @@ function Home() {
 
 
       {/* ── II. The count — type as architecture, no boxes ──────────── */}
-      <section className="chapter light-left relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
-        <div className="grid gap-x-16 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+        <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 sm:gap-x-16 sm:gap-y-16 lg:grid-cols-4">
           {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 110} className="relative">
-              <p className="font-display text-[4.5rem] leading-[0.8] font-light text-foil lg:text-[5.5rem]">
+            <Reveal key={s.label} delay={i * 110} className="relative min-w-0">
+              <p className="font-display text-[3.4rem] leading-[0.85] font-light text-foil sm:text-[4.5rem] lg:text-[5.5rem]">
                 {s.value}
               </p>
-              <p className="mt-6 font-sans text-[10px] tracking-[0.34em] uppercase text-ivory">
+              <p className="mt-4 font-sans text-[10px] tracking-[0.34em] uppercase text-ivory sm:mt-6">
                 {s.label}
               </p>
-              <p className="mt-2 max-w-[22ch] font-sans text-[13px] leading-relaxed font-light text-muted-foreground">
+              <p className="mt-2 max-w-[26ch] font-sans text-[13px] leading-relaxed font-light text-muted-foreground">
                 {s.sub}
               </p>
             </Reveal>
@@ -173,19 +176,20 @@ function Home() {
         </div>
       </section>
 
+
       {/* ── III. Manifesto — type-led, hairline creed, twin small plates ── */}
-      <section className="chapter relative overflow-hidden pt-24 pb-24 lg:pt-36 lg:pb-40">
-        <div className="mx-auto max-w-[92rem] px-6 md:px-12">
-          <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-16">
+      <section className="chapter relative overflow-hidden pt-20 pb-20 md:pt-24 md:pb-24 lg:pt-36 lg:pb-40">
+        <div className="mx-auto max-w-[92rem] px-5 sm:px-6 md:px-12">
+          <div className="grid gap-y-12 md:gap-y-16 lg:grid-cols-12 lg:gap-x-16">
             {/* Statement */}
-            <Reveal className="lg:col-span-7">
+            <Reveal className="min-w-0 lg:col-span-7">
               <p className="flex items-center gap-5 font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
-                <span className="h-px w-10 bg-gold/60" />
+                <span className="h-px w-10 shrink-0 bg-gold/60" />
                 The house
               </p>
-              <h2 className="mt-10 font-display text-[2.6rem] leading-[0.98] font-light text-ivory lg:text-[4.2rem]">
+              <h2 className="mt-7 font-display text-[clamp(2rem,8.5vw,4.2rem)] leading-[1] font-light text-ivory md:mt-10">
                 We do not sell decor.
-                <span className="mt-2 block pl-8 italic text-gold-light lg:pl-20">
+                <span className="mt-2 block pl-5 italic text-gold-light sm:pl-8 lg:pl-20">
                   We take responsibility
                 </span>
                 <span className="block">for an evening.</span>
@@ -194,7 +198,7 @@ function Home() {
 
             {/* Offset narrow plate */}
             <Reveal variant="mask" delay={180} className="lg:col-span-4 lg:col-start-9 lg:mt-6">
-              <div className="relative ml-auto w-full max-w-[19rem]">
+              <div className="relative mx-auto w-full max-w-[16rem] sm:max-w-[19rem] lg:ml-auto lg:mr-0">
                 <Plate image={photo("ae-05")} ratio="3/4" speed={0.5} />
                 <span className="pointer-events-none absolute -inset-3 border-[0.5px] border-gold/20" />
               </div>
@@ -202,12 +206,13 @@ function Home() {
           </div>
 
           {/* Creed — three tenets on hairlines, breaking the grid */}
-          <div className="mt-20 grid gap-y-14 lg:mt-28 lg:grid-cols-12 lg:gap-x-16">
+          <div className="mt-16 grid gap-y-10 md:gap-y-14 lg:mt-28 lg:grid-cols-12 lg:gap-x-16">
             <Reveal delay={120} className="lg:col-span-3 lg:col-start-1 lg:pt-24">
-              <div className="relative w-full max-w-[15rem]">
+              <div className="relative w-full max-w-[11rem] sm:max-w-[15rem]">
                 <Plate image={photo("ae-17")} ratio="4/5" speed={0.9} fade="bottom" />
               </div>
             </Reveal>
+
 
             <div className="lg:col-span-8 lg:col-start-5">
               {[
@@ -228,18 +233,19 @@ function Home() {
                 },
               ].map((t, i) => (
                 <Reveal key={t.n} delay={i * 110}>
-                  <article className="group/creed relative grid grid-cols-[auto_1fr] items-start gap-x-8 py-10 lg:gap-x-14">
-                    <span className="font-display text-[1.5rem] leading-none font-light text-gold-deep transition-colors duration-700 group-hover/creed:text-gold">
+                  <article className="group/creed relative grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-5 py-8 sm:gap-x-8 md:py-10 lg:gap-x-14">
+                    <span className="font-display text-[1.25rem] leading-none font-light text-gold-deep transition-colors duration-700 group-hover/creed:text-gold sm:text-[1.5rem]">
                       {t.n}
                     </span>
                     <div className="min-w-0">
-                      <h3 className="font-display text-[1.5rem] leading-tight font-light text-ivory lg:text-[2rem]">
+                      <h3 className="font-display text-[1.35rem] leading-tight font-light text-ivory sm:text-[1.5rem] lg:text-[2rem]">
                         {t.head}
                       </h3>
-                      <p className="mt-4 max-w-xl font-sans text-[14px] leading-[2] font-light text-muted-foreground">
+                      <p className="mt-3 max-w-xl font-sans text-[14px] leading-[1.9] font-light text-muted-foreground sm:mt-4 sm:leading-[2]">
                         {t.body}
                       </p>
                     </div>
+
                     <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-border" />
                     <span className="pointer-events-none absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-gold transition-transform duration-[900ms] [transition-timing-function:var(--ease-lux)] group-hover/creed:scale-x-100" />
                   </article>
@@ -268,37 +274,38 @@ function Home() {
       </section>
 
       {/* ── IV. Disciplines — staggered editorial index, no card grid ── */}
-      <section className="chapter light-right relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.3fr]">
-          <Reveal className="lg:sticky lg:top-32 lg:self-start">
+      <section className="chapter light-right relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+        <div className="grid gap-10 md:gap-12 lg:grid-cols-[0.9fr_1.3fr]">
+          <Reveal className="min-w-0 lg:sticky lg:top-32 lg:self-start">
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">What we do</p>
-            <h2 className="mt-8 font-display text-[2.6rem] leading-[1.02] font-light text-ivory lg:text-[4rem]">
+            <h2 className="mt-6 font-display text-[clamp(2.1rem,8.5vw,4rem)] leading-[1.04] font-light text-ivory md:mt-8">
               Seventeen disciplines,
               <span className="block italic text-gold-light">one crew.</span>
             </h2>
-            <LuxTextLink to="/services" className="mt-10">
+            <LuxTextLink to="/services" className="mt-8 md:mt-10">
               All services
             </LuxTextLink>
           </Reveal>
 
-          <ol className="lg:pt-6">
+          <ol className="min-w-0 lg:pt-6">
             {featured.map((s, i) => (
               <li key={s.slug} className="group/row relative">
                 <Reveal delay={i * 60}>
                   <Link
                     to="/services/$slug"
                     params={{ slug: s.slug }}
-                    className="relative grid grid-cols-[auto_1fr] items-baseline gap-x-8 py-9 lg:gap-x-14"
-                    style={{ marginLeft: `${(i % 3) * 1.75}rem` }}
+                    className="relative grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-5 py-7 sm:gap-x-8 md:py-9 lg:ml-[var(--row-indent)] lg:gap-x-14"
+                    style={{ "--row-indent": `${(i % 3) * 1.75}rem` } as CSSProperties}
+
                   >
                     <span className="font-sans text-[10px] tracking-[0.3em] text-gold-deep">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="min-w-0">
-                      <span className="block font-display text-[1.9rem] leading-tight font-light text-ivory transition-[color,transform] duration-[900ms] [transition-timing-function:var(--ease-lux)] group-hover/row:translate-x-2 group-hover/row:text-gold lg:text-[2.6rem]">
+                      <span className="block font-display text-[1.65rem] leading-tight font-light text-ivory transition-[color,transform] duration-[900ms] [transition-timing-function:var(--ease-lux)] group-hover/row:translate-x-2 group-hover/row:text-gold sm:text-[1.9rem] lg:text-[2.6rem]">
                         {s.name}
                       </span>
-                      <span className="mt-3 block max-w-xl font-sans text-[14px] leading-[1.95] font-light text-muted-foreground opacity-70 transition-opacity duration-700 group-hover/row:opacity-100">
+                      <span className="mt-3 block max-w-xl font-sans text-[14px] leading-[1.9] font-light text-muted-foreground opacity-80 transition-opacity duration-700 group-hover/row:opacity-100">
                         {s.lede}
                       </span>
                     </span>
@@ -313,18 +320,29 @@ function Home() {
       </section>
 
       {/* ── V. Immersive frame — full bleed, blending both ends ─────── */}
-      <section className="relative">
+      <section className="relative isolate">
         <Plate
           image={photo("ae-19")}
           ratio="16/9"
           speed={1.4}
           fade="both"
-          className="min-h-[70svh] [&>div]:min-h-[70svh]"
+          sizes="100vw"
+          className="min-h-[62svh] [&>div]:min-h-[62svh] md:min-h-[70svh] md:[&>div]:min-h-[70svh]"
+        />
+        {/* Legibility scrim — sits under the quote only, so the far side of the
+            frame keeps its colour. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(100deg, color-mix(in oklab, var(--background) 84%, transparent) 0%, color-mix(in oklab, var(--background) 58%, transparent) 45%, color-mix(in oklab, var(--background) 12%, transparent) 85%)",
+          }}
         />
         <div className="pointer-events-none absolute inset-0 flex items-center">
-          <div className="mx-auto w-full max-w-[92rem] px-6 md:px-12">
+          <div className="mx-auto w-full max-w-[92rem] px-5 sm:px-6 md:px-12">
             <Reveal variant="mask" duration={1400}>
-              <p className="max-w-3xl font-display text-[2rem] leading-[1.25] font-light text-ivory italic drop-shadow-[0_10px_40px_rgba(0,0,0,0.8)] lg:text-[3.2rem]">
+              <p className="max-w-3xl font-display text-[clamp(1.5rem,6.2vw,3.2rem)] leading-[1.3] font-light text-ivory italic [text-shadow:0_2px_30px_rgba(0,0,0,0.85)]">
                 “Light first. Then flowers. Then the food that people will still
                 talk about in March.”
               </p>
@@ -333,14 +351,15 @@ function Home() {
         </div>
       </section>
 
+
       {/* ── VI. Selected work — floating, uneven, magazine framing ──── */}
-      <section className="chapter relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
-        <div className="flex flex-wrap items-end justify-between gap-8">
-          <Reveal>
+      <section className="chapter relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+        <div className="flex flex-wrap items-end justify-between gap-6 md:gap-8">
+          <Reveal className="min-w-0">
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
               Selected work
             </p>
-            <h2 className="mt-8 max-w-[14ch] font-display text-[2.6rem] leading-[1.02] font-light text-ivory lg:text-[4rem]">
+            <h2 className="mt-6 max-w-[14ch] font-display text-[clamp(2.1rem,8.5vw,4rem)] leading-[1.04] font-light text-ivory md:mt-8">
               Six rooms from a longer archive.
             </h2>
           </Reveal>
@@ -349,7 +368,8 @@ function Home() {
           </Reveal>
         </div>
 
-        <div className="mt-20 grid gap-x-10 gap-y-16 lg:grid-cols-12">
+        <div className="mt-12 grid gap-x-10 gap-y-10 md:mt-20 md:gap-y-16 lg:grid-cols-12">
+
           <Reveal variant="mask" className="lg:col-span-5 lg:mt-24">
             <Plate image={gallery[0]} ratio="3/4" caption speed={0.6} />
           </Reveal>
@@ -370,13 +390,13 @@ function Home() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-24 flex flex-wrap gap-x-10 gap-y-5">
+        <Reveal className="mt-16 lg:mt-24" innerClassName="flex flex-wrap gap-x-8 gap-y-4 sm:gap-x-10 sm:gap-y-5">
           {portfolioCategories.map((c) => (
             <Link
               key={c.slug}
               to="/portfolio/$slug"
               params={{ slug: c.slug }}
-              className="group/cat relative font-display text-2xl font-light text-muted-foreground transition-colors duration-500 hover:text-gold lg:text-3xl"
+              className="group/cat relative font-display text-xl font-light text-muted-foreground transition-colors duration-500 hover:text-gold sm:text-2xl lg:text-3xl"
             >
               {c.name}
               <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform duration-[800ms] [transition-timing-function:var(--ease-lux)] group-hover/cat:origin-left group-hover/cat:scale-x-100" />
@@ -386,40 +406,47 @@ function Home() {
       </section>
 
       {/* ── VII. Process — horizontal timeline over a dark plate ────── */}
-      <section className="relative isolate overflow-hidden py-28 lg:py-40">
+      <section className="relative isolate overflow-hidden py-20 md:py-28 lg:py-40">
         <div className="absolute inset-0 -z-10">
           <img
             {...imgAttrs("ae-08", photo("ae-08").url, "100vw")}
             alt=""
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover opacity-[0.22] drift-slow"
+            className="h-full w-full object-cover opacity-[0.18] drift-slow"
           />
-          <div className="absolute inset-0 veil" />
+          {/* Legibility stack — this section is entirely type over photography. */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, var(--background) 0%, color-mix(in oklab, var(--background) 80%, transparent) 30%, color-mix(in oklab, var(--background) 80%, transparent) 70%, var(--background) 100%)",
+            }}
+          />
           <div className="absolute inset-0 vignette" />
         </div>
 
-        <div className="mx-auto max-w-[92rem] px-6 md:px-12">
+        <div className="mx-auto max-w-[92rem] px-5 sm:px-6 md:px-12">
           <Reveal>
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
               The process
             </p>
-            <h2 className="mt-8 max-w-[18ch] font-display text-[2.4rem] leading-[1.04] font-light text-ivory lg:text-[3.6rem]">
+            <h2 className="mt-6 max-w-[18ch] font-display text-[clamp(2rem,8vw,3.6rem)] leading-[1.06] font-light text-ivory md:mt-8">
               Five unhurried movements, from first message to last guest.
             </h2>
           </Reveal>
 
-          <div className="mt-20 grid gap-y-14 md:grid-cols-3 md:gap-x-12 lg:grid-cols-5">
+          <div className="mt-12 grid gap-y-10 sm:grid-cols-2 sm:gap-x-10 md:mt-20 md:grid-cols-3 md:gap-x-12 md:gap-y-14 lg:grid-cols-5">
             {consultationSteps.map((s, i) => (
-              <Reveal key={s.step} delay={i * 110} className="group/step relative">
-                <div className="mb-6 flex items-center gap-4">
-                  <span className="font-display text-[2.6rem] leading-none font-light text-gold-deep transition-colors duration-700 group-hover/step:text-gold">
+              <Reveal key={s.step} delay={i * 110} className="group/step relative min-w-0">
+                <div className="mb-4 flex items-center gap-4 md:mb-6">
+                  <span className="font-display text-[2.2rem] leading-none font-light text-gold-deep transition-colors duration-700 group-hover/step:text-gold md:text-[2.6rem]">
                     {s.step}
                   </span>
                   <span className="hairline flex-1 opacity-60" />
                 </div>
-                <h3 className="font-display text-xl font-light text-ivory">{s.title}</h3>
-                <p className="mt-4 font-sans text-[13px] leading-[1.95] font-light text-muted-foreground">
+                <h3 className="font-display text-lg font-light text-ivory md:text-xl">{s.title}</h3>
+                <p className="mt-3 font-sans text-[13px] leading-[1.9] font-light text-muted-foreground md:mt-4">
                   {s.body}
                 </p>
               </Reveal>
@@ -428,15 +455,16 @@ function Home() {
         </div>
       </section>
 
+
       {/* ── VIII. Voices — oversized pull quotes, no card walls ─────── */}
-      <section className="chapter light-left relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
+      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
         <Reveal>
           <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
             {liveRating.rating} from {liveRating.count} Google reviews
           </p>
         </Reveal>
 
-        <div className="mt-16 space-y-20 lg:space-y-28">
+        <div className="mt-10 space-y-14 md:mt-16 md:space-y-20 lg:space-y-28">
           {testimonials.slice(0, 3).map((t, i) => (
             <Reveal
               key={t.id}
@@ -449,56 +477,59 @@ function Home() {
                     : "lg:max-w-3xl"
               }
             >
-              <blockquote className="font-display text-[1.7rem] leading-[1.3] font-light text-ivory italic lg:text-[2.6rem]">
+              <blockquote className="font-display text-[clamp(1.35rem,5.6vw,2.6rem)] leading-[1.34] font-light text-ivory italic">
                 “{t.quote}”
               </blockquote>
-              <p className="mt-7 font-sans text-[10px] tracking-[0.32em] uppercase text-gold-deep">
+              <p className="mt-5 font-sans text-[10px] leading-[1.9] tracking-[0.28em] uppercase text-gold-deep md:mt-7 md:tracking-[0.32em]">
                 {t.name} · {t.event} · {t.area}
               </p>
             </Reveal>
           ))}
         </div>
 
-        <Reveal className="mt-20">
+        <Reveal className="mt-14 md:mt-20">
           <LuxTextLink to="/reviews">Read all reviews</LuxTextLink>
         </Reveal>
       </section>
 
+
       {/* ── IX. Territory — split screen ────────────────────────────── */}
       <section className="relative grid items-stretch lg:grid-cols-[1fr_1fr]">
-        <div className="relative order-2 min-h-[50svh] lg:order-1">
+        <div className="relative order-2 min-h-[44svh] md:min-h-[50svh] lg:order-1">
           <Plate
             image={photo("ae-24")}
             ratio="3/4"
             speed={0.9}
             fade="sides"
+            sizes="(min-width: 1024px) 50vw, 100vw"
             className="h-full [&>div]:h-full"
           />
         </div>
-        <div className="order-1 flex items-center px-6 py-24 md:px-12 lg:order-2 lg:py-40 lg:pr-[max(3rem,calc((100vw-92rem)/2+3rem))]">
-          <div>
+        <div className="order-1 flex items-center px-5 py-16 sm:px-6 md:px-12 md:py-24 lg:order-2 lg:py-40 lg:pr-[max(3rem,calc((100vw-92rem)/2+3rem))]">
+          <div className="min-w-0">
             <Reveal>
               <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
                 Where we work
               </p>
-              <h2 className="mt-8 max-w-[16ch] font-display text-[2.4rem] leading-[1.04] font-light text-ivory lg:text-[3.4rem]">
+              <h2 className="mt-6 max-w-[16ch] font-display text-[clamp(2rem,8vw,3.4rem)] leading-[1.06] font-light text-ivory md:mt-8">
                 Every postcode in Lahore, produced by the same team.
               </h2>
             </Reveal>
-            <Reveal delay={140} className="mt-12 flex flex-wrap gap-x-8 gap-y-4">
+            <Reveal delay={140} className="mt-8 md:mt-12" innerClassName="flex flex-wrap gap-x-6 gap-y-4 sm:gap-x-8">
+
               {locations.map((l) => (
                 <Link
                   key={l.slug}
                   to="/areas/$slug"
                   params={{ slug: l.slug }}
-                  className="group/area relative font-sans text-[11px] tracking-[0.26em] uppercase text-muted-foreground transition-colors duration-500 hover:text-gold"
+                  className="group/area relative font-sans text-[11px] tracking-[0.22em] uppercase text-muted-foreground transition-colors duration-500 hover:text-gold sm:tracking-[0.26em]"
                 >
                   {l.shortName}
                   <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform duration-700 group-hover/area:origin-left group-hover/area:scale-x-100" />
                 </Link>
               ))}
             </Reveal>
-            <Reveal delay={220} className="mt-14">
+            <Reveal delay={220} className="mt-10 md:mt-14">
               <LuxLink to="/areas" tone="ghost">
                 All service areas
               </LuxLink>
@@ -508,13 +539,13 @@ function Home() {
       </section>
 
       {/* ── X. Journal — one lead story, two whispers ───────────────── */}
-      <section className="chapter relative mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
-        <div className="flex flex-wrap items-end justify-between gap-8">
-          <Reveal>
+      <section className="chapter relative mx-auto max-w-[92rem] px-5 py-20 sm:px-6 md:px-12 md:py-28 lg:py-40">
+        <div className="flex flex-wrap items-end justify-between gap-6 md:gap-8">
+          <Reveal className="min-w-0">
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
               The journal
             </p>
-            <h2 className="mt-8 font-display text-[2.6rem] leading-[1.02] font-light text-ivory lg:text-[4rem]">
+            <h2 className="mt-6 font-display text-[clamp(2.1rem,8.5vw,4rem)] leading-[1.04] font-light text-ivory md:mt-8">
               Written by the people
               <span className="block italic text-gold-light">who build it.</span>
             </h2>
@@ -524,38 +555,41 @@ function Home() {
           </Reveal>
         </div>
 
-        <div className="mt-20 grid gap-x-16 gap-y-14 lg:grid-cols-[1.35fr_1fr]">
+        <div className="mt-12 grid gap-x-16 gap-y-12 md:mt-20 md:gap-y-14 lg:grid-cols-[1.35fr_1fr]">
+
           {journal[0] && (
             <Reveal variant="mask">
               <Link to="/journal/$slug" params={{ slug: journal[0].slug }} className="group/lead block">
                 <Plate image={photo("ae-11")} ratio="16/10" />
-                <p className="mt-8 font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
+                <p className="mt-6 font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep md:mt-8">
                   {journal[0].category} · {journal[0].readingTime}
                 </p>
-                <h3 className="mt-5 max-w-2xl font-display text-[2rem] leading-[1.12] font-light text-ivory transition-colors duration-700 group-hover/lead:text-gold lg:text-[2.6rem]">
+                <h3 className="mt-4 max-w-2xl font-display text-[clamp(1.6rem,6vw,2.6rem)] leading-[1.14] font-light text-ivory transition-colors duration-700 group-hover/lead:text-gold md:mt-5">
                   {journal[0].title}
                 </h3>
-                <p className="mt-5 max-w-xl font-sans text-[14px] leading-[1.95] font-light text-muted-foreground">
+                <p className="mt-4 max-w-xl font-sans text-[14px] leading-[1.9] font-light text-muted-foreground md:mt-5">
+
                   {journal[0].excerpt}
                 </p>
               </Link>
             </Reveal>
           )}
 
-          <div className="flex flex-col justify-center gap-14 lg:pt-10">
+          <div className="flex flex-col justify-center gap-10 md:gap-14 lg:pt-10">
             {journal.slice(1).map((a, i) => (
               <Reveal key={a.slug} delay={i * 120}>
                 <Link to="/journal/$slug" params={{ slug: a.slug }} className="group/story block">
                   <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold-deep">
                     {a.category} · {a.readingTime}
                   </p>
-                  <h3 className="mt-4 font-display text-[1.6rem] leading-tight font-light text-ivory transition-[color,transform] duration-700 group-hover/story:translate-x-1.5 group-hover/story:text-gold lg:text-[2rem]">
+                  <h3 className="mt-3 font-display text-[clamp(1.4rem,5.4vw,2rem)] leading-tight font-light text-ivory transition-[color,transform] duration-700 group-hover/story:translate-x-1.5 group-hover/story:text-gold md:mt-4">
                     {a.title}
                   </h3>
-                  <p className="mt-4 font-sans text-[13px] leading-[1.95] font-light text-muted-foreground">
+                  <p className="mt-3 font-sans text-[13px] leading-[1.9] font-light text-muted-foreground md:mt-4">
                     {a.excerpt}
                   </p>
-                  <span className="mt-6 block h-px w-full origin-left scale-x-100 bg-border transition-colors duration-700 group-hover/story:bg-gold" />
+                  <span className="mt-5 block h-px w-full origin-left scale-x-100 bg-border transition-colors duration-700 group-hover/story:bg-gold md:mt-6" />
+
                 </Link>
               </Reveal>
             ))}
