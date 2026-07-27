@@ -123,7 +123,7 @@ function WhyPage() {
         <div className="mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">
           <Reveal>
             <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
-              In their words · {site.rating.value} from {site.rating.count} Google reviews
+              In their words · {liveRating.rating} from {liveRating.count} Google reviews
             </p>
           </Reveal>
           <div className="mt-16 grid gap-14 lg:grid-cols-3 lg:gap-16">
