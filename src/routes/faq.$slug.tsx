@@ -3,6 +3,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { faqTopics, getFaqTopic, type FaqTopic } from "@/content/faqs";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { pageMeta, jsonLd, breadcrumbSchema, faqSchema, type Crumb } from "@/lib/seo";
 
 function trailFor(slug: string): Crumb[] {
@@ -93,6 +94,7 @@ function FaqTopicPage() {
         </div>
       </section>
 
+      <RelatedConstellation kind="faq" slug={params.slug} options={{ kinds: ["service", "area", "collection", "article"] }} />
       <CtaBand />
     </main>
   );

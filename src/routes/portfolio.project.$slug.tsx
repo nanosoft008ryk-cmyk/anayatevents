@@ -11,6 +11,7 @@ import { getService } from "@/content/services";
 import { getLocation } from "@/content/locations";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
@@ -408,7 +409,8 @@ function ProjectCaseStudy() {
       </section>
 
       <div className="mt-32 md:mt-44">
-        <CtaBand />
+        <RelatedConstellation kind="project" slug={params.slug} options={{ kinds: ["collection", "service", "area", "article"] }} />
+      <CtaBand />
       </div>
     </main>
   );

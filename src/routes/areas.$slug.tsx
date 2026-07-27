@@ -11,6 +11,7 @@ import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { CtaBand } from "@/components/CtaBand";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { AreaMap } from "@/components/AreaMap";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import {
@@ -603,4 +604,5 @@ function AreaPage() {
       </span>
     </main>
   );
-}
+}<RelatedConstellation kind="area" slug={params.slug} options={{ kinds: ["service", "area", "collection", "article", "faq"] }} />
+      

@@ -6,6 +6,7 @@ import { photo } from "@/content/images";
 import { locations } from "@/content/locations";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink } from "@/components/ui/LuxButton";
@@ -415,4 +416,5 @@ function ServicePage() {
       />
     </main>
   );
-}
+}<RelatedConstellation kind="service" slug={params.slug} options={{ kinds: ["collection", "article", "area", "faq"] }} />
+      

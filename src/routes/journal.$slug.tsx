@@ -15,6 +15,7 @@ import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { CtaBand } from "@/components/CtaBand";
+import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { imgAttrs } from "@/lib/img";
 import {
   pageMeta,
@@ -322,4 +323,5 @@ function ArticlePage() {
       />
     </main>
   );
-}
+}<RelatedConstellation kind="article" slug={params.slug} options={{ kinds: ["service", "collection", "area", "faq"] }} />
+      
