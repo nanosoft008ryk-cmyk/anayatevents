@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "seo:audit": "node scripts/seo-audit.mjs"
+    "seo:audit": "node scripts/seo-audit.mjs",
+    "seo:ci": "node scripts/seo-audit.mjs --max-errors=0 --max-warnings=40"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
