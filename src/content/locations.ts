@@ -1,382 +1,1083 @@
+/* ---------------------------------------------------------------------------
+ * Service-area content.
+ *
+ * CONTENT RULE (non-negotiable): Anayat Events has ONE base — The Palms 7
+ * Farmhouse, Green Acres Housing Society, Lahore. Every other area page
+ * describes work we travel to do. Nothing on these pages may imply a branch,
+ * an office, a showroom or a second address in that locality. The permitted
+ * register is "we serve clients here", "our team travels here", "we regularly
+ * plan events in this area".
+ *
+ * Every area also carries genuinely distinct copy — different audience,
+ * venues, celebration styles and planning considerations. Nothing here is a
+ * find-and-replace of another entry.
+ * ------------------------------------------------------------------------- */
+
+/** Drives the per-page layout rhythm so no two area pages read alike. */
+export type AreaRhythm = "editorial" | "mirrored" | "column" | "stacked";
+
 export interface LocationArea {
   slug: string;
   name: string;
   shortName: string;
   metaTitle: string;
   metaDescription: string;
+  /** The visible H1. Written naturally — never keyword-stuffed. */
+  heroHeadline: string;
+  heroKicker: string;
   hero: string;
   lede: string;
-  body: string[];
-  venues: { name: string; note: string }[];
-  logistics: { title: string; body: string }[];
-  gallery: string[];
+  rhythm: AreaRhythm;
+  intro: { heading: string; body: string[] };
+  experience: {
+    heading: string;
+    body: string[];
+    notes: { title: string; body: string }[];
+  };
+  /** Service slugs presented as an editorial list, not a keyword block. */
+  services: string[];
+  /** Venue *types* commonly chosen locally — never claimed relationships. */
+  venueTypes: { type: string; note: string }[];
+  inspiration: {
+    heading: string;
+    body: string;
+    palette: { name: string; hex: string }[];
+    gallery: string[];
+  };
+  why: { heading: string; body: string[] };
+  categories: string[];
+  projects: string[];
+  articles: string[];
   faqs: { q: string; a: string }[];
   nearby: string[];
+  /** How the team reaches this area from the single Green Acres base. */
+  travelNote: string;
 }
 
 export const locations: LocationArea[] = [
   {
     slug: "lahore",
-    name: "Event Management in Lahore",
+    name: "Lahore",
     shortName: "Lahore",
-    metaTitle: "Event Management Company in Lahore | Anayat Events & Catering",
+    metaTitle: "Luxury Event Management Serving Lahore | Anayat Events & Catering",
     metaDescription:
-      "Luxury event management and catering across Lahore — weddings, corporate events and private celebrations produced end to end by a single in-house team.",
+      "Anayat Events & Catering serves clients throughout Lahore — weddings, corporate occasions and private celebrations planned, designed and catered by one in-house team.",
+    heroHeadline: "Luxury Event Management Serving Lahore",
+    heroKicker: "Our home city",
     hero: "ae-22",
-    lede: "The city we were built in, and the only one we claim to know by heart.",
-    body: [
-      "Lahore does not have one wedding season; it has a winter rush that compresses eight months of demand into fourteen weekends. Florists run out. Good crews get double-booked. Venues quietly raise their rates in September.",
-      "Working here well is a matter of timing and relationships more than taste. We hold crew capacity, book floral volume ahead of the curve, and tell families honestly when a date is going to cost them more than it should.",
-      "From Gulberg drawing rooms to Bedian farmhouse lawns, we produce across the whole city — the same team, the same standards, whatever the postcode.",
+    lede:
+      "The city our team knows best — and the one whose seasons, traffic and courtyards shape how we plan everything else.",
+    rhythm: "editorial",
+    intro: {
+      heading: "A city that celebrates loudly, and well",
+      body: [
+        "Lahore does not treat a wedding as an evening. It treats it as a season — a run of dinners, mehndis, nikahs and walimas that pull three generations of a family into the same rooms across a fortnight. Nothing else in the country compresses so much hosting into so little calendar.",
+        "That rhythm shapes everything about how celebrations are produced here. Between November and February the city's florists, crews and good venues are spoken for months in advance, and the difference between a smooth wedding week and a frantic one is almost always decided in August, not in December.",
+        "Our own base sits at The Palms 7 Farmhouse in Green Acres, and from there our team travels across the whole city — Gulberg drawing rooms, DHA house lawns, Bahria halls, Bedian gardens. Same planners, same kitchen brigade, same standards, whichever postcode the invitation carries.",
+      ],
+    },
+    experience: {
+      heading: "What we have learned working across Lahore",
+      body: [
+        "We do not publish counts of weddings or claim to have worked at every venue in the city. What we can say honestly is that our team has planned and produced celebrations across most of Lahore's districts, and that the accumulated knowledge shows up in unglamorous places: which halls hide a decor-exclusivity clause, which lawns drain badly after rain, which approach roads seize up at seven in the evening.",
+        "That knowledge is the actual service. Design is what a client sees; logistics is what keeps the design intact from the moment the first truck leaves Green Acres to the moment the last chair is loaded back onto it.",
+      ],
+      notes: [
+        {
+          title: "Seasonality read honestly",
+          body: "We will tell you when a date is going to cost meaningfully more than a date two weeks either side of it, and why.",
+        },
+        {
+          title: "One team, whole city",
+          body: "Planning, decor, florals and kitchen are in-house. Nothing is subcontracted out to a crew you have never met.",
+        },
+        {
+          title: "Access before aesthetics",
+          body: "Every commission begins with a physical look at the venue's power, kitchen distance and load-in window before a single sketch is drawn.",
+        },
+      ],
+    },
+    services: [
+      "wedding-planning",
+      "luxury-weddings",
+      "luxury-catering",
+      "corporate-events",
+      "stage-decoration",
+      "floral-design",
     ],
-    venues: [
-      { name: "Farmhouse estates, Bedian & Raiwind", note: "Full production builds on open ground." },
-      { name: "Hotel ballrooms, Gulberg & Mall", note: "Managed load-in with in-house venue operations." },
-      { name: "Banquet halls, Johar Town & Model Town", note: "Service-route planning around fixed kitchens." },
-      { name: "Private residences, DHA & Cantt", note: "Compact crews and residential sound planning." },
+    venueTypes: [
+      { type: "Hotel ballrooms", note: "Formal receptions where the venue runs its own operations team and timings are shared." },
+      { type: "Banquet halls & marquees", note: "The city's workhorse format — best transformed with an overlay rather than fought." },
+      { type: "Farmhouse estates", note: "Open land on the outskirts, built up into a full temporary venue for the night." },
+      { type: "Private residences", note: "Home lawns and courtyards, planned around neighbours, gates and driveway width." },
     ],
-    logistics: [
-      { title: "Peak season", body: "November to February books out by August. October and March offer the same weather at materially lower cost." },
-      { title: "Traffic windows", body: "Load-ins are scheduled outside the Ferozepur Road and Canal peak hours to protect the build timeline." },
-      { title: "Sound regulation", body: "We plan every function to the local cut-off time for its area and design the last hour to wind down." },
+    inspiration: {
+      heading: "The Lahore palette",
+      body:
+        "A city of brick, brass and old gardens tends to reward warmth over contrast. Most of our Lahore work sits in ivory and candlelight with a single deep accent — jewel green, oxblood, or the marigold that arrives with every mehndi whether you plan for it or not.",
+      palette: [
+        { name: "Candle ivory", hex: "#F2E8D8" },
+        { name: "Old brass", hex: "#B08D4F" },
+        { name: "Mughal green", hex: "#1F3A2E" },
+        { name: "Marigold", hex: "#E39A2B" },
+      ],
+      gallery: ["ae-22", "ae-13", "ae-04", "ae-25", "ae-07", "ae-16"],
+    },
+    why: {
+      heading: "Why families across the city call us",
+      body: [
+        "Most people who contact us have already been quoted by someone cheaper and someone louder. What they are usually looking for is the third thing: a house that will tell them the truth about what their number buys, and then deliver exactly that without a single conversation about extras on the morning of the event.",
+        "We keep design, florals and food under one roof because that is the only way to be accountable for all three. When the stage is late, it is our problem. When a table is served four minutes behind the rest of the room, it is our problem. There is nobody else in the chain to look at.",
+      ],
+    },
+    categories: ["wedding-stages", "floral-installations", "dining-catering"],
+    projects: ["the-long-white", "crystal-rain-walima", "chandeliers-in-the-trees"],
+    articles: [
+      "planning-a-lahore-wedding-week",
+      "what-a-wedding-actually-costs",
+      "designing-a-stage-that-photographs",
     ],
-    gallery: ["ae-22", "ae-13", "ae-04", "ae-25", "ae-07", "ae-16"],
     faqs: [
-      { q: "Which areas of Lahore do you cover?", a: "All of it — DHA, Bahria Town, Gulberg, Model Town, Johar Town, Cantt, Askari, Raiwind Road, Bedian Road, Green Acres and Wapda Town." },
-      { q: "What does a Lahore wedding realistically cost?", a: "It scales with guest count and format more than with decor. We give an honest range in the first conversation rather than after a proposal." },
-      { q: "Do you have a physical office we can visit?", a: "Yes — The Palms 7 Farmhouse in Green Acres. Most families prefer to meet there because they can see a real setup." },
+      {
+        q: "Which parts of Lahore do you serve?",
+        a: "Effectively all of it — DHA, Bahria Town, Gulberg, Model Town, Johar Town, Cantt and Askari, Wapda Town, Raiwind Road, Bedian Road and Green Acres, plus surrounding Punjab on request.",
+      },
+      {
+        q: "Do you have offices in each of these areas?",
+        a: "No. We work from a single base at The Palms 7 Farmhouse in Green Acres, Lahore. Our planning and production teams travel out to every other area we serve.",
+      },
+      {
+        q: "How far in advance should a Lahore wedding be booked?",
+        a: "For a peak winter date, six to nine months is comfortable and four is tight. Off-peak dates in October or March can often be arranged in far less time.",
+      },
+      {
+        q: "Can you handle an entire wedding week rather than a single function?",
+        a: "Yes, and it is usually the better arrangement — one design language, one crew and one point of accountability across mehndi, nikah and walima.",
+      },
     ],
     nearby: ["dha-lahore", "bahria-town-lahore", "gulberg", "model-town"],
+    travelNote:
+      "Everything we build leaves from one place: our production base at The Palms 7 Farmhouse in Green Acres. Fabrication, floral cold storage and the kitchen brigade all operate from that single address, and our crews travel out from there to every area of the city we serve.",
   },
+
   {
     slug: "dha-lahore",
-    name: "Event Management in DHA Lahore",
+    name: "DHA Lahore",
     shortName: "DHA Lahore",
-    metaTitle: "Event Planner & Caterer in DHA Lahore | Anayat Events",
+    metaTitle: "Luxury Wedding Planner Serving DHA Lahore | Anayat Events",
     metaDescription:
-      "Event planning and catering in DHA Lahore — house lawns, club halls and private residences across Phases 1 to 8, produced with discreet compact crews.",
+      "Anayat Events plans and caters celebrations for clients across DHA Lahore — house lawns, club halls and private residences from Phase 1 to Phase 8, with discreet compact crews.",
+    heroHeadline: "Luxury Wedding Planner Serving DHA Lahore",
+    heroKicker: "Phases 1 – 8",
     hero: "ae-19",
-    lede: "House lawns, club halls and a security gate that needs your supplier list by Thursday.",
-    body: [
-      "DHA events are usually residential, and residential events are governed by things nobody puts in a mood board: gate passes, neighbour tolerance, driveway width, and how many vans can stand on a street without blocking it.",
-      "We submit supplier lists to the relevant phase administration in advance, arrive in a staged order rather than all at once, and work with compact crews who know how to move through somebody's home without leaving a mark.",
-      "Phases 5, 6 and 8 have the lawn depth for a genuine outdoor function. The older phases suit seated dinners and nikah ceremonies beautifully.",
+    lede:
+      "Where the venue is usually somebody's home, and the plan has to respect the street as much as the guest list.",
+    rhythm: "mirrored",
+    intro: {
+      heading: "A neighbourhood that hosts at home",
+      body: [
+        "DHA celebrates privately. Families here tend to choose their own lawn over a hall — partly for control, largely because a house full of relatives is the point of the evening rather than an inconvenience to be managed elsewhere.",
+        "It gives the work a particular character. The design brief is smaller and more intimate, but the operational one is harder: a residential build has to arrive, install, run and disappear without leaving a mark on a driveway, a lawn edge or a neighbour's patience.",
+        "The phases differ too. Five, six and eight have the lawn depth for a genuine outdoor function with a stage and a proper dance floor. The older phases, with their narrower plots and mature planting, are at their best for a seated dinner or a nikah where the house itself is the backdrop.",
+      ],
+    },
+    experience: {
+      heading: "How our team works in DHA",
+      body: [
+        "Our crews travel into DHA regularly, and over time we have learned to plan backwards from the gate rather than forwards from the mood board. Supplier and vehicle lists go to the relevant phase administration well ahead of the build. Arrivals are staged so that four vans never stand on one residential street at the same time.",
+        "We also plan around what a house can actually carry. Domestic supply is never loaded with event lighting or kitchen draw — power comes in on our own generator so nothing in the home flickers when the stage lights come up.",
+      ],
+      notes: [
+        { title: "Gate clearance handled for you", body: "We prepare and lodge the supplier and vehicle documentation with phase security on your behalf." },
+        { title: "Compact, discreet crews", body: "Smaller teams who know how to move through a family home without disturbing it." },
+        { title: "Neighbour courtesy", body: "Sound levels and a firm finish time are agreed in writing before the first truck arrives." },
+      ],
+    },
+    services: [
+      "wedding-planning",
+      "nikah-planning",
+      "private-events",
+      "luxury-catering",
+      "floral-design",
+      "birthday-events",
     ],
-    venues: [
-      { name: "Private house lawns, Phases 5–8", note: "Full lawn builds with generator and lighting." },
-      { name: "Defence Raya & club venues", note: "Managed hall functions with external catering." },
-      { name: "Y-Block & commercial halls", note: "Compact indoor formats for 150–400 guests." },
-      { name: "Rooftop terraces", note: "Intimate dinners with wind and heater planning." },
+    venueTypes: [
+      { type: "Private house lawns", note: "The commonest DHA format — full builds with independent power and lighting." },
+      { type: "Club and members' venues", note: "Managed hall functions where external catering is permitted." },
+      { type: "Commercial halls in the blocks", note: "Compact indoor formats for roughly 150 to 400 guests." },
+      { type: "Rooftop terraces", note: "Intimate winter dinners, planned around wind and heating." },
     ],
-    logistics: [
-      { title: "Gate clearance", body: "Supplier vehicle lists are lodged with phase security at least seventy-two hours ahead." },
-      { title: "Neighbour courtesy", body: "Sound levels and a firm cut-off agreed in writing before the build starts." },
-      { title: "Street parking", body: "Marshals and a staged drop-off keep the road clear for residents throughout." },
-    ],
-    gallery: ["ae-19", "ae-15", "ae-06", "ae-09", "ae-23", "ae-03"],
+    inspiration: {
+      heading: "Restraint, at home",
+      body:
+        "Residential DHA work looks best when it stays close to the architecture instead of hiding it. Warm white light on existing planting, low floral runs that let people see each other across a table, and metal rather than colour doing the ornament.",
+      palette: [
+        { name: "Bone", hex: "#EFE7DC" },
+        { name: "Champagne", hex: "#D8BE8E" },
+        { name: "Garden green", hex: "#2C4232" },
+        { name: "Dusk grey", hex: "#4A4A46" },
+      ],
+      gallery: ["ae-19", "ae-15", "ae-06", "ae-09", "ae-23", "ae-03"],
+    },
+    why: {
+      heading: "Why DHA clients keep our number",
+      body: [
+        "Because a home event is an act of trust before it is a design commission. You are letting a production crew into the place your family lives, and the thing clients tell us afterwards is almost never about the stage — it is that nothing was scratched, nobody shouted, and the lawn was back to itself by the following afternoon.",
+        "The design matters too, of course. But at this scale, taste is table stakes and behaviour is the differentiator.",
+      ],
+    },
+    categories: ["nikah-ceremonies", "lounges-seating", "floral-installations"],
+    projects: ["bloom-curtain-nikah", "ivory-salon"],
+    articles: ["an-intimate-nikah-at-home", "why-fresh-flowers-matter"],
     faqs: [
-      { q: "Can you set up in a DHA house lawn?", a: "Yes — from a forty-guest nikah to a three-hundred-guest mehndi, with generator power so the house supply is never loaded." },
-      { q: "How do you handle DHA security clearance?", a: "We prepare and submit the full supplier and vehicle list to the phase office on your behalf." },
-      { q: "Is there a sound cut-off?", a: "Yes, and we design the final hour of the function to taper into it rather than end abruptly." },
+      {
+        q: "Do you have an office in DHA?",
+        a: "No — our single base is at Green Acres, Lahore. Our planning and production team travels into DHA for site visits, builds and event days.",
+      },
+      {
+        q: "Can you set up a full function in a DHA house lawn?",
+        a: "Yes, from a forty-guest nikah up to around three hundred guests, with our own generator so the household supply is never loaded.",
+      },
+      {
+        q: "Who arranges DHA security clearance for the suppliers?",
+        a: "We do. The full supplier and vehicle list is prepared and submitted to the phase office ahead of the build date.",
+      },
+      {
+        q: "How is the sound cut-off managed?",
+        a: "We design the last hour of the function to taper toward the agreed finish time rather than stopping abruptly at it.",
+      },
     ],
-    nearby: ["lahore", "cantt-askari", "bahria-town-lahore", "gulberg"],
+    nearby: ["cantt-askari", "bedian-road", "gulberg", "lahore"],
+    travelNote:
+      "DHA is a straightforward run from our Green Acres base, and our crews make it regularly. Site visits, tastings and design meetings can happen at your home or at the farmhouse — whichever suits the family.",
   },
+
   {
     slug: "bahria-town-lahore",
-    name: "Event Management in Bahria Town Lahore",
+    name: "Bahria Town Lahore",
     shortName: "Bahria Town",
-    metaTitle: "Event Planner & Caterer in Bahria Town Lahore | Anayat Events",
+    metaTitle: "Luxury Event Management for Bahria Town Lahore | Anayat Events",
     metaDescription:
-      "Event planning and catering in Bahria Town Lahore — grand halls, community lawns and villa celebrations with full production and in-house catering.",
+      "Anayat Events serves clients across Bahria Town Lahore — grand halls, community lawns and villa celebrations, with full production, decor and in-house catering.",
+    heroHeadline: "Luxury Event Management for Bahria Town Lahore",
+    heroKicker: "Grand halls & open lawns",
     hero: "ae-05",
-    lede: "Big halls, generous lawns and rooms with enough ceiling height to actually hang something.",
-    body: [
-      "Bahria Town is the easiest large-format venue landscape in Lahore. Wide access roads, real parking, halls with genuine height and lawns that were laid out rather than left over.",
-      "Height is the opportunity most planners waste here. These ceilings take hanging floral gardens, chandelier clusters and drape work that would be impossible in an older Gulberg hall.",
-      "We produce full winter wedding weeks across the sectors — mehndi on a lawn, nikah in a villa, walima in a grand hall — without the crew ever leaving the neighbourhood.",
+    lede:
+      "Wide roads, real parking and ceilings tall enough to hang something worth looking up at.",
+    rhythm: "column",
+    intro: {
+      heading: "The easiest large format in the city",
+      body: [
+        "Bahria Town was laid out rather than accumulated, and it shows in the way celebrations run here. Access roads are wide, parking genuinely exists, and the halls were designed as venues instead of converted into them.",
+        "The community skews young and family-oriented, and the celebration style follows: larger guest lists, more elaborate mehndi nights, and a real appetite for scale — bigger stages, longer dining rooms, more light in the air.",
+        "Height is the local advantage most planners waste. These ceilings will carry hanging floral gardens and chandelier clusters that a converted hall in an older part of Lahore simply cannot take.",
+      ],
+    },
+    experience: {
+      heading: "Producing across the sectors",
+      body: [
+        "Our team regularly plans events throughout Bahria Town, and the practical benefit is that a full wedding week can be run without the crew ever leaving the neighbourhood — mehndi on a community lawn, nikah in a villa, walima in a grand hall, with the same production language across all three.",
+        "Because the drive from our Green Acres base is longer than a cross-town run, we stage production overnight for early builds. The setup window belongs to the build, not to the journey.",
+      ],
+      notes: [
+        { title: "Rigging surveyed first", body: "Overhead installations are only promised after we have physically checked the hall's rigging points." },
+        { title: "Genuine load-in space", body: "Wide access means larger, fewer vehicle movements and a calmer build than most of the city allows." },
+        { title: "Crews staged early", body: "For dawn builds our production team stages overnight so travel never eats into setup." },
+      ],
+    },
+    services: [
+      "luxury-weddings",
+      "mehndi-planning",
+      "walima-planning",
+      "stage-decoration",
+      "live-bbq-catering",
+      "indoor-catering",
     ],
-    venues: [
-      { name: "Grand banquet halls", note: "High ceilings suited to hanging installations." },
-      { name: "Community lawns", note: "Marquee builds with full outdoor kitchens." },
-      { name: "Villa residences", note: "Intimate nikah and dinner formats." },
-      { name: "Club & golf venues", note: "Corporate dinners and award evenings." },
+    venueTypes: [
+      { type: "Grand banquet halls", note: "High ceilings that carry hanging florals and chandelier work." },
+      { type: "Community lawns", note: "Marquee builds with full outdoor kitchens behind them." },
+      { type: "Villa residences", note: "Intimate nikah and family dinner formats." },
+      { type: "Club and golf venues", note: "Corporate dinners, award evenings and formal receptions." },
     ],
-    logistics: [
-      { title: "Access", body: "Wide roads and real parking make large load-ins genuinely straightforward here." },
-      { title: "Ceiling height", body: "We survey and rig for hanging florals and chandeliers that lower halls cannot carry." },
-      { title: "Distance", body: "Our crews stage overnight for early builds so the drive never eats into the setup window." },
-    ],
-    gallery: ["ae-05", "ae-02", "ae-14", "ae-08", "ae-26", "ae-13"],
+    inspiration: {
+      heading: "Scale, lit properly",
+      body:
+        "Big rooms fail when they are decorated at floor level and left dark above shoulder height. Bahria work is at its best when the ceiling carries the design — suspended blooms, layered crystal, and a warm wash that fills the volume instead of pooling on the tables.",
+      palette: [
+        { name: "Pearl", hex: "#F4EFE6" },
+        { name: "Antique gold", hex: "#C39B4E" },
+        { name: "Deep rose", hex: "#7C2F3B" },
+        { name: "Midnight", hex: "#141821" },
+      ],
+      gallery: ["ae-05", "ae-02", "ae-14", "ae-08", "ae-26", "ae-13"],
+    },
+    why: {
+      heading: "Why clients here choose us",
+      body: [
+        "Families in Bahria Town are usually planning something large, and large events punish vagueness. What we offer is a drawn, costed plan before anything is committed — elevations, floral schedules, a service timeline for the kitchen — so the scale is designed rather than improvised.",
+        "The other reason is food. At six hundred guests, catering stops being a menu question and becomes an engineering one. Ours is in-house, which means the kitchen sits in the same planning meetings as the design team.",
+      ],
+    },
+    categories: ["wedding-stages", "mehndi-celebrations", "dining-catering"],
+    projects: ["crystal-rain-walima", "jharoka-nights"],
+    articles: ["the-service-standard-nobody-talks-about", "designing-a-stage-that-photographs"],
     faqs: [
-      { q: "Do you travel to Bahria Town for smaller events?", a: "Yes — we work there from intimate villa dinners upward, with no distance surcharge." },
-      { q: "Can you hang heavy floral installations?", a: "Where the structure permits, yes. We survey rigging points before promising anything overhead." },
-      { q: "Do you know the venue managers there?", a: "We work with most of the major halls regularly, which shortens load-in negotiation considerably." },
+      {
+        q: "Is there a Bahria Town branch of Anayat Events?",
+        a: "No. We operate from one base in Green Acres, Lahore, and our team travels out to Bahria Town for meetings, site surveys and event production.",
+      },
+      {
+        q: "Do you charge extra for the distance?",
+        a: "No distance surcharge is applied for Bahria Town. It is a regular part of our service area.",
+      },
+      {
+        q: "Can you hang heavy floral installations in the halls?",
+        a: "Where the structure allows it, yes — but we survey the rigging points before promising anything overhead, never afterwards.",
+      },
+      {
+        q: "Will you take on a smaller villa dinner here?",
+        a: "Yes. We work from intimate villa gatherings upward; the scale changes the plan, not the standard.",
+      },
     ],
-    nearby: ["lahore", "dha-lahore", "raiwind-road", "wapda-town"],
+    nearby: ["raiwind-road", "wapda-town", "dha-lahore", "lahore"],
+    travelNote:
+      "Bahria Town sits a comfortable drive from our Green Acres production base. For early morning builds our crews stage overnight nearby, so the setup window is spent working rather than travelling.",
   },
+
   {
     slug: "gulberg",
-    name: "Event Management in Gulberg",
+    name: "Gulberg",
     shortName: "Gulberg",
-    metaTitle: "Event Planner & Caterer in Gulberg Lahore | Anayat Events",
+    metaTitle: "Premium Event Planning & Catering for Gulberg Lahore | Anayat Events",
     metaDescription:
-      "Event planning and catering in Gulberg Lahore — hotel ballrooms, boutique halls and heritage residences with discreet, tightly scheduled production.",
+      "Anayat Events serves clients in Gulberg Lahore — hotel ballrooms, boutique halls and heritage residences, produced with pre-assembled sets and tightly scheduled load-ins.",
+    heroHeadline: "Premium Event Planning for Gulberg, Lahore",
+    heroKicker: "Ballrooms & heritage houses",
     hero: "ae-07",
-    lede: "Hotel ballrooms, heritage houses and load-in windows measured in minutes.",
-    body: [
-      "Gulberg is dense, and density dictates everything. Load-in windows are short, service lifts are shared, and the street outside will not tolerate three trucks for an afternoon.",
-      "We plan Gulberg builds backwards from the venue's access constraints: pre-assembled modules, staged arrivals, and a crew that can strike a full walima in under ninety minutes because the next event loads in at nine.",
-      "In return you get the city's best hotel ballrooms and a handful of heritage residences with a character no purpose-built hall can imitate.",
+    lede:
+      "The city's most polished rooms, reached through its least forgiving streets.",
+    rhythm: "stacked",
+    intro: {
+      heading: "Density, and what it demands",
+      body: [
+        "Gulberg is the commercial and social centre of Lahore, and celebrations here take their tone from that. Guest lists lean professional as often as familial; the dress code is a little sharper; evenings tend to start and finish earlier than in the outer societies.",
+        "It is also the most physically constrained part of the city to work in. Load-in windows are measured in minutes rather than hours, service lifts are shared with the venue's own operations, and the street outside will not tolerate three trucks standing through an afternoon.",
+        "In exchange you get rooms nothing else in Lahore can match — five-star ballrooms with real proportion, and a handful of heritage residences whose character no purpose-built hall will ever imitate.",
+      ],
+    },
+    experience: {
+      heading: "Working to the clock",
+      body: [
+        "Our team plans Gulberg builds backwards from the venue's access constraints. Sets are fabricated and pre-assembled at our Green Acres workshop and arrive as finished modules, sized against the service lift before anything is cut.",
+        "The same discipline applies at the other end of the night. When a venue has another function loading in the next morning, the strike is rehearsed as carefully as the build.",
+      ],
+      notes: [
+        { title: "Pre-assembly as standard", body: "Sets arrive finished. We do not build from raw material inside a hotel loading bay." },
+        { title: "Lift-dimension checks", body: "Every module is measured against the venue's service lift at design stage." },
+        { title: "Staged street arrivals", body: "Vehicles arrive in sequence so the road stays usable throughout the build." },
+      ],
+    },
+    services: [
+      "corporate-events",
+      "luxury-weddings",
+      "venue-management",
+      "indoor-catering",
+      "floral-design",
+      "private-events",
     ],
-    venues: [
-      { name: "Five-star hotel ballrooms", note: "Managed liaison with in-house operations teams." },
-      { name: "Boutique event halls", note: "Compact seated formats for 100–300 guests." },
-      { name: "Heritage residences", note: "Character venues requiring careful, low-impact builds." },
-      { name: "Rooftop restaurants", note: "Intimate engagements and corporate receptions." },
+    venueTypes: [
+      { type: "Five-star hotel ballrooms", note: "Formal receptions requiring liaison with the venue's own operations team." },
+      { type: "Boutique event halls", note: "Seated formats for roughly 100 to 300 guests." },
+      { type: "Heritage residences", note: "Character properties that need low-impact rigging and no fixings into original fabric." },
+      { type: "Rooftop restaurants", note: "Engagements, launches and corporate receptions with a skyline behind them." },
     ],
-    logistics: [
-      { title: "Load-in windows", body: "Sets are pre-assembled off site so installation fits inside a short access slot." },
-      { title: "Service lifts", body: "Module sizes are checked against lift dimensions before fabrication begins." },
-      { title: "Street management", body: "Staged vehicle arrivals keep the road usable throughout the build." },
-    ],
-    gallery: ["ae-07", "ae-02", "ae-23", "ae-12", "ae-20", "ae-04"],
+    inspiration: {
+      heading: "Tailored, not decorated",
+      body:
+        "Gulberg rooms already have architecture. The work is editing rather than adding — a controlled palette, sculptural floral instead of volume, and lighting that flatters the room's own detailing rather than papering over it.",
+      palette: [
+        { name: "Alabaster", hex: "#EDE9E2" },
+        { name: "Smoked bronze", hex: "#8A6B3B" },
+        { name: "Ink", hex: "#1B1D22" },
+        { name: "Blush stone", hex: "#C9A9A0" },
+      ],
+      gallery: ["ae-07", "ae-02", "ae-23", "ae-12", "ae-20", "ae-04"],
+    },
+    why: {
+      heading: "Why Gulberg hosts work with us",
+      body: [
+        "Corporate clients and hotel-based weddings share one requirement above all others: predictability. A programme that starts when the invitation says it will, a room that is finished before the first guest is in the lobby, and a supplier who talks to the venue's banqueting manager without needing the client in the middle.",
+        "That is the part of the job we take most seriously here. The design is what gets photographed; the schedule is what gets remembered.",
+      ],
+    },
+    categories: ["corporate-private", "lounges-seating", "wedding-stages"],
+    projects: ["ivory-salon", "the-long-white"],
+    articles: ["designing-a-stage-that-photographs", "planning-a-lahore-wedding-week"],
     faqs: [
-      { q: "Can you cater inside a Gulberg hotel?", a: "Where the hotel permits outside catering, yes — and we confirm that policy before you sign a venue contract." },
-      { q: "How do you manage tight load-in times?", a: "Pre-assembly. Sets arrive as finished modules rather than being built from raw materials on site." },
-      { q: "Do you work at heritage properties?", a: "Yes, with low-impact rigging and no fixings into original fabric." },
+      {
+        q: "Are you based in Gulberg?",
+        a: "No — our base is at Green Acres, Lahore. We travel into Gulberg for surveys, venue liaison and production, which we do frequently.",
+      },
+      {
+        q: "Can you cater inside a Gulberg hotel?",
+        a: "Only where the hotel permits outside catering. We confirm that policy for you before you sign a venue contract, because it is not always obvious in the paperwork.",
+      },
+      {
+        q: "How do you cope with very short load-in windows?",
+        a: "By pre-assembling everything at our workshop. Installation inside the venue becomes placement and finishing rather than construction.",
+      },
+      {
+        q: "Do you work in heritage properties?",
+        a: "Yes, with rigging designed to leave no fixings or marks in original fabric. We survey the building before agreeing to any structural element.",
+      },
     ],
-    nearby: ["lahore", "model-town", "cantt-askari", "dha-lahore"],
+    nearby: ["model-town", "cantt-askari", "dha-lahore", "lahore"],
+    travelNote:
+      "Our production base is in Green Acres, and Gulberg builds are planned around the drive: modules leave the workshop finished, timed to arrive inside the venue's access window rather than ahead of it.",
   },
+
   {
     slug: "model-town",
-    name: "Event Management in Model Town",
+    name: "Model Town",
     shortName: "Model Town",
-    metaTitle: "Event Planner & Caterer in Model Town Lahore | Anayat Events",
+    metaTitle: "Elegant Event Planning for Model Town Lahore | Anayat Events",
     metaDescription:
-      "Event planning and catering in Model Town Lahore — garden residences, community halls and family celebrations produced with quiet, respectful crews.",
+      "Anayat Events serves clients in Model Town Lahore — garden residences, community halls and family celebrations designed around mature trees and traditional formats.",
+    heroHeadline: "Elegant Event Planning for Model Town, Lahore",
+    heroKicker: "Old gardens & deep verandahs",
     hero: "ae-11",
-    lede: "Old gardens, deep verandahs and families who have hosted in the same house for forty years.",
-    body: [
-      "Model Town rewards restraint. These are established homes with mature trees, generous verandahs and a certain formality that a loud contemporary set would fight rather than flatter.",
-      "We design here with the architecture: lighting the trees rather than the walls, using the verandah as the natural stage, keeping palettes close to ivory, brass and deep green.",
-      "The lawns are older and drain unevenly, so groundwork and flooring get more attention than they would elsewhere.",
+    lede:
+      "Established houses, forty-year-old trees, and families who have hosted in the same garden for three generations.",
+    rhythm: "editorial",
+    intro: {
+      heading: "A neighbourhood with its own manners",
+      body: [
+        "Model Town is one of the oldest planned neighbourhoods in Lahore, and it has kept a formality that newer societies never acquired. The houses are generous rather than showy, the gardens are mature, and the families hosting in them often have a very clear idea of how things are done.",
+        "Celebration style follows from that. Guest lists here tend toward the extended and the traditional; ceremonies are given their proper weight; and there is far less appetite for spectacle than for a room that feels correct.",
+        "The gardens are the real asset. Canopies that took decades to grow will out-perform anything we could build, provided the design is willing to be quieter than they are.",
+      ],
+    },
+    experience: {
+      heading: "Designing with the architecture, not over it",
+      body: [
+        "When our team works in Model Town, the first decision is usually what not to install. Lighting the trees rather than draping them, using a verandah as the natural stage, keeping the palette to ivory, brass and deep green so nothing competes with the brickwork.",
+        "The practical side is less romantic. Older lawns drain unevenly and the interior lanes are narrow, so ground levelling and a staged supplier order get more attention here than they would in a purpose-built venue.",
+      ],
+      notes: [
+        { title: "Ground surveyed before layout", body: "Levelling and flooring are assessed in person, because these lawns rarely sit flat." },
+        { title: "Canopy lighting", body: "Mature trees are treated as the principal set element rather than screened away." },
+        { title: "Small-vehicle access", body: "Narrow interior lanes require smaller vans and a staged arrival order." },
+      ],
+    },
+    services: [
+      "wedding-planning",
+      "nikah-planning",
+      "walima-planning",
+      "outdoor-catering",
+      "floral-design",
+      "private-events",
     ],
-    venues: [
-      { name: "Garden residences", note: "Mature-tree lawns with verandah staging." },
-      { name: "Model Town community halls", note: "Traditional formats for larger family gatherings." },
-      { name: "Club venues", note: "Formal dinners and anniversary functions." },
-      { name: "Link Road banquet spaces", note: "Mid-size walima and reception formats." },
+    venueTypes: [
+      { type: "Garden residences", note: "Mature-tree lawns with a verandah that usually makes the best stage." },
+      { type: "Community halls", note: "Traditional formats for larger extended-family gatherings." },
+      { type: "Club venues", note: "Formal dinners, anniversaries and milestone celebrations." },
+      { type: "Link Road banquet spaces", note: "Mid-size walima and reception formats close to home." },
     ],
-    logistics: [
-      { title: "Ground survey", body: "Older lawns drain unevenly, so levelling and flooring are surveyed before layout is fixed." },
-      { title: "Tree lighting", body: "Mature canopies are lit as the primary set rather than screened off behind drapes." },
-      { title: "Access lanes", body: "Narrow interior lanes require smaller vehicles and a staged supplier order." },
-    ],
-    gallery: ["ae-11", "ae-25", "ae-14", "ae-01", "ae-19", "ae-26"],
+    inspiration: {
+      heading: "Green, brass, and candlelight",
+      body:
+        "The most successful Model Town evenings look as though the garden was simply lit and set for dinner. Long tables under the canopy, brass and glass instead of acrylic, and florals in the register of the existing planting rather than imported against it.",
+      palette: [
+        { name: "Ivory linen", hex: "#F0E9DB" },
+        { name: "Aged brass", hex: "#A98846" },
+        { name: "Cypress", hex: "#25382B" },
+        { name: "Terracotta", hex: "#9C5B3E" },
+      ],
+      gallery: ["ae-11", "ae-25", "ae-14", "ae-01", "ae-19", "ae-26"],
+    },
+    why: {
+      heading: "Why Model Town families choose us",
+      body: [
+        "Largely because we are willing to do less. Families here have often seen a version of their garden over-decorated by someone determined to demonstrate value, and the relief when a planner suggests removing rather than adding is real.",
+        "There is also the matter of protocol. Separated seating, elders' comfort, the order in which a family is greeted — these are not afterthoughts in this neighbourhood, and we plan them as carefully as the floral schedule.",
+      ],
+    },
+    categories: ["floral-installations", "nikah-ceremonies", "dining-catering"],
+    projects: ["garden-banquet", "bloom-curtain-nikah"],
+    articles: ["why-fresh-flowers-matter", "an-intimate-nikah-at-home"],
     faqs: [
-      { q: "Can you work around mature trees on the lawn?", a: "We design around them deliberately — uplit canopies are the best set money cannot buy." },
-      { q: "Are the interior lanes a problem for load-in?", a: "We use smaller vehicles and a staged arrival order so the lane is never blocked." },
-      { q: "Do you handle traditional family formats?", a: "Yes, including separated seating arrangements where the family prefers them." },
+      {
+        q: "Do you have a Model Town office?",
+        a: "No. Anayat Events operates from a single base in Green Acres, Lahore, and travels to Model Town for consultations and event production.",
+      },
+      {
+        q: "Can you work around old trees on the lawn?",
+        a: "We prefer to. Uplit mature canopies produce a better room than any ceiling treatment we could hang beneath them.",
+      },
+      {
+        q: "Are the narrow interior lanes a problem for load-in?",
+        a: "Not if they are planned for. We use smaller vehicles and a staged arrival order so the lane is never blocked for residents.",
+      },
+      {
+        q: "Do you handle traditional formats and separated seating?",
+        a: "Yes, and we will discuss it early so the floor plan is built around the family's preference rather than adjusted on the day.",
+      },
     ],
-    nearby: ["lahore", "gulberg", "johar-town", "wapda-town"],
+    nearby: ["gulberg", "johar-town", "wapda-town", "lahore"],
+    travelNote:
+      "Our team travels to Model Town from the Green Acres base for every survey and build. Because the lanes here are tight, we plan vehicle sizes and arrival order well before the event week.",
   },
+
   {
     slug: "johar-town",
-    name: "Event Management in Johar Town",
+    name: "Johar Town",
     shortName: "Johar Town",
-    metaTitle: "Event Planner & Caterer in Johar Town Lahore | Anayat Events",
+    metaTitle: "Wedding Planning & Catering Services for Johar Town | Anayat Events",
     metaDescription:
-      "Event planning and catering in Johar Town Lahore — marriage halls, marquees and home functions with full decor, catering and on-site management.",
+      "Anayat Events serves clients in Johar Town Lahore — marriage halls, marquees and home functions with full decor overlays, in-house catering and honest venue advice.",
+    heroHeadline: "Wedding Planning & Catering for Johar Town",
+    heroKicker: "The hall district",
     hero: "ae-08",
-    lede: "The city's densest concentration of marriage halls, and a real difference between the good and the merely available.",
-    body: [
-      "Johar Town has more banquet capacity than any other part of Lahore, which makes venue choice the single highest-leverage decision a family makes here.",
-      "We survey before we recommend: ceiling height, kitchen distance, generator capacity, parking depth and whether the hall's own decor package can be declined. Several cannot, and that changes everything.",
-      "For families working to a defined budget, this is the district where good planning produces the largest visible return.",
+    lede:
+      "More banquet capacity than anywhere else in Lahore — and a real gap between the good rooms and the merely available ones.",
+    rhythm: "mirrored",
+    intro: {
+      heading: "Choice, which is not the same as ease",
+      body: [
+        "Johar Town has more marriage halls per square kilometre than any other part of the city. For a family planning a wedding, that abundance is a mixed blessing: the venue decision is the single highest-leverage choice they will make, and almost nothing on a hall's own brochure helps them make it.",
+        "The community here is broad — established professional families, university staff, business owners — and the celebration style is generous but budget-aware. People want a room that looks like far more than they spent, which is a genuinely different design problem from an open-ended commission.",
+        "It is also the district where good planning produces the most visible return, because so much of what goes wrong here is avoidable at the contract stage.",
+      ],
+    },
+    experience: {
+      heading: "We survey before we recommend",
+      body: [
+        "When clients in Johar Town ask us which hall to take, we do not answer from a list. We look at ceiling height, the distance from kitchen to the furthest table, generator capacity, honest parking depth, and — most importantly — whether the venue's own decor package can be declined. Several cannot, and that single clause changes the entire design conversation.",
+        "Where a hall's fixed decor has to stay, we design an overlay that conceals it rather than argues with it. It is unglamorous work and it is the difference between a transformed room and a compromised one.",
+      ],
+      notes: [
+        { title: "Contract clauses read first", body: "Decor exclusivity and outside-catering permissions are checked before you sign anything." },
+        { title: "Parking assessed honestly", body: "Guest-count-to-parking ratios are measured, not taken from the venue's brochure." },
+        { title: "Overlay design", body: "Fixed hall decor is concealed with a designed overlay rather than left to compete." },
+      ],
+    },
+    services: [
+      "wedding-planning",
+      "walima-planning",
+      "stage-decoration",
+      "indoor-catering",
+      "live-bbq-catering",
+      "venue-management",
     ],
-    venues: [
-      { name: "Marriage halls & marquees", note: "Full decor overlays on hall shells." },
-      { name: "Home lawn functions", note: "Compact residential builds with generator power." },
-      { name: "Emporium-area venues", note: "Corporate and mid-size reception formats." },
-      { name: "Community centres", note: "Value-led formats for large guest counts." },
+    venueTypes: [
+      { type: "Marriage halls", note: "The local default — best handled with a full decor overlay on the existing shell." },
+      { type: "Marquees", note: "Covered builds where a hall's capacity or aesthetics fall short." },
+      { type: "Home lawn functions", note: "Compact residential builds with independent generator power." },
+      { type: "Emporium-area venues", note: "Corporate and mid-size reception formats near the commercial belt." },
     ],
-    logistics: [
-      { title: "Venue vetting", body: "We check kitchen distance, generator capacity and decor exclusivity clauses before recommending a hall." },
-      { title: "Parking depth", body: "Guest-count-to-parking ratio is assessed honestly; most halls here overstate it." },
-      { title: "Overlay decor", body: "Where a hall's fixed decor cannot be removed, we design an overlay that conceals rather than competes." },
-    ],
-    gallery: ["ae-08", "ae-17", "ae-02", "ae-21", "ae-13", "ae-06"],
+    inspiration: {
+      heading: "Making a shell disappear",
+      body:
+        "The Johar Town brief is nearly always transformation on a budget. That means concentrating spend where the eye goes — the stage, the entrance, the ceiling line above the dance floor — and letting a disciplined palette do the rest of the work for free.",
+      palette: [
+        { name: "Warm white", hex: "#F5EFE4" },
+        { name: "Burnished gold", hex: "#BE9247" },
+        { name: "Plum", hex: "#4C2338" },
+        { name: "Sage", hex: "#8C9A82" },
+      ],
+      gallery: ["ae-08", "ae-17", "ae-02", "ae-21", "ae-13", "ae-06"],
+    },
+    why: {
+      heading: "Why clients in this area call us",
+      body: [
+        "Because we will tell them what their number actually buys before they commit to it. A great many families in Johar Town have been quoted a figure and then discovered the extras afterwards; our proposals carry the whole picture, including the parts that are not flattering to us.",
+        "And because the catering is ours. In a district where the hall's in-house kitchen is often the weakest link in the evening, having food planned by the same people who planned the room changes the result more than any decor decision.",
+      ],
+    },
+    categories: ["wedding-stages", "dining-catering", "mehndi-celebrations"],
+    projects: ["crystal-rain-walima", "the-long-white"],
+    articles: ["what-a-wedding-actually-costs", "the-service-standard-nobody-talks-about"],
     faqs: [
-      { q: "Can you replace a hall's in-house decor?", a: "Where the contract allows it. Some halls mandate their own package — we check that clause before you sign." },
-      { q: "Which halls do you recommend here?", a: "It depends entirely on your guest count and format; we shortlist by fit rather than by any commercial arrangement." },
-      { q: "Do you cater in halls with their own kitchen?", a: "Where outside catering is permitted, yes, and we confirm that in writing beforehand." },
+      {
+        q: "Do you have a branch in Johar Town?",
+        a: "No. We work from one base at Green Acres, Lahore, and our planners and crews travel to Johar Town for surveys and event days.",
+      },
+      {
+        q: "Can you replace a hall's in-house decor?",
+        a: "Only where the contract permits it. Some halls mandate their own package, so we check that clause before you sign and design an overlay if it cannot be removed.",
+      },
+      {
+        q: "Which halls here do you recommend?",
+        a: "It depends entirely on your guest count and format. We shortlist by fit after a survey — never by any commercial arrangement with a venue.",
+      },
+      {
+        q: "Can you cater in a hall that has its own kitchen?",
+        a: "Where outside catering is permitted, yes, and we get that confirmed in writing before the booking is made.",
+      },
     ],
-    nearby: ["lahore", "wapda-town", "model-town", "raiwind-road"],
+    nearby: ["wapda-town", "model-town", "raiwind-road", "lahore"],
+    travelNote:
+      "Johar Town is an easy run for our crews from the Green Acres base, and venue surveys there are usually arranged within a few days of an enquiry.",
   },
+
   {
     slug: "cantt-askari",
-    name: "Event Management in Cantt & Askari",
+    name: "Cantt & Askari",
     shortName: "Cantt & Askari",
-    metaTitle: "Event Planner & Caterer in Lahore Cantt & Askari | Anayat Events",
+    metaTitle: "Formal Event Management for Lahore Cantt & Askari | Anayat Events",
     metaDescription:
-      "Event planning and catering in Lahore Cantt and Askari — messes, officers' clubs and residential lawns with cleared crews and strict timing discipline.",
+      "Anayat Events serves clients in Lahore Cantt and Askari — messes, garrison clubs and residential lawns, with cleared crews, submitted documentation and exact timings.",
+    heroHeadline: "Formal Event Management for Lahore Cantt & Askari",
+    heroKicker: "Protocol & precision",
     hero: "ae-03",
-    lede: "Cleared crews, submitted lists, and functions that start exactly when they say they will.",
-    body: [
-      "Cantt and Askari venues run on procedure. Vehicle passes, personnel clearance, fixed timings and a level of punctuality the rest of the city treats as optional.",
-      "We are comfortable in that environment. Documentation goes in early, crews carry identification, and the run-of-show is written to the minute because here it will actually be held to the minute.",
-      "Messes and officers' clubs are among the most elegant rooms in Lahore, with proportions and formality that suit a restrained design far better than a maximal one.",
+    lede:
+      "Documentation filed early, crews carrying identification, and a programme that runs to the minute because here it genuinely will.",
+    rhythm: "column",
+    intro: {
+      heading: "A community that runs on procedure",
+      body: [
+        "Cantt and the Askari societies have a culture of their own, and celebrations reflect it. Punctuality is not aspirational. Guest lists are structured. Seating carries protocol. The evening has a shape everybody in the room already understands.",
+        "The venues match that temperament. Officers' messes and garrison clubs are among the most elegant interiors in Lahore — high ceilings, disciplined proportion, dark wood — and they reward a restrained design far more than a maximal one.",
+        "Access, meanwhile, is governed rather than negotiated: vehicle passes, personnel clearance, fixed start and finish times, no exceptions on the day.",
+      ],
+    },
+    experience: {
+      heading: "Comfortable inside the rules",
+      body: [
+        "Our team works within these protocols regularly. Crew identification and vehicle documentation are submitted well ahead of the load-in date, and the run-of-show is written to the minute because it will be held to the minute.",
+        "Design-wise, we treat these rooms with lighting and florals rather than heavy structural overlay. Building a large set inside a mess usually diminishes it; the room is already the best thing in the room.",
+      ],
+      notes: [
+        { title: "Clearance prepared in advance", body: "Personnel and vehicle lists are compiled and submitted as a standard part of the process." },
+        { title: "Timings treated as absolute", body: "Our builds are complete before the stated deadline, not at it." },
+        { title: "Light-touch design", body: "Formal interiors are enhanced with lighting and floral work rather than overlaid with structure." },
+      ],
+    },
+    services: [
+      "corporate-events",
+      "walima-planning",
+      "nikah-planning",
+      "indoor-catering",
+      "floral-design",
+      "private-events",
     ],
-    venues: [
-      { name: "Officers' messes", note: "Formal rooms suited to restrained design." },
-      { name: "Askari community halls", note: "Mid-size family functions and receptions." },
-      { name: "Garrison club venues", note: "Corporate dinners and formal ceremonies." },
-      { name: "Residential lawns", note: "Compact home builds within cleared areas." },
+    venueTypes: [
+      { type: "Officers' messes", note: "Formal interiors best served by restraint and considered lighting." },
+      { type: "Askari community halls", note: "Mid-size family functions and receptions." },
+      { type: "Garrison club venues", note: "Corporate dinners, ceremonies and formal award evenings." },
+      { type: "Residential lawns", note: "Compact home builds within cleared areas." },
     ],
-    logistics: [
-      { title: "Clearance", body: "Crew identification and vehicle lists submitted well ahead of the load-in date." },
-      { title: "Fixed timings", body: "Start and finish times are absolute; the run-of-show is built with that in mind." },
-      { title: "Restrained design", body: "Formal rooms are treated with lighting and florals rather than heavy structural overlay." },
-    ],
-    gallery: ["ae-03", "ae-12", "ae-07", "ae-20", "ae-23", "ae-15"],
+    inspiration: {
+      heading: "Formal, warm, unfussy",
+      body:
+        "The register here is closer to a state dinner than a party. Symmetry, low centrepieces that do not obstruct conversation, silverware that reads as heritage, and a light level that stays warm and even from the top table to the back of the room.",
+      palette: [
+        { name: "Parchment", hex: "#EDE4D4" },
+        { name: "Regimental gold", hex: "#B08A3E" },
+        { name: "Deep bottle", hex: "#1C3128" },
+        { name: "Oxblood", hex: "#5A2126" },
+      ],
+      gallery: ["ae-03", "ae-12", "ae-07", "ae-20", "ae-23", "ae-15"],
+    },
+    why: {
+      heading: "Why clients in Cantt work with us",
+      body: [
+        "Because we do not need to be managed. Documentation goes in without a reminder, the crew arrives dressed and identified, and the programme is delivered as written. For a host who is themselves accountable to a protocol, that is worth more than any design flourish.",
+        "The design still matters — but it is measured here, and being trusted with a formal room is a compliment we try to deserve by leaving it looking like itself.",
+      ],
+    },
+    categories: ["corporate-private", "nikah-ceremonies", "lounges-seating"],
+    projects: ["ivory-salon", "bloom-curtain-nikah"],
+    articles: ["planning-a-lahore-wedding-week", "the-service-standard-nobody-talks-about"],
     faqs: [
-      { q: "Can your crew get clearance for Cantt venues?", a: "Yes — we handle personnel and vehicle documentation as a standard part of the process." },
-      { q: "Do you work with mess and club protocols?", a: "Regularly, including seating protocol and formal ceremony sequencing." },
-      { q: "How strict are the timings?", a: "Absolute, and we plan to them. Our builds finish before the stated deadline, not at it." },
+      {
+        q: "Is Anayat Events located inside Cantt?",
+        a: "No. Our single base is at Green Acres, Lahore. Our crews travel into Cantt and Askari with the appropriate clearance for each event.",
+      },
+      {
+        q: "Can your crew obtain clearance for mess and club venues?",
+        a: "Yes — personnel identification and vehicle documentation are handled by us as part of the standard planning process.",
+      },
+      {
+        q: "Are you familiar with mess protocols and seating order?",
+        a: "We work with them regularly, including formal ceremony sequencing and top-table arrangements.",
+      },
+      {
+        q: "How strict are the venue timings?",
+        a: "Absolute — and we plan to finish ahead of them rather than against them.",
+      },
     ],
-    nearby: ["lahore", "dha-lahore", "gulberg", "model-town"],
+    nearby: ["dha-lahore", "gulberg", "model-town", "lahore"],
+    travelNote:
+      "Every crew that enters a Cantt or Askari venue travels from our Green Acres base with documentation lodged in advance. Planning meetings can be held at the farmhouse or wherever is most convenient for the host.",
   },
+
   {
     slug: "raiwind-road",
-    name: "Event Management on Raiwind Road",
+    name: "Raiwind Road",
     shortName: "Raiwind Road",
-    metaTitle: "Farmhouse Event Planner on Raiwind Road Lahore | Anayat Events",
+    metaTitle: "Farmhouse Wedding Production on Raiwind Road | Anayat Events",
     metaDescription:
-      "Farmhouse event management on Raiwind Road Lahore — large estate weddings with full power, kitchen, lighting and guest logistics built from the ground up.",
+      "Anayat Events serves clients along Raiwind Road Lahore — large farmhouse estate weddings with power, kitchens, lighting and guest logistics built from the ground up.",
+    heroHeadline: "Farmhouse Wedding Production Along Raiwind Road",
+    heroKicker: "The estate belt",
     hero: "ae-10",
-    lede: "The farmhouse belt, where the venue gives you land and absolutely nothing else.",
-    body: [
-      "Raiwind Road is where Lahore's large farmhouse weddings happen. Acres of lawn, long approach drives, and infrastructure that ranges from excellent to entirely theoretical.",
-      "Every estate is different, so every commission starts with a physical survey: power capacity, water, drainage, access width, mobile signal and how far the nearest hospital is.",
-      "Then we build the event as a temporary settlement — kitchen, lighting, sanitation, shelter, parking — and take it all away again the same night.",
+    lede:
+      "Land, a gate, and very little else. Everything a guest touches that night arrives on a truck.",
+    rhythm: "stacked",
+    intro: {
+      heading: "Where Lahore's largest weddings happen",
+      body: [
+        "The Raiwind Road corridor is where the city goes when the guest list outgrows every hall in it. Acres of open lawn, long approach drives and the kind of horizon that makes a thousand-person wedding feel intimate rather than industrial.",
+        "The trade is that the venue gives you space and almost nothing else. Power capacity ranges from adequate to entirely theoretical, kitchens are frequently non-existent, and the difference between two neighbouring estates can be enormous.",
+        "Clients who choose this belt are usually planning a full wedding week and want a single canvas for it — which is exactly what open ground is, once someone has built a venue on top of it.",
+      ],
+    },
+    experience: {
+      heading: "Building a venue that did not exist that morning",
+      body: [
+        "Every Raiwind commission our team takes begins with a physical survey: power, water, drainage, access width, mobile signal and how far the nearest hospital is. Nothing about an estate can be assumed from photographs.",
+        "From there we build the event as a temporary settlement — kitchen, lighting, sanitation, shelter, parking, wayfinding — run it for a night, and take all of it away again before morning.",
+      ],
+      notes: [
+        { title: "Independent power as standard", body: "We bring generator capacity rather than trusting an estate supply we have not load-tested." },
+        { title: "Wayfinding from the main road", body: "Lit signage and marshals at every turn, because an unmarked gate is invisible after dark." },
+        { title: "Crews staged on site", body: "For dawn builds on distant estates, production stages overnight rather than commuting." },
+      ],
+    },
+    services: [
+      "farmhouse-events",
+      "luxury-weddings",
+      "destination-weddings",
+      "outdoor-catering",
+      "live-bbq-catering",
+      "venue-management",
     ],
-    venues: [
-      { name: "Large farmhouse estates", note: "Multi-acre builds for 500–1500 guests." },
-      { name: "Boutique farm venues", note: "Intimate outdoor formats under mature trees." },
-      { name: "Agricultural land builds", note: "Complete temporary infrastructure on open ground." },
-      { name: "Poolside lawns", note: "Evening mehndi and reception formats." },
+    venueTypes: [
+      { type: "Large farmhouse estates", note: "Multi-acre builds for very large guest counts." },
+      { type: "Boutique farm venues", note: "Intimate outdoor formats set under existing mature trees." },
+      { type: "Open agricultural land", note: "Complete temporary infrastructure raised on bare ground." },
+      { type: "Poolside lawns", note: "Evening mehndi and reception formats around existing water." },
     ],
-    logistics: [
-      { title: "Site survey", body: "Power, water, drainage and access measured in person before any layout is drawn." },
-      { title: "Guest wayfinding", body: "Lit signage along the approach road so nobody misses an unmarked gate at night." },
-      { title: "Crew accommodation", body: "Production stages overnight on site for dawn builds on distant estates." },
-    ],
-    gallery: ["ae-10", "ae-25", "ae-18", "ae-11", "ae-24", "ae-26"],
+    inspiration: {
+      heading: "Fire, field and lantern light",
+      body:
+        "Open ground wants warmth and edges. Lantern runs to define the walkable world, live fire visible from the dining lawn, and a stage lit so that it reads from two hundred metres away without bleaching out at ten.",
+      palette: [
+        { name: "Raw linen", hex: "#E8DFCD" },
+        { name: "Ember", hex: "#C4762E" },
+        { name: "Field green", hex: "#31402C" },
+        { name: "Night", hex: "#11130F" },
+      ],
+      gallery: ["ae-10", "ae-25", "ae-18", "ae-11", "ae-24", "ae-26"],
+    },
+    why: {
+      heading: "Why estate clients choose us",
+      body: [
+        "Because building on empty ground is the least forgiving work in this industry, and it exposes any weakness in a supplier chain immediately. There is no venue operations team to absorb a mistake, no house kitchen to fall back on and no spare power to borrow.",
+        "We keep production, florals and the kitchen in-house precisely so that on a site like this there is one plan and one crew, rather than five companies discovering each other's assumptions at four in the afternoon.",
+      ],
+    },
+    categories: ["outdoor-farmhouse", "wedding-stages", "dining-catering"],
+    projects: ["chandeliers-in-the-trees", "garden-banquet"],
+    articles: ["choosing-a-farmhouse-in-lahore", "outdoor-catering-in-lahore-heat"],
     faqs: [
-      { q: "Do farmhouses here have enough power?", a: "Rarely for a full event. We bring independent generator capacity as standard rather than trusting the estate supply." },
-      { q: "How do guests find the venue at night?", a: "Lit signage from the main road and marshals at every turn on the approach." },
-      { q: "What is the largest event you have built here?", a: "Multi-acre wedding weeks well beyond a thousand guests, with kitchens and power built entirely from scratch." },
+      {
+        q: "Do you operate a venue on Raiwind Road?",
+        a: "No. Our own base is at Green Acres, Lahore. Along Raiwind Road we work at estates chosen by the client, travelling out with full production.",
+      },
+      {
+        q: "Do farmhouses here have enough power for a wedding?",
+        a: "Rarely for a full event. We bring independent generator capacity as standard instead of relying on the estate supply.",
+      },
+      {
+        q: "How will guests find an unmarked estate at night?",
+        a: "Lit signage from the main road and marshals at each turn on the approach, set up before the first guest leaves home.",
+      },
+      {
+        q: "Can you cater at scale where there is no kitchen?",
+        a: "Yes. We build a full temporary kitchen on site, with the same brigade that cooks at every other event we produce.",
+      },
     ],
-    nearby: ["bedian-road", "green-acres", "lahore", "bahria-town-lahore"],
+    nearby: ["bedian-road", "green-acres", "bahria-town-lahore", "johar-town"],
+    travelNote:
+      "Estate work along Raiwind Road is run out of our Green Acres base. For multi-day builds the production team stages on site, so the crew is present from the first survey peg to the final load-out.",
   },
+
   {
     slug: "bedian-road",
-    name: "Event Management on Bedian Road",
+    name: "Bedian Road",
     shortName: "Bedian Road",
-    metaTitle: "Farmhouse Wedding Planner on Bedian Road Lahore | Anayat Events",
+    metaTitle: "Garden & Farmhouse Wedding Planning on Bedian Road | Anayat Events",
     metaDescription:
-      "Farmhouse wedding planning on Bedian Road Lahore — canal-side estates, garden weddings and full outdoor production with in-house catering.",
+      "Anayat Events serves clients along Bedian Road Lahore — canal-side gardens and farmhouse weddings, planned with weather contingency, drainage awareness and full outdoor production.",
+    heroHeadline: "Garden Wedding Planning Along Bedian Road",
+    heroKicker: "Canal-side gardens",
     hero: "ae-24",
-    lede: "Canal-side estates with the best trees in the city and roads that flood in one good hour of rain.",
-    body: [
-      "Bedian Road holds Lahore's most beautiful farmhouse gardens — old trees, water features and a stillness you cannot fabricate on a hall floor.",
-      "It also floods. Drainage on the approach roads is poor, and a monsoon-adjacent date needs a contingency that is drawn and funded, not merely discussed.",
-      "We plan Bedian weddings with a covered alternative for every outdoor function, a stated decision cut-off, and vehicle routing that avoids the worst of the standing water.",
+    lede:
+      "The most beautiful trees in Lahore, growing beside roads that flood in one determined hour of rain.",
+    rhythm: "editorial",
+    intro: {
+      heading: "Beauty with a caveat",
+      body: [
+        "Bedian Road holds the loveliest garden venues near the city — old canopies, water features, and a stillness that no built room reproduces. Couples who choose it are almost always choosing atmosphere over convenience, and they are usually right to.",
+        "The caveat is drainage. The approach roads sit low, they flood, and a date anywhere near the monsoon shoulder needs a contingency that is drawn, costed and agreed rather than merely mentioned in a meeting.",
+        "The style here leans natural: fewer structures, more candlelight, dinner under trees rather than under a ceiling. It suits smaller and mid-size weddings better than the enormous ones that head further down Raiwind.",
+      ],
+    },
+    experience: {
+      heading: "Planning for the weather honestly",
+      body: [
+        "Every outdoor function our team plans on Bedian Road carries a covered alternative that has been designed and priced, with a stated decision cut-off so nobody is choosing at midnight the night before.",
+        "We also route around the problem. Guest and supplier approaches are chosen to avoid the low-lying stretches, and we will happily tell a client that a particular week in August is the wrong week for this particular road.",
+      ],
+      notes: [
+        { title: "A costed wet-weather plan", body: "The covered alternative is drawn and priced at proposal stage, not improvised later." },
+        { title: "Routing around standing water", body: "Guest and vehicle approaches avoid the stretches that hold water after heavy rain." },
+        { title: "Canopy as architecture", body: "Existing trees are uplit and built around rather than screened behind drape." },
+      ],
+    },
+    services: [
+      "farmhouse-events",
+      "wedding-planning",
+      "mehndi-planning",
+      "outdoor-catering",
+      "floral-design",
+      "private-events",
     ],
-    venues: [
-      { name: "Canal-side farmhouses", note: "Garden weddings under mature canopies." },
-      { name: "Private estates", note: "Full-week multi-function commissions." },
-      { name: "Garden marquee sites", note: "Covered builds with lawn overflow." },
-      { name: "Poolside venues", note: "Evening receptions and mehndi functions." },
+    venueTypes: [
+      { type: "Canal-side farmhouses", note: "Garden weddings beneath established canopies." },
+      { type: "Private estates", note: "Full-week, multi-function commissions on a single site." },
+      { type: "Garden marquee sites", note: "Covered builds with lawn overflow for larger counts." },
+      { type: "Poolside venues", note: "Evening receptions and mehndi functions around water." },
     ],
-    logistics: [
-      { title: "Drainage & weather", body: "Every outdoor function carries a drawn, costed covered alternative with a decision cut-off." },
-      { title: "Approach routing", body: "Guest and supplier routes chosen to avoid the low-lying stretches after rain." },
-      { title: "Canopy lighting", body: "Old trees are uplit as the principal set element rather than screened out." },
-    ],
-    gallery: ["ae-24", "ae-01", "ae-25", "ae-14", "ae-10", "ae-19"],
+    inspiration: {
+      heading: "Under the trees",
+      body:
+        "The design here is mostly about light. Warm uplight into the canopies, candle density at table level, and floral that reads as though it was cut from the garden that morning rather than trucked in from a cold store — even though, of course, it was.",
+      palette: [
+        { name: "Cream", hex: "#F1EADA" },
+        { name: "Soft gold", hex: "#CBA968" },
+        { name: "Moss", hex: "#3A4A32" },
+        { name: "Water blue", hex: "#3C5560" },
+      ],
+      gallery: ["ae-24", "ae-01", "ae-25", "ae-14", "ae-10", "ae-19"],
+    },
+    why: {
+      heading: "Why couples on this road trust us",
+      body: [
+        "Because we are candid about the risk before the deposit rather than after it. Several planners will happily book a July garden wedding on Bedian Road and deal with the consequences in July; we would rather have the awkward conversation in January.",
+        "And because when the weather does behave, this is the most rewarding kind of event we produce. A garden dinner under old trees, lit properly, is worth every contingency line it took to protect.",
+      ],
+    },
+    categories: ["outdoor-farmhouse", "floral-installations", "mehndi-celebrations"],
+    projects: ["chandeliers-in-the-trees", "jharoka-nights"],
+    articles: ["choosing-a-farmhouse-in-lahore", "why-fresh-flowers-matter"],
     faqs: [
-      { q: "Is Bedian Road risky in monsoon?", a: "The approach roads flood. We plan a covered alternative and a rerouted approach for any date near the season." },
-      { q: "Can you build under existing trees?", a: "Yes, and we prefer it — canopy uplighting produces a better room than any ceiling we could hang." },
-      { q: "How far is it from central Lahore for guests?", a: "Roughly forty minutes from Gulberg outside peak hours; we build that into the invitation timing." },
+      {
+        q: "Do you have premises on Bedian Road?",
+        a: "No — our base is at Green Acres, Lahore, which is a short run from the Bedian belt. We travel to whichever estate the client has chosen.",
+      },
+      {
+        q: "Is Bedian Road risky during monsoon season?",
+        a: "The approach roads do flood. For any date near the season we plan a covered alternative and an alternate approach route as part of the proposal.",
+      },
+      {
+        q: "Can you build under existing trees?",
+        a: "Yes, and we prefer it. Canopy uplighting produces a better room than anything we could hang beneath it.",
+      },
+      {
+        q: "How long does it take guests to reach these venues?",
+        a: "Roughly forty minutes from central Lahore outside peak hours — we build that into the invitation timings and the arrival plan.",
+      },
     ],
     nearby: ["green-acres", "raiwind-road", "dha-lahore", "lahore"],
+    travelNote:
+      "Bedian Road is one of the closest areas to our Green Acres base, which makes late design changes and same-week site visits unusually easy here.",
   },
+
   {
     slug: "green-acres",
-    name: "Event Management in Green Acres",
+    name: "Green Acres",
     shortName: "Green Acres",
-    metaTitle: "Event Management in Green Acres Lahore | Anayat Events",
+    metaTitle: "Event Management in Green Acres Lahore | Anayat Events & Catering",
     metaDescription:
-      "Event management in Green Acres Lahore — our home ground at The Palms 7 Farmhouse, with same-day setup, on-site tastings and full production capability.",
+      "Green Acres Housing Society is home to Anayat Events & Catering. Our workshop, floral store and kitchen operate from The Palms 7 Farmhouse, serving events across the society and beyond.",
+    heroHeadline: "Event Management in Green Acres, Lahore",
+    heroKicker: "Where we are actually based",
     hero: "ae-26",
-    lede: "Our own address. The one place where our warehouse, kitchen and lawn are the same postcode.",
-    body: [
-      "Anayat Events is based at The Palms 7 Farmhouse in Green Acres Housing Society. Our workshop, floral cold store, kitchen and crew all operate from here.",
-      "For events in this society that proximity is a material advantage: same-day setup changes are possible, forgotten items are minutes away, and tastings happen in the same kitchen that will cook on your night.",
-      "It is also where most families first meet us, because seeing a real stage half-built explains more than any portfolio.",
+    lede:
+      "Our one address. Workshop, cold store, kitchen and lawn, all inside the same gate.",
+    rhythm: "mirrored",
+    intro: {
+      heading: "The only place we can call home ground",
+      body: [
+        "Anayat Events & Catering operates from The Palms 7 Farmhouse in Green Acres Housing Society. This is our single premises — the workshop where sets are fabricated, the cold store where florals are held, the kitchen where menus are trialled, and the lawn where a great many first meetings happen.",
+        "Green Acres itself is a quiet, green society on the eastern edge of the city, close enough to the Bedian and Raiwind estate belts to make it a natural production base and far enough out to have space for one.",
+        "For clients hosting inside the society, that proximity is a genuine operational advantage rather than a marketing line.",
+      ],
+    },
+    experience: {
+      heading: "What being local here actually changes",
+      body: [
+        "When an event is in Green Acres, our warehouse is minutes from the site. Late design changes remain possible, a forgotten crate is a ten-minute problem instead of a two-hour one, and builds can start earlier without additional transport cost.",
+        "It is also where most families meet us for the first time. Seeing a stage half-assembled in the workshop, or tasting a menu cooked by the brigade that will cook on the night, explains more about how we work than any presentation.",
+      ],
+      notes: [
+        { title: "Workshop on the doorstep", body: "Fabrication and floral storage sit minutes from site, so changes stay genuinely possible." },
+        { title: "Tastings in the real kitchen", body: "Menus are tasted in the same kitchen, cooked by the same brigade that will serve your event." },
+        { title: "Longer build windows", body: "Local builds can begin earlier in the day without extra transport or crew cost." },
+      ],
+    },
+    services: [
+      "luxury-catering",
+      "farmhouse-events",
+      "wedding-planning",
+      "private-events",
+      "stage-decoration",
+      "birthday-events",
     ],
-    venues: [
-      { name: "The Palms 7 Farmhouse", note: "Our base — lawns, kitchen and workshop on site." },
-      { name: "Neighbouring estates", note: "Minutes from our warehouse and cold store." },
-      { name: "Society community lawns", note: "Mid-size family functions." },
-      { name: "Private residences", note: "Compact home builds with immediate crew access." },
+    venueTypes: [
+      { type: "The Palms 7 Farmhouse", note: "Our own base — lawns, kitchen and workshop on a single site, available subject to date." },
+      { type: "Neighbouring estates", note: "Minutes from our cold store and fabrication workshop." },
+      { type: "Society community lawns", note: "Mid-size family functions close to home." },
+      { type: "Private residences", note: "Compact home builds with immediate crew access." },
     ],
-    logistics: [
-      { title: "Proximity", body: "Warehouse and cold store minutes from site, so late changes remain genuinely possible." },
-      { title: "On-site tastings", body: "Menu tastings run in the same kitchen brigade that will cook your event." },
-      { title: "Extended build time", body: "Local builds can start earlier without additional transport cost." },
-    ],
-    gallery: ["ae-26", "ae-25", "ae-04", "ae-22", "ae-11", "ae-18"],
+    inspiration: {
+      heading: "How we design for ourselves",
+      body:
+        "Work on home ground tends to be the most experimental we do — new floral techniques, prototype stage structures, lighting rigs we want to test at full scale. If something on this site looks unusual, it is probably the first outing of an idea that will travel across the city next season.",
+      palette: [
+        { name: "Farmhouse white", hex: "#F3EDE1" },
+        { name: "Signature gold", hex: "#C6A15B" },
+        { name: "Leaf", hex: "#2A3C2B" },
+        { name: "Charcoal", hex: "#1A1A18" },
+      ],
+      gallery: ["ae-26", "ae-25", "ae-04", "ae-22", "ae-11", "ae-18"],
+    },
+    why: {
+      heading: "Why the base matters to every other area",
+      body: [
+        "Everything we produce anywhere in Lahore is made here first. The stage that goes up in a Gulberg ballroom is assembled in this workshop; the florals installed in a DHA lawn spend the previous night in this cold store; the food served on a Raiwind estate is planned in this kitchen.",
+        "That is the reason we keep one base rather than several. A single production house means a single standard, and it is far easier to protect one of those than five.",
+      ],
+    },
+    categories: ["outdoor-farmhouse", "dining-catering", "floral-installations"],
+    projects: ["garden-banquet", "chandeliers-in-the-trees"],
+    articles: ["outdoor-catering-in-lahore-heat", "planning-a-lahore-wedding-week"],
     faqs: [
-      { q: "Can we visit your setup before booking?", a: "Yes — most families visit The Palms 7 Farmhouse and see a live build or a stage in the workshop." },
-      { q: "Do you host events at your own farmhouse?", a: "We do, subject to availability, and it is often the simplest option for a full wedding week." },
-      { q: "Where exactly are you located?", a: "The Palms 7 Farmhouse, Green Acres Housing Society, Lahore 54000." },
+      {
+        q: "Is this your actual office?",
+        a: "Yes. The Palms 7 Farmhouse in Green Acres Housing Society is our one and only premises — every other area we serve is reached by travelling from here.",
+      },
+      {
+        q: "Can we visit before booking?",
+        a: "Please do. Most families come to the farmhouse to see a live build or a stage in the workshop; we are open daily from 2:00 PM to 10:00 PM.",
+      },
+      {
+        q: "Do you host events at the farmhouse itself?",
+        a: "We do, subject to availability, and it is often the simplest arrangement for a full wedding week.",
+      },
+      {
+        q: "Where exactly is it?",
+        a: "The Palms 7 Farmhouse, Green Acres Housing Society, Lahore 54000.",
+      },
     ],
-    nearby: ["bedian-road", "raiwind-road", "lahore", "dha-lahore"],
+    nearby: ["bedian-road", "raiwind-road", "dha-lahore", "lahore"],
+    travelNote:
+      "This is the address every crew, every truck and every floral delivery leaves from. Meetings, tastings and workshop visits all happen here by appointment during opening hours.",
   },
+
   {
     slug: "wapda-town",
-    name: "Event Management in Wapda Town",
+    name: "Wapda Town",
     shortName: "Wapda Town",
-    metaTitle: "Event Planner & Caterer in Wapda Town Lahore | Anayat Events",
+    metaTitle: "Family Event Planning & Catering for Wapda Town | Anayat Events",
     metaDescription:
-      "Event planning and catering in Wapda Town Lahore — community halls, home lawns and family celebrations with full decor and in-house catering.",
+      "Anayat Events serves clients in Wapda Town Lahore — home lawns, community halls and multi-generation family celebrations with full decor, seating comfort and in-house catering.",
+    heroHeadline: "Family Celebration Planning for Wapda Town",
+    heroKicker: "Home lawns & community halls",
     hero: "ae-06",
-    lede: "Family neighbourhoods, generous home lawns and celebrations built around three generations in one room.",
-    body: [
-      "Wapda Town and its neighbouring societies are family territory — multi-generation households, home functions and guest lists shaped by relations rather than invitations.",
-      "That changes the design brief. Seating has to work for elders, food has to cover a wide range of preferences, and the floor plan has to survive children running through it for four hours.",
-      "We plan for the room as it actually behaves: real back support on floor seating, shaded waiting areas, continuous food service and a sound level that lets people talk.",
+    lede:
+      "Three generations in one room for four hours — which is a design brief, not a detail.",
+    rhythm: "column",
+    intro: {
+      heading: "Family territory, planned as such",
+      body: [
+        "Wapda Town and the societies around it are family neighbourhoods in the fullest sense: multi-generation households, guest lists shaped by relation rather than invitation, and celebrations that spill comfortably out of the house and onto the lawn.",
+        "It changes what a good plan looks like. Elders need real seating with back support and a shaded place to wait. Children will run through the floor plan for the entire evening, so the floor plan had better survive them. Food preferences span sixty years of taste in one room.",
+        "Most events here are home functions or community-hall receptions rather than hotel affairs, and the tone is warm rather than formal.",
+      ],
+    },
+    experience: {
+      heading: "Designing for how the room behaves",
+      body: [
+        "Our team plans these celebrations around behaviour rather than photographs. Continuous food service across the evening instead of a single rigid sitting. Sound levels that let a grandmother hold a conversation. Circulation wide enough that the buffet never becomes a bottleneck.",
+        "It is less photogenic than a big stage reveal and it is what people actually remember about a family evening.",
+      ],
+      notes: [
+        { title: "Comfort planned first", body: "Seating, shade and step-free access are designed around elders and small children before anything else." },
+        { title: "Continuous service", body: "Food runs across the evening rather than landing in one fixed sitting." },
+        { title: "Street courtesy", body: "Parking marshalled and drop-off staged so the road stays passable for neighbours." },
+      ],
+    },
+    services: [
+      "private-events",
+      "birthday-events",
+      "walima-planning",
+      "luxury-catering",
+      "live-bbq-catering",
+      "stage-decoration",
     ],
-    venues: [
-      { name: "Home lawns", note: "Residential builds with independent power." },
-      { name: "Community halls", note: "Mid-size receptions and walima formats." },
-      { name: "Local marquees", note: "Covered functions for larger family counts." },
-      { name: "Rooftop spaces", note: "Compact evening gatherings." },
+    venueTypes: [
+      { type: "Home lawns", note: "Residential builds with independent power so the house supply is untouched." },
+      { type: "Community halls", note: "Mid-size receptions and walima formats within the society." },
+      { type: "Local marquees", note: "Covered functions for larger extended-family counts." },
+      { type: "Rooftop spaces", note: "Compact evening gatherings and milestone dinners." },
     ],
-    logistics: [
-      { title: "Multi-generation comfort", body: "Seating, shade and access planned for elders and small children first." },
-      { title: "Continuous service", body: "Food runs across the evening rather than in a single fixed sitting." },
-      { title: "Residential courtesy", body: "Sound and finish times agreed with neighbours before the build." },
-    ],
-    gallery: ["ae-06", "ae-21", "ae-17", "ae-09", "ae-08", "ae-16"],
+    inspiration: {
+      heading: "Warm, generous, unpretentious",
+      body:
+        "The register here is hospitality rather than spectacle. Abundant table florals in warm tones, string and lantern light instead of hard beams, and a stage that is beautiful but low enough that the family can stand on it together without anyone feeling exhibited.",
+      palette: [
+        { name: "Butter cream", hex: "#F3E9D2" },
+        { name: "Honey gold", hex: "#D2A24C" },
+        { name: "Rosewood", hex: "#6B3A34" },
+        { name: "Olive", hex: "#5A5F3C" },
+      ],
+      gallery: ["ae-06", "ae-21", "ae-17", "ae-09", "ae-08", "ae-16"],
+    },
+    why: {
+      heading: "Why families here work with us",
+      body: [
+        "Because we will work honestly to a defined number. A great many celebrations in this area have a real ceiling on them, and the useful thing a planner can do is say clearly what is achievable at that figure before anyone commits, then hit it without surprises.",
+        "And because the small courtesies matter more than the grand gesture here — a chair carried over to an elderly relative, a plate sent out to the drivers, food still hot at eleven. Those are decisions made by a crew that was briefed to care, and that is the part we can promise.",
+      ],
+    },
+    categories: ["dining-catering", "lounges-seating", "wedding-stages"],
+    projects: ["garden-banquet", "the-long-white"],
+    articles: ["what-a-wedding-actually-costs", "the-service-standard-nobody-talks-about"],
     faqs: [
-      { q: "Do you take on smaller family functions here?", a: "Yes — home functions from around forty guests upward, with full setup and clear-down." },
-      { q: "Can you work within a defined budget?", a: "We will tell you honestly what is achievable at your number before you commit to anything." },
-      { q: "Is parking a problem in these streets?", a: "It can be, so we marshal it and stage the drop-off to keep the road passable." },
+      {
+        q: "Do you have an office in Wapda Town?",
+        a: "No. We are based only at Green Acres, Lahore, and our team travels to Wapda Town for consultations, surveys and event days.",
+      },
+      {
+        q: "Will you take on smaller family functions?",
+        a: "Yes — home functions from around forty guests upward, with full setup, service and clear-down.",
+      },
+      {
+        q: "Can you work within a fixed budget?",
+        a: "We will tell you honestly what is achievable at your number before you commit to anything, including when the answer is that it is not enough.",
+      },
+      {
+        q: "Is street parking a problem here?",
+        a: "It can be, so we marshal it and stage the drop-off to keep the road passable for residents throughout the evening.",
+      },
     ],
-    nearby: ["johar-town", "model-town", "lahore", "bahria-town-lahore"],
+    nearby: ["johar-town", "model-town", "bahria-town-lahore", "lahore"],
+    travelNote:
+      "Wapda Town is served from our Green Acres base like every other area. Home surveys are usually arranged within a few days so the lawn, power and access can be measured properly before design begins.",
   },
 ];
 
@@ -385,3 +1086,6 @@ const locationMap = new Map(locations.map((l) => [l.slug, l]));
 export function getLocation(slug: string): LocationArea | undefined {
   return locationMap.get(slug);
 }
+
+/** Highlighted on the main Areas page above the full explorer. */
+export const featuredAreaSlugs = ["dha-lahore", "bahria-town-lahore", "gulberg", "raiwind-road"];
