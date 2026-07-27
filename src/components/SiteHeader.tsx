@@ -95,9 +95,9 @@ export function SiteHeader() {
           ))}
           <Link
             to="/contact"
-            className="group/cta relative isolate overflow-hidden px-7 py-3.5 font-sans text-[10px] tracking-[0.34em] uppercase text-gold transition-colors duration-500 hover:text-primary-foreground"
+            className="group/cta btn-shape relative isolate ml-2 flex items-center overflow-hidden px-7 py-3.5 font-sans text-[10px] tracking-[0.34em] uppercase text-gold transition-colors duration-500 hover:text-primary-foreground"
           >
-            <span className="absolute inset-0 -z-10 border border-border-strong transition-colors duration-500 group-hover/cta:border-gold" />
+            <span className="absolute inset-0 -z-10 rounded-[25px] border border-border-strong transition-colors duration-500 group-hover/cta:border-gold" />
             <span className="absolute inset-0 -z-10 origin-bottom scale-y-0 bg-gold transition-transform duration-[800ms] [transition-timing-function:var(--ease-lux)] group-hover/cta:scale-y-100" />
             Enquire
           </Link>
@@ -216,16 +216,16 @@ export function SiteHeader() {
                 )}
               </div>
             ))}
-            <div className="flex flex-col gap-3 pt-10">
+            <div className="flex flex-col gap-4 pt-10">
               <Link
                 to="/contact"
-                className="bg-gold px-6 py-4 text-center font-sans text-[11px] tracking-[0.3em] uppercase text-primary-foreground"
+                className="btn-shape flex items-center justify-center bg-gold px-6 py-4 text-center font-sans text-[11px] tracking-[0.3em] uppercase text-primary-foreground"
               >
                 Enquire
               </Link>
               <a
                 href={site.phoneHref}
-                className="border border-border-strong px-6 py-4 text-center font-sans text-[11px] tracking-[0.3em] uppercase text-ivory"
+                className="btn-shape flex items-center justify-center border border-border-strong px-6 py-4 text-center font-sans text-[11px] tracking-[0.3em] uppercase text-ivory"
               >
                 Call {site.phoneDisplay}
               </a>

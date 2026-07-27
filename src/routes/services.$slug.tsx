@@ -186,13 +186,13 @@ function ServicePage() {
           <p className="font-sans text-[11px] tracking-[0.32em] uppercase text-gold">
             {service.name} across Lahore
           </p>
-          <ul className="mt-8 flex flex-wrap gap-3">
+          <ul className="mt-8 flex flex-wrap gap-4">
             {locations.slice(0, 8).map((l) => (
               <li key={l.slug}>
                 <Link
                   to="/areas/$slug"
                   params={{ slug: l.slug }}
-                  className="inline-flex border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.2em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
+                  className="btn-shape btn-shape inline-flex items-center border border-border-strong px-6 py-3 font-sans text-[11px] tracking-[0.2em] uppercase text-ivory transition-colors hover:border-gold hover:text-gold"
                 >
                   {l.shortName}
                 </Link>

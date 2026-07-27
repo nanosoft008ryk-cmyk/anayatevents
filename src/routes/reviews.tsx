@@ -61,7 +61,7 @@ function ReviewsPage() {
           href={site.mapsUrl}
           target="_blank"
           rel="noreferrer"
-          className="mt-8 inline-block border border-gold px-8 py-4 font-sans text-[11px] tracking-[0.24em] uppercase text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
+          className="mt-8 btn-shape inline-flex items-center border border-gold px-8 py-4 font-sans text-[11px] tracking-[0.24em] uppercase text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
         >
           Read them on Google
         </a>

@@ -10,7 +10,7 @@ import { ProposalDialog } from "@/components/ProposalDialog";
  */
 export function ConciergeBar() {
   const item =
-    "group/cc relative flex min-h-11 flex-1 items-center justify-center gap-2 px-4 py-4 font-sans text-[10px] tracking-[0.28em] uppercase text-ivory/75 transition-colors duration-500 hover:text-gold lg:flex-none lg:py-3.5";
+    "group/cc btn-shape relative flex min-h-11 flex-1 items-center justify-center gap-2 px-4 py-4 font-sans text-[10px] tracking-[0.28em] uppercase text-ivory/75 transition-colors duration-500 hover:text-gold lg:mx-1 lg:flex-none lg:py-3.5";
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 print:hidden lg:inset-x-auto lg:right-8 lg:bottom-8">

@@ -94,7 +94,7 @@ function PortfolioIndex() {
 
           <Link
             to="/vault"
-            className="mt-12 inline-block border border-gold px-8 py-4 font-sans text-[11px] tracking-[0.24em] uppercase text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
+            className="mt-12 btn-shape inline-flex items-center border border-gold px-8 py-4 font-sans text-[11px] tracking-[0.24em] uppercase text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
           >
             Enter the Vault — full archive
           </Link>
