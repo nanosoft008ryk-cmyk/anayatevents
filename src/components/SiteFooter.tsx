@@ -7,6 +7,7 @@ import { photo } from "@/content/images";
 import { imgAttrs } from "@/lib/img";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxAnchor } from "@/components/ui/LuxButton";
+import { GoogleProfileLink } from "@/components/GoogleProfileLink";
 
 /**
  * Cinematic finale. The footer opens with a full-bleed closing frame and the
