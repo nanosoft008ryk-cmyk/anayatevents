@@ -1,5 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { useMemo, useState } from "react";
+
 
 import { testimonials } from "@/content/testimonials";
 
@@ -25,7 +27,12 @@ const trail: Crumb[] = [
 ];
 
 export const Route = createFileRoute("/reviews")({
+  // Sort order lives in the URL so a sorted view is shareable.
+  validateSearch: (search: Record<string, unknown>) => ({
+    sort: search.sort === "rating" ? ("rating" as const) : ("newest" as const),
+  }),
   loader: ({ context }) => context.queryClient.ensureQueryData(googleReviewsQuery()),
+
   head: ({ loaderData }) => ({
     ...pageMeta({
       title: "Google Reviews — Anayat Events & Catering, Lahore",
@@ -93,9 +100,43 @@ function ReviewCard({ review }: { review: GoogleReview }) {
   );
 }
 
+/** How many reviews are revealed at a time by "Load more". */
+const PAGE = 4;
+const ARCHIVE_PAGE = 6;
+
+const SORTS = [
+  { key: "newest", label: "Newest first" },
+  { key: "rating", label: "Highest rated" },
+] as const;
+
 function ReviewsPage() {
   const { data } = useSuspenseQuery(googleReviewsQuery());
-  const { rating, ratingCount, mapsUri, reviews } = data;
+  const { rating, ratingCount, mapsUri, writeReviewUri, reviews } = data;
+
+  const { sort } = Route.useSearch();
+  const navigate = useNavigate({ from: PATH });
+
+  const [shown, setShown] = useState(PAGE);
+  const [archiveShown, setArchiveShown] = useState(ARCHIVE_PAGE);
+
+  // Google returns its own relevance order; we re-sort on the client so the
+  // control is instant and the live payload stays the single source of truth.
+  const ordered = useMemo(() => {
+    const list = [...reviews];
+    return sort === "rating"
+      ? list.sort(
+          (a, b) => b.rating - a.rating || (a.publishTime < b.publishTime ? 1 : -1),
+        )
+      : list.sort((a, b) => (a.publishTime < b.publishTime ? 1 : -1));
+  }, [reviews, sort]);
+
+  const visible = ordered.slice(0, shown);
+  const archive = testimonials.slice(0, archiveShown);
+
+  function setSort(next: (typeof SORTS)[number]["key"]) {
+    setShown(PAGE);
+    navigate({ search: { sort: next }, replace: true, resetScroll: false });
+  }
 
   return (
     <main className="bg-background">
@@ -115,6 +156,14 @@ function ReviewsPage() {
 
         <div className="mt-10 flex flex-wrap items-center gap-x-14 gap-y-5">
           <a
+            href={writeReviewUri}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-shape inline-flex items-center bg-gold px-8 py-4 font-sans text-[11px] tracking-[0.24em] uppercase text-primary-foreground transition-opacity hover:opacity-88"
+          >
+            Write a Google review
+          </a>
+          <a
             href={mapsUri}
             target="_blank"
             rel="noopener noreferrer"
@@ -122,31 +171,62 @@ function ReviewsPage() {
           >
             Read all {ratingCount} on Google
           </a>
-          <a
-            href={mapsUri}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-sans text-[10px] tracking-[0.28em] uppercase text-ivory transition-colors hover:text-gold"
-          >
-            Leave a review
-          </a>
         </div>
       </section>
 
       {reviews.length > 0 && (
         <section className="border-t border-border">
           <div className="mx-auto max-w-[92rem] px-6 py-16 md:px-12 md:py-24">
-            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold-deep">
-              Live from Google
-            </p>
-            <div className="mt-10 columns-1 gap-14 lg:columns-2 [&>*]:mb-2">
-              {reviews.map((r, i) => (
-                <Reveal key={r.id} delay={i * 90}>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-12 gap-y-5">
+              <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold-deep">
+                Live from Google
+              </p>
+              <div className="flex items-center gap-8" role="group" aria-label="Sort reviews">
+                {SORTS.map((s) => {
+                  const active = sort === s.key;
+                  return (
+                    <button
+                      key={s.key}
+                      type="button"
+                      onClick={() => setSort(s.key)}
+                      aria-pressed={active}
+                      className={`relative font-sans text-[10px] tracking-[0.28em] uppercase transition-colors ${
+                        active ? "text-gold" : "text-muted-foreground hover:text-ivory"
+                      }`}
+                    >
+                      {s.label}
+                      <span
+                        className={`absolute -bottom-2 left-0 h-px w-full bg-gold transition-transform duration-500 [transition-timing-function:var(--ease-lux)] ${
+                          active ? "scale-x-100" : "scale-x-0"
+                        }`}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="mt-12 columns-1 gap-14 lg:columns-2 [&>*]:mb-2">
+              {visible.map((r, i) => (
+                <Reveal key={r.id} delay={(i % PAGE) * 90}>
                   <ReviewCard review={r} />
                 </Reveal>
               ))}
             </div>
-            <p className="mt-6 font-sans text-[11px] leading-[2] font-light text-muted-foreground">
+
+            {shown < ordered.length && (
+              <div className="mt-14 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setShown((n) => n + PAGE)}
+                  className="btn-shape inline-flex items-center border border-gold/40 px-10 py-4 font-sans text-[10px] tracking-[0.28em] uppercase text-gold transition-colors hover:border-gold hover:bg-gold hover:text-primary-foreground"
+                >
+                  Load more reviews ({ordered.length - shown} left)
+                </button>
+              </div>
+            )}
+
+            <p className="mt-12 font-sans text-[11px] leading-[2] font-light text-muted-foreground">
               Google publishes a selection of the most relevant reviews through its API — the
               full set of {ratingCount} ratings lives on{" "}
               <a
@@ -169,7 +249,7 @@ function ReviewsPage() {
             From the house archive
           </p>
           <div className="mt-10 columns-1 gap-6 md:columns-2 lg:columns-3 [&>*]:mb-6">
-            {testimonials.map((t) => (
+            {archive.map((t) => (
               <figure
                 key={t.id}
                 className="break-inside-avoid border border-border bg-surface/30 p-8"
@@ -186,6 +266,18 @@ function ReviewsPage() {
               </figure>
             ))}
           </div>
+
+          {archiveShown < testimonials.length && (
+            <div className="mt-14 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setArchiveShown((n) => n + ARCHIVE_PAGE)}
+                className="btn-shape inline-flex items-center border border-gold/40 px-10 py-4 font-sans text-[10px] tracking-[0.28em] uppercase text-gold transition-colors hover:border-gold hover:bg-gold hover:text-primary-foreground"
+              >
+                Load more ({testimonials.length - archiveShown} left)
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -193,4 +285,5 @@ function ReviewsPage() {
     </main>
   );
 }
+
 
