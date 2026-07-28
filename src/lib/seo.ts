@@ -1,3 +1,4 @@
+import { SITE_URL, absoluteUrl } from "@/lib/site-url";
 import { site } from "@/content/site";
 import { logo } from "@/content/images";
 
@@ -75,17 +76,19 @@ export function jsonLdMaybe(data: unknown | null) {
 /* ------------------------------- Schema.org ------------------------------ */
 
 /**
- * Absolute origin for every canonical, og:url and schema URL. This is the
- * project's stable Lovable host; when a custom domain is attached, change this
- * one line and every URL on the site follows.
+ * Absolute origin for every canonical, og:url and schema URL.
+ *
+ * The value comes from {@link SITE_URL} (see `src/lib/site-url.ts`), which
+ * reads `VITE_SITE_URL` / platform environment variables. No domain is
+ * hardcoded anywhere else in the project: point the environment variable at
+ * the production domain and every URL on the site follows.
  */
-export const BASE_URL = "https://anayatevents.lovable.app";
-
+export const BASE_URL = SITE_URL;
 
 export function abs(path: string): string {
-  if (/^https?:\/\//.test(path)) return path;
-  return `${BASE_URL}${path}`;
+  return absoluteUrl(path);
 }
+
 
 const postalAddress = {
   "@type": "PostalAddress",

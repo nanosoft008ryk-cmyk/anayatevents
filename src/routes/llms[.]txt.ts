@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { BASE_URL } from "@/lib/seo";
+import { requestOrigin } from "@/lib/site-url";
 import { site } from "@/content/site";
 import { serviceIndex, locationIndex } from "@/content/answers";
 import { faqTopics } from "@/content/faqs";
@@ -12,8 +12,8 @@ import { articles } from "@/content/journal";
  * over crawling every page. Generated from the same content files the site
  * renders, so it can never drift from what a human reads.
  */
-function build() {
-  const abs = (p: string) => `${BASE_URL}${p}`;
+function build(origin: string) {
+  const abs = (p: string) => `${origin}${p}`;
   const lines: string[] = [];
 
   lines.push(`# ${site.legalName}`);
@@ -74,8 +74,8 @@ function build() {
 export const Route = createFileRoute("/llms.txt")({
   server: {
     handlers: {
-      GET: () =>
-        new Response(build(), {
+      GET: ({ request }) =>
+        new Response(build(requestOrigin(request)), {
           headers: {
             "Content-Type": "text/plain; charset=utf-8",
             "Cache-Control": "public, max-age=3600",
