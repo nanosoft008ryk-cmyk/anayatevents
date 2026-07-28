@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { BASE_URL } from "@/lib/seo";
+import { requestOrigin } from "@/lib/site-url";
 
 /**
  * Generated, never hand-maintained. Everything public is crawlable; only build
- * artefacts are excluded. The sitemap reference is derived from BASE_URL, so
- * changing the domain in one place updates this too.
+ * artefacts are excluded. Every absolute URL is derived from the origin of
+ * the incoming request, so this file is correct on any domain or host.
  */
-const body = `# ${BASE_URL}
+const buildBody = (origin: string) => `# ${origin}
 User-agent: *
 Allow: /
 Disallow: /_build/
@@ -57,20 +57,20 @@ User-agent: DuckAssistBot
 Allow: /
 
 # Plain-text summary of the business, written for answer engines:
-# ${BASE_URL}/llms.txt
+# ${origin}/llms.txt
 #
 # Machine-readable entity graph for knowledge-graph systems:
-# ${BASE_URL}/knowledge-graph.json
+# ${origin}/knowledge-graph.json
 
-Sitemap: ${BASE_URL}/sitemap.xml
-Sitemap: ${BASE_URL}/image-sitemap.xml
+Sitemap: ${origin}/sitemap.xml
+Sitemap: ${origin}/image-sitemap.xml
 `;
 
 export const Route = createFileRoute("/robots.txt")({
   server: {
     handlers: {
-      GET: () =>
-        new Response(body, {
+      GET: ({ request }) =>
+        new Response(buildBody(requestOrigin(request)), {
           headers: {
             "Content-Type": "text/plain; charset=utf-8",
             "Cache-Control": "public, max-age=3600",
