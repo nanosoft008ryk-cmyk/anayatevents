@@ -62,6 +62,7 @@ Allow: /
 # Machine-readable entity graph for knowledge-graph systems:
 # ${origin}/knowledge-graph.json
 
+Sitemap: ${origin}/sitemap-index.xml
 Sitemap: ${origin}/sitemap.xml
 Sitemap: ${origin}/image-sitemap.xml
 `;

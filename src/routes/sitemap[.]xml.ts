@@ -2,57 +2,21 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { requestOrigin } from "@/lib/site-url";
 import { allPages } from "@/lib/route-registry";
+import { buildUrlset, XML_HEADERS } from "@/lib/sitemap";
 
 /**
- * Fully automatic sitemap. Pages are discovered from src/routes and expanded
- * from the content modules (see route-registry). Adding a page or a content
- * record regenerates this file on the next build — it is never edited by hand.
+ * Flat sitemap of every page, kept alongside the split /sitemap-index.xml for
+ * crawlers and tools that expect a single file. Both are generated from the
+ * same registry, so they can never drift apart.
  *
  * <lastmod> is emitted only where a real, page-specific publication date
  * exists (journal articles). No build-time or synthetic dates.
  */
-function esc(value: string): string {
-  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-function buildXml(origin: string): string {
-  const urls = allPages()
-    .map((e) => {
-      const abs = /^https?:\/\//.test(e.image ?? "") ? e.image : e.image ? `${origin}${e.image}` : "";
-      return [
-        `  <url>`,
-        `    <loc>${origin}${e.path}</loc>`,
-        e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
-        `    <priority>${e.priority}</priority>`,
-        abs
-          ? `    <image:image>\n      <image:loc>${esc(abs)}</image:loc>\n${
-              e.imageTitle ? `      <image:title>${esc(e.imageTitle)}</image:title>\n` : ""
-            }    </image:image>`
-          : null,
-        `  </url>`,
-      ]
-        .filter(Boolean)
-        .join("\n");
-    })
-    .join("\n");
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-${urls}
-</urlset>
-`;
-}
-
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: ({ request }) =>
-        new Response(buildXml(requestOrigin(request)), {
-          headers: {
-            "Content-Type": "application/xml; charset=utf-8",
-            "Cache-Control": "public, max-age=3600",
-          },
-        }),
+        new Response(buildUrlset(allPages(), requestOrigin(request)), { headers: XML_HEADERS }),
     },
   },
 });

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaultRouteImport } from './routes/vault'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -27,6 +28,7 @@ import { Route as JournalIndexRouteImport } from './routes/journal.index'
 import { Route as FaqIndexRouteImport } from './routes/faq.index'
 import { Route as AreasIndexRouteImport } from './routes/areas.index'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
+import { Route as SitemapsSectionRouteImport } from './routes/sitemaps.$section'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
@@ -58,6 +60,11 @@ const TermsRoute = TermsRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapIndexDotxmlRoute = SitemapIndexDotxmlRouteImport.update({
+  id: '/sitemap-index.xml',
+  path: '/sitemap-index.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
@@ -133,6 +140,11 @@ const AreasIndexRoute = AreasIndexRouteImport.update({
 const AboutIndexRoute = AboutIndexRouteImport.update({
   id: '/about/',
   path: '/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapsSectionRoute = SitemapsSectionRouteImport.update({
+  id: '/sitemaps/$section',
+  path: '/sitemaps/$section',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
@@ -231,6 +243,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
@@ -249,6 +262,7 @@ export interface FileRoutesByFullPath {
   '/journal/$slug': typeof JournalSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/sitemaps/$section': typeof SitemapsSectionRoute
   '/about/': typeof AboutIndexRoute
   '/areas/': typeof AreasIndexRoute
   '/faq/': typeof FaqIndexRoute
@@ -268,6 +282,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
@@ -286,6 +301,7 @@ export interface FileRoutesByTo {
   '/journal/$slug': typeof JournalSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/sitemaps/$section': typeof SitemapsSectionRoute
   '/about': typeof AboutIndexRoute
   '/areas': typeof AreasIndexRoute
   '/faq': typeof FaqIndexRoute
@@ -306,6 +322,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/vault': typeof VaultRoute
@@ -324,6 +341,7 @@ export interface FileRoutesById {
   '/journal/$slug': typeof JournalSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/sitemaps/$section': typeof SitemapsSectionRoute
   '/about/': typeof AboutIndexRoute
   '/areas/': typeof AreasIndexRoute
   '/faq/': typeof FaqIndexRoute
@@ -345,6 +363,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
+    | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/terms'
     | '/vault'
@@ -363,6 +382,7 @@ export interface FileRouteTypes {
     | '/journal/$slug'
     | '/portfolio/$slug'
     | '/services/$slug'
+    | '/sitemaps/$section'
     | '/about/'
     | '/areas/'
     | '/faq/'
@@ -382,6 +402,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
+    | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/terms'
     | '/vault'
@@ -400,6 +421,7 @@ export interface FileRouteTypes {
     | '/journal/$slug'
     | '/portfolio/$slug'
     | '/services/$slug'
+    | '/sitemaps/$section'
     | '/about'
     | '/areas'
     | '/faq'
@@ -419,6 +441,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
+    | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/terms'
     | '/vault'
@@ -437,6 +460,7 @@ export interface FileRouteTypes {
     | '/journal/$slug'
     | '/portfolio/$slug'
     | '/services/$slug'
+    | '/sitemaps/$section'
     | '/about/'
     | '/areas/'
     | '/faq/'
@@ -457,6 +481,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ReviewsRoute: typeof ReviewsRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapIndexDotxmlRoute: typeof SitemapIndexDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   VaultRoute: typeof VaultRoute
@@ -475,6 +500,7 @@ export interface RootRouteChildren {
   JournalSlugRoute: typeof JournalSlugRoute
   PortfolioSlugRoute: typeof PortfolioSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  SitemapsSectionRoute: typeof SitemapsSectionRoute
   AboutIndexRoute: typeof AboutIndexRoute
   AreasIndexRoute: typeof AreasIndexRoute
   FaqIndexRoute: typeof FaqIndexRoute
@@ -506,6 +532,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-index.xml': {
+      id: '/sitemap-index.xml'
+      path: '/sitemap-index.xml'
+      fullPath: '/sitemap-index.xml'
+      preLoaderRoute: typeof SitemapIndexDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/robots.txt': {
@@ -611,6 +644,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about/'
       preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemaps/$section': {
+      id: '/sitemaps/$section'
+      path: '/sitemaps/$section'
+      fullPath: '/sitemaps/$section'
+      preLoaderRoute: typeof SitemapsSectionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/$slug': {
@@ -745,6 +785,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ReviewsRoute: ReviewsRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapIndexDotxmlRoute: SitemapIndexDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   VaultRoute: VaultRoute,
@@ -763,6 +804,7 @@ const rootRouteChildren: RootRouteChildren = {
   JournalSlugRoute: JournalSlugRoute,
   PortfolioSlugRoute: PortfolioSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  SitemapsSectionRoute: SitemapsSectionRoute,
   AboutIndexRoute: AboutIndexRoute,
   AreasIndexRoute: AreasIndexRoute,
   FaqIndexRoute: FaqIndexRoute,
