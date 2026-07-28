@@ -13,6 +13,7 @@ import { Route as VaultRouteImport } from './routes/vault'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.]xml'
+import { Route as SitemapSectionDotxmlRouteImport } from './routes/sitemap-$section[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -64,6 +65,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SitemapIndexDotxmlRoute = SitemapIndexDotxmlRouteImport.update({
   id: '/sitemap-index.xml',
   path: '/sitemap-index.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapSectionDotxmlRoute = SitemapSectionDotxmlRouteImport.update({
+  id: '/sitemap-$section.xml',
+  path: '/sitemap-$section.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
@@ -237,6 +243,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-$section.xml': typeof SitemapSectionDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -275,6 +282,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-$section.xml': typeof SitemapSectionDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -314,6 +322,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap-$section.xml': typeof SitemapSectionDotxmlRoute
   '/sitemap-index.xml': typeof SitemapIndexDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -354,6 +363,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
+    | '/sitemap-$section.xml'
     | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/terms'
@@ -392,6 +402,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
+    | '/sitemap-$section.xml'
     | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/terms'
@@ -430,6 +441,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
+    | '/sitemap-$section.xml'
     | '/sitemap-index.xml'
     | '/sitemap.xml'
     | '/terms'
@@ -469,6 +481,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ReviewsRoute: typeof ReviewsRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapSectionDotxmlRoute: typeof SitemapSectionDotxmlRoute
   SitemapIndexDotxmlRoute: typeof SitemapIndexDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
@@ -526,6 +539,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap-index.xml'
       fullPath: '/sitemap-index.xml'
       preLoaderRoute: typeof SitemapIndexDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-$section.xml': {
+      id: '/sitemap-$section.xml'
+      path: '/sitemap-$section.xml'
+      fullPath: '/sitemap-$section.xml'
+      preLoaderRoute: typeof SitemapSectionDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/robots.txt': {
@@ -765,6 +785,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ReviewsRoute: ReviewsRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapSectionDotxmlRoute: SitemapSectionDotxmlRoute,
   SitemapIndexDotxmlRoute: SitemapIndexDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
