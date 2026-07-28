@@ -1,3 +1,4 @@
+import { SITE_URL, absoluteUrl } from "@/lib/site-url";
 import { site } from "@/content/site";
 import { logo } from "@/content/images";
 
