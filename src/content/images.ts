@@ -26,10 +26,13 @@ import a25 from "@/assets/ae-25.jpg.asset.json";
 import a26 from "@/assets/ae-26.jpg.asset.json";
 import logoAsset from "@/assets/ae-logo.jpg.asset.json";
 import variants from "@/content/variants.json";
+import { assetUrl } from "@/lib/asset-url";
 
 // Small WebP rendition — the logo never renders larger than ~80px.
-export const logo =
-  (variants as Record<string, { v: Record<string, string> }>)["ae-logo"]?.v["640"] ?? logoAsset.url;
+export const logo = assetUrl(
+  (variants as Record<string, { v: Record<string, string> }>)["ae-logo"]?.v["640"] ??
+    logoAsset.url,
+);
 
 export type PhotoTag =
   | "stage"
@@ -52,7 +55,7 @@ export interface Photo {
   orientation: "portrait" | "landscape";
 }
 
-export const photos: Photo[] = [
+const rawPhotos: Photo[] = [
   {
     id: "ae-01",
     url: a01.url,
@@ -262,6 +265,9 @@ export const photos: Photo[] = [
     orientation: "portrait",
   },
 ];
+
+/** CDN paths resolved to absolute URLs so images work on every host. */
+export const photos: Photo[] = rawPhotos.map((p) => ({ ...p, url: assetUrl(p.url) }));
 
 const byId = new Map(photos.map((p) => [p.id, p]));
 

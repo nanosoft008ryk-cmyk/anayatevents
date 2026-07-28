@@ -1,4 +1,6 @@
 import variantsJson from "@/content/variants.json";
+import { assetUrl } from "@/lib/asset-url";
+
 
 type Variant = {
   orig: string;
@@ -29,8 +31,8 @@ function setOf(map: Record<string, string> | undefined) {
     .sort((a, b) => a - b);
   if (!widths.length) return { srcSet: undefined, largest: undefined };
   return {
-    srcSet: widths.map((w) => `${map[String(w)]} ${w}w`).join(", "),
-    largest: map[String(widths[widths.length - 1])],
+    srcSet: widths.map((w) => `${assetUrl(map[String(w)])} ${w}w`).join(", "),
+    largest: assetUrl(map[String(widths[widths.length - 1])]),
   };
 }
 
@@ -42,14 +44,16 @@ function setOf(map: Record<string, string> | undefined) {
  */
 export function imgAttrs(id: string, fallbackUrl: string, sizes = "100vw"): ImgAttrs {
   const entry = variants[id];
-  if (!entry) return { src: fallbackUrl };
+  const fallback = assetUrl(fallbackUrl);
+  if (!entry) return { src: fallback };
 
   const webp = setOf(entry.v);
   const avif = setOf(entry.a);
-  if (!webp.srcSet) return { src: fallbackUrl };
+  if (!webp.srcSet) return { src: fallback };
 
   return {
-    src: webp.largest ?? fallbackUrl,
+    src: webp.largest ?? fallback,
+
     srcSet: webp.srcSet,
     avifSrcSet: avif.srcSet,
     sizes,
