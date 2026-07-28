@@ -17,6 +17,7 @@ import { AnswerBlock } from "@/components/aeo/AnswerBlock";
 import { FactTable } from "@/components/aeo/FactTable";
 import { locationAnswerItems, locationFacts } from "@/content/answers";
 import { LuxTextLink } from "@/components/ui/LuxButton";
+import { entityRelationsSchema } from "@/lib/graph-schema";
 import {
   pageMeta,
   jsonLd,
@@ -66,6 +67,7 @@ export const Route = createFileRoute("/areas/$slug")({
       }),
       scripts: [
         jsonLd(breadcrumbSchema(trail)),
+        ...jsonLdMaybe(entityRelationsSchema(path)),
         jsonLd(
           professionalServiceSchema({
             path,

@@ -99,11 +99,16 @@ export function Plate({
             photography stays clean and vivid. */}
 
       </div>
-      {caption && (
+      {caption ? (
         <figcaption className="mt-4 font-sans text-[10px] leading-relaxed tracking-[0.26em] uppercase text-muted-foreground transition-colors duration-500 group-hover/plate:text-gold-deep">
           {image.caption}
         </figcaption>
+      ) : (
+        // The frame stays clean for a reader, but the photograph still carries
+        // a contextual caption for assistive technology and answer engines.
+        <figcaption className="sr-only">{image.caption ?? image.alt}</figcaption>
       )}
+
     </figure>
   );
 }

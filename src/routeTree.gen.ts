@@ -16,6 +16,7 @@ import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
+import { Route as KnowledgeGraphDotjsonRouteImport } from './routes/knowledge-graph[.]json'
 import { Route as ImageSitemapDotxmlRouteImport } from './routes/image-sitemap[.]xml'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -77,6 +78,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
   id: '/llms.txt',
   path: '/llms.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeGraphDotjsonRoute = KnowledgeGraphDotjsonRouteImport.update({
+  id: '/knowledge-graph.json',
+  path: '/knowledge-graph.json',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImageSitemapDotxmlRoute = ImageSitemapDotxmlRouteImport.update({
@@ -220,6 +226,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
+  '/knowledge-graph.json': typeof KnowledgeGraphDotjsonRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
@@ -256,6 +263,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
+  '/knowledge-graph.json': typeof KnowledgeGraphDotjsonRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
@@ -293,6 +301,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
+  '/knowledge-graph.json': typeof KnowledgeGraphDotjsonRoute
   '/llms.txt': typeof LlmsDottxtRoute
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
@@ -331,6 +340,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/image-sitemap.xml'
+    | '/knowledge-graph.json'
     | '/llms.txt'
     | '/privacy'
     | '/reviews'
@@ -367,6 +377,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/image-sitemap.xml'
+    | '/knowledge-graph.json'
     | '/llms.txt'
     | '/privacy'
     | '/reviews'
@@ -403,6 +414,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/cookies'
     | '/image-sitemap.xml'
+    | '/knowledge-graph.json'
     | '/llms.txt'
     | '/privacy'
     | '/reviews'
@@ -440,6 +452,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CookiesRoute: typeof CookiesRoute
   ImageSitemapDotxmlRoute: typeof ImageSitemapDotxmlRoute
+  KnowledgeGraphDotjsonRoute: typeof KnowledgeGraphDotjsonRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
   PrivacyRoute: typeof PrivacyRoute
   ReviewsRoute: typeof ReviewsRoute
@@ -521,6 +534,13 @@ declare module '@tanstack/react-router' {
       path: '/llms.txt'
       fullPath: '/llms.txt'
       preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge-graph.json': {
+      id: '/knowledge-graph.json'
+      path: '/knowledge-graph.json'
+      fullPath: '/knowledge-graph.json'
+      preLoaderRoute: typeof KnowledgeGraphDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/image-sitemap.xml': {
@@ -720,6 +740,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CookiesRoute: CookiesRoute,
   ImageSitemapDotxmlRoute: ImageSitemapDotxmlRoute,
+  KnowledgeGraphDotjsonRoute: KnowledgeGraphDotjsonRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
   PrivacyRoute: PrivacyRoute,
   ReviewsRoute: ReviewsRoute,
@@ -754,13 +775,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

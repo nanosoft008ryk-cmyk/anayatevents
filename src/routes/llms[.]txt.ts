@@ -62,6 +62,7 @@ function build() {
   lines.push(`- About: ${abs("/about")}`);
   lines.push(`- Contact: ${abs("/contact")}`);
   lines.push(`- Sitemap: ${abs("/sitemap.xml")}`);
+  lines.push(`- Entity knowledge graph (JSON): ${abs("/knowledge-graph.json")}`);
   lines.push("");
   lines.push(
     "This content may be quoted or summarised with attribution to Anayat Events & Catering.",

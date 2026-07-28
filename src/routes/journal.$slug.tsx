@@ -17,8 +17,10 @@ import { LuxTextLink } from "@/components/ui/LuxButton";
 import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { SmartImg } from "@/components/ui/SmartImg";
+import { entityRelationsSchema } from "@/lib/graph-schema";
 import {
   pageMeta,
+  jsonLdMaybe,
   jsonLd,
   breadcrumbSchema,
   articleSchema,
@@ -74,6 +76,7 @@ export const Route = createFileRoute("/journal/$slug")({
       }),
       scripts: [
         jsonLd(breadcrumbSchema(trail)),
+        ...jsonLdMaybe(entityRelationsSchema(path)),
         jsonLd(
           articleSchema({
             title: article.title,

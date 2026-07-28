@@ -58,6 +58,9 @@ Allow: /
 
 # Plain-text summary of the business, written for answer engines:
 # ${BASE_URL}/llms.txt
+#
+# Machine-readable entity graph for knowledge-graph systems:
+# ${BASE_URL}/knowledge-graph.json
 
 Sitemap: ${BASE_URL}/sitemap.xml
 Sitemap: ${BASE_URL}/image-sitemap.xml
