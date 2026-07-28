@@ -485,7 +485,9 @@ export function validateKnowledgeGraph(): GraphIssue[] {
         message: `${e.name} has no parent entity`,
       });
 
-    if (e.path) {
+    // People and event types legitimately share a section page; only entities
+    // whose path is their own canonical URL are checked for collisions.
+    if (e.path && e.kind !== "person") {
       const clash = slugPairs.get(e.path);
       if (clash)
         issues.push({
