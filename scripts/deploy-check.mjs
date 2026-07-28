@@ -77,7 +77,15 @@ async function crawl() {
     m[1].replace(/^https?:\/\/[^/]+/, ""),
   );
 
-  const expectedOrigin = new URL(CRAWL_BASE).origin;
+  // Generated files follow the request host; canonical/og/schema follow the
+  // configured VITE_SITE_URL (the development fallback when it is unset).
+  const servedOrigin = new URL(CRAWL_BASE).origin;
+  const fallback = readFileSync("src/lib/site-url.ts", "utf8").match(
+    /DEV_FALLBACK\s*=\s*"([^"]+)"/,
+  )?.[1];
+  const expectedOrigin = new URL(
+    args.expect ?? process.env.VITE_SITE_URL ?? fallback ?? CRAWL_BASE,
+  ).origin;
   for (const path of paths) {
     const url = `${CRAWL_BASE}${path}`;
     const page = await fetch(url);
@@ -140,7 +148,7 @@ async function crawl() {
     }
     const body = await r.text();
     const wrong = [...new Set((body.match(/https?:\/\/[^\s"<)]+/g) ?? []).map((u) => new URL(u).origin))]
-      .filter((o) => o !== expectedOrigin && /lovable\.app|localhost/.test(o));
+      .filter((o) => o !== servedOrigin && /lovable\.app|localhost/.test(o));
     if (wrong.length) add("error", "generated-file-domain", file, `References ${wrong.join(", ")}`);
   }
 
