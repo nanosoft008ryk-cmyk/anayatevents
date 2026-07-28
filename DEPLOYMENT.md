@@ -28,7 +28,32 @@ host**, so they are correct on every domain even before the variable is set.
 Internal navigation uses relative router links (`/services`, `/areas/dha-lahore`),
 so it never depends on the domain.
 
-## 2. Build
+## 2. Photographs (media)
+
+Photographs live at root-relative paths (`/__l5e/assets-v1/...`). Two modes,
+both domain-independent — pick one:
+
+**A. Self-hosted (recommended for production, zero external dependency).**
+Set on your host:
+
+```
+SELF_HOST_MEDIA=1
+VITE_SELF_HOST_MEDIA=1
+```
+
+`npm run build` then runs `scripts/mirror-media.mjs` automatically, which
+downloads all 223 renditions into `public/__l5e/assets-v1/...` before the
+build. Every image is served from your own domain. Run it manually any time
+with `npm run media:mirror` (`--force` to re-download).
+
+**B. CDN-backed (default, no configuration).** Images resolve against an
+absolute media origin, so they load identically on any domain. Point it
+elsewhere with `VITE_ASSET_ORIGIN=https://cdn.your-domain.com`.
+
+In both modes `SmartImg` retries with the other strategy if a file ever fails
+to load, so a page can never show a broken image.
+
+## 3. Build
 
 ```
 npm run build          # production build
@@ -37,10 +62,11 @@ npm run verify         # SEO + AEO + deployment readiness (dev server must be ru
 
 `npm run deploy:check` scans the whole source tree for hardcoded deployment
 domains and crawls every sitemap URL to verify routes, canonicals, `og:url`,
-JSON-LD domains, generated files and local assets. It writes
+JSON-LD domains, generated files and that every homepage image actually loads
+on the serving host. It writes
 `reports/deploy/deploy-report.{json,html}` and exits non-zero on any error.
 
-## 3. Host configuration
+## 4. Host configuration
 
 This is a TanStack Start (SSR) application; deep links and refreshes are
 handled by the server output — no SPA fallback rules are required.
@@ -73,23 +99,17 @@ Serve `.output/public` and route unmatched requests to the server handler in
   "rewrites": [{ "source": "**", "destination": "/index.html" }] } }
 ```
 
-## 4. After moving domains
+## 5. After moving domains
 
 Nothing to search and replace. Update `VITE_SITE_URL`, redeploy, then in
 Google Search Console add the new property and submit `/sitemap.xml` — the
 canonicals, structured data and sitemaps already point at the new domain.
 
-## Images on non-Lovable hosts
-
-Every photograph is served from Lovable's asset CDN at
-`/__l5e/assets-v1/...`. That path only resolves on a Lovable-served host, so
-all media paths are resolved against an absolute CDN origin
-(`src/lib/asset-url.ts`). No configuration is needed; set
-`VITE_ASSET_ORIGIN` only if the media is moved to a different CDN.
-
 ## Vercel checklist
 
 - `VITE_SITE_URL=https://your-domain.com` — canonicals, og:url, JSON-LD and
   sitemaps follow it. Without it they fall back to the Lovable origin.
+- `SELF_HOST_MEDIA=1` and `VITE_SELF_HOST_MEDIA=1` — bundles every photograph
+  into the deployment so images load from your own domain (see section 2).
 - `LOVABLE_API_KEY` + `GOOGLE_MAPS_API_KEY` — required for the live Google
   reviews feed. Missing values degrade gracefully to the last-known rating.

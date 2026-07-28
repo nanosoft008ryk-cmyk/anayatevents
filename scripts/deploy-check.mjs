@@ -18,6 +18,7 @@ const args = Object.fromEntries(
   }),
 );
 const CRAWL_BASE = args.base ?? "http://localhost:8080";
+const ASSET_ORIGIN = (process.env.VITE_ASSET_ORIGIN ?? "https://anayatevents.lovable.app").replace(/\/+$/, "");
 
 /* --------------------------- 1. source scanning --------------------------- */
 
@@ -25,7 +26,11 @@ const SOURCE_DIRS = ["src", "scripts", "public"];
 const ALLOWED_DOMAIN_FILES = new Set([
   // The single place a fallback domain may appear.
   "src/lib/site-url.ts",
+  // Default media origin, overridable with VITE_ASSET_ORIGIN and bypassed
+  // entirely when the media is mirrored into the build (SELF_HOST_MEDIA=1).
+  "src/lib/asset-url.ts",
   "scripts/deploy-check.mjs",
+  "scripts/mirror-media.mjs",
 ]);
 const DOMAIN_RE = /https?:\/\/[a-z0-9-]+(?:--[a-z0-9-]+)?\.lovable\.app/gi;
 
@@ -148,8 +153,30 @@ async function crawl() {
     }
     const body = await r.text();
     const wrong = [...new Set((body.match(/https?:\/\/[^\s"<)]+/g) ?? []).map((u) => new URL(u).origin))]
-      .filter((o) => o !== servedOrigin && /lovable\.app|localhost/.test(o));
+      // The media origin is legitimately cross-origin unless the assets are
+      // mirrored into the build (SELF_HOST_MEDIA=1).
+      .filter((o) => o !== servedOrigin && o !== ASSET_ORIGIN && /lovable\.app|localhost/.test(o));
     if (wrong.length) add("error", "generated-file-domain", file, `References ${wrong.join(", ")}`);
+  }
+
+  // Every image referenced by the homepage must actually load on this host.
+  const home = await (await fetch(`${CRAWL_BASE}/`)).text();
+  const media = [
+    ...new Set(
+      [...home.matchAll(/(?:src|srcset)="([^"]+)"/g)]
+        .flatMap((m) => m[1].split(",").map((c) => c.trim().split(/\s+/)[0]))
+        .filter((u) => u.includes("/__l5e/")),
+    ),
+  ].slice(0, 12);
+  if (!media.length) add("warn", "media", "/", "No catalogue media found on the homepage.");
+  for (const url of media) {
+    const target = url.startsWith("http") ? url : `${CRAWL_BASE}${url}`;
+    try {
+      const r = await fetch(target, { method: "HEAD" });
+      if (!r.ok) add("error", "media-unreachable", target, `Returned ${r.status} — images will break on this domain.`);
+    } catch (err) {
+      add("error", "media-unreachable", target, err.message);
+    }
   }
 
   return paths.length;
