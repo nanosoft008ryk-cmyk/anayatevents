@@ -214,6 +214,17 @@ export function SiteFooter() {
             <p className="font-sans text-[9.5px] leading-relaxed tracking-[0.22em] uppercase text-ivory/70 sm:text-right sm:text-[10px] sm:tracking-[0.24em]">
               {site.serviceArea} · Rated {liveRating.rating} from {liveRating.count} reviews
             </p>
+            <p className="font-sans text-[9.5px] leading-relaxed tracking-[0.22em] uppercase text-ivory/50 sm:text-right sm:text-[10px] sm:tracking-[0.24em]">
+              Design &amp; Developed by{" "}
+              <a
+                href="https://naumanellahi.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/80 transition-colors duration-500 hover:text-gold"
+              >
+                Nauman Ellahi
+              </a>
+            </p>
           </div>
         </div>
       </div>
