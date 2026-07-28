@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { BASE_URL } from "@/lib/seo";
+import { requestOrigin } from "@/lib/site-url";
 import { allPages } from "@/lib/route-registry";
 
 /**
@@ -15,13 +15,13 @@ function esc(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function buildXml(): string {
+function buildXml(origin: string): string {
   const urls = allPages()
     .map((e) => {
-      const abs = /^https?:\/\//.test(e.image ?? "") ? e.image : e.image ? `${BASE_URL}${e.image}` : "";
+      const abs = /^https?:\/\//.test(e.image ?? "") ? e.image : e.image ? `${origin}${e.image}` : "";
       return [
         `  <url>`,
-        `    <loc>${BASE_URL}${e.path}</loc>`,
+        `    <loc>${origin}${e.path}</loc>`,
         e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
         `    <priority>${e.priority}</priority>`,
         abs
@@ -46,8 +46,8 @@ ${urls}
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
-      GET: () =>
-        new Response(buildXml(), {
+      GET: ({ request }) =>
+        new Response(buildXml(requestOrigin(request)), {
           headers: {
             "Content-Type": "application/xml; charset=utf-8",
             "Cache-Control": "public, max-age=3600",

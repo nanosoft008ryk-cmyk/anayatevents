@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { BASE_URL } from "@/lib/seo";
+import { requestOrigin } from "@/lib/site-url";
 import { knowledgeGraphDocument } from "@/lib/knowledge-graph";
 
 /**
@@ -11,8 +11,8 @@ import { knowledgeGraphDocument } from "@/lib/knowledge-graph";
 export const Route = createFileRoute("/knowledge-graph.json")({
   server: {
     handlers: {
-      GET: () =>
-        new Response(JSON.stringify(knowledgeGraphDocument(BASE_URL), null, 2), {
+      GET: ({ request }) =>
+        new Response(JSON.stringify(knowledgeGraphDocument(requestOrigin(request)), null, 2), {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
             "Cache-Control": "public, max-age=3600",

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { BASE_URL } from "@/lib/seo";
+import { requestOrigin } from "@/lib/site-url";
 import { allPageImages } from "@/lib/route-registry";
 
 /**
@@ -17,17 +17,17 @@ function esc(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function absolute(url: string): string {
-  return /^https?:\/\//.test(url) ? url : `${BASE_URL}${url}`;
+function absolute(url: string, origin: string): string {
+  return /^https?:\/\//.test(url) ? url : `${origin}${url}`;
 }
 
-function buildXml(): string {
+function buildXml(origin: string): string {
   const blocks = allPageImages().map((page) => {
     const images = page.images
       .map((img) =>
         [
           `    <image:image>`,
-          `      <image:loc>${esc(absolute(img.url))}</image:loc>`,
+          `      <image:loc>${esc(absolute(img.url, origin))}</image:loc>`,
           `      <image:title>${esc(img.title)}</image:title>`,
           img.caption ? `      <image:caption>${esc(img.caption)}</image:caption>` : null,
           `    </image:image>`,
@@ -37,7 +37,7 @@ function buildXml(): string {
       )
       .join("\n");
 
-    return [`  <url>`, `    <loc>${BASE_URL}${page.path}</loc>`, images, `  </url>`].join("\n");
+    return [`  <url>`, `    <loc>${origin}${page.path}</loc>`, images, `  </url>`].join("\n");
   });
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -50,8 +50,8 @@ ${blocks.join("\n")}
 export const Route = createFileRoute("/image-sitemap.xml")({
   server: {
     handlers: {
-      GET: () =>
-        new Response(buildXml(), {
+      GET: ({ request }) =>
+        new Response(buildXml(requestOrigin(request)), {
           headers: {
             "Content-Type": "application/xml; charset=utf-8",
             "Cache-Control": "public, max-age=3600",
