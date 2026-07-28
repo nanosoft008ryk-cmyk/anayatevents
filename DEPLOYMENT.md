@@ -99,23 +99,17 @@ Serve `.output/public` and route unmatched requests to the server handler in
   "rewrites": [{ "source": "**", "destination": "/index.html" }] } }
 ```
 
-## 4. After moving domains
+## 5. After moving domains
 
 Nothing to search and replace. Update `VITE_SITE_URL`, redeploy, then in
 Google Search Console add the new property and submit `/sitemap.xml` — the
 canonicals, structured data and sitemaps already point at the new domain.
 
-## Images on non-Lovable hosts
-
-Every photograph is served from Lovable's asset CDN at
-`/__l5e/assets-v1/...`. That path only resolves on a Lovable-served host, so
-all media paths are resolved against an absolute CDN origin
-(`src/lib/asset-url.ts`). No configuration is needed; set
-`VITE_ASSET_ORIGIN` only if the media is moved to a different CDN.
-
 ## Vercel checklist
 
 - `VITE_SITE_URL=https://your-domain.com` — canonicals, og:url, JSON-LD and
   sitemaps follow it. Without it they fall back to the Lovable origin.
+- `SELF_HOST_MEDIA=1` and `VITE_SELF_HOST_MEDIA=1` — bundles every photograph
+  into the deployment so images load from your own domain (see section 2).
 - `LOVABLE_API_KEY` + `GOOGLE_MAPS_API_KEY` — required for the live Google
   reviews feed. Missing values degrade gracefully to the last-known rating.
