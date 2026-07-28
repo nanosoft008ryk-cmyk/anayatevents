@@ -400,6 +400,10 @@ export function slugify(value: string): string {
     .replace(/^-|-$/g, "");
 }
 
+function unique(list: string[], self: string): string[] {
+  return [...new Set(list)].filter((id) => id !== self);
+}
+
 /** Every entity, deduplicated by identity and stable between builds. */
 export const entities: Entity[] = dedupe(buildEntities());
 
@@ -427,8 +431,6 @@ function dedupe(list: Entity[]): Entity[] {
     related: e.related.filter((id) => ids.has(id)),
   }));
 }
-
-const unique = (list: string[], self: string) => [...new Set(list)].filter((id) => id !== self);
 
 const byId = new Map(entities.map((e) => [e.id, e]));
 const byPath = new Map(entities.filter((e) => e.path).map((e) => [e.path!, e]));
