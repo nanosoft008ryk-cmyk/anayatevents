@@ -18,6 +18,7 @@ const args = Object.fromEntries(
   }),
 );
 const CRAWL_BASE = args.base ?? "http://localhost:8080";
+const ASSET_ORIGIN = (process.env.VITE_ASSET_ORIGIN ?? "https://anayatevents.lovable.app").replace(/\/+$/, "");
 
 /* --------------------------- 1. source scanning --------------------------- */
 
@@ -152,7 +153,9 @@ async function crawl() {
     }
     const body = await r.text();
     const wrong = [...new Set((body.match(/https?:\/\/[^\s"<)]+/g) ?? []).map((u) => new URL(u).origin))]
-      .filter((o) => o !== servedOrigin && /lovable\.app|localhost/.test(o));
+      // The media origin is legitimately cross-origin unless the assets are
+      // mirrored into the build (SELF_HOST_MEDIA=1).
+      .filter((o) => o !== servedOrigin && o !== ASSET_ORIGIN && /lovable\.app|localhost/.test(o));
     if (wrong.length) add("error", "generated-file-domain", file, `References ${wrong.join(", ")}`);
   }
 
