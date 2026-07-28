@@ -238,9 +238,12 @@ for (const p of paths) {
         note(p, "alt-quality", `terse alt text: "${alt}"`);
     }
   }
+  // Only picture figures are expected to carry a caption; a pull-quote figure
+  // is captioned by its own attribution.
   const figures = [...main.matchAll(/<figure[\s\S]*?<\/figure>/g)];
   for (const [fig] of figures)
-    if (!/<figcaption/.test(fig)) warn(p, "caption", "<figure> without a <figcaption>");
+    if (/<img\b/.test(fig) && !/<figcaption/.test(fig))
+      warn(p, "caption", "image <figure> without a <figcaption>");
 
   /* Repeated paragraphs across the site. */
   for (const [, raw] of main.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/g)) {
