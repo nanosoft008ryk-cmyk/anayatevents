@@ -16,7 +16,9 @@
     "aeo:ci": "node scripts/knowledge-audit.mjs --max-errors=0",
     "audit:all": "npm run seo:ci && npm run aeo:ci",
     "deploy:check": "node scripts/deploy-check.mjs",
-    "verify": "npm run seo:ci && npm run aeo:ci && npm run deploy:check"
+    "sitemap:audit": "node scripts/sitemap-audit.mjs",
+    "sitemap:ci": "node scripts/sitemap-audit.mjs --ci",
+    "verify": "npm run seo:ci && npm run aeo:ci && npm run sitemap:ci && npm run deploy:check"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
