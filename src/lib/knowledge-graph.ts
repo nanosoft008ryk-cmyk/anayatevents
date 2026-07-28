@@ -155,7 +155,11 @@ function buildEntities(): Entity[] {
     path: "/",
     summary: site.description,
     parent: null,
-    children: HUBS.map((h) => hubId(h.slug)),
+    children: [
+      ...HUBS.map((h) => hubId(h.slug)),
+      ...eventTypes.map((t) => entityId("event-type", slugify(t))),
+      ...["privacy", "terms", "cookies"].map((p) => entityId("policy", p)),
+    ],
     siblings: [],
     supporting: [],
     related: [],
