@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { requestOrigin } from "@/lib/site-url";
 import { allPages } from "@/lib/route-registry";
+import { buildUrlset, XML_HEADERS } from "@/lib/sitemap";
 
 /**
  * Fully automatic sitemap. Pages are discovered from src/routes and expanded

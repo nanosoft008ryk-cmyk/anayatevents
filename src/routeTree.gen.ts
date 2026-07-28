@@ -28,6 +28,7 @@ import { Route as JournalIndexRouteImport } from './routes/journal.index'
 import { Route as FaqIndexRouteImport } from './routes/faq.index'
 import { Route as AreasIndexRouteImport } from './routes/areas.index'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
+import { Route as SitemapsSectionRouteImport } from './routes/sitemaps.$section'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
@@ -139,6 +140,11 @@ const AreasIndexRoute = AreasIndexRouteImport.update({
 const AboutIndexRoute = AboutIndexRouteImport.update({
   id: '/about/',
   path: '/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapsSectionRoute = SitemapsSectionRouteImport.update({
+  id: '/sitemaps/$section',
+  path: '/sitemaps/$section',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
@@ -256,6 +262,7 @@ export interface FileRoutesByFullPath {
   '/journal/$slug': typeof JournalSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/sitemaps/$section': typeof SitemapsSectionRoute
   '/about/': typeof AboutIndexRoute
   '/areas/': typeof AreasIndexRoute
   '/faq/': typeof FaqIndexRoute
@@ -294,6 +301,7 @@ export interface FileRoutesByTo {
   '/journal/$slug': typeof JournalSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/sitemaps/$section': typeof SitemapsSectionRoute
   '/about': typeof AboutIndexRoute
   '/areas': typeof AreasIndexRoute
   '/faq': typeof FaqIndexRoute
@@ -333,6 +341,7 @@ export interface FileRoutesById {
   '/journal/$slug': typeof JournalSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/sitemaps/$section': typeof SitemapsSectionRoute
   '/about/': typeof AboutIndexRoute
   '/areas/': typeof AreasIndexRoute
   '/faq/': typeof FaqIndexRoute
@@ -373,6 +382,7 @@ export interface FileRouteTypes {
     | '/journal/$slug'
     | '/portfolio/$slug'
     | '/services/$slug'
+    | '/sitemaps/$section'
     | '/about/'
     | '/areas/'
     | '/faq/'
@@ -411,6 +421,7 @@ export interface FileRouteTypes {
     | '/journal/$slug'
     | '/portfolio/$slug'
     | '/services/$slug'
+    | '/sitemaps/$section'
     | '/about'
     | '/areas'
     | '/faq'
@@ -449,6 +460,7 @@ export interface FileRouteTypes {
     | '/journal/$slug'
     | '/portfolio/$slug'
     | '/services/$slug'
+    | '/sitemaps/$section'
     | '/about/'
     | '/areas/'
     | '/faq/'
@@ -488,6 +500,7 @@ export interface RootRouteChildren {
   JournalSlugRoute: typeof JournalSlugRoute
   PortfolioSlugRoute: typeof PortfolioSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  SitemapsSectionRoute: typeof SitemapsSectionRoute
   AboutIndexRoute: typeof AboutIndexRoute
   AreasIndexRoute: typeof AreasIndexRoute
   FaqIndexRoute: typeof FaqIndexRoute
@@ -631,6 +644,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about/'
       preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemaps/$section': {
+      id: '/sitemaps/$section'
+      path: '/sitemaps/$section'
+      fullPath: '/sitemaps/$section'
+      preLoaderRoute: typeof SitemapsSectionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/$slug': {
@@ -784,6 +804,7 @@ const rootRouteChildren: RootRouteChildren = {
   JournalSlugRoute: JournalSlugRoute,
   PortfolioSlugRoute: PortfolioSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  SitemapsSectionRoute: SitemapsSectionRoute,
   AboutIndexRoute: AboutIndexRoute,
   AreasIndexRoute: AreasIndexRoute,
   FaqIndexRoute: FaqIndexRoute,

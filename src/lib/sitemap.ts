@@ -18,7 +18,7 @@ export type SitemapSectionId =
 
 export interface SitemapSection {
   id: SitemapSectionId;
-  /** Public path of this section's sitemap, e.g. /sitemap-services.xml */
+  /** Public path of this section's sitemap, e.g. /sitemaps/services.xml */
   path: string;
   entries: (PageEntry & { priority: string })[];
 }
@@ -44,7 +44,7 @@ export function sectionOf(path: string): SitemapSectionId {
 }
 
 export function sitemapPathFor(id: SitemapSectionId): string {
-  return `/sitemap-${id}.xml`;
+  return `/sitemaps/${id}.xml`;
 }
 
 /** All non-empty sections, in a stable, hierarchy-first order. */
