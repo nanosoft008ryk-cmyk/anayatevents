@@ -16,8 +16,10 @@ import { SmartImg } from "@/components/ui/SmartImg";
 import { AnswerBlock } from "@/components/aeo/AnswerBlock";
 import { FactTable } from "@/components/aeo/FactTable";
 import { serviceAnswerItems, serviceFacts } from "@/content/answers";
+import { entityRelationsSchema } from "@/lib/graph-schema";
 import {
   pageMeta,
+  jsonLdMaybe,
   jsonLd,
   breadcrumbSchema,
   serviceSchema,
@@ -83,6 +85,7 @@ export const Route = createFileRoute("/services/$slug")({
       }),
       scripts: [
         jsonLd(breadcrumbSchema(trail)),
+        ...jsonLdMaybe(entityRelationsSchema(path)),
         jsonLd(
           serviceSchema({
             name: service.name,

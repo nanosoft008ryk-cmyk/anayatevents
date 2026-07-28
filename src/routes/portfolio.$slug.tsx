@@ -15,8 +15,10 @@ import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { entityRelationsSchema } from "@/lib/graph-schema";
 import {
   pageMeta,
+  jsonLdMaybe,
   jsonLd,
   breadcrumbSchema,
   imageGallerySchema,
@@ -56,6 +58,7 @@ export const Route = createFileRoute("/portfolio/$slug")({
       }),
       scripts: [
         jsonLd(breadcrumbSchema(trail)),
+        ...jsonLdMaybe(entityRelationsSchema(path)),
         jsonLd(
           imageGallerySchema({
             name: category.name,
