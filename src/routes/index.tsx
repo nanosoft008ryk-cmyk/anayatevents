@@ -16,6 +16,7 @@ import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { GoogleProfileLink } from "@/components/GoogleProfileLink";
+import { ReviewQr } from "@/components/reviews/ReviewQr";
 import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
 import { preloadLinks } from "@/lib/img";
 import { SmartImg } from "@/components/ui/SmartImg";
