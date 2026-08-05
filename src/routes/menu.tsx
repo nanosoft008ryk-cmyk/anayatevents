@@ -98,7 +98,7 @@ function MenuPage() {
               </Reveal>
               <Reveal delay={620}>
                 <div className="mt-10 flex flex-wrap gap-4">
-                  <LuxAnchor href={menuPdf} tone="foil" external download={menuPdfFilename}>
+                  <LuxAnchor href={menuPdf} tone="foil" external>
                     Download the menu card
                   </LuxAnchor>
                   <LuxAnchor href={site.whatsappHref} tone="ghost" external>
@@ -248,7 +248,7 @@ function MenuPage() {
               we will write a table around your evening.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <LuxAnchor href={menuPdf} tone="foil" external download={menuPdfFilename}>
+              <LuxAnchor href={menuPdf} tone="foil" external>
                 Download the full menu (PDF)
               </LuxAnchor>
               <LuxAnchor href={site.phoneHref} tone="ghost">
