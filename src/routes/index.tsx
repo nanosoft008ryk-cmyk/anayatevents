@@ -510,6 +510,10 @@ function Home() {
         <Reveal className="mt-14 md:mt-20">
           <LuxTextLink to="/reviews">Read all reviews</LuxTextLink>
         </Reveal>
+
+        <div className="mt-16 border-t-[0.5px] border-gold/20 pt-14 md:mt-24 md:pt-20">
+          <ReviewQr />
+        </div>
       </section>
 
 
