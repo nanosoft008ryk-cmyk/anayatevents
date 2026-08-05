@@ -26,7 +26,7 @@ export const Route = createFileRoute("/contact")({
     ...pageMeta({
       title: "Contact Anayat Events & Catering — Speak to a Planner in Lahore",
       description:
-        "Begin a conversation, not a form. Call or WhatsApp 0321 416 9707, or write to us — a planner replies personally within 12 working hours. Lahore, open daily 2–10 PM.",
+        "Begin a conversation, not a form. Call 0321 416 9707 or WhatsApp 0321 033 3224 — a planner replies personally within 12 working hours. Lahore, open daily 2–10 PM.",
       path: PATH,
       image: photo("ae-24").url,
     }),

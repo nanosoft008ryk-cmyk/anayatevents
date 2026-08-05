@@ -16,6 +16,7 @@ import { Plate } from "@/components/Plate";
 import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { GoogleProfileLink } from "@/components/GoogleProfileLink";
+import { ReviewQr } from "@/components/reviews/ReviewQr";
 import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
 import { preloadLinks } from "@/lib/img";
 import { SmartImg } from "@/components/ui/SmartImg";
@@ -510,6 +511,10 @@ function Home() {
         <Reveal className="mt-14 md:mt-20">
           <LuxTextLink to="/reviews">Read all reviews</LuxTextLink>
         </Reveal>
+
+        <div className="mt-16 border-t-[0.5px] border-gold/20 pt-14 md:mt-24 md:pt-20">
+          <ReviewQr />
+        </div>
       </section>
 
 
