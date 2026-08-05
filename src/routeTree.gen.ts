@@ -16,6 +16,7 @@ import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as MenuRouteImport } from './routes/menu'
 import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
 import { Route as KnowledgeGraphDotjsonRouteImport } from './routes/knowledge-graph[.]json'
 import { Route as ImageSitemapDotxmlRouteImport } from './routes/image-sitemap[.]xml'
@@ -80,6 +81,11 @@ const ReviewsRoute = ReviewsRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MenuRoute = MenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
@@ -240,6 +246,7 @@ export interface FileRoutesByFullPath {
   '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
   '/knowledge-graph.json': typeof KnowledgeGraphDotjsonRoute
   '/llms.txt': typeof LlmsDottxtRoute
+  '/menu': typeof MenuRoute
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -279,6 +286,7 @@ export interface FileRoutesByTo {
   '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
   '/knowledge-graph.json': typeof KnowledgeGraphDotjsonRoute
   '/llms.txt': typeof LlmsDottxtRoute
+  '/menu': typeof MenuRoute
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -319,6 +327,7 @@ export interface FileRoutesById {
   '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
   '/knowledge-graph.json': typeof KnowledgeGraphDotjsonRoute
   '/llms.txt': typeof LlmsDottxtRoute
+  '/menu': typeof MenuRoute
   '/privacy': typeof PrivacyRoute
   '/reviews': typeof ReviewsRoute
   '/robots.txt': typeof RobotsDottxtRoute
@@ -360,6 +369,7 @@ export interface FileRouteTypes {
     | '/image-sitemap.xml'
     | '/knowledge-graph.json'
     | '/llms.txt'
+    | '/menu'
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
@@ -399,6 +409,7 @@ export interface FileRouteTypes {
     | '/image-sitemap.xml'
     | '/knowledge-graph.json'
     | '/llms.txt'
+    | '/menu'
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
@@ -438,6 +449,7 @@ export interface FileRouteTypes {
     | '/image-sitemap.xml'
     | '/knowledge-graph.json'
     | '/llms.txt'
+    | '/menu'
     | '/privacy'
     | '/reviews'
     | '/robots.txt'
@@ -478,6 +490,7 @@ export interface RootRouteChildren {
   ImageSitemapDotxmlRoute: typeof ImageSitemapDotxmlRoute
   KnowledgeGraphDotjsonRoute: typeof KnowledgeGraphDotjsonRoute
   LlmsDottxtRoute: typeof LlmsDottxtRoute
+  MenuRoute: typeof MenuRoute
   PrivacyRoute: typeof PrivacyRoute
   ReviewsRoute: typeof ReviewsRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
@@ -560,6 +573,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/menu': {
+      id: '/menu'
+      path: '/menu'
+      fullPath: '/menu'
+      preLoaderRoute: typeof MenuRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/llms.txt': {
@@ -782,6 +802,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImageSitemapDotxmlRoute: ImageSitemapDotxmlRoute,
   KnowledgeGraphDotjsonRoute: KnowledgeGraphDotjsonRoute,
   LlmsDottxtRoute: LlmsDottxtRoute,
+  MenuRoute: MenuRoute,
   PrivacyRoute: PrivacyRoute,
   ReviewsRoute: ReviewsRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
