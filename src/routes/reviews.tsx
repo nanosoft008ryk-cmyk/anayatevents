@@ -280,6 +280,20 @@ function ReviewsPage() {
         mapsUri={mapsUri}
       />
 
+      {/* III·b — Scan-to-review */}
+      <section
+        aria-label="Scan to leave a Google review"
+        className="border-t border-border py-20 md:py-28"
+      >
+        <div className="mx-auto max-w-[92rem] px-6 md:px-12">
+          <ReviewQr
+            eyebrow="Scan to review"
+            heading="Add your evening to the record."
+            body="Every review on this page arrives from Google, unedited. Scan the mark with a phone camera and Google's review sheet opens on the house's verified profile."
+          />
+        </div>
+      </section>
+
       {/* IV — The centrepiece */}
       {featured ? <FeaturedReview review={featured} /> : null}
 
