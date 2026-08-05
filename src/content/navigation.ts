@@ -190,8 +190,10 @@ export const footerColumns = [
     items: [
       { label: "About the house", to: "/about" },
       ...aboutChapters.map((c) => ({ label: c.title, to: c.to })),
+      { label: "Menu & pricing", to: "/menu" },
       { label: "Reviews", to: "/reviews" },
       { label: "FAQ centre", to: "/faq" },
+
       { label: "Enquire", to: "/contact" },
       { label: "Privacy Policy", to: "/privacy" },
       { label: "Terms of Service", to: "/terms" },
