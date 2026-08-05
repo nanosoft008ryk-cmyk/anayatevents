@@ -22,6 +22,7 @@ import {
 } from "@/components/reviews/ReviewNavigator";
 import { GoogleMark, Stars } from "@/components/reviews/review-parts";
 import { TrustLedger } from "@/components/reviews/TrustLedger";
+import { ReviewQr } from "@/components/reviews/ReviewQr";
 import { googleReviewsQuery } from "@/lib/google-reviews";
 import {
   pageMeta,
