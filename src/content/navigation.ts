@@ -84,6 +84,12 @@ export const navigation: NavGroup[] = [
       },
     ],
   },
+  // The catering menu — a single page, no dropdown.
+  {
+    label: "Menu",
+    to: "/menu",
+  },
+
   {
     label: "Journal",
     to: "/journal",
