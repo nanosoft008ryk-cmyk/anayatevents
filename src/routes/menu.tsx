@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { site } from "@/content/site";
 import { photo, photosByIds } from "@/content/images";
-import { menuTiers, setupIncludes, menuPdf, menuPdfFilename } from "@/content/menu";
+import { menuTiers, setupIncludes, menuPdf } from "@/content/menu";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
