@@ -33,9 +33,12 @@ export const site = {
 
   hours: "Open daily, 2:00 PM – 10:00 PM",
   hoursSchema: ["Mo-Su 14:00-22:00"],
-  geo: { lat: 31.4457, lng: 74.4184 },
-  mapsUrl:
-    "https://www.google.com/maps/place/Anayat+Events+%26+Catering+%7C+Event+Management+Lahore/data=!4m2!3m1!1s0x3919010562eb96c3:0x5eb0eb2dc387ef24",
+  geo: { lat: 31.4011, lng: 74.2389 },
+  /** Short share link that opens the verified Google Business Profile. */
+  mapsUrl: "https://share.google/VmAVUlCDicDsBNidf",
+  /** Direct "write a review" deep link for the Google Business Profile. */
+  reviewUrl: "https://g.page/r/CSTvh8Mt67BeEBM/review",
+  facebook: "https://www.facebook.com/AnayatEvents",
   mapEmbed:
     "https://www.google.com/maps?q=Green+Acres+Housing+Society+Lahore+54000&output=embed",
   /** Google Maps directions deep link to the studio, from the user's location. */
@@ -44,6 +47,16 @@ export const site = {
     encodeURIComponent("The Palms 7 Farmhouse, Green Acres Housing Society, Lahore 54000, Pakistan"),
   founded: "2016",
   serviceArea: "Lahore and surrounding Punjab",
+  /** Named neighbourhoods served — used verbatim in LocalBusiness areaServed. */
+  areaServedList: [
+    "DHA Lahore",
+    "Bahria Town Lahore",
+    "Gulberg Lahore",
+    "Johar Town Lahore",
+    "Model Town Lahore",
+    "Cantt & Askari Lahore",
+    "Green Acres Lahore",
+  ],
   responseTime: "Within 12 working hours",
 };
 

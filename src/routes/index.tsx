@@ -28,9 +28,9 @@ const HOME_PHOTOS = ["ae-13", "ae-14", "ae-10", "ae-16", "ae-26", "ae-03"];
 export const Route = createFileRoute("/")({
   head: () => {
     const meta = pageMeta({
-      title: "Anayat Events & Catering — Luxury Event Management in Lahore",
+      title: "Luxury Event Management & Catering Services in Lahore | Anayat Events",
       description:
-        "Lahore's luxury event management and catering house. Weddings, walimas and corporate celebrations, designed and served by one accountable team.",
+        "Anayat Events & Catering offers bespoke wedding planning, luxury decor, and gourmet catering in Lahore. Book your Barat, Walima, or Corporate event today!",
       path: "/",
       image: photo(HERO).url,
     });
@@ -75,7 +75,7 @@ function Home() {
         {/* Vertical eyebrow rail */}
         <div className="pointer-events-none absolute top-1/2 left-6 hidden -translate-y-1/2 items-center gap-4 lg:flex">
           <span className="font-sans text-[10px] tracking-[0.4em] uppercase text-gold [writing-mode:vertical-rl] rotate-180">
-            Lahore · Since {site.founded}
+            Event management in Lahore · since {site.founded}
           </span>
           <span className="h-16 w-px bg-gradient-to-b from-gold to-transparent" />
         </div>
@@ -85,7 +85,7 @@ function Home() {
           <div className="col-span-12 flex min-w-0 flex-col lg:col-span-7 lg:pr-12">
             <p className="mb-5 flex items-center gap-4 font-sans text-[10px] tracking-[0.4em] uppercase text-gold sm:mb-8 lg:hidden">
               <span className="h-px w-8 shrink-0 bg-gold" />
-              Lahore · Since {site.founded}
+              Event management in Lahore · since {site.founded}
             </p>
             <h1 className="font-display text-[clamp(2.6rem,12vw,5rem)] leading-[0.94] font-light tracking-tight text-ivory lg:text-[6rem] xl:text-[7.4rem]">
               <RevealWords text="An evening" delay={120} />
@@ -103,7 +103,9 @@ function Home() {
             <div className="mt-6 max-w-md">
               <Reveal delay={780}>
                 <p className="font-sans text-[15px] leading-[1.85] font-light tracking-wide text-foreground/80 sm:text-[14px] sm:leading-[1.95]">
-                  {site.description}
+                  A luxury event management and wedding catering house in Lahore — designing Barat,
+                  Walima and corporate occasions with bespoke decor and gourmet catering. Trusted
+                  across DHA, Bahria Town, Gulberg and every corner of the city.
                 </p>
               </Reveal>
               {/* Mobile: full-width, thumb-sized actions. Desktop keeps the
@@ -303,6 +305,11 @@ function Home() {
               Seventeen disciplines,
               <span className="block italic text-gold-light">one crew.</span>
             </h2>
+            <p className="mt-6 max-w-md font-sans text-[14px] leading-[1.9] font-light text-muted-foreground">
+              Wedding catering services in Lahore, luxury Barat and Walima decor, marquees,
+              florals, lighting and full production — planned by the best event planners in
+              Lahore, under one roof.
+            </p>
             <LuxTextLink to="/services" className="mt-8 md:mt-10">
               All services
             </LuxTextLink>
@@ -537,7 +544,7 @@ function Home() {
                 Where we work
               </p>
               <h2 className="mt-6 max-w-[16ch] font-display text-[clamp(2rem,8vw,3.4rem)] leading-[1.06] font-light text-ivory md:mt-8">
-                Every postcode in Lahore, produced by the same team.
+                From DHA to Bahria Town — every corner of Lahore, produced by the same team.
               </h2>
             </Reveal>
             <Reveal delay={140} className="mt-8 md:mt-12" innerClassName="flex flex-wrap gap-x-6 gap-y-4 sm:gap-x-8">

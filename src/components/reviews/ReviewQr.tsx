@@ -1,4 +1,5 @@
 import { reviewQr } from "@/content/review-qr";
+import { site } from "@/content/site";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
@@ -58,7 +59,7 @@ export function ReviewQr({
           {body}
         </p>
         <a
-          href={reviewQr.url}
+          href={site.reviewUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-shape mt-7 inline-flex min-h-11 items-center font-sans text-[10px] tracking-[0.3em] uppercase text-gold transition-colors hover:text-gold-light"
