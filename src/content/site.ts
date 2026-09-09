@@ -47,6 +47,16 @@ export const site = {
     encodeURIComponent("The Palms 7 Farmhouse, Green Acres Housing Society, Lahore 54000, Pakistan"),
   founded: "2016",
   serviceArea: "Lahore and surrounding Punjab",
+  /** Named neighbourhoods served — used verbatim in LocalBusiness areaServed. */
+  areaServedList: [
+    "DHA Lahore",
+    "Bahria Town Lahore",
+    "Gulberg Lahore",
+    "Johar Town Lahore",
+    "Model Town Lahore",
+    "Cantt & Askari Lahore",
+    "Green Acres Lahore",
+  ],
   responseTime: "Within 12 working hours",
 };
 

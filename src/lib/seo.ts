@@ -116,11 +116,16 @@ const openingHoursSpecification = [
   },
 ];
 
-/** Sitewide entity. Emitted once, from __root.tsx only. */
+/**
+ * Sitewide entity. Emitted once, from __root.tsx only — so the homepage (and
+ * every other page) carries the full LocalBusiness + EventPlanner markup
+ * aligned with the Google Business Profile: exact address, geo, both phone
+ * numbers, the named Lahore neighbourhoods served and the social profiles.
+ */
 export function organizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["EventPlanner", "LocalBusiness"],
     "@id": abs("/#business"),
     name: site.legalName,
     alternateName: site.name,
@@ -138,13 +143,23 @@ export function organizationSchema() {
     },
     hasMap: site.mapsUrl,
     telephone: site.phoneE164,
+    contactPoint: site.contacts.map((c) => ({
+      "@type": "ContactPoint",
+      telephone: c.tel.replace("tel:", ""),
+      contactType: "reservations",
+      areaServed: "PK",
+      availableLanguage: ["en", "ur"],
+    })),
     url: abs("/"),
-    sameAs: [site.instagram, site.mapsUrl],
+    sameAs: [site.instagram, site.facebook, site.mapsUrl].filter(Boolean),
     openingHoursSpecification,
     priceRange: "$$$",
     currenciesAccepted: "PKR",
     foundingDate: site.founded,
-    areaServed: { "@type": "City", name: "Lahore" },
+    areaServed: [
+      { "@type": "City", name: "Lahore" },
+      ...(site.areaServedList ?? []).map((name) => ({ "@type": "Place", name })),
+    ],
     knowsLanguage: ["en", "ur"],
     aggregateRating: {
       "@type": "AggregateRating",
