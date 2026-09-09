@@ -153,9 +153,14 @@ export function SiteFooter() {
               </p>
               <div className="mt-6 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-1 lg:gap-y-0">
                 <div>
-                  <p className="max-w-xs font-sans text-[13.5px] leading-[1.9] font-light text-ivory/70">
+                  <a
+                    href={site.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block max-w-xs font-sans text-[13.5px] leading-[1.9] font-light text-ivory/70 transition-colors hover:text-gold"
+                  >
                     {site.address.full}
-                  </p>
+                  </a>
                   <p className="mt-3 font-sans text-[13.5px] font-light text-ivory/70">
                     {site.hours}
                   </p>
