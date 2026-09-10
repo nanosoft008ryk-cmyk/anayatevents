@@ -34,8 +34,8 @@ export const site = {
   hours: "Open daily, 12:00 PM – 10:00 PM",
   hoursSchema: ["Mo-Su 12:00-22:00"],
   geo: { lat: 31.4037716, lng: 74.241375 },
-  /** Short share link that opens the verified Google Business Profile. */
-  mapsUrl: "https://share.google/VmAVUlCDicDsBNidf",
+  /** Canonical Google Business Profile link (opens the verified listing). */
+  mapsUrl: "https://maps.app.goo.gl/Ss3oQGNPi72YhEu39",
   /** Direct "write a review" deep link for the Google Business Profile. */
   reviewUrl: "https://g.page/r/CSTvh8Mt67BeEBM/review",
   facebook: "https://www.facebook.com/anayatevents",

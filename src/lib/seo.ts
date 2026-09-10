@@ -141,7 +141,10 @@ export function organizationSchema() {
       latitude: site.geo.lat,
       longitude: site.geo.lng,
     },
-    hasMap: site.mapsUrl,
+    hasMap: {
+      "@type": "Map",
+      url: site.mapsUrl,
+    },
     telephone: site.phoneE164,
     contactPoint: site.contacts.map((c) => ({
       "@type": "ContactPoint",
