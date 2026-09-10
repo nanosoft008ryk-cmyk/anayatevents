@@ -2,7 +2,7 @@
  * Service-area content.
  *
  * CONTENT RULE (non-negotiable): Anayat Events has ONE base — The Palms 7
- * Farmhouse, Green Acres Housing Society, Lahore. Every other area page
+ * Farmhouse, Green Acres Extension, Lahore. Every other area page
  * describes work we travel to do. Nothing on these pages may imply a branch,
  * an office, a showroom or a second address in that locality. The permitted
  * register is "we serve clients here", "our team travels here", "we regularly
@@ -972,7 +972,7 @@ export const locations: LocationArea[] = [
       },
       {
         q: "Can we visit before booking?",
-        a: "Please do. Most families come to the farmhouse to see a live build or a stage in the workshop; we are open daily from 2:00 PM to 10:00 PM.",
+        a: "Please do. Most families come to the farmhouse to see a live build or a stage in the workshop; we are open daily from 12:00 PM to 10:00 PM.",
       },
       {
         q: "Do you host events at the farmhouse itself?",
@@ -980,7 +980,7 @@ export const locations: LocationArea[] = [
       },
       {
         q: "Where exactly is it?",
-        a: "The Palms 7 Farmhouse, Green Acres Housing Society, Lahore 54000.",
+        a: "The Palms 7 Farmhouse, Green Acres Extension, Lahore 54000.",
       },
     ],
     nearby: ["bedian-road", "raiwind-road", "dha-lahore", "lahore"],
