@@ -912,7 +912,7 @@ export const locations: LocationArea[] = [
     intro: {
       heading: "The only place we can call home ground",
       body: [
-        "Anayat Events & Catering operates from The Palms 7 Farmhouse in Green Acres Housing Society. This is our single premises — the workshop where sets are fabricated, the cold store where florals are held, the kitchen where menus are trialled, and the lawn where a great many first meetings happen.",
+        "Anayat Events & Catering operates from The Palms 7 Farmhouse in Green Acres Extension. This is our single premises — the workshop where sets are fabricated, the cold store where florals are held, the kitchen where menus are trialled, and the lawn where a great many first meetings happen.",
         "Green Acres itself is a quiet, green society on the eastern edge of the city, close enough to the Bedian and Raiwind estate belts to make it a natural production base and far enough out to have space for one.",
         "For clients hosting inside the society, that proximity is a genuine operational advantage rather than a marketing line.",
       ],
@@ -968,7 +968,7 @@ export const locations: LocationArea[] = [
     faqs: [
       {
         q: "Is this your actual office?",
-        a: "Yes. The Palms 7 Farmhouse in Green Acres Housing Society is our one and only premises — every other area we serve is reached by travelling from here.",
+        a: "Yes. The Palms 7 Farmhouse in Green Acres Extension is our one and only premises — every other area we serve is reached by travelling from here.",
       },
       {
         q: "Can we visit before booking?",
