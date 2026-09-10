@@ -8,12 +8,12 @@ export const site = {
     "Anayat Events & Catering is a luxury event management and catering house in Lahore, designing weddings, celebrations and corporate occasions with an unhurried, editorial hand.",
   rating: { value: "5.0", count: 62 },
   address: {
-    street: "The Palms 7 Farmhouse, Green Acres Housing Society",
+    street: "The Palms 7 Farmhouse, Green Acres Extension",
     locality: "Lahore",
     region: "Punjab",
     postalCode: "54000",
     country: "PK",
-    full: "The Palms 7 Farmhouse, Green Acres Housing Society, Lahore 54000, Pakistan",
+    full: "The Palms 7 Farmhouse, Green Acres Extension, Lahore 54000, Pakistan",
   },
   // Contact details taken from the business's own published listings (Instagram
   // @anayat_events_catering). No email is published, so the site never shows one.
@@ -31,20 +31,20 @@ export const site = {
    *  proposal modal instantly gains a mailto: submission route. */
   email: "" as string,
 
-  hours: "Open daily, 2:00 PM – 10:00 PM",
-  hoursSchema: ["Mo-Su 14:00-22:00"],
-  geo: { lat: 31.4011, lng: 74.2389 },
+  hours: "Open daily, 12:00 PM – 10:00 PM",
+  hoursSchema: ["Mo-Su 12:00-22:00"],
+  geo: { lat: 31.4037716, lng: 74.241375 },
   /** Short share link that opens the verified Google Business Profile. */
   mapsUrl: "https://share.google/VmAVUlCDicDsBNidf",
   /** Direct "write a review" deep link for the Google Business Profile. */
   reviewUrl: "https://g.page/r/CSTvh8Mt67BeEBM/review",
-  facebook: "https://www.facebook.com/AnayatEvents",
+  facebook: "https://www.facebook.com/anayatevents",
   mapEmbed:
-    "https://www.google.com/maps?q=Green+Acres+Housing+Society+Lahore+54000&output=embed",
+    "https://www.google.com/maps?q=Green+Acres+Extension+Lahore+54000&output=embed",
   /** Google Maps directions deep link to the studio, from the user's location. */
   directionsUrl:
     "https://www.google.com/maps/dir/?api=1&destination=" +
-    encodeURIComponent("The Palms 7 Farmhouse, Green Acres Housing Society, Lahore 54000, Pakistan"),
+    encodeURIComponent("The Palms 7 Farmhouse, Green Acres Extension, Lahore 54000, Pakistan"),
   founded: "2016",
   serviceArea: "Lahore and surrounding Punjab",
   /** Named neighbourhoods served — used verbatim in LocalBusiness areaServed. */
