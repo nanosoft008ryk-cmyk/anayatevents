@@ -182,7 +182,6 @@ export function websiteSchema() {
     description: site.description,
     url: abs("/"),
     inLanguage: "en",
-    publisher: { "@id": abs("/#business") },
   };
 }
 
