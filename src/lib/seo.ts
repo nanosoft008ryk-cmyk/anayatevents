@@ -111,7 +111,7 @@ const openingHoursSpecification = [
       "Saturday",
       "Sunday",
     ],
-    opens: "14:00",
+    opens: "12:00",
     closes: "22:00",
   },
 ];

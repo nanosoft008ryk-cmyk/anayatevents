@@ -270,7 +270,7 @@ function ContactPage() {
 
       <AreaMap
         areaName="Lahore"
-        travelNote="The studio sits in Green Acres Housing Society, minutes from Bedian Road and within easy reach of DHA, Bahria Town and the Ring Road."
+        travelNote="The studio sits in Green Acres Extension, minutes from Bedian Road and within easy reach of DHA, Bahria Town and the Ring Road."
       />
       <RelatedConstellation path="/contact" heading="Continue" />
     </main>

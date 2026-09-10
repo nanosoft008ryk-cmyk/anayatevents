@@ -2,7 +2,7 @@
  * Service-area content.
  *
  * CONTENT RULE (non-negotiable): Anayat Events has ONE base — The Palms 7
- * Farmhouse, Green Acres Housing Society, Lahore. Every other area page
+ * Farmhouse, Green Acres Extension, Lahore. Every other area page
  * describes work we travel to do. Nothing on these pages may imply a branch,
  * an office, a showroom or a second address in that locality. The permitted
  * register is "we serve clients here", "our team travels here", "we regularly
@@ -912,7 +912,7 @@ export const locations: LocationArea[] = [
     intro: {
       heading: "The only place we can call home ground",
       body: [
-        "Anayat Events & Catering operates from The Palms 7 Farmhouse in Green Acres Housing Society. This is our single premises — the workshop where sets are fabricated, the cold store where florals are held, the kitchen where menus are trialled, and the lawn where a great many first meetings happen.",
+        "Anayat Events & Catering operates from The Palms 7 Farmhouse in Green Acres Extension. This is our single premises — the workshop where sets are fabricated, the cold store where florals are held, the kitchen where menus are trialled, and the lawn where a great many first meetings happen.",
         "Green Acres itself is a quiet, green society on the eastern edge of the city, close enough to the Bedian and Raiwind estate belts to make it a natural production base and far enough out to have space for one.",
         "For clients hosting inside the society, that proximity is a genuine operational advantage rather than a marketing line.",
       ],
@@ -968,11 +968,11 @@ export const locations: LocationArea[] = [
     faqs: [
       {
         q: "Is this your actual office?",
-        a: "Yes. The Palms 7 Farmhouse in Green Acres Housing Society is our one and only premises — every other area we serve is reached by travelling from here.",
+        a: "Yes. The Palms 7 Farmhouse in Green Acres Extension is our one and only premises — every other area we serve is reached by travelling from here.",
       },
       {
         q: "Can we visit before booking?",
-        a: "Please do. Most families come to the farmhouse to see a live build or a stage in the workshop; we are open daily from 2:00 PM to 10:00 PM.",
+        a: "Please do. Most families come to the farmhouse to see a live build or a stage in the workshop; we are open daily from 12:00 PM to 10:00 PM.",
       },
       {
         q: "Do you host events at the farmhouse itself?",
@@ -980,7 +980,7 @@ export const locations: LocationArea[] = [
       },
       {
         q: "Where exactly is it?",
-        a: "The Palms 7 Farmhouse, Green Acres Housing Society, Lahore 54000.",
+        a: "The Palms 7 Farmhouse, Green Acres Extension, Lahore 54000.",
       },
     ],
     nearby: ["bedian-road", "raiwind-road", "dha-lahore", "lahore"],
