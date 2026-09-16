@@ -146,10 +146,12 @@ export function organizationSchema() {
       url: site.mapsUrl,
     },
     telephone: site.phoneE164,
+    ...(site.email ? { email: site.email } : {}),
     contactPoint: site.contacts.map((c) => ({
       "@type": "ContactPoint",
       telephone: c.tel.replace("tel:", ""),
       contactType: "reservations",
+      ...(site.email ? { email: site.email } : {}),
       areaServed: "PK",
       availableLanguage: ["en", "ur"],
     })),

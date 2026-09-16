@@ -160,6 +160,42 @@ export const topFaqs: FaqItem[] = [
   faqTopics[1].items[3],
 ];
 
+/**
+ * Homepage questions.
+ *
+ * These are the "choosing a planner in Lahore" questions people ask before
+ * they know what they want — deliberately written so they do not repeat any
+ * question already owned by a topic, service or area page. The ledger in
+ * entity-graph.ts gives the homepage first claim, so this is the only page on
+ * the site that marks them up.
+ */
+export const homeFaqs: FaqItem[] = [
+  {
+    q: "What does an event planner in Lahore actually do?",
+    a: "On a full commission: budget architecture, venue strategy, design and floral direction, lighting, catering, vendor contracts, guest logistics and a minute-by-minute run-of-show for each function. The design is the visible part. The coordination is the part that decides whether the evening runs.",
+  },
+  {
+    q: "Which areas of Lahore do you cover?",
+    a: "The whole city and the farmhouse belt around it — DHA, Bahria Town, Gulberg, Model Town, Johar Town, Wapda Town, Valencia, Cantt and Askari, Green Acres, and the Raiwind, Bedian, Ferozepur and Canal Road corridors. We work from one base at Green Acres and travel out; there are no branch offices.",
+  },
+  {
+    q: "Do you handle decoration and catering together, or separately?",
+    a: "Together, and we prefer to. Decor, florals, lighting and the kitchen are all in-house, which means one contract, one accountable line and no morning where two suppliers discover each other's plans on your lawn. Families do book decor or catering alone, and that is fine.",
+  },
+  {
+    q: "Can you manage a full wedding week — mehndi, barat and walima?",
+    a: "Yes, and it is the most common way we are booked. Running the week as one commission is also cheaper than three separate ones: the same stage structure, lighting rig and crew get re-dressed between functions rather than built from scratch each time.",
+  },
+  {
+    q: "How much does a wedding planner in Lahore cost?",
+    a: "It is set by guest count, number of functions, venue and the scale of the build, so there is no single figure worth quoting. What we will do on a first call is tell you honestly what is achievable at the number you have in mind — including when the answer is that it is not enough for what you are describing.",
+  },
+  {
+    q: "How do we book Anayat Events & Catering?",
+    a: "Send your date, rough guest count and which functions you are planning, by WhatsApp, phone or email. A planner — not a form queue — reads it and replies within twelve working hours, usually with a first call or a visit to the farmhouse.",
+  },
+];
+
 export const allFaqs: FaqItem[] = faqTopics.flatMap((t) => t.items);
 
 const topicMap = new Map(faqTopics.map((t) => [t.slug, t]));

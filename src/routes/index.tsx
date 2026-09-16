@@ -10,6 +10,8 @@ import { locations } from "@/content/locations";
 import { portfolioCategories } from "@/content/portfolio";
 import { testimonials } from "@/content/testimonials";
 import { articlesByDate } from "@/content/journal";
+import { homeFaqs } from "@/content/faqs";
+import { uniqueFaqs } from "@/lib/entity-graph";
 import { CtaBand } from "@/components/CtaBand";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
@@ -17,7 +19,8 @@ import { Reveal, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { GoogleProfileLink } from "@/components/GoogleProfileLink";
 import { ReviewQr } from "@/components/reviews/ReviewQr";
-import { pageMeta, jsonLd, itemListSchema } from "@/lib/seo";
+import { LuxAccordion } from "@/components/services/LuxAccordion";
+import { pageMeta, jsonLd, itemListSchema, faqScripts } from "@/lib/seo";
 import { preloadLinks } from "@/lib/img";
 import { SmartImg } from "@/components/ui/SmartImg";
 
@@ -28,7 +31,7 @@ const HOME_PHOTOS = ["ae-13", "ae-14", "ae-10", "ae-16", "ae-26", "ae-03"];
 export const Route = createFileRoute("/")({
   head: () => {
     const meta = pageMeta({
-      title: "Luxury Event Management & Catering Services in Lahore | Anayat Events",
+      title: "Event Planner & Wedding Catering in Lahore | Anayat Events",
       description:
         "Anayat Events & Catering offers bespoke wedding planning, luxury decor, and gourmet catering in Lahore. Book your Barat, Walima, or Corporate event today!",
       path: "/",
@@ -53,6 +56,9 @@ export const Route = createFileRoute("/")({
           })),
         }),
       ),
+      // FAQPage for the homepage answers. uniqueFaqs() keeps this the only
+      // page on the site marking these questions up.
+      ...faqScripts(uniqueFaqs("/", homeFaqs), "/"),
     ],
     };
   },
@@ -88,17 +94,25 @@ function Home() {
               Event management in Lahore · since {site.founded}
             </p>
             <h1 className="font-display text-[clamp(2.6rem,12vw,5rem)] leading-[0.94] font-light tracking-tight text-ivory lg:text-[6rem] xl:text-[7.4rem]">
-              <RevealWords text="An evening" delay={120} />
+              <RevealWords text="Event management" delay={120} step={60} />
               <span className="mt-1 block pl-4 sm:pl-10 md:pl-24">
                 <span className="italic text-gold-light">
-                  <RevealWords text="built" delay={340} />
+                  <RevealWords text="& wedding" delay={340} />
                 </span>{" "}
-                <RevealWords text="before" delay={460} />
+                <RevealWords text="planning" delay={460} />
               </span>
               <span className="mt-1 block">
-                <RevealWords text="you arrive at it." delay={620} step={60} />
+                <RevealWords text="in Lahore." delay={620} step={60} />
               </span>
             </h1>
+
+            {/* The house line — the brand's signature phrase, kept in the hero
+                directly beneath the headline rather than lost to the rewrite. */}
+            <Reveal delay={700}>
+              <p className="mt-5 font-display text-[1.15rem] leading-snug font-light text-ivory/75 italic sm:text-[1.35rem]">
+                An evening built before you arrive at it.
+              </p>
+            </Reveal>
 
             <div className="mt-6 max-w-md">
               <Reveal delay={780}>
@@ -625,6 +639,32 @@ function Home() {
                 </Link>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── XI. Answers — the questions asked before the first call ──── */}
+      <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
+        <div className="grid gap-10 md:gap-12 lg:grid-cols-[0.9fr_1.3fr] lg:gap-x-16">
+          <Reveal className="min-w-0 lg:sticky lg:top-32 lg:self-start">
+            <p className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
+              Before you call
+            </p>
+            <h2 className="mt-6 font-display text-[clamp(2.1rem,8.5vw,4rem)] leading-[1.04] font-light text-ivory md:mt-8">
+              The questions
+              <span className="block italic text-gold-light">everyone asks first.</span>
+            </h2>
+            <p className="mt-6 max-w-md font-sans text-[14px] leading-[1.9] font-light text-muted-foreground">
+              Straight answers on cost, coverage across Lahore, and how a full wedding week is
+              actually run. More in the FAQ centre.
+            </p>
+            <LuxTextLink to="/faq" className="mt-8 md:mt-10">
+              All answers
+            </LuxTextLink>
+          </Reveal>
+
+          <div className="min-w-0">
+            <LuxAccordion items={homeFaqs} />
           </div>
         </div>
       </section>

@@ -175,6 +175,14 @@ export function SiteFooter() {
                       {c.name} — {c.display}
                     </a>
                   ))}
+                  {site.email && (
+                    <a
+                      href={site.emailHref}
+                      className="block font-sans text-[13.5px] leading-[1.9] font-light text-ivory/70 transition-colors hover:text-gold"
+                    >
+                      {site.email}
+                    </a>
+                  )}
                 </div>
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">

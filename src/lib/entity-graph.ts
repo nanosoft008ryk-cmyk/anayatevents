@@ -20,7 +20,7 @@ import { services } from "@/content/services";
 import { locations } from "@/content/locations";
 import { portfolioCategories, portfolioProjects } from "@/content/portfolio";
 import { articles } from "@/content/journal";
-import { faqTopics, topFaqs } from "@/content/faqs";
+import { faqTopics, homeFaqs, topFaqs } from "@/content/faqs";
 
 export type NodeKind = "service" | "area" | "collection" | "project" | "article" | "faq";
 
@@ -268,6 +268,9 @@ function claim(pageKey: string, items: { q: string }[]) {
   }
 }
 
+// The homepage answers the broad "choosing a planner in Lahore" questions
+// first, so its FAQ markup is never suppressed by a deeper page.
+claim("/", homeFaqs);
 claim("/faq", topFaqs);
 for (const topic of faqTopics) claim(`/faq/${topic.slug}`, topic.items);
 for (const service of services) claim(`/services/${service.slug}`, service.faqs);

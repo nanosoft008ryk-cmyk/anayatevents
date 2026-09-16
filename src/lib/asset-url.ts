@@ -19,7 +19,7 @@
  * Nothing else in the codebase should ever hardcode a media host.
  */
 
-const DEFAULT_ASSET_ORIGIN = "https://anayatevents.lovable.app";
+const DEFAULT_ASSET_ORIGIN = "https://www.anayatevent.com";
 
 function readEnv(key: string): string | undefined {
   const viteEnv = (import.meta as unknown as { env?: Record<string, string | undefined> }).env;

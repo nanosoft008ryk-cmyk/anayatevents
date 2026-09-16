@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "prebuild": "node scripts/mirror-media.mjs --if-enabled",
-    "build": "vite build",
+    "build": "node scripts/mirror-media.mjs --if-enabled && vite build",
     "media:mirror": "node scripts/mirror-media.mjs",
     "media:mirror:force": "node scripts/mirror-media.mjs --force",
     "build:dev": "vite build --mode development",

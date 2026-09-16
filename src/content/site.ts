@@ -16,7 +16,7 @@ export const site = {
     full: "The Palms 7 Farmhouse, Green Acres Extension, Lahore 54000, Pakistan",
   },
   // Contact details taken from the business's own published listings (Instagram
-  // @anayat_events_catering). No email is published, so the site never shows one.
+  // @anayat_events_catering) and confirmed directly by the business.
   contacts: [
     { name: "Mian Saif", display: "0321 416 9707", tel: "tel:+923214169707", whatsapp: "https://wa.me/923214169707" },
     { name: "Mian Asif", display: "0321 033 3224", tel: "tel:+923210333224", whatsapp: "https://wa.me/923210333224" },
@@ -27,9 +27,13 @@ export const site = {
   whatsappDisplay: "0321 033 3224",
   whatsappHref: "https://wa.me/923210333224",
   instagram: "https://www.instagram.com/anayat_events_catering/",
-  /** No email is published on the GMB listing yet. Set it here and the
-   *  proposal modal instantly gains a mailto: submission route. */
-  email: "" as string,
+  /** Published enquiry address. Setting this lights up the mailto: submission
+   *  route in the proposal modal, the enquiry letter and the journal invite,
+   *  and adds `email` to the LocalBusiness / ContactPoint markup.
+   *  Keep this identical to the address on the Google Business Profile — NAP
+   *  consistency is what ties the two records together. */
+  email: "miansaif953@gmail.com" as string,
+  emailHref: "mailto:miansaif953@gmail.com",
 
   hours: "Open daily, 12:00 PM – 10:00 PM",
   hoursSchema: ["Mo-Su 12:00-22:00"],

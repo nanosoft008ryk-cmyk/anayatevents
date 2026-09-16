@@ -74,7 +74,7 @@ export const services: Service[] = [
       },
     ],
     testimonial: "t-01",
-    related: ["luxury-weddings", "mehndi-planning", "walima-planning", "luxury-catering"],
+    related: ["luxury-weddings", "mehndi-planning", "barat-planning", "walima-planning", "luxury-catering"],
   },
   {
     slug: "luxury-weddings",
@@ -233,7 +233,68 @@ export const services: Service[] = [
       },
     ],
     testimonial: "t-04",
-    related: ["wedding-planning", "stage-decoration", "live-bbq-catering", "walima-planning"],
+    related: ["wedding-planning", "barat-planning", "stage-decoration", "walima-planning"],
+  },
+  {
+    slug: "barat-planning",
+    name: "Barat Planning",
+    navLabel: "Barat",
+    family: "Weddings",
+    eyebrow: "The arrival, and the departure",
+    title: "Barat Planning & Decoration",
+    metaTitle: "Barat Decoration & Planning in Lahore | Anayat Events",
+    metaDescription:
+      "Barat planning and decoration in Lahore — entrance processions, couple stages, guest seating and catering held to the hour, through to a calm rukhsati.",
+    hero: "ae-01",
+    lede: "Two moments decide a barat: how the procession comes through the gate, and how the rukhsati leaves it.",
+    body: [
+      "A barat is the one function with a moving part at each end. It opens with a procession that almost never arrives on schedule, and it closes with a rukhsati that families remember long after they have forgotten the flowers. Everything between those two points is hosting — and almost every barat that goes wrong goes wrong on timing, not on decor.",
+      "So we plan the barat backwards from the rukhsati. Entrance route and dhol position, where the ghori or the car stops, where the sehra bandi photographs can actually be taken without a hundred phones in the frame, how long the stage greeting queue will run, when the food opens so it is neither cold nor rushed, and how the cars are staged at the gate so the final departure is unhurried.",
+      "The stage carries the weight of the evening because it is where the couple sits for hours and where most of the photographs are taken. We build it deep enough for both families to come up together, light it warm from the front so faces are not lost to shadow, and keep the florals below sightline so the room is not watching the back of an arrangement.",
+    ],
+    inclusions: [
+      {
+        title: "Entrance & procession",
+        body: "Gate design, floral arch, dhol placement and a lit approach route planned for the arrival to be photographed, not survived.",
+      },
+      {
+        title: "Couple stage",
+        body: "A built stage sized for both families to join the couple, front-lit warm and dressed with florals kept below eye line.",
+      },
+      {
+        title: "Guest seating & flow",
+        body: "Seating geometry, aisle widths and greeting-queue management so four hundred guests move without a crush at the stage.",
+      },
+      {
+        title: "Catering to the hour",
+        body: "Menu, counts and crew sized so service opens on the planned minute even when the procession runs late.",
+      },
+      {
+        title: "Rukhsati management",
+        body: "Car staging, lighting held at the gate and a crew brief for the departure — the one moment that cannot be re-run.",
+      },
+    ],
+    gallery: ["ae-01", "ae-05", "ae-21", "ae-18", "ae-13"],
+    faqs: [
+      {
+        q: "The barat always arrives late. How do you plan around that?",
+        a: "We build a float into the run-of-show rather than pretending it will not happen — usually forty-five minutes between the published arrival and the point where food must open. The kitchen works to the second number, so a late procession moves the greeting queue, not the dinner.",
+      },
+      {
+        q: "Can you arrange the ghori, dhol and entry choreography?",
+        a: "We coordinate the dholwalas and the entry sequence, and we plan the route, lighting and stopping point for a ghori or car entry. The animal itself is booked through a specialist handler, briefed into our run-of-show.",
+      },
+      {
+        q: "Do you handle the barat and the walima as one commission?",
+        a: "Most families book them together, and it is the cheaper way to do it — the same stage structure, lighting rig and crew are re-dressed between functions instead of being built twice.",
+      },
+      {
+        q: "How is the rukhsati handled so it does not become chaotic?",
+        a: "Cars are staged and turned in advance, the gate lighting is held rather than struck with the rest of the set, and two crew are assigned to nothing else. It is a short moment that goes badly if nobody owns it.",
+      },
+    ],
+    testimonial: "t-02",
+    related: ["wedding-planning", "mehndi-planning", "walima-planning", "stage-decoration"],
   },
   {
     slug: "walima-planning",
@@ -286,7 +347,7 @@ export const services: Service[] = [
       },
     ],
     testimonial: "t-05",
-    related: ["luxury-catering", "wedding-planning", "venue-management", "stage-decoration"],
+    related: ["luxury-catering", "barat-planning", "wedding-planning", "stage-decoration"],
   },
   {
     slug: "nikah-planning",

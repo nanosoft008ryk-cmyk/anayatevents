@@ -32,10 +32,18 @@ export interface PageEntry {
 /** Files that are endpoints or shells, never indexable pages. */
 const NON_PAGE = /(^__|\[\.\]|README)/;
 
+/**
+ * The root splat (`$.tsx`) is the redirect/404 handler, not a page. It must
+ * never reach the sitemap: the keyword URLs it serves are 301s to canonical
+ * pages, and a redirect is not an indexable destination.
+ */
+const SPLAT = /(^|\/)\$$/;
+
 /** Filename → URL pattern. `about.story.tsx` → `/about/story`. */
 function fileToPattern(file: string): string {
   const rel = file.replace(/^\/src\/routes\//, "").replace(/\.tsx?$/, "");
   if (NON_PAGE.test(rel)) return "";
+  if (SPLAT.test(rel)) return "";
   const segments = rel.split(/[./]/).filter(Boolean);
   const cleaned = segments.filter((s, i) => !(s === "index" && i === segments.length - 1));
   return "/" + cleaned.join("/");

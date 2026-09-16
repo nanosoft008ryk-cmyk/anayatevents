@@ -22,6 +22,7 @@ import { Route as KnowledgeGraphDotjsonRouteImport } from './routes/knowledge-gr
 import { Route as ImageSitemapDotxmlRouteImport } from './routes/image-sitemap[.]xml'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as PortfolioIndexRouteImport } from './routes/portfolio.index'
@@ -111,6 +112,11 @@ const CookiesRoute = CookiesRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -241,6 +247,7 @@ const JournalCategorySlugRoute = JournalCategorySlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
@@ -281,6 +288,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
@@ -322,6 +330,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
   '/contact': typeof ContactRoute
   '/cookies': typeof CookiesRoute
   '/image-sitemap.xml': typeof ImageSitemapDotxmlRoute
@@ -364,6 +373,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$'
     | '/contact'
     | '/cookies'
     | '/image-sitemap.xml'
@@ -404,6 +414,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$'
     | '/contact'
     | '/cookies'
     | '/image-sitemap.xml'
@@ -444,6 +455,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/$'
     | '/contact'
     | '/cookies'
     | '/image-sitemap.xml'
@@ -485,6 +497,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SplatRoute: typeof SplatRoute
   ContactRoute: typeof ContactRoute
   CookiesRoute: typeof CookiesRoute
   ImageSitemapDotxmlRoute: typeof ImageSitemapDotxmlRoute
@@ -615,6 +628,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -797,6 +817,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SplatRoute: SplatRoute,
   ContactRoute: ContactRoute,
   CookiesRoute: CookiesRoute,
   ImageSitemapDotxmlRoute: ImageSitemapDotxmlRoute,

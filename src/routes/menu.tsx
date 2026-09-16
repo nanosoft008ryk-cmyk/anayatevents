@@ -23,7 +23,7 @@ export const Route = createFileRoute("/menu")({
     ...pageMeta({
       title: "Catering Menu & Per-Guest Packages — Anayat Events, Lahore",
       description:
-        "Anayat Events catering menus in Lahore: economy Rs 2,600, standard Rs 4,200 and executive Rs 6,000 per guest, minimum 250 guests — buffet, bar-bq, tandoor and full farmhouse setup included. Download the menu card.",
+        "Wedding catering menus in Lahore from Rs 2,600 per guest — buffet, bar-bq and tandoor, with full setup included. Three tiers, minimum 250 guests.",
       path: PATH,
       image: photo("ae-13").url,
     }),

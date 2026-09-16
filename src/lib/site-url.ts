@@ -19,7 +19,7 @@
  */
 
 /** Used only when no environment variable is configured. */
-const DEV_FALLBACK = "https://anayatevents.lovable.app";
+const DEV_FALLBACK = "https://www.anayatevent.com";
 
 function readEnv(key: string): string | undefined {
   // import.meta.env is inlined by Vite; process.env exists on the server.

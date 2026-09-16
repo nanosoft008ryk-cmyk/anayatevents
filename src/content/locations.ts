@@ -339,7 +339,7 @@ export const locations: LocationArea[] = [
         a: "Yes. We work from intimate villa gatherings upward; the scale changes the plan, not the standard.",
       },
     ],
-    nearby: ["raiwind-road", "wapda-town", "dha-lahore", "lahore"],
+    nearby: ["raiwind-road", "wapda-town", "ferozepur-road", "dha-lahore"],
     travelNote:
       "Bahria Town sits a comfortable drive from our Green Acres production base. For early morning builds our crews stage overnight nearby, so the setup window is spent working rather than travelling.",
   },
@@ -431,7 +431,7 @@ export const locations: LocationArea[] = [
         a: "Yes, with rigging designed to leave no fixings or marks in original fabric. We survey the building before agreeing to any structural element.",
       },
     ],
-    nearby: ["model-town", "cantt-askari", "dha-lahore", "lahore"],
+    nearby: ["model-town", "cantt-askari", "ferozepur-road", "canal-road"],
     travelNote:
       "Our production base is in Green Acres, and Gulberg builds are planned around the drive: modules leave the workshop finished, timed to arrive inside the venue's access window rather than ahead of it.",
   },
@@ -523,7 +523,7 @@ export const locations: LocationArea[] = [
         a: "Yes, and we will discuss it early so the floor plan is built around the family's preference rather than adjusted on the day.",
       },
     ],
-    nearby: ["gulberg", "johar-town", "wapda-town", "lahore"],
+    nearby: ["gulberg", "johar-town", "ferozepur-road", "cantt-askari"],
     travelNote:
       "Our team travels to Model Town from the Green Acres base for every survey and build. Because the lanes here are tight, we plan vehicle sizes and arrival order well before the event week.",
   },
@@ -615,7 +615,7 @@ export const locations: LocationArea[] = [
         a: "Where outside catering is permitted, yes, and we get that confirmed in writing before the booking is made.",
       },
     ],
-    nearby: ["wapda-town", "model-town", "raiwind-road", "lahore"],
+    nearby: ["wapda-town", "valencia-town", "model-town", "canal-road"],
     travelNote:
       "Johar Town is an easy run for our crews from the Green Acres base, and venue surveys there are usually arranged within a few days of an enquiry.",
   },
@@ -1075,9 +1075,312 @@ export const locations: LocationArea[] = [
         a: "It can be, so we marshal it and stage the drop-off to keep the road passable for residents throughout the evening.",
       },
     ],
-    nearby: ["johar-town", "model-town", "bahria-town-lahore", "lahore"],
+    nearby: ["johar-town", "model-town", "valencia-town", "lahore"],
     travelNote:
       "Wapda Town is served from our Green Acres base like every other area. Home surveys are usually arranged within a few days so the lawn, power and access can be measured properly before design begins.",
+  },
+  {
+    slug: "valencia-town",
+    name: "Valencia Town",
+    shortName: "Valencia",
+    metaTitle: "Event Planner in Valencia Town, Lahore | Anayat Events",
+    metaDescription:
+      "Valencia Town weddings and family celebrations — wide-plot home lawns, the society club and marquee receptions, planned and catered by one Lahore team.",
+    heroHeadline: "Wedding & Event Planning for Valencia Town, Lahore",
+    heroKicker: "Wide plots & society halls",
+    hero: "ae-09",
+    lede:
+      "Some of the most generous private lawns on this side of the city — and plot width changes what a plan can be.",
+    rhythm: "mirrored",
+    intro: {
+      heading: "A society built with room to host",
+      body: [
+        "Valencia was laid out with larger plots than most of the societies around it, and that single planning decision shapes almost every celebration held here. A kanal-plus lawn takes a full marquee, a built stage and a working catering line without the compromises that a tighter plot forces.",
+        "It means families in Valencia often host at home where elsewhere they would have booked a hall — and hosting at home is a different brief. The house has to stay liveable while a production runs through it, and the event has to end without the family waking up inside a building site.",
+        "The society's own club and community facilities take the mid-size receptions, and the marquee belt along the main approach handles the larger guest counts when a home lawn is not the answer.",
+      ],
+    },
+    experience: {
+      heading: "What a wider plot actually changes",
+      body: [
+        "Width buys you sightlines. On a generous Valencia lawn we can set the stage far enough back that guests see it across an open foreground instead of over each other's heads, run a service aisle that never crosses the guest route, and place the kitchen line far enough from the seating that the noise and heat of it never reach a table.",
+        "It also means we can build rather than rent. There is space to dry-assemble a set on site, which is the difference between a stage that looks made for the room and one that was clearly delivered on a truck.",
+        "The constraint here is rarely space. It is power, and the fact that a domestic supply was never designed to carry a lighting rig and a catering line at the same time.",
+      ],
+      notes: [
+        {
+          title: "Independent power, always",
+          body: "Our own silenced generation carries the event load so the house supply runs the house and nothing else.",
+        },
+        {
+          title: "Lawn protection",
+          body: "Load-spread flooring under heavy structures and traffic routes, so the grass survives to the following week.",
+        },
+        {
+          title: "Same-week clear-down",
+          body: "Full strike and removal the morning after, not across the following days — the family gets the garden back.",
+        },
+      ],
+    },
+    services: [
+      "wedding-planning",
+      "barat-planning",
+      "walima-planning",
+      "luxury-catering",
+      "stage-decoration",
+      "floral-design",
+    ],
+    venueTypes: [
+      { type: "Private home lawns", note: "Kanal and larger plots that take a full marquee and built stage." },
+      { type: "Society club & halls", note: "Mid-size receptions and walima formats within Valencia itself." },
+      { type: "Marquees on the approach", note: "Larger guest counts along the main road into the society." },
+      { type: "Rooftop terraces", note: "Compact nikah ceremonies and milestone dinners." },
+    ],
+    inspiration: {
+      heading: "Open, green and lit from within",
+      body:
+        "A wide lawn rewards restraint. We light Valencia gardens from inside the planting rather than flooding them from the perimeter, keep the marquee lining pale so the space reads as larger after dark, and let the depth of the plot — not the scale of the set — do the work.",
+      palette: [
+        { name: "Garden ivory", hex: "#F2EDE1" },
+        { name: "Deep leaf", hex: "#3E4B36" },
+        { name: "Warm brass", hex: "#C9A15A" },
+        { name: "Dusk blue", hex: "#3A4557" },
+      ],
+      gallery: ["ae-09", "ae-04", "ae-19", "ae-21", "ae-01", "ae-18"],
+    },
+    why: {
+      heading: "Why Valencia families work with us",
+      body: [
+        "Because a home function in Valencia is a production running through somebody's actual house, and the families who host well here care as much about how the week around the event is handled as the evening itself. Access times, where the trucks stand, which gate the crew uses, when the noise stops.",
+        "And because everything arrives from one place. The design team, the floral crew and the kitchen brigade are the same house, so there is no morning on a Valencia lawn where three suppliers are discovering each other's plans for the first time.",
+      ],
+    },
+    categories: ["outdoor-farmhouse", "wedding-stages", "dining-catering"],
+    projects: ["garden-banquet", "chandeliers-in-the-trees"],
+    articles: ["choosing-a-farmhouse-in-lahore", "outdoor-catering-in-lahore-heat"],
+    faqs: [
+      {
+        q: "Do you have an office in Valencia Town?",
+        a: "No. Our only base is The Palms 7 Farmhouse at Green Acres, and our team travels to Valencia for site surveys, consultations and event days.",
+      },
+      {
+        q: "Can our home lawn take a full marquee and stage?",
+        a: "Most kanal-plus Valencia plots can. We measure the usable lawn, the access width for the trucks and the power position on a site survey before promising anything — width on paper and width past a gate post are rarely the same number.",
+      },
+      {
+        q: "Will the event damage the garden?",
+        a: "We use load-spread flooring beneath structures and traffic routes. Grass under a marquee flattens and recovers; grass under an unprotected truck route does not, so we plan the route before the first vehicle arrives.",
+      },
+      {
+        q: "How long does setup and clear-down take on a home lawn?",
+        a: "Typically two days in for a full wedding build and one morning out. We strike the morning after rather than spreading it across the week, because a family hosting at home wants their garden back.",
+      },
+    ],
+    nearby: ["johar-town", "wapda-town", "raiwind-road", "lahore"],
+    travelNote:
+      "Valencia sits a short run from our Green Acres base along the Raiwind side of the city, so surveys and pre-event visits are easy to arrange and the production convoy has a clear approach on the day.",
+  },
+  {
+    slug: "ferozepur-road",
+    name: "Ferozepur Road",
+    shortName: "Ferozepur Road",
+    metaTitle: "Event Planner on Ferozepur Road, Lahore | Anayat Events",
+    metaDescription:
+      "Ferozepur Road marquees, banquet halls and hotel ballrooms — wedding planning, decor and catering timed around one of Lahore's busiest corridors.",
+    heroHeadline: "Event Planning & Catering Along Ferozepur Road",
+    heroKicker: "The banquet corridor",
+    hero: "ae-02",
+    lede:
+      "Lahore's densest run of marquees and banquet halls — and the traffic that decides when your guests actually arrive.",
+    rhythm: "stacked",
+    intro: {
+      heading: "A corridor, not a neighbourhood",
+      body: [
+        "Ferozepur Road is where a very large share of Lahore's weddings are actually held. The stretch from Kalma Chowk out past Gajjumata carries marquee after banquet hall after hotel ballroom, and for families across the south of the city it is the default answer to where the function will be.",
+        "Planning here has less to do with neighbourhood character and more to do with the road itself. It is one of the busiest corridors in Lahore, it is perpetually under one phase of work or another, and the Orange Line runs its length. Guests do not arrive when the invitation says. They arrive when the road lets them.",
+        "So the plan has to absorb that. We do not design a Ferozepur Road evening that depends on four hundred people being seated at the same moment, because that moment does not exist on this road.",
+      ],
+    },
+    experience: {
+      heading: "Planning around a road that sets the timetable",
+      body: [
+        "The first thing we do for a Ferozepur Road function is establish the real arrival curve rather than the invited one — usually a long, uneven spread rather than a wave. That single number then drives everything: when the welcome service opens, how long the lounge has to hold people comfortably, and the latest minute at which dinner can be called without stranding half the guest list.",
+        "The second thing is understanding the venue's own rules. The commercial halls along this corridor are experienced operators with fixed slot times, in-house decor clauses and hard clear-down deadlines because another function follows yours. A plan that ignores the contract gets stopped mid-evening.",
+        "We read the venue agreement before we design. It is unromantic and it is the single most useful hour of the whole commission.",
+      ],
+      notes: [
+        {
+          title: "Arrival-curve planning",
+          body: "Service timings built around how guests actually reach the venue, not the time printed on the card.",
+        },
+        {
+          title: "Venue contract read first",
+          body: "Slot times, exclusivity clauses and clear-down deadlines checked before a single design decision is made.",
+        },
+        {
+          title: "Load-in inside the window",
+          body: "Setup sequenced to the hall's access hours, with the heavy build done before the corridor seizes up.",
+        },
+      ],
+    },
+    services: [
+      "wedding-planning",
+      "barat-planning",
+      "walima-planning",
+      "indoor-catering",
+      "venue-management",
+      "stage-decoration",
+    ],
+    venueTypes: [
+      { type: "Banquet halls", note: "The corridor's core — fixed slots, in-house rules, fast turnarounds." },
+      { type: "Marquee complexes", note: "Multi-hall sites running several functions on the same evening." },
+      { type: "Hotel ballrooms", note: "Formal walima and corporate formats with their own catering clauses." },
+      { type: "Community & trust halls", note: "Mid-size family receptions along the southern stretch." },
+    ],
+    inspiration: {
+      heading: "Making a standard hall stop looking like one",
+      body:
+        "Most halls on this road come with a ceiling you did not choose and a carpet you would not have picked. The work is concealment and redirection — drop the perceived ceiling with drape, pull the eye to a deep front-lit stage, and light the room warm so the existing finishes recede instead of competing.",
+      palette: [
+        { name: "Champagne", hex: "#E8D9BC" },
+        { name: "Oxblood", hex: "#5C2B2B" },
+        { name: "Antique gold", hex: "#BE9A4E" },
+        { name: "Smoke", hex: "#4A4A4C" },
+      ],
+      gallery: ["ae-02", "ae-07", "ae-05", "ae-23", "ae-13", "ae-06"],
+    },
+    why: {
+      heading: "Why families on this corridor work with us",
+      body: [
+        "Because we treat the hall as a constraint to be designed around rather than a backdrop to be fought. A venue on Ferozepur Road has rules, and the families who have the smoothest evenings are the ones whose planner knew those rules in week one instead of discovering them at load-in.",
+        "And because our catering is our own. On a corridor where many venues push an in-house kitchen or a preferred list, we will tell you plainly where we can bring our brigade and where the contract does not allow it — before you book the hall, not after.",
+      ],
+    },
+    categories: ["wedding-stages", "dining-catering", "lounges-seating"],
+    projects: ["crystal-rain-walima", "ivory-salon"],
+    articles: ["planning-a-lahore-wedding-week", "the-service-standard-nobody-talks-about"],
+    faqs: [
+      {
+        q: "Do you have an office on Ferozepur Road?",
+        a: "No. We work from our Green Acres base only, and our team travels out to venues along Ferozepur Road for recces, load-ins and event days.",
+      },
+      {
+        q: "Our hall says decor must be done in-house. Can you still work with us?",
+        a: "Sometimes. Some venues restrict decor but allow an external planner to run the function, and a few restrict catering rather than decor. Send us the agreement and we will tell you exactly what is open to us before you sign anything.",
+      },
+      {
+        q: "How do you handle guests arriving late because of the traffic?",
+        a: "We plan for it. The welcome service opens early and runs long, the lounge is sized to hold people comfortably rather than seat them immediately, and dinner is called against a decision point we agree with you in advance.",
+      },
+      {
+        q: "Can you set up between two functions on the same day?",
+        a: "Yes, where the venue's turnaround window is realistic. We will say so honestly if it is not — a slot that leaves ninety minutes for a full build is a slot that produces a half-finished room.",
+      },
+    ],
+    nearby: ["model-town", "johar-town", "cantt-askari", "lahore"],
+    travelNote:
+      "Ferozepur Road is reached from Green Acres well ahead of the evening peak. We schedule heavy load-in early in the venue's access window precisely because this corridor does not forgive a late convoy.",
+  },
+  {
+    slug: "canal-road",
+    name: "Canal Road",
+    shortName: "Canal Road",
+    metaTitle: "Event Planner on Canal Road, Lahore | Anayat Events",
+    metaDescription:
+      "Canal Road weddings — canal-side lawns, university-belt halls and garden venues along Canal Bank, planned, decorated and catered by one Lahore team.",
+    heroHeadline: "Wedding & Event Planning Along Canal Road, Lahore",
+    heroKicker: "Canal-side lawns & gardens",
+    hero: "ae-03",
+    lede:
+      "The greenest address in the city to hold an evening — and the one most exposed to the season.",
+    rhythm: "editorial",
+    intro: {
+      heading: "Lahore's green spine",
+      body: [
+        "Canal Bank Road runs the length of the city under a canopy of old trees, and the venues strung along it trade on exactly that: mature planting, water, and a setting that needs very little help to look beautiful. For an outdoor wedding in season it is one of the most flattering settings Lahore has.",
+        "It also connects a wide spread of the city, which is why families from Gulberg, Model Town, Johar Town and the Cantt all end up celebrating somewhere along it. The guest list for a Canal Road function is usually the most geographically scattered we plan for.",
+        "The trade-off is exposure. These are open, tree-shaded, water-adjacent spaces, and that means humidity, insects at dusk, and a real dependence on the weather holding.",
+      ],
+    },
+    experience: {
+      heading: "Designing with the trees rather than against them",
+      body: [
+        "The mistake on a canal-side lawn is to build a set that ignores the planting and then fight the trees with lighting. We do the opposite: the mature canopy becomes the architecture, lit from beneath so the branches read as a ceiling, and the built structure stays low and deliberately secondary.",
+        "Practically, that means a lighting plot drawn on site after dark rather than from a plan, because no drawing tells you where an eighty-year-old tree actually casts shadow.",
+        "The other discipline is the weather contingency. Every Canal Road commission carries a defined wet plan agreed in writing — what gets covered, who calls it, and by what hour — so a change in the forecast is a decision rather than an argument.",
+      ],
+      notes: [
+        {
+          title: "Lighting plotted on site",
+          body: "The rig is designed after dark under the actual canopy, because a tree's shadow is not on any drawing.",
+        },
+        {
+          title: "A written wet plan",
+          body: "Covered contingency, a named decision-maker and a cut-off hour agreed before the week of the event.",
+        },
+        {
+          title: "Dusk comfort",
+          body: "Insect management, ground heating in the cold months and shade held late in the warm ones.",
+        },
+      ],
+    },
+    services: [
+      "wedding-planning",
+      "nikah-planning",
+      "outdoor-catering",
+      "floral-design",
+      "stage-decoration",
+      "private-events",
+    ],
+    venueTypes: [
+      { type: "Canal-side lawns", note: "Open garden venues under mature canopy along Canal Bank." },
+      { type: "Garden restaurants", note: "Smaller nikah ceremonies and family dinners with an existing setting." },
+      { type: "Institutional halls", note: "The university belt's halls and auditoria for formal and corporate formats." },
+      { type: "Club lawns", note: "Members' grounds set back from the road for mid-size receptions." },
+    ],
+    inspiration: {
+      heading: "Candlelight under an old canopy",
+      body:
+        "The palette follows the setting rather than overriding it — greens already present in the planting, ivory and candle amber for warmth after sunset, and almost no hard colour. Light sits low: candle fields, lanterns at ground level and warm uplight into the branches, so the canopy glows and the sky stays dark above it.",
+      palette: [
+        { name: "Canal green", hex: "#42513F" },
+        { name: "Candle amber", hex: "#D8A65D" },
+        { name: "Bone", hex: "#EFE8DA" },
+        { name: "Night indigo", hex: "#2C3340" },
+      ],
+      gallery: ["ae-03", "ae-19", "ae-20", "ae-09", "ae-04", "ae-18"],
+    },
+    why: {
+      heading: "Why families choose us for canal-side events",
+      body: [
+        "Because outdoor evenings are where a planner is genuinely tested. Anyone can dress a hall. A canal-side lawn asks you to have a real answer for rain, for dew on the seating, for insects at exactly the hour guests sit down, and for a lighting rig that has to look effortless under trees that were not planted for you.",
+        "And because our kitchen is used to cooking away from a building. Outdoor catering at this standard is a logistics problem before it is a culinary one, and it is one we solve from our own farmhouse base most weeks of the season.",
+      ],
+    },
+    categories: ["outdoor-farmhouse", "floral-installations", "nikah-ceremonies"],
+    projects: ["chandeliers-in-the-trees", "bloom-curtain-nikah"],
+    articles: ["outdoor-catering-in-lahore-heat", "why-fresh-flowers-matter"],
+    faqs: [
+      {
+        q: "Do you have an office on Canal Road?",
+        a: "No. Our single base is at Green Acres, and our team travels to Canal Road venues for site visits, lighting recces and event days.",
+      },
+      {
+        q: "What happens if it rains?",
+        a: "Every outdoor commission carries a written wet plan: what is covered, who makes the call and the hour by which it is made. Agreeing that in advance is what keeps a forecast change from becoming a crisis on the day.",
+      },
+      {
+        q: "Is an evening under the trees warm enough in winter?",
+        a: "With planning, yes. Ground-level heating placed along the seating rather than at the edges, and a floor covering that stops cold rising, make December canal-side evenings genuinely comfortable.",
+      },
+      {
+        q: "Can you handle insects near the water at dusk?",
+        a: "We treat the ground and planting in advance and place light sources so the brightest points sit away from where people are seated. It is a standard part of the plan for any venue on the canal, not an extra.",
+      },
+    ],
+    nearby: ["gulberg", "model-town", "johar-town", "cantt-askari"],
+    travelNote:
+      "Canal Road venues are served from our Green Acres base. Lighting recces here are always scheduled after dark, because the canopy that makes these venues beautiful is also what makes a daytime survey misleading.",
   },
 ];
 

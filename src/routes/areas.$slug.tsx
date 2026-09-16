@@ -657,7 +657,7 @@ function AreaPage() {
       <CtaBand
         eyebrow={`Planning in ${area.shortName}`}
         title={`Tell us about your ${area.shortName} celebration.`}
-        body={`Share the date, the venue if you have one, and a rough guest count. A planner will reply within ${site.responseTime.toLowerCase()} — never a template.`}
+        body={`Share the date, the venue if you have one, and a rough guest count. A planner will reply ${site.responseTime.toLowerCase()} — never a template.`}
       />
 
       {/* Hidden hero credit keeps alt-text coverage honest for the LCP frame. */}

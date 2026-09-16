@@ -18,7 +18,7 @@ const args = Object.fromEntries(
   }),
 );
 const CRAWL_BASE = args.base ?? "http://localhost:8080";
-const ASSET_ORIGIN = (process.env.VITE_ASSET_ORIGIN ?? "https://anayatevents.lovable.app").replace(/\/+$/, "");
+const ASSET_ORIGIN = (process.env.VITE_ASSET_ORIGIN ?? "https://www.anayatevent.com").replace(/\/+$/, "");
 
 /* --------------------------- 1. source scanning --------------------------- */
 

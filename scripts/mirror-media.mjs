@@ -15,14 +15,44 @@
  *   node scripts/mirror-media.mjs --if-enabled
  *        no-op unless SELF_HOST_MEDIA / VITE_SELF_HOST_MEDIA is truthy
  */
-import { createWriteStream } from "node:fs";
+import { createWriteStream, readFileSync } from "node:fs";
 import { mkdir, readdir, readFile, stat } from "node:fs/promises";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import process from "node:process";
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+// fileURLToPath, not URL.pathname: on Windows the latter yields "/C:/..."
+// which path.resolve turns into "C:\C:\..." and the mirror never runs.
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+
+/**
+ * Load `.env` into process.env.
+ *
+ * Vite reads .env for `import.meta.env`, but this script is plain Node and
+ * would otherwise never see SELF_HOST_MEDIA. That mismatch is dangerous: the
+ * app would resolve media to root-relative paths while this script skipped the
+ * download, shipping a build where every image 404s. Read it here so both
+ * halves agree. Real platform environment variables still win — we never
+ * overwrite a value the host has already set.
+ */
+function loadDotEnv() {
+  const file = path.join(ROOT, ".env");
+  try {
+    const text = readFileSync(file, "utf8");
+    for (const line of text.split(/\r?\n/)) {
+      const m = /^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/.exec(line);
+      if (!m) continue;
+      const key = m[1];
+      if (process.env[key] !== undefined) continue;
+      process.env[key] = m[2].replace(/^["']|["']$/g, "");
+    }
+  } catch {
+    /* no .env here — platform environment variables are the source of truth */
+  }
+}
+loadDotEnv();
 const ASSETS_DIR = path.join(ROOT, "src", "assets");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const CDN_ORIGIN = (

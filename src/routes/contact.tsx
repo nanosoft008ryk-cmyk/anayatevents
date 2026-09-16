@@ -219,6 +219,20 @@ function ContactPage() {
                   {site.address.locality} {site.address.postalCode}, Pakistan
                 </dd>
               </div>
+              {site.email && (
+                <div>
+                  <dt className="font-sans text-[10px] tracking-[0.32em] uppercase text-gold-deep">
+                    Email
+                  </dt>
+                  <dd className="mt-4 font-sans text-sm leading-[1.95] font-light text-muted-foreground">
+                    <a href={site.emailHref} className="transition-colors hover:text-gold">
+                      {site.email}
+                    </a>
+                    <br />
+                    Replies {site.responseTime.toLowerCase()}
+                  </dd>
+                </div>
+              )}
               <div>
                 <dt className="font-sans text-[10px] tracking-[0.32em] uppercase text-gold-deep">
                   Hours
