@@ -16,7 +16,7 @@
  *        no-op unless SELF_HOST_MEDIA / VITE_SELF_HOST_MEDIA is truthy
  */
 import { createWriteStream, readFileSync } from "node:fs";
-import { mkdir, readdir, readFile, stat } from "node:fs/promises";
+import { mkdir, readdir, readFile, rename, rm, stat } from "node:fs/promises";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
 import path from "node:path";
@@ -80,20 +80,64 @@ async function collectPointers(dir) {
   return out;
 }
 
-async function exists(p) {
+/**
+ * A mirrored file counts as present only when its size matches the size the
+ * pointer declares.
+ *
+ * Testing for size > 0 alone was not enough: a download interrupted mid-stream
+ * (or a stump left by an earlier, non-atomic version of this script) would sit
+ * in public/ forever, because every later build skipped it as "already there"
+ * and shipped a truncated image. Comparing against the declared size makes the
+ * mirror self-healing — a damaged file is simply fetched again.
+ */
+async function isMirrored(dest, expectedSize) {
   try {
-    const s = await stat(p);
-    return s.size > 0;
+    const s = await stat(dest);
+    if (s.size === 0) return false;
+    return typeof expectedSize === "number" ? s.size === expectedSize : true;
   } catch {
     return false;
   }
 }
 
+const MAX_ATTEMPTS = 4;
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Fetch one asset, with retries, into a temporary file that is renamed into
+ * place only once the stream has completed.
+ *
+ * Two failures this guards against, both seen in real deployments:
+ *
+ *  - A single transient "fetch failed" among 229 requests used to abort the
+ *    whole build. Network blips are expected at this volume; they are not a
+ *    reason to fail a deployment, so each asset gets several attempts with a
+ *    widening delay.
+ *  - A connection dropped mid-stream left a partial file at `dest`. Because
+ *    exists() only checks for size > 0, the next build would treat that stump
+ *    as "already present" and quietly ship a truncated image. Writing to
+ *    `.part` and renaming makes the final file appear only when it is whole.
+ */
 async function download(url, dest) {
-  const res = await fetch(url);
-  if (!res.ok || !res.body) throw new Error(`${res.status} ${res.statusText} — ${url}`);
   await mkdir(path.dirname(dest), { recursive: true });
-  await pipeline(Readable.fromWeb(res.body), createWriteStream(dest));
+  const tmp = `${dest}.part`;
+  let lastError;
+
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
+    try {
+      const res = await fetch(url, { signal: AbortSignal.timeout(60000) });
+      if (!res.ok || !res.body) throw new Error(`${res.status} ${res.statusText}`);
+      await pipeline(Readable.fromWeb(res.body), createWriteStream(tmp));
+      await rename(tmp, dest);
+      return attempt;
+    } catch (error) {
+      lastError = error;
+      await rm(tmp, { force: true });
+      if (attempt < MAX_ATTEMPTS) await sleep(400 * 2 ** (attempt - 1));
+    }
+  }
+
+  throw new Error(`${lastError?.message ?? "failed"} after ${MAX_ATTEMPTS} attempts — ${url}`);
 }
 
 const pointers = await collectPointers(ASSETS_DIR);
@@ -102,18 +146,25 @@ let skipped = 0;
 const failures = [];
 
 const queue = [...pointers];
-const workers = Array.from({ length: 8 }, async () => {
+let retried = 0;
+let repaired = 0;
+// Six, not eight: the previous setting ran hot enough that the CDN
+// intermittently dropped one request out of 229 and failed the deployment.
+const workers = Array.from({ length: 6 }, async () => {
   while (queue.length) {
     const pointer = queue.pop();
     const meta = JSON.parse(await readFile(pointer, "utf8"));
     if (!meta.url) continue;
     const dest = path.join(PUBLIC_DIR, meta.url.replace(/^\//, ""));
-    if (!force && (await exists(dest))) {
+    if (!force && (await isMirrored(dest, meta.size))) {
       skipped += 1;
       continue;
     }
+    // Present but the wrong size: a damaged file being replaced, not a new one.
+    if (await isMirrored(dest, undefined)) repaired += 1;
     try {
-      await download(`${CDN_ORIGIN}${meta.url}`, dest);
+      const attempts = await download(`${CDN_ORIGIN}${meta.url}`, dest);
+      if (attempts > 1) retried += 1;
       downloaded += 1;
     } catch (error) {
       failures.push(`${meta.original_filename ?? meta.url}: ${error.message}`);
@@ -125,6 +176,12 @@ await Promise.all(workers);
 console.log(
   `[mirror-media] ${pointers.length} assets — ${downloaded} downloaded, ${skipped} already present, ${failures.length} failed.`,
 );
+if (retried) {
+  console.log(`[mirror-media] ${retried} asset(s) needed a retry but succeeded.`);
+}
+if (repaired) {
+  console.log(`[mirror-media] ${repaired} damaged file(s) re-downloaded.`);
+}
 if (failures.length) {
   failures.forEach((f) => console.error(`  ✗ ${f}`));
   process.exit(1);
