@@ -70,14 +70,57 @@ if (args.has("--if-enabled") && !truthy(process.env.SELF_HOST_MEDIA ?? process.e
   process.exit(0);
 }
 
-async function collectPointers(dir) {
+async function collectPointerFiles(dir) {
   const out = [];
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const p = path.join(dir, entry.name);
-    if (entry.isDirectory()) out.push(...(await collectPointers(p)));
+    if (entry.isDirectory()) out.push(...(await collectPointerFiles(p)));
     else if (entry.name.endsWith(".asset.json")) out.push(p);
   }
   return out;
+}
+
+/**
+ * Every media URL the site can actually request, from both sources of truth.
+ *
+ * The .asset.json pointers are not the whole catalogue. The responsive srcsets
+ * are built from src/content/variants.json, which references renditions that
+ * have no pointer file at all — the 384px widths and, critically, every AVIF.
+ * Mirroring only the pointers therefore shipped a site where Chrome picked an
+ * <source type="image/avif"> that 404ed. A <picture> falls back on an
+ * unsupported type, never on a failed request, so the image simply broke.
+ *
+ * Pointer entries carry a declared byte size and are preferred, because that
+ * size is what lets isMirrored() detect a damaged file.
+ */
+async function collectTargets() {
+  const byUrl = new Map();
+
+  const add = (url, name, size) => {
+    if (!url || byUrl.has(url)) return;
+    byUrl.set(url, { url, name: name ?? url.split("/").pop(), size });
+  };
+
+  for (const file of await collectPointerFiles(ASSETS_DIR)) {
+    const meta = JSON.parse(await readFile(file, "utf8"));
+    add(meta.url, meta.original_filename, meta.size);
+  }
+
+  try {
+    const manifest = JSON.parse(
+      await readFile(path.join(ROOT, "src", "content", "variants.json"), "utf8"),
+    );
+    for (const entry of Object.values(manifest)) {
+      add(entry?.orig);
+      for (const map of [entry?.v, entry?.a]) {
+        if (map) for (const url of Object.values(map)) add(url);
+      }
+    }
+  } catch {
+    /* no manifest — the pointers alone remain the catalogue */
+  }
+
+  return [...byUrl.values()];
 }
 
 /**
@@ -140,41 +183,39 @@ async function download(url, dest) {
   throw new Error(`${lastError?.message ?? "failed"} after ${MAX_ATTEMPTS} attempts — ${url}`);
 }
 
-const pointers = await collectPointers(ASSETS_DIR);
+const targets = await collectTargets();
 let downloaded = 0;
 let skipped = 0;
 const failures = [];
 
-const queue = [...pointers];
+const queue = [...targets];
 let retried = 0;
 let repaired = 0;
 // Six, not eight: the previous setting ran hot enough that the CDN
 // intermittently dropped one request out of 229 and failed the deployment.
 const workers = Array.from({ length: 6 }, async () => {
   while (queue.length) {
-    const pointer = queue.pop();
-    const meta = JSON.parse(await readFile(pointer, "utf8"));
-    if (!meta.url) continue;
-    const dest = path.join(PUBLIC_DIR, meta.url.replace(/^\//, ""));
-    if (!force && (await isMirrored(dest, meta.size))) {
+    const target = queue.pop();
+    const dest = path.join(PUBLIC_DIR, target.url.replace(/^\//, ""));
+    if (!force && (await isMirrored(dest, target.size))) {
       skipped += 1;
       continue;
     }
     // Present but the wrong size: a damaged file being replaced, not a new one.
     if (await isMirrored(dest, undefined)) repaired += 1;
     try {
-      const attempts = await download(`${CDN_ORIGIN}${meta.url}`, dest);
+      const attempts = await download(`${CDN_ORIGIN}${target.url}`, dest);
       if (attempts > 1) retried += 1;
       downloaded += 1;
     } catch (error) {
-      failures.push(`${meta.original_filename ?? meta.url}: ${error.message}`);
+      failures.push(`${target.name}: ${error.message}`);
     }
   }
 });
 await Promise.all(workers);
 
 console.log(
-  `[mirror-media] ${pointers.length} assets — ${downloaded} downloaded, ${skipped} already present, ${failures.length} failed.`,
+  `[mirror-media] ${targets.length} assets — ${downloaded} downloaded, ${skipped} already present, ${failures.length} failed.`,
 );
 if (retried) {
   console.log(`[mirror-media] ${retried} asset(s) needed a retry but succeeded.`);
