@@ -15,7 +15,7 @@ import { uniqueFaqs } from "@/lib/entity-graph";
 import { CtaBand } from "@/components/CtaBand";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealOnLoad, RevealWords } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { GoogleProfileLink } from "@/components/GoogleProfileLink";
 import { ReviewQr } from "@/components/reviews/ReviewQr";
@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
       path: "/",
       image: photo(HERO).url,
     });
-    const heroPreload = preloadLinks(HERO, photo(HERO).url, "100vw");
+    const heroPreload = preloadLinks(HERO, photo(HERO).url, "100vw", true);
     return {
     ...meta,
     links: [
@@ -75,6 +75,7 @@ function Home() {
   return (
     <main className="overflow-x-clip bg-background">
       {/* ── I. Overture ─────────────────────────────────────────────── */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden">
         <CinematicBackdrop frames={frames} />
 
@@ -191,7 +192,7 @@ function Home() {
           </span>
         </div>
       </section>
-
+      </RevealOnLoad>
 
       {/* ── II. The count — type as architecture, no boxes ──────────── */}
       <section className="chapter light-left relative mx-auto max-w-[92rem] px-5 py-16 sm:px-6 sm:py-20 md:px-12 md:py-28 lg:py-40">
@@ -236,7 +237,7 @@ function Home() {
             {/* Offset narrow plate */}
             <Reveal variant="mask" delay={180} className="lg:col-span-4 lg:col-start-9 lg:mt-6">
               <div className="relative mx-auto w-full max-w-[16rem] sm:max-w-[19rem] lg:ml-auto lg:mr-0">
-                <Plate image={photo("ae-05")} ratio="3/4" speed={0.5} />
+                <Plate image={photo("ae-05")} ratio="3/4" speed={0.5} sizes="(min-width: 640px) 19rem, 16rem" />
                 <span className="pointer-events-none absolute -inset-3 border-[0.5px] border-gold/20" />
               </div>
             </Reveal>
@@ -246,7 +247,13 @@ function Home() {
           <div className="mt-16 grid gap-y-10 md:gap-y-14 lg:mt-28 lg:grid-cols-12 lg:gap-x-16">
             <Reveal delay={120} className="lg:col-span-3 lg:col-start-1 lg:pt-24">
               <div className="relative w-full max-w-[11rem] sm:max-w-[15rem]">
-                <Plate image={photo("ae-17")} ratio="4/5" speed={0.9} fade="bottom" />
+                <Plate
+                  image={photo("ae-17")}
+                  ratio="4/5"
+                  speed={0.9}
+                  fade="bottom"
+                  sizes="(min-width: 640px) 15rem, 11rem"
+                />
               </div>
             </Reveal>
 

@@ -8,7 +8,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxLink } from "@/components/ui/LuxButton";
 import { JourneyRail } from "@/components/services/JourneyRail";
 import { LuxAccordion } from "@/components/services/LuxAccordion";
@@ -139,6 +139,7 @@ function ServicePage() {
   return (
     <main className="bg-background">
       {/* ─── Hero ──────────────────────────────────────────────────── */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[100svh] overflow-hidden">
         <SmartImg
           id={hero.id} fallbackUrl={hero.url} sizes="100vw"
@@ -175,6 +176,7 @@ function ServicePage() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ─── Introduction: emotion first ───────────────────────────── */}
       <section className="chapter light-left relative overflow-hidden py-28 lg:py-44">

@@ -14,7 +14,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { entityRelationsSchema } from "@/lib/graph-schema";
 import {
   pageMeta,
@@ -106,6 +106,7 @@ function PortfolioCategoryPage() {
   return (
     <main className="bg-background">
       {/* I — Cinematic title */}
+      <RevealOnLoad>
       <section className="relative flex min-h-[92svh] items-end overflow-hidden">
         <CinematicBackdrop frames={category.heroFrames.map(photo)} interval={7200} />
         <div
@@ -135,6 +136,7 @@ function PortfolioCategoryPage() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       <div className="mx-auto max-w-7xl px-6 pt-10 md:px-10">
         <Breadcrumbs trail={trail} />
@@ -142,12 +144,12 @@ function PortfolioCategoryPage() {
 
       {/* II — Statement */}
       <section className="relative overflow-hidden pt-24 md:pt-36">
+        {/* Ghost word painted from an attribute: decoration, not readable text. */}
         <p
           aria-hidden
-          className="pointer-events-none absolute -top-10 right-0 font-display text-[20vw] leading-none font-light text-ivory/[0.03] select-none"
-        >
-          {category.kicker}
-        </p>
+          data-ghost={category.kicker}
+          className="pointer-events-none absolute -top-10 right-0 font-display text-[20vw] leading-none font-light text-ivory/[0.03] select-none before:content-[attr(data-ghost)]"
+        />
         <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-12 md:px-10">
           <div className="md:col-span-4">
             <Reveal variant="rise">
@@ -312,15 +314,13 @@ function PortfolioCategoryPage() {
           <div className="md:col-span-8">
             <dl className="divide-y divide-border border-y border-border">
               {category.faqs.map((f, i) => (
-                <Reveal key={f.q} variant="fade" delay={i * 90}>
-                  <div className="py-8">
-                    <dt className="font-display text-xl font-light text-ivory md:text-2xl">
-                      {f.q}
-                    </dt>
-                    <dd className="mt-4 max-w-2xl font-sans text-[15px] leading-[1.85] font-light text-muted-foreground">
-                      {f.a}
-                    </dd>
-                  </div>
+                <Reveal key={f.q} variant="fade" delay={i * 90} flat className="py-8">
+                  <dt className="font-display text-xl font-light text-ivory md:text-2xl">
+                    {f.q}
+                  </dt>
+                  <dd className="mt-4 max-w-2xl font-sans text-[15px] leading-[1.85] font-light text-muted-foreground">
+                    {f.a}
+                  </dd>
                 </Reveal>
               ))}
             </dl>

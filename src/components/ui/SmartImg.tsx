@@ -1,7 +1,7 @@
 import type { CSSProperties, Ref } from "react";
 
 import { assetFallbackUrl } from "@/lib/asset-url";
-import { imgAttrs } from "@/lib/img";
+import { imgAttrs, mobileCrop, MOBILE_MEDIA } from "@/lib/img";
 
 /**
  * Format-negotiated photograph. Serves AVIF where supported and WebP
@@ -20,6 +20,7 @@ export function SmartImg({
   className,
   style,
   priority = false,
+  artDirected = false,
   imgRef,
   ...rest
 }: {
@@ -30,12 +31,20 @@ export function SmartImg({
   className?: string;
   style?: CSSProperties;
   priority?: boolean;
+  /** Serve the portrait crop to phones when one exists (full-bleed heroes). */
+  artDirected?: boolean;
   imgRef?: Ref<HTMLImageElement>;
 } & Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src" | "srcSet" | "sizes" | "style" | "className" | "alt" | "ref">) {
   const a = imgAttrs(id, fallbackUrl, sizes);
+  const crop = artDirected ? mobileCrop(id) : undefined;
+  // A caller asking for high fetch priority means the image is above the
+  // fold, so it must never be lazy as well: a lazy LCP image waits for layout.
+  const eager = priority || rest.fetchPriority === "high";
 
   return (
     <picture className="contents">
+      {crop && <source media={MOBILE_MEDIA} type="image/avif" srcSet={crop.avif} />}
+      {crop && <source media={MOBILE_MEDIA} type="image/webp" srcSet={crop.webp} />}
       {a.avifSrcSet && <source type="image/avif" srcSet={a.avifSrcSet} sizes={sizes} />}
       {a.srcSet && <source type="image/webp" srcSet={a.srcSet} sizes={sizes} />}
       <img
@@ -45,8 +54,8 @@ export function SmartImg({
         height={a.height}
         alt={alt}
         decoding="async"
-        loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : "auto"}
+        loading={eager ? "eager" : "lazy"}
+        fetchPriority={eager ? "high" : "auto"}
         className={className}
         style={style}
         onError={(event) => {

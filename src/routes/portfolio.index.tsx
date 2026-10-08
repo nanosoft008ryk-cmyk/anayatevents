@@ -12,7 +12,7 @@ import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { pageMeta, jsonLd, breadcrumbSchema, itemListSchema, type Crumb } from "@/lib/seo";
 
 const PATH = "/portfolio";
@@ -56,6 +56,7 @@ function PortfolioIndex() {
   return (
     <main className="bg-background">
       {/* I — Cinematic opening */}
+      <RevealOnLoad>
       <section className="relative flex min-h-[100svh] items-end overflow-hidden">
         <CinematicBackdrop frames={heroFrames} interval={7600} />
         <div className="mx-auto w-full max-w-7xl px-6 pb-40 md:px-10 md:pb-48">
@@ -84,6 +85,7 @@ function PortfolioIndex() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       <div className="mx-auto max-w-7xl px-6 pt-10 md:px-10">
         <Breadcrumbs trail={trail} />
@@ -91,12 +93,12 @@ function PortfolioIndex() {
 
       {/* II — Signature project */}
       <section className="relative overflow-hidden pt-24 md:pt-36">
+        {/* Ghost word painted from an attribute: decoration, not readable text. */}
         <p
           aria-hidden
-          className="pointer-events-none absolute -top-6 left-0 font-display text-[22vw] leading-none font-light text-ivory/[0.03] select-none"
-        >
-          Signature
-        </p>
+          data-ghost="Signature"
+          className="pointer-events-none absolute -top-6 left-0 font-display text-[22vw] leading-none font-light text-ivory/[0.03] select-none before:content-[attr(data-ghost)]"
+        />
         <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-12 md:px-10">
           <div className="md:col-span-7">
             <Reveal variant="mask" duration={1500}>

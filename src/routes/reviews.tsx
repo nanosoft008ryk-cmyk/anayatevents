@@ -9,7 +9,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxAnchor, LuxLink } from "@/components/ui/LuxButton";
 import { FeaturedReview } from "@/components/reviews/FeaturedReview";
 import { ReviewMovementBlock } from "@/components/reviews/ReviewMovement";
@@ -173,6 +173,7 @@ function ReviewsPage() {
   return (
     <main className="bg-background">
       {/* I — Cinematic opening */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-dvh flex-col justify-end overflow-hidden">
         <CinematicBackdrop frames={[photo("ae-21"), photo("ae-13"), photo("ae-05"), photo("ae-24")]} />
         <div
@@ -232,6 +233,7 @@ function ReviewsPage() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* II — Why a review matters here */}
       <section aria-labelledby="trust-intro" className="border-t border-border">
@@ -350,7 +352,7 @@ function ReviewsPage() {
               href={mapsUri}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gold underline-offset-4 hover:underline"
+              className="text-gold underline underline-offset-4"
             >
               our Google profile
             </a>
@@ -442,7 +444,7 @@ function ReviewsPage() {
         <div className="mx-auto max-w-[92rem] px-6 py-24 md:px-12 md:py-32">
           <Reveal>
             <h2 id="reviews-next" className="font-sans text-[10px] tracking-[0.42em] uppercase text-gold">
-              Continue
+              Where to next
             </h2>
           </Reveal>
           <ul className="mt-14 grid gap-12 md:grid-cols-2 lg:grid-cols-3">

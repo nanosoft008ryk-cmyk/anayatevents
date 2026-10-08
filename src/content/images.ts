@@ -34,6 +34,9 @@ export const logo = assetUrl(
     logoAsset.url,
 );
 
+/** 128px mark for the header — it renders at 36–48px, so the 640 rendition is waste. */
+export const logoMark = "/brand/ae-logo-128.webp";
+
 export type PhotoTag =
   | "stage"
   | "decor"

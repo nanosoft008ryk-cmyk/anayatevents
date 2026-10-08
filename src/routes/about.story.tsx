@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { SmartImg } from "@/components/ui/SmartImg";
 import { pageMeta, jsonLd, breadcrumbSchema, type Crumb } from "@/lib/seo";
@@ -39,6 +39,7 @@ function StoryPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: split editorial — full-height plate against a type column ─ */}
+      <RevealOnLoad>
       <section className="grid min-h-[92svh] lg:grid-cols-[1fr_1.05fr]">
         <div className="relative order-2 min-h-[46svh] overflow-hidden lg:order-1 lg:min-h-full">
           <SmartImg
@@ -64,6 +65,7 @@ function StoryPage() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ── Movements: numbered chapters, alternating margin plates ─────── */}
       {storyPage.movements.map((m, i) => {

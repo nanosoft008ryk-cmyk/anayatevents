@@ -9,7 +9,7 @@ import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxLink } from "@/components/ui/LuxButton";
 import { ServiceScroller } from "@/components/services/ServiceScroller";
 import { JourneyRail } from "@/components/services/JourneyRail";
@@ -119,6 +119,7 @@ function ServicesIndex() {
   return (
     <main className="bg-background">
       {/* ─── I. Cinematic overture ─────────────────────────────────── */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden">
         <CinematicBackdrop frames={heroFrames} interval={7600} />
         <div className="mx-auto w-full max-w-[92rem] px-6 pt-36 pb-28 md:px-12 md:pb-36 lg:pb-44">
@@ -152,6 +153,7 @@ function ServicesIndex() {
           className="mx-auto mb-8 h-16 w-px bg-gradient-to-b from-transparent via-gold/70 to-transparent"
         />
       </section>
+      </RevealOnLoad>
 
       {/* ─── II. Philosophy — typography alone ─────────────────────── */}
       <section className="chapter light-left relative overflow-hidden py-32 lg:py-48">
@@ -372,9 +374,11 @@ function ServicesIndex() {
 
           <dl className="mt-20 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
             {culinary.map((c, i) => (
-              <Reveal key={c.name} variant="rise" delay={i * 70}>
-                <span className="block hairline" />
-                <dt className="mt-5 font-display text-2xl font-light text-ivory">{c.name}</dt>
+              <Reveal key={c.name} variant="rise" delay={i * 70} flat>
+                <dt className="font-display text-2xl font-light text-ivory">
+                  <span className="mb-5 block hairline" />
+                  {c.name}
+                </dt>
                 <dd className="mt-3 font-sans text-sm leading-[1.9] font-light text-ivory/65">
                   {c.note}
                 </dd>

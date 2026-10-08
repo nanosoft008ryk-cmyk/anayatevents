@@ -8,7 +8,7 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxTextLink, LuxAnchor } from "@/components/ui/LuxButton";
 import { pageMeta, jsonLd, breadcrumbSchema, type Crumb } from "@/lib/seo";
 
@@ -38,6 +38,7 @@ function TeamPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: floating composition — offset plates, type between them ─ */}
+      <RevealOnLoad>
       <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-44">
         <HeroBackdrop id="ae-11" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
@@ -65,6 +66,7 @@ function TeamPage() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ── Profiles: editorial rows, monogram as portrait ──────────────── */}
       <section aria-label="The people">

@@ -7,7 +7,7 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { pageMeta, jsonLd, breadcrumbSchema, imageGallerySchema, type Crumb } from "@/lib/seo";
 
@@ -50,6 +50,7 @@ function CraftPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: architectural — three vertical plates of different height ─ */}
+      <RevealOnLoad>
       <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-24 md:px-12 md:pt-44">
         <HeroBackdrop id="ae-21" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
@@ -65,7 +66,8 @@ function CraftPage() {
                 image={p}
                 ratio={i === 1 ? "9/16" : i === 0 ? "3/4" : "2/3"}
                 speed={i === 1 ? 14 : -8}
-                sizes="(min-width: 768px) 30vw, 100vw"
+                sizes="(min-width: 768px) 30vw, calc(100vw - 3rem)"
+                priority={i === 0}
               />
             </Reveal>
           ))}
@@ -80,6 +82,7 @@ function CraftPage() {
           </h1>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ── Crafts: macro sections with a running craft word in the margin ─ */}
       <section aria-label="The crafts">
@@ -93,7 +96,7 @@ function CraftPage() {
                 <p className="mt-4 font-display text-3xl leading-none font-light text-foil lg:text-[2.6rem]">
                   {c.craft}
                 </p>
-                <p className="mt-6 font-sans text-[10px] leading-[2] tracking-[0.24em] uppercase text-muted-foreground/70">
+                <p className="mt-6 font-sans text-[10px] leading-[2] tracking-[0.24em] uppercase text-muted-foreground">
                   {c.detail.split(" · ").map((d) => (
                     <span key={d} className="block">
                       {d}

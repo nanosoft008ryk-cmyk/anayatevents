@@ -8,7 +8,7 @@ import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxLink, LuxTextLink } from "@/components/ui/LuxButton";
 import { pageMeta, jsonLd, breadcrumbSchema, itemListSchema, type Crumb } from "@/lib/seo";
 
@@ -48,6 +48,7 @@ function AboutHub() {
   return (
     <main className="bg-background">
       {/* ── Hero: cinematic, typography as architecture ─────────────────── */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden">
         <CinematicBackdrop frames={frames} interval={7600} />
 
@@ -74,6 +75,7 @@ function AboutHub() {
           </div>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ── Brand introduction: an editorial column, no boxes ───────────── */}
       <section className="mx-auto max-w-[92rem] px-6 py-28 md:px-12 lg:py-40">

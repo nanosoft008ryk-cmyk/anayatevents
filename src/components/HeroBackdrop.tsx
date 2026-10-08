@@ -23,7 +23,9 @@ export function HeroBackdrop({
       <SmartImg
         id={image.id}
         fallbackUrl={image.url}
-        sizes="100vw"
+        // Shown at 40% under a veil, so a phone takes the 640px rendition
+        // rather than a full-resolution frame that competes with the headline.
+        sizes="(max-width: 640px) 360px, 100vw"
         alt=""
         priority={priority}
         className="h-full w-full object-cover opacity-40 kenburns"

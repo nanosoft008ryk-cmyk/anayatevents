@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { SmartImg } from "@/components/ui/SmartImg";
 import { pageMeta, jsonLd, breadcrumbSchema, imageGallerySchema, type Crumb } from "@/lib/seo";
@@ -51,6 +51,7 @@ function BehindPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: full-bleed documentary still with a film-slate caption ── */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[92svh] flex-col justify-end overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <SmartImg
@@ -85,6 +86,7 @@ function BehindPage() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ── The call sheet: timestamped, left rail of hours ─────────────── */}
       <section className="mx-auto max-w-[92rem] px-6 py-24 md:px-12 lg:py-32">

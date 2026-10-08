@@ -6,7 +6,7 @@ import { menuTiers, setupIncludes, menuPdf } from "@/content/menu";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxAnchor } from "@/components/ui/LuxButton";
 import { ProposalDialog } from "@/components/ProposalDialog";
 import { pageMeta, jsonLd, breadcrumbSchema, abs, type Crumb } from "@/lib/seo";
@@ -71,6 +71,7 @@ function MenuPage() {
   return (
     <main className="bg-background">
       {/* ── Opening ──────────────────────────────────────────────────────── */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[86svh] flex-col justify-end overflow-hidden">
         <CinematicBackdrop frames={photosByIds(["ae-13", "ae-21", "ae-06"])} interval={8000} />
         <div className="mx-auto w-full max-w-[92rem] px-6 pt-40 pb-20 md:px-12 lg:pb-28">
@@ -110,6 +111,7 @@ function MenuPage() {
           </div>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ── The tables ───────────────────────────────────────────────────── */}
       <section className="chapter light-left">
@@ -172,7 +174,7 @@ function MenuPage() {
 
                     <dl className="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2">
                       {tier.courses.map((course, i) => (
-                        <Reveal key={course.heading} delay={i * 70}>
+                        <Reveal key={course.heading} delay={i * 70} flat>
                           <dt className="font-sans text-[10px] tracking-[0.32em] uppercase text-gold">
                             {course.heading}
                           </dt>
@@ -226,18 +228,19 @@ function MenuPage() {
           </Reveal>
           <ul className="mt-14 grid gap-x-12 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
             {setupIncludes.map((item, i) => (
-              <Reveal key={item} delay={i * 50}>
-                <li className="flex items-baseline gap-4 border-b border-border pb-5">
-                  <span
-                    aria-hidden
-                    className="font-sans text-[10px] tracking-[0.28em] text-gold-deep"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="font-display text-lg font-light text-ivory/85 md:text-xl">
-                    {item}
-                  </span>
-                </li>
+              <Reveal
+                key={item}
+                delay={i * 50}
+                flat
+                as="li"
+                className="flex items-baseline gap-4 border-b border-border pb-5"
+              >
+                <span aria-hidden className="font-sans text-[10px] tracking-[0.28em] text-gold-deep">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="font-display text-lg font-light text-ivory/85 md:text-xl">
+                  {item}
+                </span>
               </Reveal>
             ))}
           </ul>

@@ -8,7 +8,7 @@ import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { AreaMap } from "@/components/AreaMap";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { JourneyRail } from "@/components/services/JourneyRail";
 import { LuxAnchor } from "@/components/ui/LuxButton";
 import { EnquiryLetter } from "@/components/contact/EnquiryLetter";
@@ -51,6 +51,7 @@ function ContactPage() {
   return (
     <main className="bg-background">
       {/* ── Invitation ───────────────────────────────────────────────────── */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden">
         <CinematicBackdrop frames={photosByIds(["ae-24", "ae-03", "ae-16"])} interval={8000} />
         <div className="mx-auto w-full max-w-[92rem] px-6 pt-40 pb-20 md:px-12 lg:pb-28">
@@ -80,6 +81,7 @@ function ContactPage() {
           </div>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ── Speak to a person ────────────────────────────────────────────── */}
       <section className="chapter light-left">

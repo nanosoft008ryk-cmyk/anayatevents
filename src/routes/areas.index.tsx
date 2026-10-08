@@ -5,7 +5,7 @@ import { photo } from "@/content/images";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { CtaBand } from "@/components/CtaBand";
@@ -62,6 +62,7 @@ function AreasIndex() {
   return (
     <main className="bg-background">
       {/* I. Hero */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden">
         <CinematicBackdrop frames={frames} />
         <div className="relative mx-auto w-full max-w-[92rem] px-6 pt-40 pb-44 md:px-12">
@@ -85,6 +86,7 @@ function AreasIndex() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* II. Introduction */}
       <section className="relative isolate">

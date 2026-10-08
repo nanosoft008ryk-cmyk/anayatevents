@@ -49,11 +49,7 @@ export function RelatedConstellation({
               <ul className="mt-6 space-y-5">
                 {group.items.map((item) => (
                   <li key={item.path}>
-                    <Link
-                      to={item.path as never}
-                      className="group block"
-                      aria-label={`${item.name} — ${group.label.toLowerCase()}`}
-                    >
+                    <Link to={item.path as never} className="group block">
                       <span className="font-sans text-[13px] tracking-[0.06em] text-ivory transition-colors group-hover:text-gold">
                         {item.name}
                       </span>

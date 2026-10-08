@@ -8,7 +8,7 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { pageMeta, jsonLd, breadcrumbSchema, itemListSchema, type Crumb } from "@/lib/seo";
 
@@ -47,6 +47,7 @@ function PromisePage() {
   return (
     <main className="bg-background">
       {/* ── Hero: the quietest page on the site. Type on air. ───────────── */}
+      <RevealOnLoad>
       <section className="relative isolate mx-auto max-w-3xl px-6 pt-40 pb-24 text-center md:pt-52">
         <HeroBackdrop id="ae-09" priority />
         <Breadcrumbs trail={trail} className="mb-14 justify-center [&_ol]:justify-center" />
@@ -65,6 +66,7 @@ function PromisePage() {
           </p>
         </Reveal>
       </section>
+      </RevealOnLoad>
 
       {/* ── A single plate, dissolving, as a breath ─────────────────────── */}
       <section className="mx-auto max-w-5xl px-6 py-8">

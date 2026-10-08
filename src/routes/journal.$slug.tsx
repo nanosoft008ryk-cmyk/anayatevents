@@ -12,7 +12,7 @@ import { site } from "@/content/site";
 import { photo } from "@/content/images";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
@@ -142,13 +142,14 @@ function ArticlePage() {
 
       {/* ── Cover ────────────────────────────────────────────────────────── */}
       <article>
+        <RevealOnLoad>
         <header className="relative isolate flex min-h-[86svh] flex-col justify-end overflow-hidden">
           <div className="absolute inset-0 -z-10">
             <SmartImg
               id={hero.id} fallbackUrl={hero.url} sizes="100vw"
               alt={hero.alt}
+              priority
               className="h-full w-full object-cover kenburns"
-              decoding="async"
             />
             <div
               className="absolute inset-0"
@@ -187,6 +188,7 @@ function ArticlePage() {
             )}
           </div>
         </header>
+        </RevealOnLoad>
 
         {/* ── Body ───────────────────────────────────────────────────────── */}
         <div className="mx-auto max-w-[92rem] px-6 pt-20 pb-10 md:px-12 md:pt-28">

@@ -101,6 +101,8 @@ export function SiteFooter() {
             alt={`${site.name} logo`}
             width={96}
             height={96}
+            loading="lazy"
+            decoding="async"
             className="mx-auto h-16 w-16 rounded-full object-cover sm:h-20 sm:w-20 md:h-24 md:w-24"
           />
         </Reveal>

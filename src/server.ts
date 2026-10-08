@@ -44,12 +44,40 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
+type HtmlRewriterLike = {
+  on(
+    selector: string,
+    handler: { element(el: { remove(): void }): void },
+  ): HtmlRewriterLike;
+  transform(response: Response): Response;
+};
+
+// Hydration chunks are preloaded in <head>, where they share the first round
+// trips with the stylesheet, fonts and hero photograph and delay first paint
+// on a slow phone. src/client.tsx only imports the app once the server HTML
+// has painted, and Vite's preload helper fetches that import's chunks in
+// parallel, so the head hints are dropped and the visible page arrives first.
+// HTMLRewriter is the Cloudflare Workers streaming rewriter; on any other
+// runtime the response passes through untouched.
+function dropModulePreloads(response: Response): Response {
+  const Rewriter = (globalThis as { HTMLRewriter?: new () => HtmlRewriterLike }).HTMLRewriter;
+  if (!Rewriter) return response;
+  if (!(response.headers.get("content-type") ?? "").includes("text/html")) return response;
+  return new Rewriter()
+    .on('link[rel="modulepreload"]', {
+      element(el) {
+        el.remove();
+      },
+    })
+    .transform(response);
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      return dropModulePreloads(await normalizeCatastrophicSsrResponse(response));
     } catch (error) {
       console.error(error);
       return new Response(renderErrorPage(), {

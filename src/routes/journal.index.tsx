@@ -15,7 +15,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { CategoryExplorer } from "@/components/journal/CategoryExplorer";
 import { NewsletterInvite } from "@/components/journal/NewsletterInvite";
@@ -95,6 +95,7 @@ function JournalIndex() {
   return (
     <main className="bg-background">
       {/* ── Masthead ─────────────────────────────────────────────────────── */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[92svh] flex-col justify-end overflow-hidden">
         <CinematicBackdrop frames={photosByIds(["ae-14", "ae-22", "ae-17", "ae-25"])} />
         <div className="mx-auto w-full max-w-[92rem] px-6 pt-40 pb-24 md:px-12 lg:pb-32">
@@ -123,6 +124,7 @@ function JournalIndex() {
           </div>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ── Editor's note ────────────────────────────────────────────────── */}
       <section className="chapter light-left">

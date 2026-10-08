@@ -7,7 +7,7 @@ import { getArticle } from "@/content/journal";
 import { photo } from "@/content/images";
 import { site } from "@/content/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
 import { CtaBand } from "@/components/CtaBand";
@@ -176,6 +176,7 @@ function AreaPage() {
   return (
     <main className="bg-background">
       {/* I. Hero */}
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden">
         <CinematicBackdrop frames={frames} />
         <div className="relative mx-auto w-full max-w-[92rem] px-6 pt-40 pb-44 md:px-12">
@@ -195,16 +196,18 @@ function AreaPage() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* II. Local introduction */}
       <section className="relative isolate overflow-hidden pt-16 lg:pt-24">
         <div className="pointer-events-none relative h-[14vw] select-none overflow-hidden lg:h-[16vw]">
+          {/* Painted from a data attribute so the near-invisible ghost word is
+              decoration, not text a contrast checker or reader picks up. */}
           <span
             aria-hidden
-            className={`absolute top-0 whitespace-nowrap font-display leading-[0.82] font-light text-ivory/[0.045] ${rhythm.ghost}`}
-          >
-            {area.shortName}
-          </span>
+            data-ghost={area.shortName}
+            className={`absolute top-0 whitespace-nowrap font-display leading-[0.82] font-light text-ivory/[0.045] before:content-[attr(data-ghost)] ${rhythm.ghost}`}
+          />
         </div>
         <div className="relative mx-auto max-w-[92rem] px-6 pt-10 pb-28 md:px-12 lg:pt-16 lg:pb-40">
 
@@ -265,15 +268,13 @@ function AreaPage() {
               ))}
               <dl className="mt-12 divide-y divide-border border-y border-border">
                 {area.experience.notes.map((note, i) => (
-                  <Reveal key={note.title} delay={120 + i * 90}>
-                    <div className="flex gap-6 py-7">
-                      <dt className="w-40 shrink-0 font-sans text-[11px] leading-[1.8] tracking-[0.18em] uppercase text-gold-deep">
-                        {note.title}
-                      </dt>
-                      <dd className="font-sans text-[14px] leading-[1.95] font-light text-muted-foreground">
-                        {note.body}
-                      </dd>
-                    </div>
+                  <Reveal key={note.title} delay={120 + i * 90} flat className="flex gap-6 py-7">
+                    <dt className="w-40 shrink-0 font-sans text-[11px] leading-[1.8] tracking-[0.18em] uppercase text-gold-deep">
+                      {note.title}
+                    </dt>
+                    <dd className="font-sans text-[14px] leading-[1.95] font-light text-muted-foreground">
+                      {note.body}
+                    </dd>
                   </Reveal>
                 ))}
               </dl>
@@ -352,18 +353,22 @@ function AreaPage() {
             </div>
             <ol className="divide-y divide-border border-y border-border">
               {area.venueTypes.map((v, i) => (
-                <Reveal key={v.type} delay={i * 90}>
-                  <li className="flex flex-wrap items-baseline gap-x-10 gap-y-3 py-8">
-                    <span className="font-display text-[1.5rem] font-light text-gold-deep">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="font-display text-[1.6rem] leading-[1.15] font-light text-ivory lg:text-[2rem]">
-                      {v.type}
-                    </span>
-                    <span className="ml-auto max-w-lg font-sans text-[14px] leading-[1.95] font-light text-muted-foreground">
-                      {v.note}
-                    </span>
-                  </li>
+                <Reveal
+                  key={v.type}
+                  delay={i * 90}
+                  flat
+                  as="li"
+                  className="flex flex-wrap items-baseline gap-x-10 gap-y-3 py-8"
+                >
+                  <span className="font-display text-[1.5rem] font-light text-gold-deep">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-display text-[1.6rem] leading-[1.15] font-light text-ivory lg:text-[2rem]">
+                    {v.type}
+                  </span>
+                  <span className="ml-auto max-w-lg font-sans text-[14px] leading-[1.95] font-light text-muted-foreground">
+                    {v.note}
+                  </span>
                 </Reveal>
               ))}
             </ol>
@@ -506,7 +511,7 @@ function AreaPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-8 max-w-2xl font-sans text-[12px] leading-[1.9] font-light text-muted-foreground/70">
+            <p className="mt-8 max-w-2xl font-sans text-[12px] leading-[1.9] font-light text-muted-foreground">
               Projects are shown to illustrate the style and standard of our work. Unless
               stated on the project page itself, they were not necessarily produced in
               this area.
@@ -586,15 +591,13 @@ function AreaPage() {
             </div>
             <dl className="divide-y divide-border border-y border-border">
               {area.faqs.map((faq, i) => (
-                <Reveal key={faq.q} delay={i * 80}>
-                  <div className="py-8">
-                    <dt className="font-display text-[1.25rem] leading-[1.4] font-light text-ivory lg:text-[1.5rem]">
-                      {faq.q}
-                    </dt>
-                    <dd className="mt-4 max-w-3xl font-sans text-[14px] leading-[2] font-light text-muted-foreground">
-                      {faq.a}
-                    </dd>
-                  </div>
+                <Reveal key={faq.q} delay={i * 80} flat className="py-8">
+                  <dt className="font-display text-[1.25rem] leading-[1.4] font-light text-ivory lg:text-[1.5rem]">
+                    {faq.q}
+                  </dt>
+                  <dd className="mt-4 max-w-3xl font-sans text-[14px] leading-[2] font-light text-muted-foreground">
+                    {faq.a}
+                  </dd>
                 </Reveal>
               ))}
             </dl>

@@ -12,6 +12,7 @@ export function Stars({ rating, size = "sm" }: { rating: number; size?: "sm" | "
         "font-sans text-gold",
         size === "sm" ? "text-[10px] tracking-[0.34em]" : "text-[15px] tracking-[0.4em]",
       )}
+      role="img"
       aria-label={`Rated ${rating} out of 5`}
     >
       <span aria-hidden="true">

@@ -3,7 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 
 import { navigation } from "@/content/navigation";
 import { site } from "@/content/site";
-import { logo, photo } from "@/content/images";
+import { logoMark, photo } from "@/content/images";
 import { SmartImg } from "@/components/ui/SmartImg";
 
 export function SiteHeader() {
@@ -66,8 +66,11 @@ export function SiteHeader() {
       >
         <Link to="/" className="group/logo flex items-center gap-4" aria-label={`${site.name} — home`}>
           <img
-            src={logo}
+            src={logoMark}
             alt=""
+            width={48}
+            height={48}
+            fetchPriority="low"
             className={`rounded-full object-cover transition-all duration-700 [transition-timing-function:var(--ease-lux)] ${
               solid ? "h-9 w-9" : "h-12 w-12"
             }`}

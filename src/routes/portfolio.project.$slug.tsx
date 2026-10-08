@@ -14,7 +14,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import {
   pageMeta,
   jsonLd,
@@ -83,6 +83,7 @@ function ProjectCaseStudy() {
   return (
     <main className="bg-background">
       {/* I — Title card */}
+      <RevealOnLoad>
       <section className="relative flex min-h-[96svh] items-end overflow-hidden">
         <CinematicBackdrop frames={project.heroFrames.map(photo)} interval={8000} />
         <div className="mx-auto w-full max-w-7xl px-6 pb-36 md:px-10 md:pb-44">
@@ -111,6 +112,7 @@ function ProjectCaseStudy() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       <div className="mx-auto max-w-7xl px-6 pt-10 md:px-10">
         <Breadcrumbs trail={trail} />
@@ -121,16 +123,16 @@ function ProjectCaseStudy() {
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <dl className="grid grid-cols-2 gap-y-12 border-y border-border py-14 md:grid-cols-4">
             {project.highlights.map((h, i) => (
-              <Reveal key={h.label} variant="rise" delay={i * 90}>
+              <Reveal key={h.label} variant="rise" delay={i * 90} flat>
                 <dt className="font-sans text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
                   {h.label}
                 </dt>
                 <dd className="mt-3 font-display text-4xl leading-none font-light text-gold md:text-5xl">
                   {h.value}
                 </dd>
-                <p className="mt-3 font-sans text-[11px] leading-relaxed font-light text-muted-foreground">
+                <dd className="mt-3 font-sans text-[11px] leading-relaxed font-light text-muted-foreground">
                   {h.note}
-                </p>
+                </dd>
               </Reveal>
             ))}
           </dl>

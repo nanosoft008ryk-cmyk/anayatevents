@@ -16,18 +16,30 @@ export function CinematicBackdrop({
   interval?: number;
 }) {
   const [index, setIndex] = useState(0);
-  // Only the opening frame is fetched with the document; the rest are armed
-  // once the browser is idle so mobile never competes with the LCP image.
+  // Furthest frame fetched so far. Only the opening frame comes with the
+  // document; each later frame is fetched one step ahead of its turn, and the
+  // first of them only after the page has fully loaded, so mobile never spends
+  // its opening seconds on photographs nobody can see yet.
+  const [reach, setReach] = useState(0);
   const [armed, setArmed] = useState(false);
   const plate = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
-    const id = w.requestIdleCallback
-      ? w.requestIdleCallback(() => setArmed(true))
-      : window.setTimeout(() => setArmed(true), 2000);
-    return () => window.clearTimeout(id as number);
+    let timer = 0;
+    const arm = () => {
+      timer = window.setTimeout(() => setArmed(true), 3000);
+    };
+    if (document.readyState === "complete") arm();
+    else window.addEventListener("load", arm, { once: true });
+    return () => {
+      window.removeEventListener("load", arm);
+      window.clearTimeout(timer);
+    };
   }, []);
+
+  useEffect(() => {
+    if (armed) setReach((r) => Math.max(r, Math.min(index + 1, frames.length - 1)));
+  }, [armed, index, frames.length]);
 
   useEffect(() => {
     if (frames.length < 2) return;
@@ -63,13 +75,14 @@ export function CinematicBackdrop({
           className="absolute inset-0 transition-opacity duration-[2600ms] [transition-timing-function:var(--ease-lux)]"
           style={{ opacity: i === index ? 1 : 0 }}
         >
-          {(i === 0 || armed) && (
+          {i <= reach && (
             <SmartImg
               id={f.id}
               fallbackUrl={f.url}
               sizes="100vw"
               alt={i === 0 ? f.alt : ""}
               priority={i === 0}
+              artDirected={i === 0}
               fetchPriority={i === 0 ? "high" : "low"}
               className="h-full w-full object-cover kenburns"
               style={{ animationDelay: `${i * -4}s` }}

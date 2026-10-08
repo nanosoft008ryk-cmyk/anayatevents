@@ -8,7 +8,7 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { pageMeta, jsonLd, breadcrumbSchema, itemListSchema, type Crumb } from "@/lib/seo";
 
@@ -47,6 +47,7 @@ function ProcessPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: one word per movement, set as a masthead ──────────────── */}
+      <RevealOnLoad>
       <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-48 lg:pb-28">
         <HeroBackdrop id="ae-14" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
@@ -77,6 +78,7 @@ function ProcessPage() {
           </p>
         </Reveal>
       </section>
+      </RevealOnLoad>
 
       {/* ── Movements: full-bleed plate per stage, type floating over it ── */}
       {processPage.movements.map((m, i) => (
@@ -107,7 +109,7 @@ function ProcessPage() {
                 }`}
               >
                 <div className="glass rounded-[25px] px-7 py-10 md:px-12 md:py-14">
-                  <p className="font-sans text-[10px] tracking-[0.44em] uppercase text-gold-deep">
+                  <p className="font-sans text-[10px] tracking-[0.44em] uppercase text-gold">
                     {m.index} · {m.caption}
                   </p>
                   <Reveal delay={80} variant="mask">

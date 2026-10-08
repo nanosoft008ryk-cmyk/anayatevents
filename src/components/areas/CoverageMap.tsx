@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 import { locations } from "@/content/locations";
@@ -82,37 +82,75 @@ export function CoverageMap() {
                 const m = marks[l.slug];
                 if (!m) return null;
                 const on = l.slug === active;
-                return (
-                  <button
-                    key={l.slug}
-                    type="button"
-                    onMouseEnter={() => setActive(l.slug)}
-                    onFocus={() => setActive(l.slug)}
-                    onClick={() => setActive(l.slug)}
-                    aria-pressed={on}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-sans text-[9px] tracking-[0.24em] uppercase transition-colors duration-500"
-                    style={{ left: `${m.x}%`, top: `${m.y}%` }}
+                const mark = (
+                  <span
+                    className={
+                      on
+                        ? "inline-flex items-center gap-2 text-gold"
+                        : "inline-flex items-center gap-2 text-muted-foreground hover:text-ivory"
+                    }
                   >
                     <span
                       className={
                         on
-                          ? "inline-flex items-center gap-2 text-gold"
-                          : "inline-flex items-center gap-2 text-muted-foreground hover:text-ivory"
+                          ? "h-[7px] w-[7px] rounded-full bg-gold shadow-[0_0_0_5px_color-mix(in_oklab,var(--gold)_22%,transparent)]"
+                          : "h-[5px] w-[5px] rounded-full bg-border-strong"
                       }
+                    />
+                    {l.shortName}
+                  </span>
+                );
+                const place =
+                  "absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-sans text-[9px] tracking-[0.24em] uppercase transition-colors duration-500";
+                return (
+                  <Fragment key={l.slug}>
+                    {/* On a phone the labels sit too close to tap, so they are
+                        only a picture there and the chips below do the work. */}
+                    <span
+                      aria-hidden="true"
+                      className={`${place} lg:hidden`}
+                      style={{ left: `${m.x}%`, top: `${m.y}%` }}
                     >
-                      <span
-                        className={
-                          on
-                            ? "h-[7px] w-[7px] rounded-full bg-gold shadow-[0_0_0_5px_color-mix(in_oklab,var(--gold)_22%,transparent)]"
-                            : "h-[5px] w-[5px] rounded-full bg-border-strong"
-                        }
-                      />
-                      {l.shortName}
+                      {mark}
                     </span>
-                  </button>
+                    <button
+                      type="button"
+                      onMouseEnter={() => setActive(l.slug)}
+                      onFocus={() => setActive(l.slug)}
+                      onClick={() => setActive(l.slug)}
+                      aria-pressed={on}
+                      className={`${place} hidden lg:block`}
+                      style={{ left: `${m.x}%`, top: `${m.y}%` }}
+                    >
+                      {mark}
+                    </button>
+                  </Fragment>
                 );
               })}
             </div>
+          </div>
+
+          <div className="-mt-6 flex flex-wrap gap-2 lg:hidden">
+            {locations
+              .filter((l) => marks[l.slug])
+              .map((l) => {
+                const on = l.slug === active;
+                return (
+                  <button
+                    key={l.slug}
+                    type="button"
+                    onClick={() => setActive(l.slug)}
+                    aria-pressed={on}
+                    className={
+                      on
+                        ? "min-h-11 border border-gold px-4 font-sans text-[10px] tracking-[0.24em] uppercase text-gold"
+                        : "min-h-11 border border-border px-4 font-sans text-[10px] tracking-[0.24em] uppercase text-muted-foreground"
+                    }
+                  >
+                    {l.shortName}
+                  </button>
+                );
+              })}
           </div>
 
           {/* Read-out */}

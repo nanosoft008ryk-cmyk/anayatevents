@@ -7,7 +7,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxAnchor, LuxTextLink } from "@/components/ui/LuxButton";
 import { SmartImg } from "@/components/ui/SmartImg";
 import { pageMeta, jsonLd, breadcrumbSchema, type Crumb } from "@/lib/seo";
@@ -40,6 +40,7 @@ function CareersPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: mosaic band above a low, wide headline ────────────────── */}
+      <RevealOnLoad>
       <section className="pt-32 md:pt-36">
         <div className="mx-auto max-w-[92rem] px-6 md:px-12">
           <Breadcrumbs trail={trail} className="mb-10" />
@@ -73,6 +74,7 @@ function CareersPage() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ── Culture: four statements in a wide, uneven grid ─────────────── */}
       <section className="mx-auto max-w-[92rem] px-6 py-24 md:px-12 lg:py-32">

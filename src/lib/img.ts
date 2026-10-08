@@ -14,6 +14,22 @@ type Variant = {
 
 const variants = variantsJson as unknown as Record<string, Variant>;
 
+/** Viewports that receive a portrait art-directed crop instead of the master. */
+export const MOBILE_MEDIA = "(max-width: 640px)";
+
+/**
+ * Portrait crops (committed under public/hero) for full-bleed opening frames.
+ * A phone only ever shows the centre third of a landscape master behind the
+ * hero, so this crop is both sharper and a fraction of the bytes.
+ */
+const mobileCrops: Record<string, { avif: string; webp: string }> = {
+  "ae-22": { avif: "/hero/ae-22-mobile.avif", webp: "/hero/ae-22-mobile.webp" },
+};
+
+export function mobileCrop(id: string) {
+  return mobileCrops[id];
+}
+
 export type ImgAttrs = {
   src: string;
   srcSet?: string;
@@ -62,10 +78,31 @@ export function imgAttrs(id: string, fallbackUrl: string, sizes = "100vw"): ImgA
   };
 }
 
-/** Preload links for an above-the-fold image: AVIF first, WebP fallback. */
-export function preloadLinks(id: string, fallbackUrl: string, sizes = "100vw") {
+/**
+ * Preload links for an above-the-fold image: AVIF first, WebP fallback. With
+ * `artDirected`, phones preload the portrait crop and larger screens the set.
+ */
+export function preloadLinks(
+  id: string,
+  fallbackUrl: string,
+  sizes = "100vw",
+  artDirected = false,
+) {
   const a = imgAttrs(id, fallbackUrl, sizes);
   const links: Record<string, string>[] = [];
+  const crop = artDirected ? mobileCrop(id) : undefined;
+  if (crop) {
+    links.push({
+      rel: "preload",
+      as: "image",
+      type: "image/avif",
+      href: crop.avif,
+      media: MOBILE_MEDIA,
+      fetchPriority: "high",
+    });
+    const wide = preloadLinks(id, fallbackUrl, sizes);
+    return [...links, ...wide.map((l) => ({ ...l, media: "(min-width: 641px)" }))];
+  }
   if (a.avifSrcSet) {
     links.push({
       rel: "preload",

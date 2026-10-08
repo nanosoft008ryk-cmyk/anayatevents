@@ -14,7 +14,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CinematicBackdrop } from "@/components/CinematicBackdrop";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { CtaBand } from "@/components/CtaBand";
 import { pageMeta, jsonLd, breadcrumbSchema, itemListSchema, type Crumb } from "@/lib/seo";
@@ -74,6 +74,7 @@ function CategoryPage() {
 
   return (
     <main className="bg-background">
+      <RevealOnLoad>
       <section className="relative isolate flex min-h-[78svh] flex-col justify-end overflow-hidden">
         <CinematicBackdrop frames={photosByIds(category.heroFrames)} interval={8000} />
         <div className="mx-auto w-full max-w-[92rem] px-6 pt-40 pb-20 md:px-12 lg:pb-28">
@@ -96,6 +97,7 @@ function CategoryPage() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       <section className="chapter light-left">
         <div className="mx-auto grid max-w-[92rem] gap-14 px-6 py-24 md:px-12 lg:grid-cols-[0.8fr_1.4fr] lg:py-32">

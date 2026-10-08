@@ -1,8 +1,29 @@
-import { useEffect, useRef, useState, type ElementType, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ElementType,
+  type ReactNode,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
 type RevealVariant = "rise" | "mask" | "fade" | "letter";
+
+/**
+ * Inside an opening (above-the-fold) section, reveals run as pure CSS
+ * keyframes from the server-rendered HTML instead of waiting for hydration and
+ * an IntersectionObserver. The motion is identical, but the headline paints
+ * with the first frame, which is what LCP and FCP measure on mobile.
+ */
+const ImmediateReveal = createContext(false);
+
+export function RevealOnLoad({ children }: { children: ReactNode }) {
+  return <ImmediateReveal.Provider value>{children}</ImmediateReveal.Provider>;
+}
 
 const variantClass: Record<RevealVariant, string> = {
   rise: "translate-y-8 opacity-0",
@@ -25,6 +46,8 @@ export function Reveal({
   className,
   innerClassName,
   once = true,
+  immediate = false,
+  flat = false,
 }: {
   children: ReactNode;
   as?: ElementType;
@@ -35,12 +58,22 @@ export function Reveal({
   /** Layout classes for the animated inner element (use for flex/grid rows). */
   innerClassName?: string;
   once?: boolean;
+  /** Animate on page load with CSS alone (above-the-fold content). */
+  immediate?: boolean;
+  /**
+   * Render a single element instead of a wrapper + animated inner, so a
+   * reveal can itself be the <li> of a list or the dt/dd group of a <dl>.
+   * Not for the "mask" variant, whose clip would hide it from the observer.
+   */
+  flat?: boolean;
 }) {
   const Tag = (as ?? "div") as ElementType;
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
+  const onLoad = useContext(ImmediateReveal) || immediate;
 
   useEffect(() => {
+    if (onLoad) return;
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -62,11 +95,62 @@ export function Reveal({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [once]);
+  }, [once, onLoad]);
 
   // The clip/transform lives on an INNER element. Observing a self-clipped node
   // makes its intersection rect empty, so the observer would never fire.
   const Inner = (Tag === "span" ? "span" : "div") as ElementType;
+
+  const loadStyle = {
+    "--reveal-duration": `${duration}ms`,
+    "--reveal-delay": `${delay}ms`,
+  } as CSSProperties;
+  const motionStyle: CSSProperties = {
+    transitionProperty: "transform, opacity, clip-path, filter",
+    transitionDuration: `${duration}ms`,
+    transitionTimingFunction: "var(--ease-lux)",
+    transitionDelay: `${delay}ms`,
+  };
+  const stateClass = shown
+    ? "translate-y-0 opacity-100 blur-0 [clip-path:inset(0_0_0_0)]"
+    : variantClass[variant];
+
+  if (flat) {
+    return onLoad ? (
+      <Tag
+        className={cn("reveal-load", `reveal-load-${variant}`, className, innerClassName)}
+        style={loadStyle}
+      >
+        {children}
+      </Tag>
+    ) : (
+      <Tag
+        ref={ref as never}
+        className={cn("will-change-[transform,opacity]", className, innerClassName, stateClass)}
+        style={motionStyle}
+      >
+        {children}
+      </Tag>
+    );
+  }
+
+  if (onLoad) {
+    return (
+      <Tag className={className}>
+        <Inner
+          className={cn(
+            "reveal-load",
+            `reveal-load-${variant}`,
+            Tag === "span" ? "inline-block" : "block h-full",
+            innerClassName,
+          )}
+          style={loadStyle}
+        >
+          {children}
+        </Inner>
+      </Tag>
+    );
+  }
 
   return (
     <Tag ref={ref as never} className={className}>
@@ -75,16 +159,9 @@ export function Reveal({
           "will-change-[transform,opacity,clip-path]",
           Tag === "span" ? "inline-block" : "block h-full",
           innerClassName,
-          shown
-            ? "translate-y-0 opacity-100 blur-0 [clip-path:inset(0_0_0_0)]"
-            : variantClass[variant],
+          stateClass,
         )}
-        style={{
-          transitionProperty: "transform, opacity, clip-path, filter",
-          transitionDuration: `${duration}ms`,
-          transitionTimingFunction: "var(--ease-lux)",
-          transitionDelay: `${delay}ms`,
-        }}
+        style={motionStyle}
       >
         {children}
       </Inner>
@@ -101,8 +178,10 @@ export function RevealWords({
   wordClassName,
   delay = 0,
   step = 70,
+  immediate,
 }: {
   text: string;
+  immediate?: boolean;
   className?: string;
   wordClassName?: string;
   delay?: number;
@@ -118,6 +197,7 @@ export function RevealWords({
           variant="letter"
           delay={delay + i * step}
           duration={900}
+          immediate={immediate}
           className={cn("inline-block", wordClassName)}
         >
           {w}

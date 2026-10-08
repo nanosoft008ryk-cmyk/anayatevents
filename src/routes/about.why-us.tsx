@@ -10,7 +10,7 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { RelatedConstellation } from "@/components/RelatedConstellation";
 import { CtaBand } from "@/components/CtaBand";
 import { Plate } from "@/components/Plate";
-import { Reveal, RevealWords } from "@/components/motion/Reveal";
+import { Reveal, RevealWords, RevealOnLoad } from "@/components/motion/Reveal";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { pageMeta, jsonLd, breadcrumbSchema, itemListSchema, type Crumb } from "@/lib/seo";
 
@@ -52,6 +52,7 @@ function WhyPage() {
   return (
     <main className="bg-background">
       {/* ── Hero: split — a single quiet plate beside a wide type column ── */}
+      <RevealOnLoad>
       <section className="relative isolate mx-auto max-w-[92rem] px-6 pt-36 pb-20 md:px-12 md:pt-48">
         <HeroBackdrop id="ae-04" priority />
         <Breadcrumbs trail={trail} className="mb-12" />
@@ -75,6 +76,7 @@ function WhyPage() {
           </Reveal>
         </div>
       </section>
+      </RevealOnLoad>
 
       {/* ── Differences: two-column ledger — what we do / what you feel ─── */}
       <section className="border-t border-border">
