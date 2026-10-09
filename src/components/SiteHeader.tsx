@@ -67,7 +67,7 @@ export function SiteHeader() {
         <Link to="/" className="group/logo flex items-center gap-4" aria-label={`${site.name} — home`}>
           <img
             src={logoMark}
-            alt=""
+            alt={`${site.name} logo`}
             width={48}
             height={48}
             fetchPriority="low"

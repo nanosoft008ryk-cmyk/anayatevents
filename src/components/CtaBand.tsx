@@ -18,8 +18,9 @@ export function CtaBand({
       {/* Plate dissolves into the page above and the footer below — no band edges. */}
       <div className="absolute inset-0 -z-10">
         <SmartImg
-          id="ae-16" fallbackUrl={photo("ae-16").url} sizes="100vw"
-          alt=""
+          id="ae-16" fallbackUrl={photo("ae-16").url} sizes="(max-width: 640px) 360px, 100vw"
+          alt={photo("ae-16").alt}
+          aria-hidden="true"
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover opacity-30 drift-slow"

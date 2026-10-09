@@ -118,8 +118,8 @@ function Home() {
             <div className="mt-6 max-w-md">
               <Reveal delay={780}>
                 <p className="font-sans text-[15px] leading-[1.85] font-light tracking-wide text-foreground/80 sm:text-[14px] sm:leading-[1.95]">
-                  A luxury event management and wedding catering house in Lahore — designing Barat,
-                  Walima and corporate occasions with bespoke decor and gourmet catering. Trusted
+                  A luxury event management, wedding planning and catering house in Lahore — designing Barat,
+                  Walima and corporate occasions with bespoke decor and gourmet menus. Trusted
                   across DHA, Bahria Town, Gulberg and every corner of the city.
                 </p>
               </Reveal>
@@ -460,8 +460,9 @@ function Home() {
           <SmartImg
             id="ae-08"
             fallbackUrl={photo("ae-08").url}
-            sizes="100vw"
-            alt=""
+            sizes="(max-width: 640px) 360px, 100vw"
+            alt={photo("ae-08").alt}
+            aria-hidden="true"
             className="h-full w-full object-cover opacity-[0.18] drift-slow"
           />
           {/* Legibility stack — this section is entirely type over photography. */}

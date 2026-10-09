@@ -87,7 +87,7 @@ export function preloadLinks(
   fallbackUrl: string,
   sizes = "100vw",
   artDirected = false,
-) {
+) : Record<string, string>[] {
   const a = imgAttrs(id, fallbackUrl, sizes);
   const links: Record<string, string>[] = [];
   const crop = artDirected ? mobileCrop(id) : undefined;

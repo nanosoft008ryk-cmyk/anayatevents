@@ -9,109 +9,49 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VaultRouteImport } from './routes/vault'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.]xml'
-import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
-import { Route as ReviewsRouteImport } from './routes/reviews'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as MenuRouteImport } from './routes/menu'
-import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
-import { Route as KnowledgeGraphDotjsonRouteImport } from './routes/knowledge-graph[.]json'
-import { Route as ImageSitemapDotxmlRouteImport } from './routes/image-sitemap[.]xml'
-import { Route as CookiesRouteImport } from './routes/cookies'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicesIndexRouteImport } from './routes/services.index'
-import { Route as PortfolioIndexRouteImport } from './routes/portfolio.index'
-import { Route as JournalIndexRouteImport } from './routes/journal.index'
-import { Route as FaqIndexRouteImport } from './routes/faq.index'
-import { Route as AreasIndexRouteImport } from './routes/areas.index'
+import { Route as SplatRouteImport } from './routes/$'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as ImageSitemapDotxmlRouteImport } from './routes/image-sitemap[.]xml'
+import { Route as KnowledgeGraphDotjsonRouteImport } from './routes/knowledge-graph[.]json'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
+import { Route as MenuRouteImport } from './routes/menu'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as SitemapIndexDotxmlRouteImport } from './routes/sitemap-index[.]xml'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as VaultRouteImport } from './routes/vault'
 import { Route as AboutIndexRouteImport } from './routes/about.index'
-import { Route as SitemapsSectionRouteImport } from './routes/sitemaps.$section'
-import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
-import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
-import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
-import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
-import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
-import { Route as AboutWhyUsRouteImport } from './routes/about.why-us'
-import { Route as AboutTeamRouteImport } from './routes/about.team'
-import { Route as AboutStoryRouteImport } from './routes/about.story'
-import { Route as AboutPromiseRouteImport } from './routes/about.promise'
-import { Route as AboutProcessRouteImport } from './routes/about.process'
-import { Route as AboutPhilosophyRouteImport } from './routes/about.philosophy'
-import { Route as AboutJourneyRouteImport } from './routes/about.journey'
-import { Route as AboutCraftsmanshipRouteImport } from './routes/about.craftsmanship'
-import { Route as AboutCareersRouteImport } from './routes/about.careers'
 import { Route as AboutBehindTheScenesRouteImport } from './routes/about.behind-the-scenes'
-import { Route as PortfolioProjectSlugRouteImport } from './routes/portfolio.project.$slug'
+import { Route as AboutCareersRouteImport } from './routes/about.careers'
+import { Route as AboutCraftsmanshipRouteImport } from './routes/about.craftsmanship'
+import { Route as AboutJourneyRouteImport } from './routes/about.journey'
+import { Route as AboutPhilosophyRouteImport } from './routes/about.philosophy'
+import { Route as AboutProcessRouteImport } from './routes/about.process'
+import { Route as AboutPromiseRouteImport } from './routes/about.promise'
+import { Route as AboutStoryRouteImport } from './routes/about.story'
+import { Route as AboutTeamRouteImport } from './routes/about.team'
+import { Route as AboutWhyUsRouteImport } from './routes/about.why-us'
+import { Route as AreasIndexRouteImport } from './routes/areas.index'
+import { Route as AreasSlugRouteImport } from './routes/areas.$slug'
+import { Route as FaqIndexRouteImport } from './routes/faq.index'
+import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
+import { Route as JournalIndexRouteImport } from './routes/journal.index'
+import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
+import { Route as PortfolioIndexRouteImport } from './routes/portfolio.index'
+import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as SitemapsSectionRouteImport } from './routes/sitemaps.$section'
 import { Route as JournalCategorySlugRouteImport } from './routes/journal.category.$slug'
+import { Route as PortfolioProjectSlugRouteImport } from './routes/portfolio.project.$slug'
 
-const VaultRoute = VaultRouteImport.update({
-  id: '/vault',
-  path: '/vault',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapIndexDotxmlRoute = SitemapIndexDotxmlRouteImport.update({
-  id: '/sitemap-index.xml',
-  path: '/sitemap-index.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
-  id: '/robots.txt',
-  path: '/robots.txt',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReviewsRoute = ReviewsRouteImport.update({
-  id: '/reviews',
-  path: '/reviews',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MenuRoute = MenuRouteImport.update({
-  id: '/menu',
-  path: '/menu',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
-  id: '/llms.txt',
-  path: '/llms.txt',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KnowledgeGraphDotjsonRoute = KnowledgeGraphDotjsonRouteImport.update({
-  id: '/knowledge-graph.json',
-  path: '/knowledge-graph.json',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ImageSitemapDotxmlRoute = ImageSitemapDotxmlRouteImport.update({
-  id: '/image-sitemap.xml',
-  path: '/image-sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CookiesRoute = CookiesRouteImport.update({
-  id: '/cookies',
-  path: '/cookies',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SplatRoute = SplatRouteImport.update({
@@ -119,34 +59,69 @@ const SplatRoute = SplatRouteImport.update({
   path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesIndexRoute = ServicesIndexRouteImport.update({
-  id: '/services/',
-  path: '/services/',
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
-  id: '/portfolio/',
-  path: '/portfolio/',
+const ImageSitemapDotxmlRoute = ImageSitemapDotxmlRouteImport.update({
+  id: '/image-sitemap.xml',
+  path: '/image-sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const JournalIndexRoute = JournalIndexRouteImport.update({
-  id: '/journal/',
-  path: '/journal/',
+const KnowledgeGraphDotjsonRoute = KnowledgeGraphDotjsonRouteImport.update({
+  id: '/knowledge-graph.json',
+  path: '/knowledge-graph.json',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FaqIndexRoute = FaqIndexRouteImport.update({
-  id: '/faq/',
-  path: '/faq/',
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AreasIndexRoute = AreasIndexRouteImport.update({
-  id: '/areas/',
-  path: '/areas/',
+const MenuRoute = MenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapIndexDotxmlRoute = SitemapIndexDotxmlRouteImport.update({
+  id: '/sitemap-index.xml',
+  path: '/sitemap-index.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VaultRoute = VaultRouteImport.update({
+  id: '/vault',
+  path: '/vault',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
@@ -154,74 +129,9 @@ const AboutIndexRoute = AboutIndexRouteImport.update({
   path: '/about/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapsSectionRoute = SitemapsSectionRouteImport.update({
-  id: '/sitemaps/$section',
-  path: '/sitemaps/$section',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesSlugRoute = ServicesSlugRouteImport.update({
-  id: '/services/$slug',
-  path: '/services/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PortfolioSlugRoute = PortfolioSlugRouteImport.update({
-  id: '/portfolio/$slug',
-  path: '/portfolio/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const JournalSlugRoute = JournalSlugRouteImport.update({
-  id: '/journal/$slug',
-  path: '/journal/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqSlugRoute = FaqSlugRouteImport.update({
-  id: '/faq/$slug',
-  path: '/faq/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AreasSlugRoute = AreasSlugRouteImport.update({
-  id: '/areas/$slug',
-  path: '/areas/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutWhyUsRoute = AboutWhyUsRouteImport.update({
-  id: '/about/why-us',
-  path: '/about/why-us',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutTeamRoute = AboutTeamRouteImport.update({
-  id: '/about/team',
-  path: '/about/team',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutStoryRoute = AboutStoryRouteImport.update({
-  id: '/about/story',
-  path: '/about/story',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutPromiseRoute = AboutPromiseRouteImport.update({
-  id: '/about/promise',
-  path: '/about/promise',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutProcessRoute = AboutProcessRouteImport.update({
-  id: '/about/process',
-  path: '/about/process',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutPhilosophyRoute = AboutPhilosophyRouteImport.update({
-  id: '/about/philosophy',
-  path: '/about/philosophy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutJourneyRoute = AboutJourneyRouteImport.update({
-  id: '/about/journey',
-  path: '/about/journey',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutCraftsmanshipRoute = AboutCraftsmanshipRouteImport.update({
-  id: '/about/craftsmanship',
-  path: '/about/craftsmanship',
+const AboutBehindTheScenesRoute = AboutBehindTheScenesRouteImport.update({
+  id: '/about/behind-the-scenes',
+  path: '/about/behind-the-scenes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutCareersRoute = AboutCareersRouteImport.update({
@@ -229,19 +139,109 @@ const AboutCareersRoute = AboutCareersRouteImport.update({
   path: '/about/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutBehindTheScenesRoute = AboutBehindTheScenesRouteImport.update({
-  id: '/about/behind-the-scenes',
-  path: '/about/behind-the-scenes',
+const AboutCraftsmanshipRoute = AboutCraftsmanshipRouteImport.update({
+  id: '/about/craftsmanship',
+  path: '/about/craftsmanship',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PortfolioProjectSlugRoute = PortfolioProjectSlugRouteImport.update({
-  id: '/portfolio/project/$slug',
-  path: '/portfolio/project/$slug',
+const AboutJourneyRoute = AboutJourneyRouteImport.update({
+  id: '/about/journey',
+  path: '/about/journey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutPhilosophyRoute = AboutPhilosophyRouteImport.update({
+  id: '/about/philosophy',
+  path: '/about/philosophy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutProcessRoute = AboutProcessRouteImport.update({
+  id: '/about/process',
+  path: '/about/process',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutPromiseRoute = AboutPromiseRouteImport.update({
+  id: '/about/promise',
+  path: '/about/promise',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutStoryRoute = AboutStoryRouteImport.update({
+  id: '/about/story',
+  path: '/about/story',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutTeamRoute = AboutTeamRouteImport.update({
+  id: '/about/team',
+  path: '/about/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutWhyUsRoute = AboutWhyUsRouteImport.update({
+  id: '/about/why-us',
+  path: '/about/why-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasIndexRoute = AreasIndexRouteImport.update({
+  id: '/areas/',
+  path: '/areas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AreasSlugRoute = AreasSlugRouteImport.update({
+  id: '/areas/$slug',
+  path: '/areas/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqIndexRoute = FaqIndexRouteImport.update({
+  id: '/faq/',
+  path: '/faq/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqSlugRoute = FaqSlugRouteImport.update({
+  id: '/faq/$slug',
+  path: '/faq/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalIndexRoute = JournalIndexRouteImport.update({
+  id: '/journal/',
+  path: '/journal/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalSlugRoute = JournalSlugRouteImport.update({
+  id: '/journal/$slug',
+  path: '/journal/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
+  id: '/portfolio/',
+  path: '/portfolio/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioSlugRoute = PortfolioSlugRouteImport.update({
+  id: '/portfolio/$slug',
+  path: '/portfolio/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/services/$slug',
+  path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapsSectionRoute = SitemapsSectionRouteImport.update({
+  id: '/sitemaps/$section',
+  path: '/sitemaps/$section',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JournalCategorySlugRoute = JournalCategorySlugRouteImport.update({
   id: '/journal/category/$slug',
   path: '/journal/category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioProjectSlugRoute = PortfolioProjectSlugRouteImport.update({
+  id: '/portfolio/project/$slug',
+  path: '/portfolio/project/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -539,95 +539,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/vault': {
-      id: '/vault'
-      path: '/vault'
-      fullPath: '/vault'
-      preLoaderRoute: typeof VaultRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap-index.xml': {
-      id: '/sitemap-index.xml'
-      path: '/sitemap-index.xml'
-      fullPath: '/sitemap-index.xml'
-      preLoaderRoute: typeof SitemapIndexDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/robots.txt': {
-      id: '/robots.txt'
-      path: '/robots.txt'
-      fullPath: '/robots.txt'
-      preLoaderRoute: typeof RobotsDottxtRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reviews': {
-      id: '/reviews'
-      path: '/reviews'
-      fullPath: '/reviews'
-      preLoaderRoute: typeof ReviewsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/menu': {
-      id: '/menu'
-      path: '/menu'
-      fullPath: '/menu'
-      preLoaderRoute: typeof MenuRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/llms.txt': {
-      id: '/llms.txt'
-      path: '/llms.txt'
-      fullPath: '/llms.txt'
-      preLoaderRoute: typeof LlmsDottxtRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/knowledge-graph.json': {
-      id: '/knowledge-graph.json'
-      path: '/knowledge-graph.json'
-      fullPath: '/knowledge-graph.json'
-      preLoaderRoute: typeof KnowledgeGraphDotjsonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/image-sitemap.xml': {
-      id: '/image-sitemap.xml'
-      path: '/image-sitemap.xml'
-      fullPath: '/image-sitemap.xml'
-      preLoaderRoute: typeof ImageSitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cookies': {
-      id: '/cookies'
-      path: '/cookies'
-      fullPath: '/cookies'
-      preLoaderRoute: typeof CookiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$': {
@@ -637,46 +553,95 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/': {
-      id: '/services/'
-      path: '/services'
-      fullPath: '/services/'
-      preLoaderRoute: typeof ServicesIndexRouteImport
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/portfolio/': {
-      id: '/portfolio/'
-      path: '/portfolio'
-      fullPath: '/portfolio/'
-      preLoaderRoute: typeof PortfolioIndexRouteImport
+    '/image-sitemap.xml': {
+      id: '/image-sitemap.xml'
+      path: '/image-sitemap.xml'
+      fullPath: '/image-sitemap.xml'
+      preLoaderRoute: typeof ImageSitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/journal/': {
-      id: '/journal/'
-      path: '/journal'
-      fullPath: '/journal/'
-      preLoaderRoute: typeof JournalIndexRouteImport
+    '/knowledge-graph.json': {
+      id: '/knowledge-graph.json'
+      path: '/knowledge-graph.json'
+      fullPath: '/knowledge-graph.json'
+      preLoaderRoute: typeof KnowledgeGraphDotjsonRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/faq/': {
-      id: '/faq/'
-      path: '/faq'
-      fullPath: '/faq/'
-      preLoaderRoute: typeof FaqIndexRouteImport
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/areas/': {
-      id: '/areas/'
-      path: '/areas'
-      fullPath: '/areas/'
-      preLoaderRoute: typeof AreasIndexRouteImport
+    '/menu': {
+      id: '/menu'
+      path: '/menu'
+      fullPath: '/menu'
+      preLoaderRoute: typeof MenuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-index.xml': {
+      id: '/sitemap-index.xml'
+      path: '/sitemap-index.xml'
+      fullPath: '/sitemap-index.xml'
+      preLoaderRoute: typeof SitemapIndexDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vault': {
+      id: '/vault'
+      path: '/vault'
+      fullPath: '/vault'
+      preLoaderRoute: typeof VaultRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about/': {
@@ -686,102 +651,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sitemaps/$section': {
-      id: '/sitemaps/$section'
-      path: '/sitemaps/$section'
-      fullPath: '/sitemaps/$section'
-      preLoaderRoute: typeof SitemapsSectionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services/$slug': {
-      id: '/services/$slug'
-      path: '/services/$slug'
-      fullPath: '/services/$slug'
-      preLoaderRoute: typeof ServicesSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/portfolio/$slug': {
-      id: '/portfolio/$slug'
-      path: '/portfolio/$slug'
-      fullPath: '/portfolio/$slug'
-      preLoaderRoute: typeof PortfolioSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/journal/$slug': {
-      id: '/journal/$slug'
-      path: '/journal/$slug'
-      fullPath: '/journal/$slug'
-      preLoaderRoute: typeof JournalSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq/$slug': {
-      id: '/faq/$slug'
-      path: '/faq/$slug'
-      fullPath: '/faq/$slug'
-      preLoaderRoute: typeof FaqSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/areas/$slug': {
-      id: '/areas/$slug'
-      path: '/areas/$slug'
-      fullPath: '/areas/$slug'
-      preLoaderRoute: typeof AreasSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about/why-us': {
-      id: '/about/why-us'
-      path: '/about/why-us'
-      fullPath: '/about/why-us'
-      preLoaderRoute: typeof AboutWhyUsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about/team': {
-      id: '/about/team'
-      path: '/about/team'
-      fullPath: '/about/team'
-      preLoaderRoute: typeof AboutTeamRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about/story': {
-      id: '/about/story'
-      path: '/about/story'
-      fullPath: '/about/story'
-      preLoaderRoute: typeof AboutStoryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about/promise': {
-      id: '/about/promise'
-      path: '/about/promise'
-      fullPath: '/about/promise'
-      preLoaderRoute: typeof AboutPromiseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about/process': {
-      id: '/about/process'
-      path: '/about/process'
-      fullPath: '/about/process'
-      preLoaderRoute: typeof AboutProcessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about/philosophy': {
-      id: '/about/philosophy'
-      path: '/about/philosophy'
-      fullPath: '/about/philosophy'
-      preLoaderRoute: typeof AboutPhilosophyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about/journey': {
-      id: '/about/journey'
-      path: '/about/journey'
-      fullPath: '/about/journey'
-      preLoaderRoute: typeof AboutJourneyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about/craftsmanship': {
-      id: '/about/craftsmanship'
-      path: '/about/craftsmanship'
-      fullPath: '/about/craftsmanship'
-      preLoaderRoute: typeof AboutCraftsmanshipRouteImport
+    '/about/behind-the-scenes': {
+      id: '/about/behind-the-scenes'
+      path: '/about/behind-the-scenes'
+      fullPath: '/about/behind-the-scenes'
+      preLoaderRoute: typeof AboutBehindTheScenesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about/careers': {
@@ -791,18 +665,137 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutCareersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about/behind-the-scenes': {
-      id: '/about/behind-the-scenes'
-      path: '/about/behind-the-scenes'
-      fullPath: '/about/behind-the-scenes'
-      preLoaderRoute: typeof AboutBehindTheScenesRouteImport
+    '/about/craftsmanship': {
+      id: '/about/craftsmanship'
+      path: '/about/craftsmanship'
+      fullPath: '/about/craftsmanship'
+      preLoaderRoute: typeof AboutCraftsmanshipRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/portfolio/project/$slug': {
-      id: '/portfolio/project/$slug'
-      path: '/portfolio/project/$slug'
-      fullPath: '/portfolio/project/$slug'
-      preLoaderRoute: typeof PortfolioProjectSlugRouteImport
+    '/about/journey': {
+      id: '/about/journey'
+      path: '/about/journey'
+      fullPath: '/about/journey'
+      preLoaderRoute: typeof AboutJourneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/philosophy': {
+      id: '/about/philosophy'
+      path: '/about/philosophy'
+      fullPath: '/about/philosophy'
+      preLoaderRoute: typeof AboutPhilosophyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/process': {
+      id: '/about/process'
+      path: '/about/process'
+      fullPath: '/about/process'
+      preLoaderRoute: typeof AboutProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/promise': {
+      id: '/about/promise'
+      path: '/about/promise'
+      fullPath: '/about/promise'
+      preLoaderRoute: typeof AboutPromiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/story': {
+      id: '/about/story'
+      path: '/about/story'
+      fullPath: '/about/story'
+      preLoaderRoute: typeof AboutStoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/team': {
+      id: '/about/team'
+      path: '/about/team'
+      fullPath: '/about/team'
+      preLoaderRoute: typeof AboutTeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/why-us': {
+      id: '/about/why-us'
+      path: '/about/why-us'
+      fullPath: '/about/why-us'
+      preLoaderRoute: typeof AboutWhyUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/': {
+      id: '/areas/'
+      path: '/areas'
+      fullPath: '/areas/'
+      preLoaderRoute: typeof AreasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/areas/$slug': {
+      id: '/areas/$slug'
+      path: '/areas/$slug'
+      fullPath: '/areas/$slug'
+      preLoaderRoute: typeof AreasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq/': {
+      id: '/faq/'
+      path: '/faq'
+      fullPath: '/faq/'
+      preLoaderRoute: typeof FaqIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq/$slug': {
+      id: '/faq/$slug'
+      path: '/faq/$slug'
+      fullPath: '/faq/$slug'
+      preLoaderRoute: typeof FaqSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal/': {
+      id: '/journal/'
+      path: '/journal'
+      fullPath: '/journal/'
+      preLoaderRoute: typeof JournalIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal/$slug': {
+      id: '/journal/$slug'
+      path: '/journal/$slug'
+      fullPath: '/journal/$slug'
+      preLoaderRoute: typeof JournalSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio/': {
+      id: '/portfolio/'
+      path: '/portfolio'
+      fullPath: '/portfolio/'
+      preLoaderRoute: typeof PortfolioIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio/$slug': {
+      id: '/portfolio/$slug'
+      path: '/portfolio/$slug'
+      fullPath: '/portfolio/$slug'
+      preLoaderRoute: typeof PortfolioSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemaps/$section': {
+      id: '/sitemaps/$section'
+      path: '/sitemaps/$section'
+      fullPath: '/sitemaps/$section'
+      preLoaderRoute: typeof SitemapsSectionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/journal/category/$slug': {
@@ -810,6 +803,13 @@ declare module '@tanstack/react-router' {
       path: '/journal/category/$slug'
       fullPath: '/journal/category/$slug'
       preLoaderRoute: typeof JournalCategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio/project/$slug': {
+      id: '/portfolio/project/$slug'
+      path: '/portfolio/project/$slug'
+      fullPath: '/portfolio/project/$slug'
+      preLoaderRoute: typeof PortfolioProjectSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

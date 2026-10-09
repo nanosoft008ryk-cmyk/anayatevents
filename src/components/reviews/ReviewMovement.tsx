@@ -186,8 +186,9 @@ export function ReviewMovementBlock({
     return (
       <figure className={cn(shell, "relative isolate overflow-hidden")}>
         <SmartImg
-          id={image.id} fallbackUrl={image.url} sizes="100vw"
-          alt=""
+          id={image.id} fallbackUrl={image.url} sizes="(max-width: 640px) 360px, 100vw"
+          alt={image.alt}
+          aria-hidden="true"
           loading="lazy"
           decoding="async"
           className="absolute inset-0 -z-10 h-full w-full object-cover opacity-30 drift-slow"

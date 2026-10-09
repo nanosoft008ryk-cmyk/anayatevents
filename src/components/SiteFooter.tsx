@@ -76,8 +76,9 @@ export function SiteFooter() {
       {/* Closing frame dissolves out of the page above. */}
       <div className="absolute inset-x-0 top-0 -z-10 h-[60svh] md:h-[70svh]">
         <SmartImg
-          id={closing.id} fallbackUrl={closing.url} sizes="100vw"
-          alt=""
+          id={closing.id} fallbackUrl={closing.url} sizes="(max-width: 640px) 360px, 100vw"
+          alt={closing.alt}
+          aria-hidden="true"
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover opacity-25 drift-slow"
