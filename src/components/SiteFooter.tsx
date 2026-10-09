@@ -63,6 +63,10 @@ function IndexColumn({ heading, items }: { heading: string; items: readonly Foot
   );
 }
 
+/** PkBizGuide verified-partner link, exactly as issued by the directory. */
+const PKBIZ_BADGE = `<!-- PkBizGuide Verified Business Link: anayatevent.com -->
+<a href="https://pkbizguide.com" target="_blank" rel="noopener" data-pkbz-verify="pkbz-verify-anayatevent-2d815f" data-pkbz-domain="anayatevent.com" title="Verified Business on PkBizGuide Pakistan Directory">Verified on PkBizGuide</a>`;
+
 /**
  * Cinematic finale. A closing frame and the house line, a contact rail, a
  * collapsible index and the copyright — the last element on every page.
@@ -226,6 +230,12 @@ export function SiteFooter() {
           <div className="mt-12 flex flex-col gap-3 border-t border-border pt-7 pb-[max(6.5rem,calc(4.5rem+env(safe-area-inset-bottom)))] sm:flex-row sm:items-center sm:justify-between md:mt-16 md:pt-8 lg:pb-24">
             <p className="font-sans text-[9.5px] leading-relaxed tracking-[0.22em] uppercase text-ivory/70 sm:text-[10px] sm:tracking-[0.24em]">
               © {new Date().getFullYear()} {site.legalName}
+              {/* Directory verification badge, server-rendered verbatim (its
+                  crawler checks the exact markup and token). */}
+              <span
+                className="ml-3 inline-block border border-gold/30 px-1.5 py-px align-middle text-[8px] tracking-[0.18em] text-ivory/60 transition-colors duration-500 hover:border-gold/60 hover:text-gold"
+                dangerouslySetInnerHTML={{ __html: PKBIZ_BADGE }}
+              />
             </p>
             <p className="font-sans text-[9.5px] leading-relaxed tracking-[0.22em] uppercase text-ivory/70 sm:text-right sm:text-[10px] sm:tracking-[0.24em]">
               {site.serviceArea} · Rated {liveRating.rating} from {liveRating.count} reviews
