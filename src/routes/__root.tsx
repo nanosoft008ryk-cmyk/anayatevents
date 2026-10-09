@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import appCss from "../styles.css?url";
+import "../styles.css";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { jsonLd, organizationSchema, websiteSchema, siteNavigationSchema } from "../lib/seo";
 import { verificationMeta } from "../content/verification";
@@ -144,14 +144,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
       { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
       // Self-hosted faces (declared in styles.css, with metric-matched
-      // fallbacks). Preload the two the hero paints with; no third-party
+      // fallbacks). Preload the faces the hero paints with; no third-party
       // stylesheet sits in the critical path.
       {
         rel: "preload",
@@ -165,6 +161,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         as: "font",
         type: "font/woff2",
         href: "/fonts/jost-latin.woff2",
+        crossOrigin: "anonymous",
+      },
+      // The italic face paints "& wedding" in the home headline; preloading
+      // it takes it off the end of the HTML -> CSS -> font chain.
+      {
+        rel: "preload",
+        as: "font",
+        type: "font/woff2",
+        href: "/fonts/cormorant-garamond-italic-latin.woff2",
         crossOrigin: "anonymous",
       },
     ],

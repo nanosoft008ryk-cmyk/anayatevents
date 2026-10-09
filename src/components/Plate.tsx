@@ -40,24 +40,41 @@ export function Plate({
   useEffect(() => {
     if (!speed) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = wrap.current;
+    const img = inner.current;
+    if (!el || !img) return;
+
     let raf = 0;
+    let listening = false;
+    const apply = (r: DOMRectReadOnly) => {
+      const progress = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+      img.style.transform = `translate3d(0, ${(progress * speed * 100).toFixed(2)}px, 0) scale(1.14)`;
+    };
     const onScroll = () => {
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const el = wrap.current;
-        const img = inner.current;
-        if (!el || !img) return;
-        const r = el.getBoundingClientRect();
-        const progress = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
-        img.style.transform = `translate3d(0, ${(progress * speed * 100).toFixed(2)}px, 0) scale(1.14)`;
-      });
+      raf = requestAnimationFrame(() => apply(el.getBoundingClientRect()));
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    const listen = (on: boolean) => {
+      if (on === listening) return;
+      listening = on;
+      const method = on ? "addEventListener" : "removeEventListener";
+      window[method]("scroll", onScroll, { passive: true });
+      window[method]("resize", onScroll);
+    };
+    // The observer hands over a rect it has already measured, so the first
+    // position costs no forced layout during hydration, and plates that are
+    // off screen do no scroll work at all.
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) apply(entry.boundingClientRect);
+        listen(entry.isIntersecting);
+      },
+      { rootMargin: "25% 0px" },
+    );
+    io.observe(el);
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      io.disconnect();
+      listen(false);
       cancelAnimationFrame(raf);
     };
   }, [speed]);
