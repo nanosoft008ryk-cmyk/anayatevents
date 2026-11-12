@@ -157,11 +157,14 @@ export const footerColumns = [
   },
   {
     heading: "Areas we serve",
-    items: locations.map((l) => ({
-      label: l.shortName,
-      to: "/areas/$slug",
-      params: { slug: l.slug },
-    })),
+    items: [
+      ...locations.map((l) => ({
+        label: l.shortName,
+        to: "/areas/$slug",
+        params: { slug: l.slug },
+      })),
+      { label: "All Lahore areas", to: "/areas" },
+    ],
   },
   {
     heading: "Portfolio",

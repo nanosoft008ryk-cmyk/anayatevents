@@ -21,6 +21,8 @@
 
 import { services } from "@/content/services";
 import { locations } from "@/content/locations";
+import { nearbyAreas } from "@/content/lahore-areas";
+import { areaContent, generatedAreas } from "@/lib/area-pages";
 import { portfolioCategories, portfolioProjects } from "@/content/portfolio";
 import { articles, journalCategories } from "@/content/journal";
 import { faqTopics } from "@/content/faqs";
@@ -171,7 +173,7 @@ function buildEntities(): Entity[] {
       hub.slug === "services"
         ? services.map((s) => entityId("service", s.slug))
         : hub.slug === "areas"
-          ? locations.map((l) => entityId("area", l.slug))
+          ? [...locations, ...generatedAreas()].map((l) => entityId("area", l.slug))
           : hub.slug === "portfolio"
             ? portfolioCategories.map((c) => entityId("collection", c.slug))
             : hub.slug === "journal"
@@ -236,6 +238,23 @@ function buildEntities(): Entity[] {
         ...l.categories.map((c) => entityId("collection", c)),
         ...relatedIds(`/areas/${l.slug}`),
       ],
+    });
+  }
+
+  /* Generated areas (src/lib/area-pages): the rest of the Lahore directory. */
+  for (const a of generatedAreas()) {
+    list.push({
+      id: entityId("area", a.slug),
+      kind: "area",
+      slug: a.slug,
+      name: a.name,
+      path: `/areas/${a.slug}`,
+      summary: areaContent(a).lede,
+      parent: hubId("areas"),
+      children: [],
+      siblings: nearbyAreas(a, 4).map((n) => entityId("area", n.slug)),
+      supporting: [],
+      related: [],
     });
   }
 

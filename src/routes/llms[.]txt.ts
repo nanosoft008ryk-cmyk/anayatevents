@@ -5,6 +5,16 @@ import { site } from "@/content/site";
 import { serviceIndex, locationIndex } from "@/content/answers";
 import { faqTopics } from "@/content/faqs";
 import { articles } from "@/content/journal";
+import {
+  ZONE_LABEL,
+  ZONE_ORDER,
+  areasInZone,
+  driveTime,
+  getLahoreArea,
+  kmFromBase,
+  nearbyFirstSlugs,
+} from "@/content/lahore-areas";
+import { areaServices, comboPath } from "@/lib/area-pages";
 
 /**
  * /llms.txt — a plain-text summary of the business and the site, written for
@@ -42,6 +52,24 @@ function build(origin: string) {
 
   lines.push("## Areas served (from one Lahore base, teams travel out)");
   for (const l of locationIndex()) lines.push(`- [${l.name}](${abs(l.path)}): ${l.summary}`);
+  lines.push("");
+  lines.push("## Every Lahore neighbourhood we cover (road distance from our Green Acres base)");
+  for (const zone of ZONE_ORDER) {
+    lines.push(`### ${ZONE_LABEL[zone]}`);
+    for (const ar of areasInZone(zone))
+      lines.push(`- [${ar.name}](${abs(`/areas/${ar.slug}`)}): about ${kmFromBase(ar)} km, ${driveTime(ar)}`);
+  }
+  lines.push("");
+  lines.push("## Service pages for each area");
+  lines.push(
+    `Every service has a page for every area above at /<service>-<area>-lahore, e.g. ${abs("/mehndi-planning-johar-town-lahore")}. Services: ${areaServices.map((sv) => sv.slug).join(", ")}.`,
+  );
+  lines.push("Closest to our base (worked first):");
+  for (const slug of nearbyFirstSlugs) {
+    const ar = getLahoreArea(slug);
+    if (!ar) continue;
+    lines.push(`- ${ar.name}: ${areaServices.map((sv) => `[${sv.name}](${abs(comboPath(sv, ar))})`).join(", ")}`);
+  }
   lines.push("");
 
   lines.push("## Answers to common questions");

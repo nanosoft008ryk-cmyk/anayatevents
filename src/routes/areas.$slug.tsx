@@ -28,9 +28,15 @@ import {
   jsonLdMaybe,
   faqScripts,
   imageGallerySchema,
+  faqSchema,
+  webPageSchema,
   type Crumb,
 } from "@/lib/seo";
 import { uniqueFaqs, nearbyLocations } from "@/lib/entity-graph";
+import { AreaServiceGrid } from "@/components/areas/CoverageLinks";
+import { GeneratedAreaPage } from "@/components/areas/GeneratedAreaPage";
+import { getLahoreArea, nearbyAreas } from "@/content/lahore-areas";
+import { areaContent, generatedAreaHero, generatedAreaTrail, getGeneratedArea } from "@/lib/area-pages";
 
 /** One trail feeds both the visible breadcrumbs and the BreadcrumbList JSON-LD. */
 function trailFor(slug: string): Crumb[] {
@@ -45,8 +51,11 @@ function trailFor(slug: string): Crumb[] {
 export const Route = createFileRoute("/areas/$slug")({
   loader: ({ params }) => {
     const area = getLocation(params.slug);
-    if (!area) throw notFound();
-    return { area };
+    if (area) return { area, generated: null };
+    // Areas without an editorial page get a generated one (src/lib/area-pages).
+    const generated = getGeneratedArea(params.slug);
+    if (!generated) throw notFound();
+    return { area: null, generated: generated.slug };
   },
   head: ({ params, loaderData }) => {
     const path = `/areas/${params.slug}`;
@@ -55,7 +64,8 @@ export const Route = createFileRoute("/areas/$slug")({
         meta: [{ title: "Area unavailable" }, { name: "robots", content: "noindex" }],
       };
     }
-    const { area } = loaderData;
+    if (loaderData.generated) return generatedHead(loaderData.generated);
+    const area = loaderData.area!;
     const trail = trailFor(params.slug);
     const heroPhoto = photo(area.hero);
     return {
@@ -114,8 +124,44 @@ export const Route = createFileRoute("/areas/$slug")({
       ],
     };
   },
-  component: AreaPage,
+  component: AreaRoute,
 });
+
+function generatedHead(slug: string) {
+  const a = getLahoreArea(slug)!;
+  const c = areaContent(a);
+  const image = photo(generatedAreaHero(a)).url;
+  const near = nearbyAreas(a, 6);
+  return {
+    ...pageMeta({ title: c.metaTitle, description: c.metaDescription, path: c.path, image }),
+    scripts: [
+      jsonLd(breadcrumbSchema(generatedAreaTrail(a))),
+      jsonLd(webPageSchema({ name: c.h1, description: c.metaDescription, path: c.path, image })),
+      jsonLd(
+        professionalServiceSchema({
+          path: c.path,
+          areaName: a.name,
+          description: c.metaDescription,
+          image,
+          nearby: near.map((n) => ({ name: n.name })),
+        }),
+      ),
+      ...jsonLdMaybe(
+        nearbyPlacesSchema(
+          c.path,
+          near.map((n) => ({ name: n.name, path: `/areas/${n.slug}` })),
+        ),
+      ),
+      jsonLd(faqSchema(c.answers, c.path)),
+    ],
+  };
+}
+
+function AreaRoute() {
+  const data = Route.useLoaderData();
+  if (data.generated) return <GeneratedAreaPage area={getLahoreArea(data.generated)!} />;
+  return <AreaPage />;
+}
 
 /* Per-area layout rhythm — no two area pages read in the same order. */
 const rhythmClass: Record<
@@ -653,6 +699,8 @@ function AreaPage() {
           </div>
         </section>
       )}
+
+      <AreaServiceGrid areaSlug={area.slug} areaName={area.shortName} />
 
       {/* XIII. Close */}
       <RelatedConstellation kind="area" slug={params.slug} options={{ kinds: ["service", "area", "collection", "article", "faq"] }} />

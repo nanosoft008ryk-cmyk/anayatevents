@@ -18,6 +18,8 @@ import { portfolioCategories, portfolioProjects } from "@/content/portfolio";
 import { articles, journalCategories } from "@/content/journal";
 import { faqTopics } from "@/content/faqs";
 import { photo, photos } from "@/content/images";
+import { isNearbyFirst } from "@/content/lahore-areas";
+import { allCombos, comboContent, generatedAreaHero, generatedAreas, resolveCombo } from "@/lib/area-pages";
 
 export interface PageEntry {
   /** Absolute, slash-prefixed, lowercase, hyphen-separated path. */
@@ -67,11 +69,24 @@ const expanders: Record<string, () => PageEntry[]> = {
       image: safePhoto(s.hero),
       imageTitle: s.name,
     })),
-  "/areas/$slug": () =>
-    locations.map((l) => ({
+  "/areas/$slug": () => [
+    ...locations.map((l) => ({
       path: `/areas/${normalizeSlug(l.slug)}`,
       image: safePhoto(l.hero),
       imageTitle: l.name,
+    })),
+    ...generatedAreas().map((a) => ({
+      path: `/areas/${a.slug}`,
+      image: safePhoto(generatedAreaHero(a)),
+      imageTitle: `Events in ${a.name}, Lahore`,
+    })),
+  ],
+  // Service × area pages (/mehndi-planning-johar-town-lahore).
+  "/$slug": () =>
+    allCombos().map((c) => ({
+      path: comboContent(c).path,
+      image: safePhoto(c.service.hero),
+      imageTitle: comboContent(c).h1,
     })),
   "/portfolio/$slug": () =>
     portfolioCategories.map((c) => ({
@@ -111,6 +126,8 @@ function priorityFor(path: string): string {
   if (path === "/") return "1.0";
   if (path === "/contact" || path === "/services" || path === "/areas") return "0.9";
   if (/^\/(privacy|terms|cookies)$/.test(path)) return "0.3";
+  const combo = resolveCombo(path.slice(1));
+  if (combo) return isNearbyFirst(combo.area) ? "0.7" : "0.5";
   const depth = path.split("/").filter(Boolean).length;
   return depth === 1 ? "0.8" : depth === 2 ? "0.7" : "0.6";
 }

@@ -7,11 +7,13 @@
  * ------------------------------------------------------------------------- */
 
 import { allPages, type PageEntry } from "@/lib/route-registry";
+import { isComboPath } from "@/lib/area-pages";
 
 export type SitemapSectionId =
   | "core"
   | "services"
   | "areas"
+  | "locations"
   | "portfolio"
   | "journal"
   | "faq";
@@ -28,6 +30,7 @@ export const SECTION_ORDER: SitemapSectionId[] = [
   "core",
   "services",
   "areas",
+  "locations",
   "portfolio",
   "journal",
   "faq",
@@ -37,6 +40,7 @@ export const SECTION_ORDER: SitemapSectionId[] = [
 export function sectionOf(path: string): SitemapSectionId {
   if (path.startsWith("/services")) return "services";
   if (path.startsWith("/areas")) return "areas";
+  if (isComboPath(path)) return "locations";
   if (path.startsWith("/portfolio")) return "portfolio";
   if (path.startsWith("/journal")) return "journal";
   if (path.startsWith("/faq")) return "faq";

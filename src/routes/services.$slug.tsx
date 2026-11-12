@@ -28,6 +28,7 @@ import {
   type Crumb,
 } from "@/lib/seo";
 import { uniqueFaqs } from "@/lib/entity-graph";
+import { ServiceAreaDirectory } from "@/components/areas/CoverageLinks";
 
 function trailFor(slug: string): Crumb[] {
   const service = getService(slug);
@@ -433,6 +434,8 @@ function ServicePage() {
           </div>
         </section>
       )}
+
+      <ServiceAreaDirectory service={service} />
 
       <RelatedConstellation kind="service" slug={params.slug} options={{ kinds: ["collection", "article", "area", "faq"] }} />
 

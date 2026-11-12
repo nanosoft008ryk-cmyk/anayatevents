@@ -12,6 +12,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { LuxTextLink } from "@/components/ui/LuxButton";
 import { AreaExplorer } from "@/components/areas/AreaExplorer";
 import { CoverageMap } from "@/components/areas/CoverageMap";
+import { AreaDirectory } from "@/components/areas/CoverageLinks";
 import {
   pageMeta,
   jsonLd,
@@ -188,6 +189,8 @@ function AreasIndex() {
 
       {/* V. Coverage map */}
       <CoverageMap />
+
+      <AreaDirectory />
 
       {/* VI. Close */}
       <CtaBand
