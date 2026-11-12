@@ -167,6 +167,20 @@ export const footerColumns = [
     ],
   },
   {
+    // Sitewide links to the pages around our base, in the words people search.
+    heading: "Popular searches",
+    items: [
+      ["Wedding planner in Johar Town", "wedding-planning-johar-town-lahore"],
+      ["Mehndi decor in Wapda Town", "mehndi-planning-wapda-town-lahore"],
+      ["Catering in Valencia Town", "luxury-catering-valencia-town-lahore"],
+      ["Farmhouse for wedding, Raiwind Road", "farmhouse-events-raiwind-road-lahore"],
+      ["Live BBQ in Green Acres", "live-bbq-catering-green-acres-lahore"],
+      ["Barat decor in Bahria Town", "barat-planning-bahria-town-lahore"],
+      ["Wedding decorators in DHA", "stage-decoration-dha-lahore"],
+      ["Walima catering in Gulberg", "walima-planning-gulberg-lahore"],
+    ].map(([label, slug]) => ({ label, to: "/$slug", params: { slug } })),
+  },
+  {
     heading: "Portfolio",
     items: [
       ...portfolioCategories.map((c) => ({

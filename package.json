@@ -21,7 +21,8 @@
     "deploy:check": "node scripts/deploy-check.mjs",
     "sitemap:audit": "node scripts/sitemap-audit.mjs",
     "sitemap:ci": "node scripts/sitemap-audit.mjs --ci",
-    "verify": "npm run seo:ci && npm run aeo:ci && npm run sitemap:ci && npm run deploy:check"
+    "verify": "npm run seo:ci && npm run aeo:ci && npm run sitemap:ci && npm run deploy:check",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

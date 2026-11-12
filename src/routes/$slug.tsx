@@ -12,6 +12,7 @@ import { site } from "@/content/site";
 import {
   areaDisplay,
   areaPagePath,
+  searchTerms,
   comboContent,
   nearbyCombos,
   resolveCombo,
@@ -74,6 +75,7 @@ export const Route = createFileRoute("/$slug")({
           "@type": "Service",
           "@id": abs(`${c.path}#service`),
           name: c.h1,
+          alternateName: searchTerms(service).map((t) => `${t} in ${area.name}`),
           description: c.metaDescription,
           serviceType: service.name,
           url: abs(c.path),

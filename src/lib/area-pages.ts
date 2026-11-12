@@ -148,6 +148,10 @@ const cap = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 const aEvent = (s: Service) => `${/^[aeiou]/.test(eventOf(s)) ? "an" : "a"} ${eventOf(s)}`;
 
 /** A title that fits search results: brand suffix only while it fits. */
+/** The first description that fits the 165-character snippet. */
+const fitDescription = (options: string[]) =>
+  options.find((d) => d.length <= 165) ?? options[options.length - 1];
+
 const fitTitle = (t: string) => (`${t} | ${site.short}`.length <= 65 ? `${t} | ${site.short}` : t);
 
 /** Where the area sits relative to us, and who its neighbours are. */
@@ -328,6 +332,34 @@ export interface ComboContent {
   ctaTitle: string;
 }
 
+/* How people actually search for each service, in English and Roman Urdu.
+ * Used in one natural FAQ, the meta description and Service.alternateName,
+ * so a page answers every common phrasing of its own query. */
+const SEARCH_TERMS: Record<string, string[]> = {
+  "wedding-planning": ["wedding planner", "shadi planner", "wedding organizer"],
+  "luxury-weddings": ["luxury wedding planner", "high-end wedding decor", "royal wedding setup"],
+  "mehndi-planning": ["mehndi decor", "mehndi stage decoration", "mehndi ki decoration"],
+  "barat-planning": ["barat decor", "barat stage decoration", "barat ki decoration"],
+  "walima-planning": ["walima decor", "walima stage decoration", "walima catering"],
+  "nikah-planning": ["nikah decor", "nikah setup at home", "nikkah stage"],
+  "corporate-events": [
+    "corporate event planner",
+    "corporate event management",
+    "company dinner organiser",
+  ],
+  "birthday-events": ["birthday party planner", "birthday decoration", "kids birthday party"],
+  "private-events": ["private party planner", "engagement decor", "baby shower decoration"],
+  "luxury-catering": ["catering services", "wedding caterers", "shadi catering"],
+  "live-bbq-catering": ["BBQ catering", "live bar bq", "BBQ party catering"],
+  "outdoor-catering": ["outdoor caterers", "farmhouse catering", "lawn catering"],
+  "indoor-catering": ["home catering", "hall catering", "dawat catering"],
+  "stage-decoration": ["wedding decorators", "stage decorators", "shadi decoration"],
+  "floral-design": ["fresh flower decoration", "floral decorators", "wedding flower decor"],
+  "farmhouse-events": ["farmhouse for wedding", "farmhouse for events", "wedding farmhouse"],
+  "venue-management": ["event venue", "wedding venue", "marquee for wedding"],
+};
+export const searchTerms = (s: Service) => SEARCH_TERMS[s.slug] ?? [lower(s)];
+
 /** What drives the price, by kind of service. */
 const COST: Record<Group, string> = {
   wedding: "A {event} is priced on the guest count, the menu and the decor brief.",
@@ -357,6 +389,10 @@ export function comboContent({ service: s, area: a }: Combo): ComboContent {
       a: `Yes. ${site.name} provides ${lower(s)} in ${a.name}, covering ${listNames(inc)}. The team travels from Green Acres Extension, about ${km} km away.`,
     },
     {
+      q: `${cap(searchTerms(s)[0])} in ${a.name}: is that you?`,
+      a: `Yes. Families looking for ${listNames(searchTerms(s).map((t) => `${t} in ${a.name}`))} reach the same team at ${site.name}, one call for the whole ${eventOf(s)}.`,
+    },
+    {
       q: `Where can ${aEvent(s)} in ${a.name} be held?`,
       a: `${cap(eventOf(s))}s in ${a.name} are usually held at ${VENUES[a.kind]}${
         s.slug === "indoor-catering"
@@ -381,7 +417,11 @@ export function comboContent({ service: s, area: a }: Combo): ComboContent {
     planHeading: `How we plan your ${eventOf(s)} in ${a.name}`,
     eventName: eventOf(s),
     metaTitle: fitTitle(`${s.name} in ${where}`),
-    metaDescription: `${s.name} in ${a.name}, Lahore, planned and run by ${site.short}, ${km} km from our Green Acres base. Call ${site.phoneDisplay}.`,
+    metaDescription: fitDescription([
+      `${s.name} in ${a.name}, Lahore: ${listNames(searchTerms(s).slice(0, 2))} by ${site.short}, ${km} km from our Green Acres base. Call ${site.phoneDisplay}.`,
+      `${s.name} in ${a.name}, Lahore: ${searchTerms(s)[0]} by ${site.short}, ${km} km from Green Acres. Call ${site.phoneDisplay}.`,
+      `${s.name} in ${a.name}, Lahore by ${site.short}. Call ${site.phoneDisplay}.`,
+    ]),
     kicker: `${KIND_LABEL[a.kind]} · ${ZONE_LABEL[a.zone]}`,
     lede: fill(rotate(s.slug + "h", a, LEDES[g]), s, a),
     paragraphs,
@@ -444,7 +484,10 @@ export function areaContent(a: LahoreArea): AreaContent {
     path,
     h1: `Event Management & Catering in ${where}`,
     metaTitle: fitTitle(`Event Planner & Catering in ${where}`),
-    metaDescription: `Wedding planning, decor and catering in ${a.name}, Lahore by ${site.name}. About ${km} km from our Green Acres base. Call ${site.phoneDisplay}.`,
+    metaDescription: fitDescription([
+      `Event planner, wedding decor and catering in ${a.name}, Lahore by ${site.short}, ${km} km from our Green Acres base. Call ${site.phoneDisplay}.`,
+      `Event planner and catering in ${a.name}, Lahore by ${site.short}. Call ${site.phoneDisplay}.`,
+    ]),
     kicker: `${KIND_LABEL[a.kind]} · ${ZONE_LABEL[a.zone]}`,
     lede: fill(pick(path, AREA_LEDES), dummy, a),
     paragraphs: [
@@ -469,6 +512,10 @@ export function areaContent(a: LahoreArea): AreaContent {
       {
         q: `Do you plan events in ${where}?`,
         a: `Yes. ${site.name} plans weddings, celebrations and catering in ${a.name}. We are based at The Palms 7 Farmhouse in Green Acres Extension, about ${km} km away.`,
+      },
+      {
+        q: `Are you an event planner in ${a.name}?`,
+        a: `Yes. For an event planner, wedding planner, caterers or wedding decorators in ${a.name}, ${site.name} is one team for all four, from our base at Green Acres.`,
       },
       {
         q: `Do you have an office in ${a.name}?`,

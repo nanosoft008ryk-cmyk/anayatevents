@@ -91,7 +91,7 @@ const culinary = [
 export const Route = createFileRoute("/services/")({
   head: () => ({
     ...pageMeta({
-      title: "Signature Event Experiences in Lahore | Anayat Events & Catering",
+      title: "Event Management & Catering Services in Lahore | Anayat Events",
       description:
         "Seventeen event disciplines held by one house in Lahore — weddings, mehndi and walima production, corporate evenings, catering and stage design.",
       path: PATH,

@@ -21,9 +21,9 @@ const trail: Crumb[] = [
 export const Route = createFileRoute("/menu")({
   head: () => ({
     ...pageMeta({
-      title: "Catering Menu & Per-Guest Packages — Anayat Events, Lahore",
+      title: "Catering Menu & Per Head Packages in Lahore | Anayat Events",
       description:
-        "Wedding catering menus in Lahore from Rs 2,600 per guest — buffet, bar-bq and tandoor, with full setup included. Three tiers, minimum 250 guests.",
+        "Wedding catering packages in Lahore from Rs 2,600 per head: buffet, bar-bq and tandoor, full setup included. Three tiers, minimum 250 guests.",
       path: PATH,
       image: photo("ae-13").url,
     }),
